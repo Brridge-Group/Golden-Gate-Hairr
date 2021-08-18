@@ -1,0 +1,34 @@
+{
+  "name": "hello-world",
+  "version": "1.0.0",
+  "description": "This is a project template used as a starting point for any new project.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "heroku-postbuild": "cd client && npm install && npm run build"
+  },
+  "engines": {
+    "node": "^14.17.4",
+    "npm": "^6.14.14"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Brridge-Group/hello-world.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Brridge-Group/hello-world/issues"
+  },
+  "homepage": "https://github.com/Brridge-Group/hello-world#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.13.6",
+    "password-generator": "^2.3.2",
+    "react-router-dom": "^5.2.0"
+  }
+}
