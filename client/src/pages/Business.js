@@ -2,7 +2,9 @@ import React, { useState } from 'react'
 
 import ContentHeader from '../components/ContentHeader'
 
-const SearchResults = () => {
+const Business = () => {
+  const [searchResults, setSearchResults] = useState([])
+
   return (
     <React.Fragment>
       <div className='content-wrapper'>
@@ -10,7 +12,7 @@ const SearchResults = () => {
         <div className='card w-50 mx-auto'>
           <div className='card-header'>
             <h5 className='m-0' style={{ color: 'white ' }}>
-              Search
+              Business
             </h5>
           </div>
           <div className='card-body' style={{ height: 200 }}>
@@ -24,4 +26,4 @@ const SearchResults = () => {
   )
 }
 
-export default SearchResults
+export default Business

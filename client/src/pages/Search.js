@@ -1,21 +1,34 @@
-import React, { useState } from 'react'
-import SearchResults from './SearchResults'
+import React, { useState, useEffect } from 'react'
+import Business from './Business'
 
 import ContentHeader from '../components/ContentHeader'
-
-const city = ['Toronto', 'Wichita']
 
 const Search = () => {
   const [searchTerm, setSearchTerm] = useState('')
   const [searchResults, setSearchResults] = useState([])
 
+  useEffect(() => {
+    let mounted = true
+    getResults().then((resp) => {
+      if (mounted) {
+        setSearchResults(resp)
+      }
+    })
+    return () => (mounted = false)
+  }, [searchResults])
+  // }, [])
+
+  const getResults = () => {
+    console.log(searchTerm)
+    return fetch('http://localhost:5000/searchTerm').then((resp) => resp.json())
+  }
   const handleChange = (e) => {
     setSearchTerm(e.target.value)
   }
-  const handleFilter = () => {
-    city.filter((city) => city.includes(searchTerm))
-    setSearchResults(searchResults)
-  }
+  const results = searchResults.map((result) => {
+    return <Business name={result.name} />
+  })
+
   return (
     <React.Fragment>
       <div className='content-wrapper'>
@@ -36,15 +49,23 @@ const Search = () => {
               <input
                 type='text'
                 value={searchTerm}
+                // onChange={(e) => setSearchTerm(e.target.value)}
                 onChange={handleChange}
                 placeholder='city'
                 style={{ marginLeft: 10, marginRight: 10 }}
               />
-              <i onClick={handleFilter} class='fas fa-search'></i>
+              <button
+                style={{ border: 'none', background: 'none' }}
+                // onClick={getResults}>
+                disabled={searchTerm === null}
+                onClick={() => getResults(searchTerm)}>
+                <i className='fas fa-search'></i>
+              </button>
             </div>
           </div>
         </div>
       </div>
+      {results}
     </React.Fragment>
   )
 }
