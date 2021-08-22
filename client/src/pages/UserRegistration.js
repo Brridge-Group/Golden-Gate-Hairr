@@ -19,28 +19,33 @@ const UserRegistration = () => {
 
   const registrationSubmitHandler = async (e) => {
     e.preventDefault()
-
-    try {
-      const response = await fetch('/api/registration', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          firstName,
-          lastName,
-          email,
-          password,
-          password2,
-        }),
-      })
-
-      if (!response.ok) {
-        throw new Error('Could not save new item')
+    if (password !== password2) {
+      alert('Passwords do not match')
+    } else {
+      const newUser = {
+        firstName,
+        lastName,
+        email,
+        password,
+        password2,
       }
 
-      history.push('/')
-    } catch (err) {}
+      try {
+        const response = await fetch('/api/users', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ newUser }),
+        })
+
+        if (!response.ok) {
+          throw new Error('Could not save user')
+        }
+
+        history.push('/')
+      } catch (err) {}
+    }
   }
 
   return (
