@@ -1,53 +1,58 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React from 'react'
+import { NavLink } from 'react-router-dom'
 
 const SideBar = () => {
   return (
     <React.Fragment>
-      <aside className="main-sidebar sidebar-dark-primary elevation-4">
-        <a href="index3.html" className="brand-link">
+      <aside className='main-sidebar sidebar-dark-primary elevation-4'>
+        <a href='index3.html' className='brand-link'>
           <img
-            src="/assets/dist/img/AdminLTELogo.png"
-            alt="AdminLTE Logo"
-            className="brand-image img-circle elevation-3"
+            src='/assets/dist/img/AdminLTELogo.png'
+            alt='AdminLTE Logo'
+            className='brand-image img-circle elevation-3'
             style={{ opacity: 0.8 }}
           />
-          <span className="brand-text font-weight-light">Hello World</span>
+          <span className='brand-text font-weight-light'>Hello World</span>
         </a>
 
-        <div className="sidebar">
-          <div className="user-panel mt-3 pb-3 mb-3 d-flex">
-            <div className="image">
+        <div className='sidebar'>
+          <div className='user-panel mt-3 pb-3 mb-3 d-flex'>
+            <div className='image'>
               <img
-                src="/assets/dist/img/user2-160x160.jpg"
-                className="img-circle elevation-2"
-                alt="User"
+                src='/assets/dist/img/user2-160x160.jpg'
+                className='img-circle elevation-2'
+                alt='User'
               />
             </div>
-            <div className="info">
-              <a href="#s" className="d-block">
+            <div className='info'>
+              <a href='#s' className='d-block'>
                 John Smith
               </a>
             </div>
           </div>
 
-          <nav className="mt-2">
+          <nav className='mt-2'>
             <ul
-              className="nav nav-pills nav-sidebar flex-column"
-              data-widget="treeview"
-              role="menu"
-              data-accordion="false"
-            >
-              <li className="nav-item">
-                <NavLink to="/" exact className="nav-link">
-                  <i className="nav-icon fas fa-home"></i>
+              className='nav nav-pills nav-sidebar flex-column'
+              data-widget='treeview'
+              role='menu'
+              data-accordion='false'>
+              <li className='nav-item'>
+                <NavLink to='/' exact className='nav-link'>
+                  <i className='nav-icon fas fa-home'></i>
                   <p>Home</p>
                 </NavLink>
               </li>
-              <li className="nav-item">
-              <NavLink to="/items" className="nav-link">
-                  <i className="nav-icon fas fa-list"></i>
+              <li className='nav-item'>
+                <NavLink to='/items' className='nav-link'>
+                  <i className='nav-icon fas fa-list'></i>
                   <p>Items</p>
+                </NavLink>
+              </li>
+              <li className='nav-item'>
+                <NavLink to='/sign-up' exact className='nav-link'>
+                  <i className='nav-icon fas fa-user-plus'></i>
+                  <p>Sign Up</p>
                 </NavLink>
               </li>
             </ul>
@@ -55,7 +60,7 @@ const SideBar = () => {
         </div>
       </aside>
     </React.Fragment>
-  );
-};
+  )
+}
 
-export default SideBar;
+export default SideBar
