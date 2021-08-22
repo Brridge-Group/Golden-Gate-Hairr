@@ -1,0 +1,80 @@
+const mongoose = require('mongoose')
+
+const User = require('../models/user')
+
+const getUsers = async (req, res, next) => {
+  let users
+  try {
+    users = await User.find()
+  } catch (err) {
+    const error = new HttpError("Couldn't retrieve users!" + err, 500)
+    return next(error)
+  }
+
+  res.json({
+    users: users.map((user) => user.toObject({ getters: true })),
+  })
+}
+
+const createUser = async (req, res, next) => {
+  console.log(req.body)
+  const { firstName, lastName, email, password, password2 } = req.body
+
+  const createdUser = new User({
+    firstName,
+    lastName,
+    email,
+    password,
+    password2,
+  })
+
+  try {
+    await createdUser.save()
+  } catch (err) {
+    const error = new HttpError('Creating user failed, please try again.', 500)
+    return next(error)
+  }
+
+  res.status(201).json({ user: createdUser })
+}
+
+const getUser = async (req, res, next) => {
+  let user
+
+  const userId = req.params.id
+
+  try {
+    user = await User.findById(userId)
+  } catch (err) {
+    return next(err)
+  }
+
+  res.json({ user })
+}
+
+const deleteUser = async (req, res, next) => {
+  let user
+
+  const userId = req.params.id
+
+  try {
+    user = await User.findById(userId)
+  } catch (err) {
+    return next(err)
+  }
+
+  try {
+    if (user) {
+      await user.remove()
+    }
+  } catch (err) {
+    return next(err)
+  }
+
+  res.json({ message: 'Deleted successfully' })
+}
+
+exports.getUsers = getUsers
+exports.createUser = createUser
+exports.getUser = getUser
+exports.deleteUser = deleteUser
