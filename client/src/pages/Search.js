@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import Business from './Business'
-
 import ContentHeader from '../components/ContentHeader'
 
 const Search = () => {
@@ -20,7 +19,7 @@ const Search = () => {
 
   const getResults = () => {
     console.log(searchTerm)
-    return fetch('http://localhost:5000/searchTerm').then((resp) => resp.json())
+    return fetch('api/cities/searchTerm').then((resp) => resp.json())
   }
   const handleChange = (e) => {
     setSearchTerm(e.target.value)
