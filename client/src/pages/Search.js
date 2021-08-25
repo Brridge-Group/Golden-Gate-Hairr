@@ -19,11 +19,13 @@ const Search = () => {
 
   const getResults = () => {
     console.log(searchTerm)
+    // don't know the real name for cities (routes) just made it up
     return fetch('api/cities/searchTerm').then((resp) => resp.json())
   }
   const handleChange = (e) => {
     setSearchTerm(e.target.value)
   }
+  //real business page not set up yet - placeholder file in pages folder
   const results = searchResults.map((result) => {
     return <Business name={result.name} />
   })
