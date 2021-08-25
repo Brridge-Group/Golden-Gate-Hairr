@@ -55,7 +55,6 @@ const Search = () => {
               />
               <button
                 style={{ border: 'none', background: 'none' }}
-                // onClick={getResults}>
                 disabled={searchTerm === null}
                 onClick={() => getResults(searchTerm)}>
                 <i className='fas fa-search'></i>
