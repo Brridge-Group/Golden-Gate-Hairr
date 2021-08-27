@@ -4,6 +4,7 @@ const generatePassword = require('password-generator')
 const cors = require('cors')
 
 const itemsRoutes = require('../routes/items-route')
+const usersRoutes = require('../routes/users-route')
 
 const loader = async (app) => {
   app.use(express.json())
