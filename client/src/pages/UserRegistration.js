@@ -40,10 +40,10 @@ const UserRegistration = () => {
         })
 
         if (!response.ok) {
-          throw new Error('Could not save user')
+          throw new Error('Could not save new user')
         }
 
-        history.push('/')
+        history.push('/users')
       } catch (err) {}
     }
   }
