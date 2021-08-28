@@ -12,7 +12,7 @@ import SideBar from './components/SideBar'
 import ListItems from './pages/ListItems'
 import NewItem from './pages/NewItem'
 import UpdateItem from './pages/UpdateItem'
-import BusinessDetails from './pages/BusinessDetails'
+import BusinessDetails from './pages/BusinessDetails/BusinessDetails'
 
 const App = () => {
   let routes
