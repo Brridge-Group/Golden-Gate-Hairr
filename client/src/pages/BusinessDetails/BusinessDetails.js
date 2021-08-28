@@ -3,7 +3,6 @@ import './businessDetails.css'
 
 // Custom Imports
 import ContentHeader from '../../components/ContentHeader'
-import { starIcon2 } from '../../helpers/svgs'
 
 const BusinessDetails = () => {
   return (
