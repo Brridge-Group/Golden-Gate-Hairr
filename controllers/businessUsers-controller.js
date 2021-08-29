@@ -11,7 +11,11 @@ const createBusinessUser = async (req, res, next) => {
     lastName,
     email,
     password,
-    passwordConfirm
+    passwordConfirm,
+    businessName,
+    businessDescription,
+    businessAddress,
+    businessRating
   })
 
   try {
@@ -65,7 +69,17 @@ const getBusinessUsers = async (req, res, next) => {
 const updateBusinessUser = async (req, res, next) => {
   const businessUserId = req.params.id
 
-  const { firstName, lastName, email, password, passwordConfirm } = req.body
+  const {
+    firstName,
+    lastName,
+    email,
+    password,
+    passwordConfirm,
+    businessName,
+    businessDescription,
+    businessAddress,
+    businessRating
+  } = req.body
 
   let businessUser
 
@@ -80,6 +94,10 @@ const updateBusinessUser = async (req, res, next) => {
   businessUser.email = email
   businessUser.password = password
   businessUser.passwordConfirm = passwordConfirm
+  businessUser.businessName = businessName
+  businessUser.businessDescription = businessDescription
+  businessUser.businessAddress = businessAddress
+  businessUser.businessRating = businessRating
 
   try {
     const update = await businessUser.save()
