@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react'
+
 // Style Imports
 import './businessDetails.css'
 
@@ -5,6 +7,26 @@ import './businessDetails.css'
 import ContentHeader from '../../components/ContentHeader'
 
 const BusinessDetails = () => {
+  const [fetchedBusinessUsers, setFetchedBusinessUsers] = useState([])
+  useEffect(() => {
+    const fetchBusinesses = async () => {
+      try {
+        const response = await fetch('/api/items', { method: 'GET' })
+        const responseData = await response.json()
+        console.log(responseData)
+
+        if (!response.ok) {
+          throw new Error(response.message)
+        }
+        // setFetchedBusinessUsers(responseData.businesses)
+      } catch (error) {
+        return error
+      }
+    }
+
+    fetchBusinesses()
+  }, [])
+
   return (
     <>
       <section className='content-wrapper bus-details'>
