@@ -8,15 +8,15 @@ const businessUserRouter = express.Router()
 businessUserRouter.post('/', businessUserController.createBusinessUser)
 
 // Get Business User
-businessUserRouter.get('/', businessUserController.getBusinessUser)
+businessUserRouter.get('/:id', businessUserController.getBusinessUser)
 
 // Get All Business Users
 businessUserRouter.get('/', businessUserController.getBusinessUsers)
 
 // Update Business User
-businessUserRouter.patch('/', businessUserController.updateBusinessUser)
+businessUserRouter.patch('/:id', businessUserController.updateBusinessUser)
 
 // Delete Business User
-businessUserRouter.delete('/', businessUserController.deleteBusinessUser)
+businessUserRouter.delete('/:id', businessUserController.deleteBusinessUser)
 
 module.exports = businessUserRouter
