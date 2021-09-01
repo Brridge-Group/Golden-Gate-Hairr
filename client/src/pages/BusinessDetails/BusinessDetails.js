@@ -11,7 +11,7 @@ const BusinessDetails = () => {
   useEffect(() => {
     const fetchBusinesses = async () => {
       try {
-        const response = await fetch('/api/items', { method: 'GET' })
+        const response = await fetch('/api/businesses', { method: 'GET' })
         const responseData = await response.json()
         console.log(responseData)
 
