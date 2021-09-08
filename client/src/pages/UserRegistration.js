@@ -29,7 +29,6 @@ const UserRegistration = () => {
         password,
         password2,
       }
-
       try {
         const response = await fetch('/api/users', {
           method: 'POST',
@@ -87,7 +86,7 @@ const UserRegistration = () => {
                   <label>Email</label>
                   <input
                     name='email'
-                    type='text'
+                    type='email'
                     className='form-control'
                     placeholder='Email'
                     onChange={onChange}
@@ -98,7 +97,7 @@ const UserRegistration = () => {
                   <label>Password</label>
                   <input
                     name='password'
-                    type='text'
+                    type='password'
                     className='form-control'
                     placeholder='Password'
                     onChange={onChange}
@@ -107,10 +106,10 @@ const UserRegistration = () => {
                   />
                 </div>
                 <div className='form-group'>
-                  <label>Name</label>
+                  <label>Confirm Password</label>
                   <input
                     name='password2'
-                    type='text'
+                    type='password'
                     className='form-control'
                     placeholder='Confirm Password'
                     onChange={onChange}
