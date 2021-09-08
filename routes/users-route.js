@@ -4,19 +4,19 @@ const usersController = require('../controllers/users-controller')
 
 const router = express.Router()
 
-// Get All Items
+// Get All Users
 router.get('/', usersController.getUsers)
 
-// Get an Item
+// Get a User
 router.get('/:id', usersController.getUser)
 
-//Create new item
+//Create new User
 router.post('/', usersController.createUser)
 
-//Update item
-// router.patch('/:id', itemsController.updateItem)
+//Update User
+router.patch('/:id', usersController.updateUser)
 
-//Delete item
+//Delete User
 router.delete('/:id', usersController.deleteUser)
 
 module.exports = router

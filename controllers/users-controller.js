@@ -38,6 +38,34 @@ const createUser = async (req, res, next) => {
   res.status(201).json({ user: createdUser })
 }
 
+const updateUser = async (req, res, next) => {
+  const userId = req.params.id
+
+  console.log(req.body)
+  const { firstName, lastName, email, password, password2 } = req.body
+
+  let user
+  try {
+    user = await user.findById(userId)
+  } catch (err) {
+    return next(err)
+  }
+
+  user.firstName = firstName
+  user.lastName = lastName
+  user.email = email
+  user.password = password
+  user.password2 = password2
+
+  try {
+    const result = await user.save()
+  } catch (err) {
+    return next(err)
+  }
+
+  res.status(200).json({ user: user.toObject({ getters: true }) })
+}
+
 const getUser = async (req, res, next) => {
   let user
 
@@ -76,5 +104,6 @@ const deleteUser = async (req, res, next) => {
 
 exports.getUsers = getUsers
 exports.createUser = createUser
+exports.updateUser = updateUser
 exports.getUser = getUser
 exports.deleteUser = deleteUser
