@@ -1,12 +1,10 @@
 const mongoose = require('mongoose')
 
-const business = require('../models/business')
+const Business = require('../models/business')
 
 // Create Business
 const createBusiness = async (req, res, next) => {
   const {
-    _id,
-    userId,
     name,
     description,
     createDate,
@@ -22,8 +20,6 @@ const createBusiness = async (req, res, next) => {
   } = req.body
 
   const newBusiness = new Business({
-    _id,
-    userId,
     name,
     description,
     createDate,
@@ -41,12 +37,8 @@ const createBusiness = async (req, res, next) => {
   try {
     await newBusiness.save()
   } catch (error) {
-    const errorMessage = new HttpError(
-      'An error occurred during the creation of a new business. Please try again.' +
-        error,
-      500
-    )
-    return next(errorMessage)
+    console.log('err', error)
+    return next(error)
   }
   res.status(201).json({ business: newBusiness })
 }
@@ -58,7 +50,7 @@ const getBusiness = async (req, res, next) => {
   const businessId = req.params.id
 
   try {
-    business = await business.findById(businessId)
+    business = await Business.findById(businessId)
   } catch (error) {
     return next(error)
   }
@@ -70,14 +62,9 @@ const getBusinesses = async (req, res, next) => {
   let businesses
 
   try {
-    businesses = await business.find()
+    businesses = await Business.find()
   } catch (error) {
-    const errorMessage = new HttpError(
-      'An error occurred while retrieving the list of businesses. Please try again.' +
-        error,
-      500
-    )
-    return next(errorMessage)
+    return next(error)
   }
   res.json({
     businesses: businesses.map(business => business.toObject({ getter: true }))
@@ -89,11 +76,9 @@ const updateBusiness = async (req, res, next) => {
   const businessId = req.params.id
 
   const {
-    _id,
     userId,
     name,
     description,
-    createDate,
     address1,
     address2,
     zipCode,
@@ -112,12 +97,9 @@ const updateBusiness = async (req, res, next) => {
   } catch (error) {
     return next(error)
   }
-
-  business._id = _id
   business.userId = userId
   business.name = name
   business.description = description
-  business.createDate = createDate
   business.address1 = address1
   business.address2 = address2
   business.zipCode = zipCode

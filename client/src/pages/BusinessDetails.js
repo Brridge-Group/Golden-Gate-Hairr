@@ -1,8 +1,5 @@
 import { useEffect, useState } from 'react'
 
-// // Style Imports
-// import './businessDetails.css'
-
 // Custom Imports
 import ContentHeader from '../components/ContentHeader'
 
@@ -11,14 +8,14 @@ const BusinessDetails = () => {
   useEffect(() => {
     const fetchBusinesses = async () => {
       try {
-        const response = await fetch('/api/items', { method: 'GET' })
+        const response = await fetch('/api/businesses', { method: 'GET' })
         const responseData = await response.json()
-        console.log(responseData)
+        console.log('fetchBusinesses() resp data', responseData)
 
         if (!response.ok) {
           throw new Error(response.message)
         }
-        // setFetchedBusinessUsers(responseData.businesses)
+        setFetchedBusinessUsers(responseData.businesses)
       } catch (error) {
         return error
       }
@@ -47,34 +44,41 @@ const BusinessDetails = () => {
                     <img
                       src='star.svg'
                       alt='Star Icon'
-                      className='pr-1 pl-1 col-3 col-md-3'
+                      className='pr-1 pl-1 col-3 col-md-3 col-xl-2'
                     />
                     <img
                       src='star.svg'
                       alt='Star Icon'
-                      className='pr-1 pl-1 col-3 col-md-3'
+                      className='pr-1 pl-1 col-3 col-md-3 col-xl-2'
                     />
                     <img
                       src='star.svg'
                       alt='Star Icon'
-                      className='pr-1 pl-1 col-3 col-md-3'
+                      className='pr-1 pl-1 col-3 col-md-3 col-xl-2'
                     />
                     <img
                       src='star.svg'
                       alt='Star Icon'
-                      className='pr-1 pl-1 col-3 col-md-3'
+                      className='pr-1 pl-1 col-3 col-md-3 col-xl-2'
                     />
                   </p>
                   <button className='btn btn-default'>Review</button>
                 </figure>
-                <div className='product-info col-7 ml-4'>
-                  <h1 className='product title'>Business Name</h1>
-                  <span className='float-right col-md-auto me-md-auto'>
-                    12 Main Street Toronto, ON L3K 5H7
-                  </span>
-                  <span className='product-description col-md-auto me-md-auto'>
-                    The business description goes here.
-                  </span>
+                <div className='product-info col-7 ml-4 col-md-9'>
+                  {fetchedBusinessUsers.map(business => {
+                    return (
+                      <>
+                        <h1 className='product title'>{business.name}</h1>
+                        <span className='float-right col-md-auto me-md-auto'>
+                          {business.address1}, {business.address2}
+                          {business.city}, {business.state} {business.zipCode}
+                        </span>
+                        <span className='product-description col-md-auto me-md-auto'>
+                          {business.description}
+                        </span>
+                      </>
+                    )
+                  })}
                 </div>
               </li>
             </ul>
