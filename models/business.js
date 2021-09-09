@@ -6,7 +6,7 @@ const businessSchema = new mongoose.Schema({
   userId: { type: ObjectId },
   name: { type: String },
   description: { type: String },
-  createDate: { type: Date, default: Date.now() },
+  createDate: { type: Date, default: Date.now },
   address1: { type: String },
   address2: { type: String },
   zipCode: { type: String },
