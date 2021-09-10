@@ -13,6 +13,7 @@ import ListItems from './pages/ListItems'
 import NewItem from './pages/NewItem'
 import UpdateItem from './pages/UpdateItem'
 import BusinessDetails from './pages/BusinessDetails'
+import BusinessSignup from './pages/BusinessSignup'
 
 const App = () => {
   let routes
@@ -33,6 +34,9 @@ const App = () => {
       </Route>
       <Route path='/business-details' exact>
         <BusinessDetails />
+      </Route>
+      <Route path='/business-signup' exact>
+        <BusinessSignup />
       </Route>
       <Redirect to='/' />
     </Switch>
