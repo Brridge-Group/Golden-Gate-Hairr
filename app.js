@@ -1,21 +1,21 @@
-const loaders = require("./loaders");
-const express = require("express");
-const config = require("./config");
+const loaders = require('./loaders')
+const express = require('express')
+const config = require('./config')
 
 const startServer = async () => {
-  const app = express();
+  const app = express()
 
-  await loaders(app);
+  await loaders(app)
 
-  const port = config.port || 5000;
-  app.listen(port, (err) => {
+  const port = config.port || 5000
+  app.listen(port, err => {
     if (err) {
-      console.log(err);
-      return;
+      console.log(err)
+      return
     }
 
-    console.log(`Your server is ready !`);
-  });
-};
+    console.log(`Your server is ready ${port}!`)
+  })
+}
 
-startServer();
+startServer()
