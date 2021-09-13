@@ -4,7 +4,7 @@ const { ObjectId } = mongoose.Schema
 
 const businessSchema = new mongoose.Schema({
   userId: { type: ObjectId },
-  name: { type: String },
+  businessName: { type: String },
   description: { type: String },
   createDate: { type: Date, default: Date.now },
   address1: { type: String },
@@ -15,11 +15,10 @@ const businessSchema = new mongoose.Schema({
   country: { type: String },
   mainPicture: { type: String },
   email: { type: String, required: true, unique: true },
-  status: { type: Number, default: 1 }
-  //   ,
-  //   features: { type:ObjectId, ref: "features"}
-  //   ,
-  //   services: { type:ObjectId, ref: "services"}
+  status: { type: Number, default: 1 },
+  password: { type: String },
+  features: [{ type: ObjectId, ref: 'features' }],
+  services: [{ type: ObjectId, ref: 'services' }],
 })
 
 // 3rd parameter to match exact collection name in the DB. Mongoose automatically finds the plural of the modal name declared here if third parameter is not present.
