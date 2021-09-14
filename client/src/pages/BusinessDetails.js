@@ -86,7 +86,7 @@ const BusinessDetails = () => {
                       <span className='product-description col-md-auto me-md-auto'>
                         {business.description}
                       </span>
-                      <div className='text-center'>
+                      <div className='text-center mt-4'>
                         <button className='btn btn-default'>Book Now</button>
                       </div>
                     </div>
