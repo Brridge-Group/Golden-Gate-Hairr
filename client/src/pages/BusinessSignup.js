@@ -1,7 +1,56 @@
 import { useState } from 'react'
+
 // Custom Imports
 import ContentHeader from '../components/ContentHeader'
+
 const BusinessSignup = () => {
+  const [businessRegForm, setBusinessRegForm] = useState({
+    businessName: '',
+    email: '',
+    password: '',
+    confirmedPassword: '',
+  })
+
+  const { businessName, email, password, confirmedPassword } = businessRegForm
+
+  const onFormChange = (event) => {
+    setBusinessRegForm({
+      ...businessRegForm,
+      [event.target.name]: event.target.value,
+    })
+  }
+
+  const registrationSubmitHandler = async (event) => {
+    event?.preventDefault()
+    if (password !== confirmedPassword) {
+      alert('The provided passwords do not match. Please try again.')
+    } else {
+      const newBusiness = {
+        businessName,
+        email,
+        password,
+        confirmedPassword,
+      }
+      console.log('newBusiness', newBusiness)
+      try {
+        const apiBusData = await fetch('/api/businesses', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ ...newBusiness }),
+        })
+
+        if (!apiBusData.ok) {
+          throw new Error('New business registration failed.')
+        }
+        console.log('apiBusData', apiBusData)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    console.log('event', event)
+  }
   return (
     <>
       <section className='content-wrapper bus-signup'>
@@ -17,12 +66,15 @@ const BusinessSignup = () => {
             </div>
             <div className='card-body'>
               <p className='login-box-msg'>Register a new Business</p>
-              <form>
+              <form onSubmit={registrationSubmitHandler}>
                 <div className='input-group mb-3'>
                   <input
+                    name='businessName'
                     type='text'
                     className='form-control'
                     placeholder='Business Name'
+                    value={businessName}
+                    onChange={onFormChange}
                   />
                   <div className='input-group-append'>
                     <div className='input-group-text'>
@@ -32,9 +84,12 @@ const BusinessSignup = () => {
                 </div>
                 <div className='input-group mb-3'>
                   <input
+                    name='email'
                     type='email'
                     className='form-control'
                     placeholder='Email'
+                    value={email}
+                    onChange={onFormChange}
                   />
                   <div className='input-group-append'>
                     <div className='input-group-text'>
@@ -44,9 +99,12 @@ const BusinessSignup = () => {
                 </div>
                 <div className='input-group mb-3'>
                   <input
+                    name='password'
                     type='password'
                     className='form-control'
                     placeholder='Password'
+                    value={password}
+                    onChange={onFormChange}
                   />
                   <div className='input-group-append'>
                     <div className='input-group-text'>
@@ -56,9 +114,12 @@ const BusinessSignup = () => {
                 </div>
                 <div className='input-group mb-3'>
                   <input
+                    name='confirmedPassword'
                     type='password'
                     className='form-control'
                     placeholder='Confirm password'
+                    value={confirmedPassword}
+                    onChange={onFormChange}
                   />
                   <div className='input-group-append'>
                     <div className='input-group-text'>
