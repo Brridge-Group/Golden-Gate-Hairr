@@ -104,6 +104,7 @@ const BusinessSignup = () => {
                     className='form-control'
                     placeholder='Password'
                     value={password}
+                    minLength='6'
                     onChange={onFormChange}
                   />
                   <div className='input-group-append'>
@@ -119,6 +120,7 @@ const BusinessSignup = () => {
                     className='form-control'
                     placeholder='Confirm password'
                     value={confirmedPassword}
+                    minLength='6'
                     onChange={onFormChange}
                   />
                   <div className='input-group-append'>
