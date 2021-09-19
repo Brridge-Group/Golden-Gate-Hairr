@@ -3,7 +3,7 @@ import {
   BrowserRouter as Router,
   Route,
   Redirect,
-  Switch
+  Switch,
 } from 'react-router-dom'
 import Home from './pages/Home'
 import Header from './components/Header'
@@ -14,6 +14,7 @@ import NewItem from './pages/NewItem'
 import UpdateItem from './pages/UpdateItem'
 import BusinessDetails from './pages/BusinessDetails'
 import BusinessSignup from './pages/BusinessSignup'
+import BusinessProfile from './pages/BusinessProfile'
 
 const App = () => {
   let routes
@@ -37,6 +38,9 @@ const App = () => {
       </Route>
       <Route path='/business-signup' exact>
         <BusinessSignup />
+      </Route>
+      <Route path='/businesses/profile' exact>
+        <BusinessProfile />
       </Route>
       <Redirect to='/' />
     </Switch>
