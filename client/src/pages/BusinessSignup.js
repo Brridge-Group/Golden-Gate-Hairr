@@ -1,17 +1,27 @@
+// React Components
 import { useState } from 'react'
+import { useHistory } from 'react-router-dom'
 
 // Custom Imports
 import ContentHeader from '../components/ContentHeader'
 
 const BusinessSignup = () => {
   const [businessRegForm, setBusinessRegForm] = useState({
-    businessName: '',
+    firstName: '',
+    lastName: '',
     email: '',
     password: '',
     confirmedPassword: '',
   })
+  const [isNewBusUserCreated, setIsNewBusUserCreated] = useState(false)
 
-  const { businessName, email, password, confirmedPassword } = businessRegForm
+  // Todo: Error Handling UI
+  const [_error, set_Error] = useState(null)
+
+  const { firstName, lastName, email, password, confirmedPassword } =
+    businessRegForm
+
+  const history = useHistory()
 
   const onFormChange = (event) => {
     setBusinessRegForm({
@@ -25,31 +35,47 @@ const BusinessSignup = () => {
     if (password !== confirmedPassword) {
       alert('The provided passwords do not match. Please try again.')
     } else {
-      const newBusiness = {
-        businessName,
+      const newBusinessUser = {
+        firstName,
+        lastName,
         email,
         password,
-        confirmedPassword,
+        type: 2,
+        // confirmedPassword,
       }
-      console.log('newBusiness', newBusiness)
-      try {
-        const apiBusData = await fetch('/api/businesses', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ ...newBusiness }),
-        })
+      console.log('newBusinessUser', newBusinessUser)
 
-        if (!apiBusData.ok) {
-          throw new Error('New business registration failed.')
-        }
-        console.log('apiBusData', apiBusData)
-      } catch (error) {
-        console.log(error)
-      }
+      const response = await fetch('/api/users', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ ...newBusinessUser }),
+      })
+        .then((response) => {
+          console.log('response', response)
+          console.log('response', response.body)
+          if (response.status === 201) {
+            setIsNewBusUserCreated(true)
+            alert('Registration Successful')
+            // Todo: Set Logged In User to state
+            history.push('/businesses/profile')
+          } else {
+            throw new Error('New business user registration failed.')
+          }
+        })
+        .catch((error) => {
+          set_Error(error)
+          console.log('Error:', _error)
+        })
     }
-    console.log('event', event)
+    setBusinessRegForm({
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+      confirmedPassword: '',
+    })
   }
   return (
     <>
@@ -65,15 +91,32 @@ const BusinessSignup = () => {
               </a>
             </div>
             <div className='card-body'>
-              <p className='login-box-msg'>Register a new Business</p>
+              <p className='login-box-msg'>
+                Register a new Business <br></br> <span>User Profile</span>
+              </p>
               <form onSubmit={registrationSubmitHandler}>
                 <div className='input-group mb-3'>
                   <input
-                    name='businessName'
+                    name='firstName'
                     type='text'
                     className='form-control'
-                    placeholder='Business Name'
-                    value={businessName}
+                    placeholder='First Name'
+                    value={firstName}
+                    onChange={onFormChange}
+                  />
+                  <div className='input-group-append'>
+                    <div className='input-group-text'>
+                      <span className='fas fa-user'></span>
+                    </div>
+                  </div>
+                </div>
+                <div className='input-group mb-3'>
+                  <input
+                    name='lastName'
+                    type='text'
+                    className='form-control'
+                    placeholder='Last Name'
+                    value={lastName}
                     onChange={onFormChange}
                   />
                   <div className='input-group-append'>
