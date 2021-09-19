@@ -6,8 +6,7 @@ const getUsers = async (req, res, next) => {
   let users
   try {
     users = await User.find()
-  } catch (err) {
-    const error = new HttpError("Couldn't retrieve users!" + err, 500)
+  } catch (error) {
     return next(error)
   }
 
@@ -18,7 +17,7 @@ const getUsers = async (req, res, next) => {
 
 const createUser = async (req, res, next) => {
   console.log(req.body)
-  const { firstName, lastName, email, password, password2 } = req.body
+  const { firstName, lastName, email, password, password2, type } = req.body
 
   const createdUser = new User({
     firstName,
@@ -26,12 +25,12 @@ const createUser = async (req, res, next) => {
     email,
     password,
     password2,
+    type,
   })
 
   try {
     await createdUser.save()
-  } catch (err) {
-    const error = new HttpError('Creating user failed, please try again.', 500)
+  } catch (error) {
     return next(error)
   }
 
