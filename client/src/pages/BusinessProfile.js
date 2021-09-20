@@ -132,7 +132,7 @@ const BusinessProfile = () => {
                 Submit
               </button>
             </div>
-            {/* <-- Form End --> */}
+            {/* <-- Form Ends --> */}
           </form>
         </div>
       </section>
