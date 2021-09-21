@@ -14,6 +14,7 @@ import NewItem from './pages/NewItem'
 import UpdateItem from './pages/UpdateItem'
 import BusinessDetails from './pages/BusinessDetails'
 import UserRegistration from './pages/UserRegistration'
+import Search from './pages/Search'
 
 const App = () => {
   let routes
@@ -25,6 +26,9 @@ const App = () => {
       </Route>
       <Route path='/sign-up' exact>
         <UserRegistration />
+      </Route>{' '}
+      <Route path='/search' exact>
+        <Search />
       </Route>
       <Route path='/items' exact>
         <ListItems />
