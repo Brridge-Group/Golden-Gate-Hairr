@@ -3,38 +3,21 @@ import React, { useEffect, useState } from 'react'
 // Custom Imports
 import ContentHeader from '../components/ContentHeader'
 
-const B = (props) => {
-  console.log(props)
-  const [fetchedBusinessUsers, setFetchedBusinessUsers] = useState([])
-  useEffect(() => {
-    const fetchBusinesses = async () => {
-      try {
-        const response = await fetch('/api/businesses', { method: 'GET' })
-        const responseData = await response.json()
-        console.log('fetchBusinesses() resp data', responseData)
-
-        if (!response.ok) {
-          throw new Error(response.message)
-        }
-        setFetchedBusinessUsers(responseData.businesses)
-      } catch (error) {
-        return error
-      }
-    }
-
-    fetchBusinesses()
-  }, [])
-
+const Bus = (props) => {
+  console.log(props.business, props)
+  if (!props.length) {
+    return null
+  }
   return (
     <>
       <React.Fragment>
         <section className='content-wrapper'>
-          <ContentHeader title='Filter Business Page' />
+          <ContentHeader title='Business Details Page' />
           <div className='card w-50 mx-auto'>
             <div className='card-body'>
               <ul className='products-list product-list-in-card'>
-                {fetchedBusinessUsers.map((business) => {
-                  console.log(business._id)
+                {props.business.map((business) => {
+                  console.log(business._id, business.businessName)
                   return (
                     <>
                       <li className='item' key={business._id}>
@@ -86,9 +69,7 @@ const B = (props) => {
                             <button className='btn btn-default'>Review</button>
                           </div>
                           <div>
-                            <h1 className='product title'>
-                              {business.businessName}
-                            </h1>
+                            <h1 className='product title'>{}</h1>
                             <div>
                               {business.address1}, {business.address2}
                               {business.city}, {business.state}{' '}
@@ -112,4 +93,4 @@ const B = (props) => {
   )
 }
 
-export default B
+export default Bus

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { Redirect } from 'react-router-dom'
 import ContentHeader from '../components/ContentHeader'
 import Businesses from './Businesses'
 
@@ -81,12 +80,7 @@ const Search = () => {
           </div>
         </div>
       </div>
-      <div>
-        {filteredBusinesses}
-        {filterResults.length > 0 && (
-          <Redirect to={{ pathname: '/business-details' }} />
-        )}
-      </div>
+      <div>{filteredBusinesses}</div>
     </React.Fragment>
   )
 }
