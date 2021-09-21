@@ -3,7 +3,7 @@ import {
   BrowserRouter as Router,
   Route,
   Redirect,
-  Switch
+  Switch,
 } from 'react-router-dom'
 import Home from './pages/Home'
 import Header from './components/Header'
@@ -13,6 +13,7 @@ import ListItems from './pages/ListItems'
 import NewItem from './pages/NewItem'
 import UpdateItem from './pages/UpdateItem'
 import BusinessDetails from './pages/BusinessDetails'
+import UserRegistration from './pages/UserRegistration'
 
 const App = () => {
   let routes
@@ -21,6 +22,9 @@ const App = () => {
     <Switch>
       <Route path='/' exact>
         <Home />
+      </Route>
+      <Route path='/sign-up' exact>
+        <UserRegistration />
       </Route>
       <Route path='/items' exact>
         <ListItems />
