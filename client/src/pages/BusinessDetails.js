@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 // Custom Imports
 import ContentHeader from '../components/ContentHeader'
@@ -26,49 +26,57 @@ const BusinessDetails = () => {
 
   return (
     <>
-      <section className='content-wrapper bus-details'>
-        <header className='bus-details--header'>
+      <React.Fragment>
+        <section className='content-wrapper'>
           <ContentHeader title='Business Details Page' />
-        </header>
-        <div className='card'>
-          <div className='card-body'>
-            <ul className='products-list product-list-in-card'>
-              <li className='item d-flex'>
-                <figure className='col-4 col-md-2'>
-                  <img
-                    src='https://via.placeholder.com/100'
-                    alt='Placeholder Business Profile'
-                    className='image-fluid'
-                  />
-                  <p className='bus-details--rating '>
-                    <img
-                      src='star.svg'
-                      alt='Star Icon'
-                      className='pr-1 pl-1 col-3 col-md-3 col-xl-2'
-                    />
-                    <img
-                      src='star.svg'
-                      alt='Star Icon'
-                      className='pr-1 pl-1 col-3 col-md-3 col-xl-2'
-                    />
-                    <img
-                      src='star.svg'
-                      alt='Star Icon'
-                      className='pr-1 pl-1 col-3 col-md-3 col-xl-2'
-                    />
-                    <img
-                      src='star.svg'
-                      alt='Star Icon'
-                      className='pr-1 pl-1 col-3 col-md-3 col-xl-2'
-                    />
-                  </p>
-                  <button className='btn btn-default'>Review</button>
-                </figure>
-                <div className='product-info col-7 ml-4 col-md-9'>
-                  {fetchedBusinessUsers.map(business => {
+          <div className='card w-50 mx-auto'>
+            <div className='card-body'>
+              <ul className='products-list product-list-in-card'>
+                <li className='item'>
+                  {fetchedBusinessUsers.map((business) => {
                     return (
                       <>
-                        <h1 className='product title'>{business.name}</h1>
+                        <figure className=''>
+                          <img
+                            src='https://via.placeholder.com/100'
+                            alt='Placeholder Business Profile'
+                            className='image-fluid'
+                          />
+                          <p
+                            className='bus-details--rating '
+                            style={{
+                              display: 'flex',
+                              justifyContent: 'space-evenly',
+                              marginTop: '5px',
+                              maxWidth: '22%',
+                            }}>
+                            <img
+                              src='star.svg'
+                              alt='Star Icon'
+                              style={{ width: '10%' }}
+                            />
+                            <img
+                              src='star.svg'
+                              alt='Star Icon'
+                              style={{ width: '10%' }}
+                            />
+                            <img
+                              src='star.svg'
+                              alt='Star Icon'
+                              style={{ width: '10%' }}
+                            />
+                            <img
+                              src='star.svg'
+                              alt='Star Icon'
+                              style={{ width: '10%' }}
+                            />
+                          </p>
+                          <button className='btn btn-default'>Review</button>
+                        </figure>
+
+                        <h1 className='product title'>
+                          {business.businessName}
+                        </h1>
                         <span className='float-right col-md-auto me-md-auto'>
                           {business.address1}, {business.address2}
                           {business.city}, {business.state} {business.zipCode}
@@ -79,15 +87,12 @@ const BusinessDetails = () => {
                       </>
                     )
                   })}
-                </div>
-              </li>
-            </ul>
-            <div className='text-center'>
-              <button className='btn btn-default'>Book Now</button>
+                </li>
+              </ul>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </React.Fragment>
     </>
   )
 }
