@@ -4,27 +4,10 @@ import React, { useEffect, useState } from 'react'
 import ContentHeader from '../components/ContentHeader'
 
 const Businesses = (props) => {
-  console.log(props)
-  const [fetchedBusinessUsers, setFetchedBusinessUsers] = useState([])
-  useEffect(() => {
-    const fetchBusinesses = async () => {
-      try {
-        const response = await fetch('/api/businesses', { method: 'GET' })
-        const responseData = await response.json()
-        console.log('fetchBusinesses() resp data', responseData)
-
-        if (!response.ok) {
-          throw new Error(response.message)
-        }
-        setFetchedBusinessUsers(responseData.businesses)
-      } catch (error) {
-        return error
-      }
-    }
-
-    fetchBusinesses()
-  }, [])
-
+  console.log(props.business, props)
+  if (!props.length) {
+    return null
+  }
   return (
     <>
       <React.Fragment>
@@ -33,8 +16,8 @@ const Businesses = (props) => {
           <div className='card w-50 mx-auto'>
             <div className='card-body'>
               <ul className='products-list product-list-in-card'>
-                {fetchedBusinessUsers.map((business) => {
-                  console.log(business._id)
+                {props.business.map((business) => {
+                  console.log(business._id, business.businessName)
                   return (
                     <>
                       <li className='item' key={business._id}>
@@ -86,9 +69,7 @@ const Businesses = (props) => {
                             <button className='btn btn-default'>Review</button>
                           </div>
                           <div>
-                            <h1 className='product title'>
-                              {business.businessName}
-                            </h1>
+                            <h1 className='product title'>{}</h1>
                             <div>
                               {business.address1}, {business.address2}
                               {business.city}, {business.state}{' '}

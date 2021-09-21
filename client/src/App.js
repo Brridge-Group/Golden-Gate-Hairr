@@ -12,7 +12,7 @@ import SideBar from './components/SideBar'
 import ListItems from './pages/ListItems'
 import NewItem from './pages/NewItem'
 import UpdateItem from './pages/UpdateItem'
-import BusinessDetails from './pages/BusinessDetails'
+import Businesses from './pages/Businesses'
 import UserRegistration from './pages/UserRegistration'
 import Search from './pages/Search'
 
@@ -40,7 +40,7 @@ const App = () => {
         <UpdateItem />
       </Route>
       <Route path='/business-details' exact>
-        <BusinessDetails />
+        <Businesses />
       </Route>
       <Redirect to='/' />
     </Switch>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import ContentHeader from '../components/ContentHeader'
-// import Businesses from './Businesses'
+import Businesses from './Businesses'
 
 const Search = () => {
   const [searchTerm, setSearchTerm] = useState('')
@@ -77,7 +77,7 @@ const Search = () => {
           </div>
         </div>
       </div>
-      {/* <Businesses business={filterResults} /> */}
+      <Businesses business={filterResults} />
     </React.Fragment>
   )
 }
