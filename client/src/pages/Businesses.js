@@ -17,7 +17,8 @@ const Businesses = (props) => {
           </div>
           <div className='card-body'>
             <h6 className='card-title'>
-              supposed to show up here{console.log(props.name)} {props.name}
+              props.name supposed to show up here{console.log(props.name)}{' '}
+              {props.name}
             </h6>
 
             <p className='card-text'>

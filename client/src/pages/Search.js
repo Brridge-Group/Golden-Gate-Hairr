@@ -31,9 +31,10 @@ const Search = () => {
     return searchResults.filter((business) => {
       if (business.city === searchTerm) {
         busArr.push(business)
-      } else {
-        console.log('no')
       }
+      // if (!busArr.length) {
+      //   alert('no cities found')
+      // }
       return setfilterResults(busArr)
     })
   }
