@@ -2,23 +2,25 @@ import React, { useState, useEffect } from 'react'
 import { Redirect } from 'react-router-dom'
 import ContentHeader from '../components/ContentHeader'
 import Businesses from './Businesses'
+import axios from 'axios'
 
 const Search = () => {
-  const [searchTerm, setSearchTerm] = useState('')
-  const [searchResults, setSearchResults] = useState([])
-  const [filterResults, setfilterResults] = useState([])
+  const [allData, setAllData] = useState([])
+  const [filteredData, setFilteredData] = useState(allData)
 
   useEffect(() => {
     const fetchBusinesses = async () => {
       try {
         const response = await fetch('/api/businesses', { method: 'GET' })
         const responseData = await response.json()
-        console.log('fetchBusinesses() resp data', responseData)
 
         if (!response.ok) {
           throw new Error(response.message)
         }
-        setSearchResults(responseData.businesses)
+
+        setAllData(responseData)
+        setFilteredData(responseData)
+        console.log('in fetch line 65', responseData.businesses)
       } catch (error) {
         return error
       }
@@ -26,29 +28,21 @@ const Search = () => {
     fetchBusinesses()
   }, [])
 
-  const targetBusiness = () => {
-    const busArr = []
-    return searchResults.filter((business) => {
-      if (business.city === searchTerm) {
-        busArr.push(business)
-      }
-      // if (!busArr.length) {
-      //   alert('no cities found')
-      // }
-      return setfilterResults(busArr)
+  const handleSearch = (e) => {
+    let value = e.target.value
+    const inputCase =
+      value.charAt(0).toUpperCase() + value.slice(1).toLowerCase()
+    let result = []
+    return Object.values(allData).map((data) => {
+      result = data.filter((d) => {
+        return d.city.search(inputCase) != -1
+      })
+      console.log('data 41', data, 'result', result)
+      setFilteredData(result)
     })
   }
 
-  const handleChange = (e) => {
-    const input = e.target.value
-    const inputCase =
-      input.charAt(0).toUpperCase() + input.slice(1).toLowerCase()
-    setSearchTerm(inputCase)
-  }
-  const filteredBusinesses = filterResults.map((business) => {
-    return <Businesses name={business.businessName} />
-  })
-
+  console.log('line 48', filteredData)
   return (
     <React.Fragment>
       <div className='content-wrapper'>
@@ -60,7 +54,8 @@ const Search = () => {
             </h5>
           </div>
           <div className='card-body' style={{ height: 200 }}>
-            <div
+            <form
+              // onSubmit={handleSubmit}
               style={{ marginTop: 50, textAlign: 'center' }}
               className='form-group'>
               <label htmlFor='search'>
@@ -68,25 +63,23 @@ const Search = () => {
               </label>
               <input
                 type='text'
-                value={searchTerm}
-                onChange={handleChange}
+                onChange={(e) => handleSearch(e)}
                 placeholder='city'
                 style={{ marginLeft: 10, marginRight: 10 }}
               />
+
               <button
                 style={{ border: 'none', background: 'none' }}
-                onClick={() => targetBusiness(searchTerm)}>
+                // onClick={}
+                type='submit'>
                 <i className='fas fa-search'></i>
               </button>
-            </div>
+            </form>
           </div>
         </div>
       </div>
       <div>
-        {filteredBusinesses}
-        {filterResults.length > 0 && (
-          <Redirect to={{ pathname: '/business-details' }} />
-        )}
+        <Businesses business={filteredData} />
       </div>
     </React.Fragment>
   )

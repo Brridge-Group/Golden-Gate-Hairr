@@ -3,10 +3,14 @@ import React from 'react'
 import ContentHeader from '../components/ContentHeader'
 
 const Businesses = (props) => {
-  console.log(props.name, typeof props.name)
+  console.log('in businessses', props, typeof props, props[0])
+
   // if (!props.length) {
   //   return null
   // }
+  Object.values(props).map((b) => {
+    console.log('in map', b[0])
+  })
   return (
     <React.Fragment>
       <div className='content-wrapper'>
