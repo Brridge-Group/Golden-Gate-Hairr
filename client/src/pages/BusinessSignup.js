@@ -13,6 +13,7 @@ const BusinessSignup = () => {
     password: '',
     confirmedPassword: '',
   })
+  const [user, setUser] = useState({})
   const [isNewBusUserCreated, setIsNewBusUserCreated] = useState(false)
 
   // Todo: Error Handling UI
@@ -41,7 +42,7 @@ const BusinessSignup = () => {
         email,
         password,
         type: 2,
-        // confirmedPassword,
+        createdDate: Date.now(),
       }
       console.log('newBusinessUser', newBusinessUser)
 
@@ -53,12 +54,12 @@ const BusinessSignup = () => {
         body: JSON.stringify({ ...newBusinessUser }),
       })
         .then((response) => {
-          console.log('response', response)
-          console.log('response', response.body)
+          const responseData = response.json()
           if (response.status === 201) {
             setIsNewBusUserCreated(true)
+            setBusinessRegForm({ ...newBusinessUser })
+            setUser({ ...responseData }) // Todo: Revisit once context connected.
             alert('Registration Successful')
-            // Todo: Set Logged In User to state
             history.push('/businesses/profile')
           } else {
             throw new Error('New business user registration failed.')
@@ -69,14 +70,8 @@ const BusinessSignup = () => {
           console.log('Error:', _error)
         })
     }
-    setBusinessRegForm({
-      firstName: '',
-      lastName: '',
-      email: '',
-      password: '',
-      confirmedPassword: '',
-    })
   }
+
   return (
     <>
       <section className='content-wrapper bus-signup'>
