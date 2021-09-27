@@ -3,7 +3,7 @@ import {
   BrowserRouter as Router,
   Route,
   Redirect,
-  Switch,
+  Switch
 } from 'react-router-dom'
 import Home from './pages/Home'
 import Header from './components/Header'
@@ -15,6 +15,8 @@ import UpdateItem from './pages/UpdateItem'
 import BusinessDetails from './pages/BusinessDetails'
 import BusinessSignup from './pages/BusinessSignup'
 import BusinessProfile from './pages/BusinessProfile'
+
+import { AuthProvider } from './contexts/GlobalContext'
 
 const App = () => {
   let routes
@@ -47,14 +49,16 @@ const App = () => {
   )
 
   return (
-    <Router>
-      <div className='App'>
-        <Header />
-        <SideBar />
-        <div className='content'>{routes}</div>
-        <Footer />
-      </div>
-    </Router>
+    <AuthProvider>
+      <Router>
+        <div className='App'>
+          <Header />
+          <SideBar />
+          <div className='content'>{routes}</div>
+          <Footer />
+        </div>
+      </Router>
+    </AuthProvider>
   )
 }
 
