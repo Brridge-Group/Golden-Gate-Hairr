@@ -1,7 +1,13 @@
+// React Components
+import { useState, useContext } from 'react'
+
 // Custom Imports
 import ContentHeader from '../components/ContentHeader'
+import { AuthContext } from '../contexts/GlobalContext'
 
 const BusinessProfile = () => {
+  const { userState, setUserState } = useContext(AuthContext)
+  console.log('BP userState', userState)
   return (
     <>
       <section className='content-wrapper bus-profile'>
@@ -10,7 +16,7 @@ const BusinessProfile = () => {
         </header>
         <div className='card card-primary'>
           <div className='card-header'>
-            <h3 className='card-title'>Business Profile</h3>
+            Business Profile
           </div>
           {/* <-- Form Start --> */}
           <form>
