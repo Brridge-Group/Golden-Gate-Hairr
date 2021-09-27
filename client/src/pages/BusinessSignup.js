@@ -1,19 +1,21 @@
 // React Components
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { useHistory } from 'react-router-dom'
 
 // Custom Imports
 import ContentHeader from '../components/ContentHeader'
-
+import { AuthContext } from '../contexts/GlobalContext'
 const BusinessSignup = () => {
   const [businessRegForm, setBusinessRegForm] = useState({
     firstName: '',
     lastName: '',
     email: '',
     password: '',
-    confirmedPassword: '',
+    confirmedPassword: ''
   })
-  const [user, setUser] = useState({})
+
+  const { userState, setUserState } = useContext(AuthContext)
+
   const [isNewBusUserCreated, setIsNewBusUserCreated] = useState(false)
 
   // Todo: Error Handling UI
@@ -24,51 +26,54 @@ const BusinessSignup = () => {
 
   const history = useHistory()
 
-  const onFormChange = (event) => {
+  const onFormChange = event => {
     setBusinessRegForm({
       ...businessRegForm,
-      [event.target.name]: event.target.value,
+      [event.target.name]: event.target.value
     })
   }
 
-  const registrationSubmitHandler = async (event) => {
+  const saveNewBusinessUser = async () => {
+    const newBusinessUser = {
+      firstName,
+      lastName,
+      email,
+      password,
+      type: 2,
+      createdDate: Date.now()
+    }
+
+    const requestOptions = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ ...newBusinessUser })
+    }
+
+    try {
+      const response = await fetch('/api/users', requestOptions)
+      const json = await response.json()
+      setUserState(json)
+      setIsNewBusUserCreated(true)
+      alert('Registration Successful')
+    } catch (error) {
+      set_Error(error)
+      console.error(
+        'A new business user registration error occurred. Error Message:',
+        error
+      )
+    }
+  }
+
+  const registrationSubmitHandler = event => {
     event?.preventDefault()
+
     if (password !== confirmedPassword) {
       alert('The provided passwords do not match. Please try again.')
     } else {
-      const newBusinessUser = {
-        firstName,
-        lastName,
-        email,
-        password,
-        type: 2,
-        createdDate: Date.now(),
-      }
-      console.log('newBusinessUser', newBusinessUser)
-
-      const response = await fetch('/api/users', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ ...newBusinessUser }),
-      })
-        .then((response) => {
-          const responseData = response.json()
-          if (response.status === 201) {
-            setIsNewBusUserCreated(true)
-            setBusinessRegForm({ ...newBusinessUser })
-            setUser({ ...responseData }) // Todo: Revisit once context connected.
-            alert('Registration Successful')
-            history.push('/businesses/profile')
-          } else {
-            throw new Error('New business user registration failed.')
-          }
-        })
-        .catch((error) => {
-          set_Error(error)
-          console.log('Error:', _error)
-        })
+      saveNewBusinessUser()
+      history.push('/businesses/profile')
     }
   }
 
@@ -89,6 +94,7 @@ const BusinessSignup = () => {
               <p className='login-box-msg'>
                 Register a new Business <br></br> <span>User Profile</span>
               </p>
+              
               <form onSubmit={registrationSubmitHandler}>
                 <div className='input-group mb-3'>
                   <input
