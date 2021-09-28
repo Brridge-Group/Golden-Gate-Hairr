@@ -2,13 +2,15 @@ import React, { useState, useEffect } from 'react'
 import { Redirect } from 'react-router-dom'
 import ContentHeader from '../components/ContentHeader'
 import Businesses from './Businesses'
-import axios from 'axios'
+import { useHistory } from 'react-router-dom'
 
 const Search = () => {
   const [allData, setAllData] = useState([])
   const [filteredData, setFilteredData] = useState(allData)
+  const history = useHistory()
 
   useEffect(() => {
+    console.log('in fetchBus')
     const fetchBusinesses = async () => {
       try {
         const response = await fetch('/api/businesses', { method: 'GET' })
@@ -29,6 +31,7 @@ const Search = () => {
   }, [])
 
   const handleSearch = (e) => {
+    console.log('in handleSearch')
     let value = e.target.value
     const inputCase =
       value.charAt(0).toUpperCase() + value.slice(1).toLowerCase()
@@ -40,6 +43,11 @@ const Search = () => {
       console.log('data 41', data, 'result', result)
       setFilteredData(result)
     })
+  }
+  const onButtonClick = () => {
+    console.log('in onButtonclick')
+    history.push('/business-details')
+    setFilteredData(filteredData)
   }
 
   console.log('line 48', filteredData)
@@ -54,7 +62,7 @@ const Search = () => {
             </h5>
           </div>
           <div className='card-body' style={{ height: 200 }}>
-            <form
+            <div
               // onSubmit={handleSubmit}
               style={{ marginTop: 50, textAlign: 'center' }}
               className='form-group'>
@@ -70,16 +78,13 @@ const Search = () => {
 
               <button
                 style={{ border: 'none', background: 'none' }}
-                // onClick={}
-                type='submit'>
+                onClick={onButtonClick}>
+                {/* // type='submit'> */}
                 <i className='fas fa-search'></i>
               </button>
-            </form>
+            </div>
           </div>
         </div>
-      </div>
-      <div>
-        <Businesses business={filteredData} />
       </div>
     </React.Fragment>
   )

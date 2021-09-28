@@ -22,28 +22,28 @@ const App = () => {
 
   routes = (
     <Switch>
-      <Route path='/' exact>
+      <Route exact path='/'>
         <Home />
       </Route>
-      <Route path='/sign-up' exact>
+      <Route exact path='/sign-up'>
         <UserRegistration />
-      </Route>{' '}
-      <Route path='/search' exact>
+      </Route>
+      <Route exact path='/search'>
         <Search />
       </Route>
-      <Route path='/items' exact>
+      <Route exact path='/items'>
         <ListItems />
       </Route>
-      <Route path='/items/new' exact>
+      <Route exact path='/items/new'>
         <NewItem />
       </Route>
-      <Route path='/items/:id' exact>
+      <Route exact path='/items/:id'>
         <UpdateItem />
       </Route>
-      <Route path='/business-details' exact>
+      <Route path='/business-details'>
         <Businesses />
       </Route>
-      <Route path='/business' exact>
+      <Route exact path='/business'>
         <B />
       </Route>
       <Redirect to='/' />
