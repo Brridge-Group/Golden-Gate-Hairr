@@ -1,0 +1,67 @@
+import React from 'react'
+import ContentHeader from '../../components/ContentHeader'
+import Businesses from '../SearchResults'
+
+class Search extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      value: '',
+    }
+    this.handleChange = this.handleChange.bind(this)
+    this.buttonOnClick = this.buttonOnClick.bind(this)
+  }
+  // history = useHistory()
+
+  handleChange(e) {
+    this.setState({ value: e.target.value })
+  }
+  buttonOnClick() {
+    this.props.history.push('/business-details', {
+      value: this.props.value,
+    })
+  }
+
+  render() {
+    return (
+      <React.Fragment>
+        <div className='content-wrapper'>
+          <ContentHeader title='Search' />
+          <div className='card w-50 mx-auto'>
+            <div className='card-header'>
+              <h5 className='m-0' style={{ color: 'white ' }}>
+                Search
+              </h5>
+            </div>
+            <div className='card-body' style={{ height: 200 }}>
+              <div
+                style={{ marginTop: 50, textAlign: 'center' }}
+                className='form-group'>
+                <label htmlFor='search'>
+                  <h6 className='m-0'>I'm looking for a hair stylist in </h6>
+                </label>
+                <input
+                  type='text'
+                  onChange={this.handleChange}
+                  value={this.state.value}
+                  placeholder='city'
+                  style={{ marginLeft: 10, marginRight: 10 }}
+                />
+
+                <button
+                  type='submit'
+                  style={{ border: 'none', background: 'none' }}>
+                  {/* onClick='submit'> */}
+                  <i className='fas fa-search'></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <Businesses term={this.state.value} />
+      </React.Fragment>
+    )
+  }
+}
+
+export default Search

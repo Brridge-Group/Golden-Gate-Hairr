@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 // Custom Imports
-import ContentHeader from '../components/ContentHeader'
+import ContentHeader from '../../components/ContentHeader'
 
 const B = (props) => {
   console.log(props)

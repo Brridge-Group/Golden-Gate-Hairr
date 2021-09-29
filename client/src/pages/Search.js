@@ -1,56 +1,21 @@
-import React, { useState, useEffect } from 'react'
-import { Redirect } from 'react-router-dom'
+import React, { useState } from 'react'
 import ContentHeader from '../components/ContentHeader'
-import Businesses from './Businesses'
+import SearchResults from './SearchResults'
+
 import { useHistory } from 'react-router-dom'
 
 const Search = () => {
-  const [allData, setAllData] = useState([])
-  const [filteredData, setFilteredData] = useState(allData)
+  const [searchTerm, setSearchTerm] = useState('')
   const history = useHistory()
 
-  useEffect(() => {
-    console.log('in fetchBus')
-    const fetchBusinesses = async () => {
-      try {
-        const response = await fetch('/api/businesses', { method: 'GET' })
-        const responseData = await response.json()
-
-        if (!response.ok) {
-          throw new Error(response.message)
-        }
-
-        setAllData(responseData)
-        setFilteredData(responseData)
-        console.log('in fetch line 65', responseData.businesses)
-      } catch (error) {
-        return error
-      }
-    }
-    fetchBusinesses()
-  }, [])
-
   const handleSearch = (e) => {
-    console.log('in handleSearch')
     let value = e.target.value
-    const inputCase =
-      value.charAt(0).toUpperCase() + value.slice(1).toLowerCase()
-    let result = []
-    return Object.values(allData).map((data) => {
-      result = data.filter((d) => {
-        return d.city.search(inputCase) != -1
-      })
-      console.log('data 41', data, 'result', result)
-      setFilteredData(result)
-    })
+    setSearchTerm(value)
   }
-  const onButtonClick = () => {
-    console.log('in onButtonclick')
-    history.push('/business-details')
-    setFilteredData(filteredData)
+  const buttonOnClick = () => {
+    history.push('/businesses')
   }
 
-  console.log('line 48', filteredData)
   return (
     <React.Fragment>
       <div className='content-wrapper'>
@@ -63,7 +28,6 @@ const Search = () => {
           </div>
           <div className='card-body' style={{ height: 200 }}>
             <div
-              // onSubmit={handleSubmit}
               style={{ marginTop: 50, textAlign: 'center' }}
               className='form-group'>
               <label htmlFor='search'>
@@ -72,20 +36,22 @@ const Search = () => {
               <input
                 type='text'
                 onChange={(e) => handleSearch(e)}
+                // value={searchTerm}
                 placeholder='city'
                 style={{ marginLeft: 10, marginRight: 10 }}
               />
 
               <button
+                // type='submit'
                 style={{ border: 'none', background: 'none' }}
-                onClick={onButtonClick}>
-                {/* // type='submit'> */}
+                onClick={buttonOnClick}>
                 <i className='fas fa-search'></i>
               </button>
             </div>
           </div>
         </div>
       </div>
+      <SearchResults term={searchTerm} />
     </React.Fragment>
   )
 }

@@ -1,16 +1,22 @@
 import React from 'react'
 
-import ContentHeader from '../components/ContentHeader'
+import ContentHeader from '../../components/ContentHeader'
 
 const Businesses = (props) => {
-  console.log('in businessses', props, typeof props, props[0])
+  console.log(
+    'in businessses',
+    props,
+    typeof props,
+    props.location,
+    props.location.state
+  )
 
   // if (!props.length) {
   //   return null
   // }
-  Object.values(props).map((b) => {
-    console.log('in map', b[0])
-  })
+  // Object.values(props).map((b) => {
+  //   console.log('in map', b)
+  // })
   return (
     <React.Fragment>
       <div className='content-wrapper'>
@@ -21,8 +27,10 @@ const Businesses = (props) => {
           </div>
           <div className='card-body'>
             <h6 className='card-title'>
-              props.name supposed to show up here{console.log(props.name)}{' '}
-              {props.name}
+              props.name supposed to show up here
+              {/* { */}
+              {/* // console.log(props
+              .name)} {props.name} */}
             </h6>
 
             <p className='card-text'>
