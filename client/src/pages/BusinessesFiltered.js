@@ -4,7 +4,7 @@ import ContentHeader from '../components/ContentHeader'
 const BusinessesFiltered = (props) => {
   console.log('in bus filter', props, props.name)
   return (
-    <div className='content-wrapper'>
+    <React.Fragment>
       <ContentHeader title='Filter Business Page' />
       <div className='card w-50 mx-auto'>
         <div className='card-body'>
@@ -71,7 +71,7 @@ const BusinessesFiltered = (props) => {
           </ul>
         </div>
       </div>
-    </div>
+    </React.Fragment>
   )
 }
 

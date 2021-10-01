@@ -52,7 +52,9 @@ const App = () => {
     <Router>
       <Header />
       <SideBar />
-      <div className='content'>{routes}</div>
+      <div className='content-wrapper'>
+        <div className='content'>{routes}</div>
+      </div>
       <Footer />
     </Router>
   )

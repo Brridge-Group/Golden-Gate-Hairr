@@ -59,12 +59,12 @@ const SearchResults = (props) => {
   })
 
   return (
-    <>
+    <React.Fragment>
       {/* // <React.Fragment>
     //   <div className='content-wrapper'></div> */}
       {busFilter}
       {/* // </React.Fragment> */}
-    </>
+    </React.Fragment>
   )
 }
 
