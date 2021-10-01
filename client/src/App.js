@@ -1,4 +1,5 @@
 import React from 'react'
+import './App.css'
 import {
   BrowserRouter as Router,
   Route,
@@ -49,12 +50,10 @@ const App = () => {
 
   return (
     <Router>
-      <div className='App'>
-        <Header />
-        <SideBar />
-        <div className='content'>{routes}</div>
-        <Footer />
-      </div>
+      <Header />
+      <SideBar />
+      <div className='content'>{routes}</div>
+      <Footer />
     </Router>
   )
 }

@@ -1,18 +1,15 @@
 import React from 'react'
 import ContentHeader from '../components/ContentHeader'
 
-const BusinessesFiltered = () => {
+const BusinessesFiltered = (props) => {
+  console.log('in bus filter', props, props.name)
   return (
     <div className='content-wrapper'>
       <ContentHeader title='Filter Business Page' />
       <div className='card w-50 mx-auto'>
         <div className='card-body'>
           <ul className='products-list product-list-in-card'>
-            {/* {fetchedBusinessUsers.map((business) => {
-              console.log(business._id) */}
-
             <li className='item'>
-              {/* // key={business._id}> */}
               <figure
                 className='indie-card'
                 style={{
@@ -60,21 +57,17 @@ const BusinessesFiltered = () => {
                   </p>
                   <button className='btn btn-default'>Review</button>
                 </div>
-                {/* <div>
-                        <h1 className='product title'>
-                          {business.businessName}
-                        </h1>
-                        <div>
-                          {business.address1}, {business.address2}
-                          {business.city}, {business.state} {business.zipCode}
-                        </div>
-                        <div className='product-description c'>
-                          {business.description}
-                        </div>
-                      </div> */}
+                <div>
+                  <h1 className='product title'>{props.name}</h1>
+                  <div>
+                    {props.address} {props.city}, {props.state} {props.zipCode}
+                  </div>
+                  <div className='product-description c'>
+                    {props.description}
+                  </div>
+                </div>
               </figure>
             </li>
-            {/* ) })} */}
           </ul>
         </div>
       </div>
