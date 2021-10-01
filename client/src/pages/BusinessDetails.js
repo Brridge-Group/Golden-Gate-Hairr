@@ -1,26 +1,12 @@
 import React from 'react'
 import ContentHeader from '../components/ContentHeader'
-import BusinessDetails from './BusinessDetails'
-import { useHistory } from 'react-router-dom'
 
-const BusinessesFiltered = (props) => {
-  console.log(
-    'in bus filter',
-    // props.broadBusiness,
-    // props.broadBusiness.name,
-    props,
-    'props.business',
-    props.business
-  )
-
-  const history = useHistory()
-  const sayHi = () => {
-    console.log('hi')
-  }
-
+const BusinessDetails = (props) => {
+  console.log('in deets', props)
+  // console.log('in bus filter', props, props.name)
   return (
     <React.Fragment>
-      <ContentHeader title='Filter Business Page' />
+      <ContentHeader title='Business Details ' />
       <div className='card w-50 mx-auto'>
         <div className='card-body'>
           <ul className='products-list product-list-in-card'>
@@ -70,11 +56,9 @@ const BusinessesFiltered = (props) => {
                       style={{ width: '10%' }}
                     />
                   </p>
-                  <button className='btn btn-default' onClick={sayHi}>
-                    Review
-                  </button>
+                  <button className='btn btn-default'>Review</button>
                 </div>
-                <div>
+                {/* <div>
                   <h1 className='product title'>{props.name}</h1>
                   <div>
                     {props.address} {props.city}, {props.state} {props.zipCode}
@@ -82,7 +66,7 @@ const BusinessesFiltered = (props) => {
                   <div className='product-description c'>
                     {props.description}
                   </div>
-                </div>
+                </div> */}
               </figure>
             </li>
           </ul>
@@ -92,4 +76,4 @@ const BusinessesFiltered = (props) => {
   )
 }
 
-export default BusinessesFiltered
+export default BusinessDetails

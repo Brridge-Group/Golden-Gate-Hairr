@@ -17,6 +17,7 @@ import UpdateItem from './pages/UpdateItem'
 import UserRegistration from './pages/UserRegistration'
 import Search from './pages/Search'
 import BusinessesFiltered from './pages/BusinessesFiltered'
+import BusinessDetails from './pages/BusinessDetails'
 
 const App = () => {
   let routes
@@ -43,6 +44,9 @@ const App = () => {
       </Route>
       <Route exact path='/businesses'>
         <BusinessesFiltered />
+      </Route>
+      <Route exact path='/business-details'>
+        <BusinessDetails />
       </Route>
       <Redirect to='/' />
     </Switch>

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 
 import ContentHeader from '../components/ContentHeader'
 import BusinessesFiltered from './BusinessesFiltered'
+import BusinessDetails from './BusinessDetails'
+
 import { useHistory } from 'react-router-dom'
 
 const SearchResults = (props) => {
@@ -54,18 +56,12 @@ const SearchResults = (props) => {
         zipcode={business.zipcode}
         city={business.city}
         key={business._id}
+        business={business}
       />
     )
   })
 
-  return (
-    <React.Fragment>
-      {/* // <React.Fragment>
-    //   <div className='content-wrapper'></div> */}
-      {busFilter}
-      {/* // </React.Fragment> */}
-    </React.Fragment>
-  )
+  return <React.Fragment>{busFilter}</React.Fragment>
 }
 
 export default SearchResults
