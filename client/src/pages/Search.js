@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import ContentHeader from '../components/ContentHeader'
 import SearchResults from './SearchResults'
-import { Redirect } from 'react-router'
 
 const Search = () => {
   const [searchTerm, setSearchTerm] = useState('')
@@ -37,13 +36,11 @@ const Search = () => {
             <input
               type='text'
               onChange={(e) => handleSearch(e)}
-              // value={searchTerm}
               placeholder='city'
               style={{ marginLeft: 10, marginRight: 10 }}
             />
 
             <button
-              // type='submit'
               style={{ border: 'none', background: 'none' }}
               onClick={buttonOnClick}>
               <i className='fas fa-search'></i>

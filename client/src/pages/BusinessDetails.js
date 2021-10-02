@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import ContentHeader from '../components/ContentHeader'
-import { useHistory } from 'react-router-dom'
 
 const BusinessDetails = (props) => {
   console.log('in deets', props)
 
-  const history = useHistory()
   const [indieBus, setIndieBus] = useState('')
   useEffect(() => {
     console.log('in use effect', props.history.location.business)
     setIndieBus(props.history.location.business)
   }, [])
-  console.log('indieBus state', indieBus, indieBus.address1)
+  console.log('indieBus state', indieBus)
 
   return (
     <React.Fragment>

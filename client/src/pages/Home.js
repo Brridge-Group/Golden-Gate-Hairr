@@ -5,7 +5,6 @@ import ContentHeader from '../components/ContentHeader'
 const Home = () => {
   return (
     <React.Fragment>
-      {/* <div className="content-wrapper"> */}
       <ContentHeader title='Home' />
       <div className='card w-50 mx-auto'>
         <div className='card-header'>
@@ -26,7 +25,6 @@ const Home = () => {
           </a>
         </div>
       </div>
-      {/* </div> */}
     </React.Fragment>
   )
 }

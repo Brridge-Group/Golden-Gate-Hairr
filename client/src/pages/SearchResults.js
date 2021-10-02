@@ -1,18 +1,10 @@
 import React, { useState, useEffect } from 'react'
-
-import ContentHeader from '../components/ContentHeader'
 import BusinessesFiltered from './BusinessesFiltered'
-import BusinessDetails from './BusinessDetails'
-import { Redirect } from 'react-router'
-
-import { useHistory } from 'react-router-dom'
 
 const SearchResults = (props) => {
   console.log('in businesses props', props)
-  const history = useHistory()
 
   let result = []
-  const [filteredData, setFilteredData] = useState([])
   const [allData, setAllData] = useState([])
 
   useEffect(() => {

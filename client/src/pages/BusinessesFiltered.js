@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import ContentHeader from '../components/ContentHeader'
-import BusinessDetails from './BusinessDetails'
 import { useHistory } from 'react-router-dom'
 import { Redirect } from 'react-router'
 
@@ -8,16 +7,12 @@ const BusinessesFiltered = (props) => {
   const [redirect, setRedirect] = useState(false)
 
   const history = useHistory()
-  const sayHi = () => {
-    console.log('hi')
-  }
 
   const doSetRedirect = () => {
     setRedirect(true)
   }
   const renderRedirect = () => {
     console.log('in render redirect, props.business', props.business)
-
     if (redirect) {
       return (
         <Redirect
@@ -84,7 +79,6 @@ const BusinessesFiltered = (props) => {
                     />
                   </p>
                   {renderRedirect()}
-
                   <button className='btn btn-default' onClick={doSetRedirect}>
                     Review
                   </button>
