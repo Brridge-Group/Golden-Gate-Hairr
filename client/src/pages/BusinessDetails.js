@@ -1,16 +1,21 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import ContentHeader from '../components/ContentHeader'
 import { useHistory } from 'react-router-dom'
 
 const BusinessDetails = (props) => {
   console.log('in deets', props)
   // console.log('in bus filter', props, props.name)
-
+  // let indieBusiness = []
   const history = useHistory()
+  const [indieBus, setIndieBus] = useState('')
   // const data = history.location.state.data
   useEffect(() => {
     console.log('in use effect', props.history.location.business)
+    setIndieBus(props.history.location.business)
+
+    // let indieBusiness = props.history.location.business
   }, [])
+  console.log('indieBus state', indieBus, indieBus.address1)
 
   return (
     <React.Fragment>
@@ -66,16 +71,23 @@ const BusinessDetails = (props) => {
                   </p>
                   <button className='btn btn-default'>Review</button>
                 </div>
-                {/* <div>
-                  <h1 className='product title'>{props.name}</h1>
+                <div>
+                  <h1 className='product title'>{indieBus.businessName}</h1>
                   <div>
-                    {props.address} {props.city}, {props.state} {props.zipCode}
+                    {indieBus.address1} {indieBus.city}, {indieBus.state}{' '}
+                    {indieBus.zipCode}
+                    <br /> phone: {indieBus.phone} <br />
+                    email: {indieBus.email}
                   </div>
                   <div className='product-description c'>
-                    {props.description}
+                    {indieBus.description}
                   </div>
-                </div> */}
-                {/* <p>{JSON.stringify(data)}</p> */}
+                  <button
+                    className='btn btn-default'
+                    style={{ marginTop: '10px' }}>
+                    Book Now
+                  </button>
+                </div>
               </figure>
             </li>
           </ul>

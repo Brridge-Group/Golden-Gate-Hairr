@@ -18,30 +18,19 @@ const BusinessesFiltered = (props) => {
   }
   const renderRedirect = () => {
     console.log('in render redirect, props.business', props.business)
-    // if (redirect) {
-    //   return <Redirect to='/business-details'>{props.business}</Redirect>
-    // }
+
     if (redirect) {
       return (
         <Redirect
           to={{
             pathname: '/business-details',
             business: props.business,
-            // props: { business: business },
           }}
         />
       )
     }
     //   // history.push('/business-details')
   }
-
-  //   <Redirect
-  //   to={{
-  //     pathname: "/test/new",
-  //     testFunc: testFunc,
-  //     state: { property_id: property_id }
-  //   }}
-  // />
 
   return (
     <React.Fragment>
