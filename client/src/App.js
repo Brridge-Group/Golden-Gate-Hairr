@@ -46,9 +46,6 @@ const App = () => {
       <Route exact path='/businesses'>
         <BusinessesFiltered />
       </Route>
-      {/* <Route path='/business-details'>
-        <BusinessDetails />
-      </Route> */}
 
       <Route
         path='/business-details'

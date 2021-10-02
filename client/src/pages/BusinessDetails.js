@@ -4,16 +4,12 @@ import { useHistory } from 'react-router-dom'
 
 const BusinessDetails = (props) => {
   console.log('in deets', props)
-  // console.log('in bus filter', props, props.name)
-  // let indieBusiness = []
+
   const history = useHistory()
   const [indieBus, setIndieBus] = useState('')
-  // const data = history.location.state.data
   useEffect(() => {
     console.log('in use effect', props.history.location.business)
     setIndieBus(props.history.location.business)
-
-    // let indieBusiness = props.history.location.business
   }, [])
   console.log('indieBus state', indieBus, indieBus.address1)
 
