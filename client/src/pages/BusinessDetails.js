@@ -1,9 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import ContentHeader from '../components/ContentHeader'
+import { useHistory } from 'react-router-dom'
 
 const BusinessDetails = (props) => {
   console.log('in deets', props)
   // console.log('in bus filter', props, props.name)
+
+  const history = useHistory()
+  // const data = history.location.state.data
+  useEffect(() => {
+    console.log('in use effect', props.history.location.business)
+  }, [])
+
   return (
     <React.Fragment>
       <ContentHeader title='Business Details ' />
@@ -67,6 +75,7 @@ const BusinessDetails = (props) => {
                     {props.description}
                   </div>
                 </div> */}
+                {/* <p>{JSON.stringify(data)}</p> */}
               </figure>
             </li>
           </ul>

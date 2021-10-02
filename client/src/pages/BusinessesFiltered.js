@@ -1,22 +1,47 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ContentHeader from '../components/ContentHeader'
 import BusinessDetails from './BusinessDetails'
 import { useHistory } from 'react-router-dom'
+import { Redirect } from 'react-router'
 
 const BusinessesFiltered = (props) => {
-  console.log(
-    'in bus filter',
-    // props.broadBusiness,
-    // props.broadBusiness.name,
-    props,
-    'props.business',
-    props.business
-  )
+  console.log('in bus filter', props, 'props.business', props.business)
+  const [redirect, setRedirect] = useState(false)
 
   const history = useHistory()
   const sayHi = () => {
     console.log('hi')
   }
+
+  const doSetRedirect = () => {
+    setRedirect(true)
+  }
+  const renderRedirect = () => {
+    console.log('in render redirect, props.business', props.business)
+    // if (redirect) {
+    //   return <Redirect to='/business-details'>{props.business}</Redirect>
+    // }
+    if (redirect) {
+      return (
+        <Redirect
+          to={{
+            pathname: '/business-details',
+            business: props.business,
+            // props: { business: business },
+          }}
+        />
+      )
+    }
+    //   // history.push('/business-details')
+  }
+
+  //   <Redirect
+  //   to={{
+  //     pathname: "/test/new",
+  //     testFunc: testFunc,
+  //     state: { property_id: property_id }
+  //   }}
+  // />
 
   return (
     <React.Fragment>
@@ -70,7 +95,9 @@ const BusinessesFiltered = (props) => {
                       style={{ width: '10%' }}
                     />
                   </p>
-                  <button className='btn btn-default' onClick={sayHi}>
+                  {renderRedirect()}
+
+                  <button className='btn btn-default' onClick={doSetRedirect}>
                     Review
                   </button>
                 </div>

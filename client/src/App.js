@@ -5,6 +5,7 @@ import {
   Route,
   Redirect,
   Switch,
+  useHistory,
 } from 'react-router-dom'
 import Home from './pages/Home'
 import Header from './components/Header'
@@ -45,9 +46,15 @@ const App = () => {
       <Route exact path='/businesses'>
         <BusinessesFiltered />
       </Route>
-      <Route exact path='/business-details'>
+      {/* <Route path='/business-details'>
         <BusinessDetails />
-      </Route>
+      </Route> */}
+
+      <Route
+        path='/business-details'
+        render={(props) => <BusinessDetails {...props} />}
+      />
+
       <Redirect to='/' />
     </Switch>
   )

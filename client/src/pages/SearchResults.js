@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import ContentHeader from '../components/ContentHeader'
 import BusinessesFiltered from './BusinessesFiltered'
 import BusinessDetails from './BusinessDetails'
+import { Redirect } from 'react-router'
 
 import { useHistory } from 'react-router-dom'
 

@@ -1,17 +1,35 @@
 import React, { useState } from 'react'
 import ContentHeader from '../components/ContentHeader'
 import SearchResults from './SearchResults'
+import { Redirect } from 'react-router'
 
 const Search = () => {
   const [searchTerm, setSearchTerm] = useState('')
   const [mounted, setMounted] = useState(false)
+
+  //   clearTimeout(this.typingTimer)
+  //   this.typingTimer = setTimeout(() => {
+  //     if (val) {
+  //       this.setState({ showSearchResult: true })
+  //     }
+  //   }, 500)
+  // }
 
   const handleSearch = (e) => {
     let value = e.target.value
     const inputCase =
       value.charAt(0).toUpperCase() + value.slice(1).toLowerCase()
     setSearchTerm(inputCase)
+    const val = e.target.value
+    let typingTimer
+    clearTimeout(typingTimer)
+    typingTimer = setTimeout(() => {
+      if (val) {
+        return <Redirect to={'/businesses'}></Redirect>
+      }
+    }, 500)
   }
+
   const buttonOnClick = () => {
     setMounted(true)
   }
