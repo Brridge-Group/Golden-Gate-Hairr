@@ -9,33 +9,27 @@ import Home from './pages/Home'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import SideBar from './components/SideBar'
-import ListItems from './pages/ListItems'
-import NewItem from './pages/NewItem'
-import UpdateItem from './pages/UpdateItem'
+
 import BusinessDetails from './pages/BusinessDetails'
 import UserRegistration from './pages/UserRegistration'
+import Login from './pages/Login'
 
 const App = () => {
   let routes
 
   routes = (
     <Switch>
-      <Route path='/' exact>
+      <Route exact path='/'>
         <Home />
       </Route>
-      <Route path='/sign-up' exact>
+      <Route exact path='/sign-up'>
         <UserRegistration />
       </Route>
-      <Route path='/items' exact>
-        <ListItems />
+      <Route exact path='/log-in'>
+        <Login />
       </Route>
-      <Route path='/items/new' exact>
-        <NewItem />
-      </Route>
-      <Route path='/items/:id' exact>
-        <UpdateItem />
-      </Route>
-      <Route path='/business-details' exact>
+
+      <Route exact path='/business-details'>
         <BusinessDetails />
       </Route>
       <Redirect to='/' />
@@ -47,7 +41,9 @@ const App = () => {
       <div className='App'>
         <Header />
         <SideBar />
-        <div className='content'>{routes}</div>
+        <div className='content-wrapper'>
+          <div className='content'>{routes}</div>
+        </div>
         <Footer />
       </div>
     </Router>

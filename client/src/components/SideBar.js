@@ -12,7 +12,7 @@ const SideBar = () => {
             className='brand-image img-circle elevation-3'
             style={{ opacity: 0.8 }}
           />
-          <span className='brand-text font-weight-light'>Hello World</span>
+          <span className='brand-text font-weight-light'>app name</span>
         </a>
 
         <div className='sidebar'>
@@ -43,16 +43,17 @@ const SideBar = () => {
                   <p>Home</p>
                 </NavLink>
               </li>
-              <li className='nav-item'>
-                <NavLink to='/items' className='nav-link'>
-                  <i className='nav-icon fas fa-list'></i>
-                  <p>Items</p>
-                </NavLink>
-              </li>
+
               <li className='nav-item'>
                 <NavLink to='/sign-up' exact className='nav-link'>
                   <i className='nav-icon fas fa-user-plus'></i>
                   <p>Sign Up</p>
+                </NavLink>
+              </li>
+              <li className='nav-item'>
+                <NavLink to='/log-in' exact className='nav-link'>
+                  <i className='nav-icon fas fa-user-plus'></i>
+                  <p>Log In</p>
                 </NavLink>
               </li>
             </ul>
