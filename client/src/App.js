@@ -9,6 +9,7 @@ import Home from './pages/Home'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import SideBar from './components/SideBar'
+import './App.css'
 
 import BusinessDetails from './pages/BusinessDetails'
 import UserRegistration from './pages/UserRegistration'

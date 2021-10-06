@@ -1,20 +1,24 @@
 import React, { useState } from 'react'
 import ContentHeader from '../components/ContentHeader'
+import { useHistory } from 'react-router'
 
 const Login = () => {
   const [loginUser, setLoginUser] = useState({
-    firstName: '',
-    lastName: '',
     email: '',
     password: '',
   })
+  const history = useHistory()
 
-  const { firstName, lastName, email, password } = loginUser
+  const { email, password } = loginUser
 
   const handleChange = (e) => {
     setLoginUser({
       [e.target.name]: e.target.value,
     })
+  }
+
+  const routeChange = () => {
+    history.push('/sign-up')
   }
   const handleSubmit = () => {}
   // handleSubmit = () => {
@@ -48,32 +52,6 @@ const Login = () => {
         <div className='card-body'>
           <form className='form' onSubmit={handleSubmit}>
             <div className='form-group'>
-              <label>First Name</label>
-              <input
-                name='firstName'
-                type='text'
-                className='form-control'
-                placeholder='First Name'
-                onChange={handleChange}
-                value={firstName}
-                required
-                autoComplete='off'
-              />
-            </div>
-            <div className='form-group'>
-              <label>Last Name</label>
-              <input
-                name='lastName'
-                type='text'
-                className='form-control'
-                placeholder='Last Name'
-                onChange={handleChange}
-                value={lastName}
-                required
-                autoComplete='off'
-              />
-            </div>
-            <div className='form-group'>
               <label>Email</label>
               <input
                 name='email'
@@ -96,9 +74,14 @@ const Login = () => {
                 value={password}
               />
             </div>
-            <button type='submit' className='btn btn-primary'>
-              Submit
-            </button>
+            <div className='login-btns'>
+              <button type='submit' className='btn btn-primary'>
+                Login
+              </button>
+              <button onClick={routeChange} className='btn btn-primary'>
+                Register
+              </button>
+            </div>
           </form>
         </div>
       </div>

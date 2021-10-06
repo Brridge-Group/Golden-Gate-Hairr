@@ -1,0 +1,7 @@
+.login-btns {
+  display: flex;
+  margin-right: 10px;
+}
+button.btn.btn-primary {
+  margin-right: 20px;
+}
