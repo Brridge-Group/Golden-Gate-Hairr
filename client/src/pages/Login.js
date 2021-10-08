@@ -12,9 +12,7 @@ const Login = () => {
   const { email, password } = loginUser
 
   const handleChange = (e) => {
-    setLoginUser({
-      [e.target.name]: e.target.value,
-    })
+    setLoginUser({ ...loginUser, [e.target.name]: e.target.value })
   }
 
   const routeChange = () => {

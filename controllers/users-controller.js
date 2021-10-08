@@ -18,7 +18,8 @@ const getUsers = async (req, res, next) => {
 
 const createUser = async (req, res, next) => {
   console.log(req.body)
-  const { firstName, lastName, email, password, password2 } = req.body
+  const { firstName, lastName, email, password, password2, type, createdDate } =
+    req.body
 
   const createdUser = new User({
     firstName,
@@ -26,10 +27,13 @@ const createUser = async (req, res, next) => {
     email,
     password,
     password2,
+    type,
+    createdDate,
   })
 
   try {
     await createdUser.save()
+    console.log(createdUser._id)
   } catch (err) {
     const error = new HttpError('Creating user failed, please try again.', 500)
     return next(error)
