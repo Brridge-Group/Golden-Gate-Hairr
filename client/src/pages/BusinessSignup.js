@@ -73,7 +73,7 @@ const BusinessSignup = () => {
       alert('The provided passwords do not match. Please try again.')
     } else {
       saveNewBusinessUser()
-      history.push('/businesses/profile')
+      history.push('/business/profile')
     }
   }
 
@@ -94,7 +94,7 @@ const BusinessSignup = () => {
               <p className='login-box-msg'>
                 Register a new Business <br></br> <span>User Profile</span>
               </p>
-              
+
               <form onSubmit={registrationSubmitHandler}>
                 <div className='input-group mb-3'>
                   <input
