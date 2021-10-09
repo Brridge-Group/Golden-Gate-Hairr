@@ -27,6 +27,27 @@ const BusinessProfile = () => {
       isMakeUp: false
     }
   })
+  // Todo:
+  const onFormChange = event => {
+    const value =
+      event.target.type === 'checkbox'
+        ? event.target.checked
+        : event.target.value
+    setBusinessProfileForm({
+      ...businessProfileForm,
+      [event.target.name]: value
+    })
+    console.log(businessProfileForm)
+  }
+
+  // Todo:
+  const saveNewBusiness = async () => {}
+
+  // Todo:
+  const profileSubmitHandler = event => {
+    event?.preventDefault()
+    console.log(businessProfileForm)
+  }
   return (
     <>
       <section className='content-wrapper bus-profile'>
@@ -34,11 +55,9 @@ const BusinessProfile = () => {
           <ContentHeader title='Business Profile Page' />
         </header>
         <div className='card card-primary'>
-          <div className='card-header'>
-            Business Profile
-          </div>
+          <div className='card-header'>Business Profile</div>
           {/* <-- Form Start --> */}
-          <form>
+          <form onSubmit={profileSubmitHandler}>
             <div className='card-body'>
               <div className='form-group'>
                 <label htmlFor='businessName'>Business Name</label>
@@ -48,6 +67,7 @@ const BusinessProfile = () => {
                   className='form-control'
                   placeholder='Business Name'
                   value={businessProfileForm.businessName}
+                  onChange={onFormChange}
                 />
               </div>
               <div className='form-group'>
@@ -58,6 +78,7 @@ const BusinessProfile = () => {
                   className='form-control'
                   placeholder='Business Description / Slogan'
                   value={businessProfileForm.description}
+                  onChange={onFormChange}
                 />
               </div>
               <div className='form-group'>
@@ -68,6 +89,7 @@ const BusinessProfile = () => {
                   className='form-control'
                   placeholder='Street Address, P.O. Box, C/O'
                   value={businessProfileForm.address1}
+                  onChange={onFormChange}
                 />
               </div>
               <div className='form-group'>
@@ -78,6 +100,7 @@ const BusinessProfile = () => {
                   className='form-control'
                   placeholder='Apartment, Suite, Unit, Building, Floor, ETC.'
                   value={businessProfileForm.address2}
+                  onChange={onFormChange}
                 />
               </div>
               <div className='form-group'>
@@ -88,6 +111,7 @@ const BusinessProfile = () => {
                   className='form-control'
                   placeholder='City / Town'
                   value={businessProfileForm.city}
+                  onChange={onFormChange}
                 />
               </div>
               <div className='form-group'>
@@ -100,6 +124,7 @@ const BusinessProfile = () => {
                   className='form-control'
                   placeholder='State / Province / Region'
                   value={businessProfileForm.state}
+                  onChange={onFormChange}
                 />
               </div>
               <div className='form-group'>
@@ -110,41 +135,42 @@ const BusinessProfile = () => {
                   className='form-control'
                   placeholder='Zip / Postal Code'
                   value={businessProfileForm.zipCode}
+                  onChange={onFormChange}
                 />
               </div>
               <div className='form-group'>
                 <label htmlFor='features'>Features</label>
                 <div className='form-check'>
-                  <input type='checkbox' className='form-check-input' />
                   <input
                     name='isAccessible'
                     type='checkbox'
                     className='form-check-input'
                     checked={businessProfileForm.features.isAccessible}
+                    onChange={onFormChange}
                   />
                   <label className='form-check-label' htmlFor='accessible'>
                     Wheelchair Accessible
                   </label>
                 </div>
                 <div className='form-check'>
-                  <input type='checkbox' className='form-check-input' />
                   <input
                     name='isWifi'
                     type='checkbox'
                     className='form-check-input'
                     checked={businessProfileForm.features.isWifi}
+                    onChange={onFormChange}
                   />
                   <label className='form-check-label' htmlFor='wifi'>
                     Wifi
                   </label>
                 </div>
                 <div className='form-check'>
-                  <input type='checkbox' className='form-check-input' />
                   <input
                     name='isFreeParking'
                     type='checkbox'
                     className='form-check-input'
                     checked={businessProfileForm.features.isFreeParking}
+                    onChange={onFormChange}
                   />
                   <label className='form-check-label' htmlFor='freeParking'>
                     Free Parking
@@ -154,60 +180,60 @@ const BusinessProfile = () => {
               <div className='form-group'>
                 <label htmlFor='services'>Services</label>
                 <div className='form-check'>
-                  <input type='checkbox' className='form-check-input' />
                   <input
                     name='isWaxing'
                     type='checkbox'
                     className='form-check-input'
                     onChange={onFormChange}
+                    checked={businessProfileForm.services.isWaxing}
                   />
                   <label className='form-check-label' htmlFor='waxing'>
                     Waxing
                   </label>
                 </div>
                 <div className='form-check'>
-                  <input type='checkbox' className='form-check-input' />
                   <input
                     name='isExtensions'
                     type='checkbox'
                     className='form-check-input'
                     checked={businessProfileForm.services.isExtensions}
+                    onChange={onFormChange}
                   />
                   <label className='form-check-label' htmlFor='extensions'>
                     Extensions
                   </label>
                 </div>
                 <div className='form-check'>
-                  <input type='checkbox' className='form-check-input' />
                   <input
                     name='isBlowOuts'
                     type='checkbox'
                     className='form-check-input'
                     checked={businessProfileForm.services.isBlowOuts}
+                    onChange={onFormChange}
                   />
                   <label className='form-check-label' htmlFor='blowOuts'>
                     Blow Outs
                   </label>
                 </div>
                 <div className='form-check'>
-                  <input type='checkbox' className='form-check-input' />
                   <input
                     name='isColoring'
                     type='checkbox'
                     className='form-check-input'
                     checked={businessProfileForm.services.isColoring}
+                    onChange={onFormChange}
                   />
                   <label className='form-check-label' htmlFor='coloring'>
                     Coloring
                   </label>
                 </div>
                 <div className='form-check'>
-                  <input type='checkbox' className='form-check-input' />
                   <input
                     name='isMakeUp'
                     type='checkbox'
                     className='form-check-input'
                     checked={businessProfileForm.services.isMakeUp}
+                    onChange={onFormChange}
                   />
                   <label className='form-check-label' htmlFor='make-up'>
                     Make-up
