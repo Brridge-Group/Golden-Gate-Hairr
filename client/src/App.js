@@ -41,7 +41,7 @@ const App = () => {
       <Route path='/business-signup' exact>
         <BusinessSignup />
       </Route>
-      <Route path='/businesses/profile' exact>
+      <Route path='/business/profile' exact>
         <BusinessProfile />
       </Route>
       <Redirect to='/' />
