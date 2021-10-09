@@ -8,6 +8,25 @@ import { AuthContext } from '../contexts/GlobalContext'
 const BusinessProfile = () => {
   const { userState, setUserState } = useContext(AuthContext)
   console.log('BP userState', userState)
+  const [businessProfileForm, setBusinessProfileForm] = useState({
+    businessName: '',
+    description: '',
+    address1: '',
+    address2: '',
+    city: '',
+    state: '',
+    zipCode: '',
+    //* features and services collections need to be rendered dynamically from db as they will change
+    //* be mindful of type -> look into typescript 
+    features: { isAccessible: false, isWifi: false, isFreeParking: false },
+    services: {
+      isWaxing: false,
+      isExtensions: false,
+      isBlowOuts: false,
+      isColoring: false,
+      isMakeUp: false
+    }
+  })
   return (
     <>
       <section className='content-wrapper bus-profile'>
@@ -24,41 +43,51 @@ const BusinessProfile = () => {
               <div className='form-group'>
                 <label htmlFor='businessName'>Business Name</label>
                 <input
+                  name='businessName'
                   type='text'
                   className='form-control'
                   placeholder='Business Name'
+                  value={businessProfileForm.businessName}
                 />
               </div>
               <div className='form-group'>
                 <label htmlFor='description'>Description</label>
                 <input
+                  name='description'
                   type='text'
                   className='form-control'
                   placeholder='Business Description / Slogan'
+                  value={businessProfileForm.description}
                 />
               </div>
               <div className='form-group'>
                 <label htmlFor='address1'>Address Line 1</label>
                 <input
+                  name='address1'
                   type='text'
                   className='form-control'
                   placeholder='Street Address, P.O. Box, C/O'
+                  value={businessProfileForm.address1}
                 />
               </div>
               <div className='form-group'>
                 <label htmlFor='address2'>Address Line 2</label>
                 <input
+                  name='address2'
                   type='text'
                   className='form-control'
                   placeholder='Apartment, Suite, Unit, Building, Floor, ETC.'
+                  value={businessProfileForm.address2}
                 />
               </div>
               <div className='form-group'>
                 <label htmlFor='cityTown'>City / Town</label>
                 <input
+                  name='city'
                   type='text'
                   className='form-control'
                   placeholder='City / Town'
+                  value={businessProfileForm.city}
                 />
               </div>
               <div className='form-group'>
@@ -66,35 +95,57 @@ const BusinessProfile = () => {
                   State / Province / Region
                 </label>
                 <input
+                  name='state'
                   type='text'
                   className='form-control'
                   placeholder='State / Province / Region'
+                  value={businessProfileForm.state}
                 />
               </div>
               <div className='form-group'>
                 <label htmlFor='zipPostalCode'>Zip / Postal Code</label>
                 <input
+                  name='zipCode'
                   type='text'
                   className='form-control'
                   placeholder='Zip / Postal Code'
+                  value={businessProfileForm.zipCode}
                 />
               </div>
               <div className='form-group'>
                 <label htmlFor='features'>Features</label>
                 <div className='form-check'>
                   <input type='checkbox' className='form-check-input' />
+                  <input
+                    name='isAccessible'
+                    type='checkbox'
+                    className='form-check-input'
+                    checked={businessProfileForm.features.isAccessible}
+                  />
                   <label className='form-check-label' htmlFor='accessible'>
                     Wheelchair Accessible
                   </label>
                 </div>
                 <div className='form-check'>
                   <input type='checkbox' className='form-check-input' />
+                  <input
+                    name='isWifi'
+                    type='checkbox'
+                    className='form-check-input'
+                    checked={businessProfileForm.features.isWifi}
+                  />
                   <label className='form-check-label' htmlFor='wifi'>
                     Wifi
                   </label>
                 </div>
                 <div className='form-check'>
                   <input type='checkbox' className='form-check-input' />
+                  <input
+                    name='isFreeParking'
+                    type='checkbox'
+                    className='form-check-input'
+                    checked={businessProfileForm.features.isFreeParking}
+                  />
                   <label className='form-check-label' htmlFor='freeParking'>
                     Free Parking
                   </label>
@@ -104,30 +155,60 @@ const BusinessProfile = () => {
                 <label htmlFor='services'>Services</label>
                 <div className='form-check'>
                   <input type='checkbox' className='form-check-input' />
+                  <input
+                    name='isWaxing'
+                    type='checkbox'
+                    className='form-check-input'
+                    onChange={onFormChange}
+                  />
                   <label className='form-check-label' htmlFor='waxing'>
                     Waxing
                   </label>
                 </div>
                 <div className='form-check'>
                   <input type='checkbox' className='form-check-input' />
+                  <input
+                    name='isExtensions'
+                    type='checkbox'
+                    className='form-check-input'
+                    checked={businessProfileForm.services.isExtensions}
+                  />
                   <label className='form-check-label' htmlFor='extensions'>
                     Extensions
                   </label>
                 </div>
                 <div className='form-check'>
                   <input type='checkbox' className='form-check-input' />
+                  <input
+                    name='isBlowOuts'
+                    type='checkbox'
+                    className='form-check-input'
+                    checked={businessProfileForm.services.isBlowOuts}
+                  />
                   <label className='form-check-label' htmlFor='blowOuts'>
                     Blow Outs
                   </label>
                 </div>
                 <div className='form-check'>
                   <input type='checkbox' className='form-check-input' />
+                  <input
+                    name='isColoring'
+                    type='checkbox'
+                    className='form-check-input'
+                    checked={businessProfileForm.services.isColoring}
+                  />
                   <label className='form-check-label' htmlFor='coloring'>
                     Coloring
                   </label>
                 </div>
                 <div className='form-check'>
                   <input type='checkbox' className='form-check-input' />
+                  <input
+                    name='isMakeUp'
+                    type='checkbox'
+                    className='form-check-input'
+                    checked={businessProfileForm.services.isMakeUp}
+                  />
                   <label className='form-check-label' htmlFor='make-up'>
                     Make-up
                   </label>
