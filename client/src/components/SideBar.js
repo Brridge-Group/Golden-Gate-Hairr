@@ -45,13 +45,13 @@ const SideBar = () => {
               </li>
 
               <li className='nav-item'>
-                <NavLink to='/sign-up' exact className='nav-link'>
+                <NavLink to='/signup' exact className='nav-link'>
                   <i className='nav-icon fas fa-user-plus'></i>
                   <p>Sign Up</p>
                 </NavLink>
               </li>
               <li className='nav-item'>
-                <NavLink to='/log-in' exact className='nav-link'>
+                <NavLink to='/login' exact className='nav-link'>
                   <i className='nav-icon fas fa-user-plus'></i>
                   <p>Log In</p>
                 </NavLink>

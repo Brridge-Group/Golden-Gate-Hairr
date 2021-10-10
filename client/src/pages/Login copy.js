@@ -1,44 +1,43 @@
 import React, { useState } from 'react'
 import ContentHeader from '../components/ContentHeader'
 import { useHistory } from 'react-router'
-import axios from 'axios'
 
-const Login = (props) => {
-  // console.log('in login', props)
-  const [user, setUser] = useState({
+const Login = () => {
+  const [loginUser, setLoginUser] = useState({
     email: '',
     password: '',
   })
   const history = useHistory()
 
-  const { email, password } = user
-
-  // const handleChange = (e) => {
-  //   setUser({ ...user, [e.target.name]: e.target.value })
-  // }
+  const { email, password } = loginUser
 
   const handleChange = (e) => {
-    const { name, value } = e.target
-    setUser({
-      ...user, //spread operator
-      [name]: value,
-    })
+    setLoginUser({ ...loginUser, [e.target.name]: e.target.value })
   }
+
   const routeChange = () => {
     history.push('/signup')
   }
-  const handleSubmit = (e) => {
-    e.preventDefault(e)
-    console.log('in handle submit', user)
-    fetch('api/login', { method: 'POST' })
-      // axios.post("http://localhost:6969/Login",user)
-      // axios.post("api/login",user)
-      // axios.post('api/login', user)
-      .then((res) => {
-        alert(res.data.message)
-        props.setLogInUser(res.data.user)
-      })
-  }
+  const handleSubmit = () => {}
+  // handleSubmit = () => {
+  //   // fetch('http://localhost:3000/api/v1/login', {
+  //   fetch(`https://pacific-hollows-81769.herokuapp.com/api/v1/login`, {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       Accepts: 'application/json',
+  //     },
+  //     body: JSON.stringify(this.state),
+  //   })
+  //     .then((res) => res.json())
+  //     .then((resp) => {
+  //       if (resp.errors) {
+  //         alert(resp.errors)
+  //       } else {
+  //         this.props.setCurrentUser(resp)
+  //       }
+  //     })
+  // }
 
   return (
     <React.Fragment>
@@ -74,7 +73,7 @@ const Login = (props) => {
               />
             </div>
             <div className='login-btns'>
-              <button onClick={handleSubmit} className='btn btn-primary'>
+              <button type='submit' className='btn btn-primary'>
                 Login
               </button>
               <button onClick={routeChange} className='btn btn-primary'>

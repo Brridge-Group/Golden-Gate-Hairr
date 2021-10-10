@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   BrowserRouter as Router,
   Route,
@@ -16,19 +16,31 @@ import UserRegistration from './pages/UserRegistration'
 import Login from './pages/Login'
 
 const App = () => {
+  const [logInuser, setLogInUser] = useState({})
   let routes
 
   routes = (
     <Switch>
       <Route exact path='/'>
+        {/* {user && user._id ? <Home /> : <Login />} */}
         <Home />
       </Route>
-      <Route exact path='/sign-up'>
+      <Route path='/login'>
+        <Login setLogInUser={setLogInUser} logInuser={logInuser} />
+      </Route>
+      <Route path='/signup'>
         <UserRegistration />
       </Route>
-      <Route exact path='/log-in'>
-        <Login />
+
+      {/* <Route exact path='/'>
+        <Home />
+      </Route> */}
+      {/* <Route exact path='/signup'>
+        <UserRegistration />
       </Route>
+      <Route exact path='/login'>
+        <Login />
+      </Route> */}
 
       <Route exact path='/business-details'>
         <BusinessDetails />
