@@ -14,20 +14,28 @@ const BusinessProfile = () => {
     address1: '',
     address2: '',
     city: '',
-    state: '',
-    zipCode: '',
-    //* features and services collections need to be rendered dynamically from db as they will change
-    //* be mindful of type -> look into typescript 
-    features: { isAccessible: false, isWifi: false, isFreeParking: false },
-    services: {
-      isWaxing: false,
-      isExtensions: false,
-      isBlowOuts: false,
-      isColoring: false,
-      isMakeUp: false
-    }
+    state: ''
+    // Todo: Remove multi-level nested state?
+    // features: { isAccessible: false, isWifi: false, isFreeParking: false },
+    // services: {
+    //   isWaxing: false,
+    //   isExtensions: false,
+    //   isBlowOuts: false,
+    //   isColoring: false,
+    //   isMakeUp: false
+    // }
   })
-  // Todo:
+
+  const [isChecked, setIsChecked] = useState({
+    isAccessible: false,
+    isWifi: false,
+    isFreeParking: false,
+    isWaxing: false,
+    isExtensions: false,
+    isBlowOuts: false,
+    isColoring: false,
+    isMakeUp: false
+  })
   const onFormChange = event => {
     const value =
       event.target.type === 'checkbox'
@@ -145,7 +153,7 @@ const BusinessProfile = () => {
                     name='isAccessible'
                     type='checkbox'
                     className='form-check-input'
-                    checked={businessProfileForm.features.isAccessible}
+                    checked={isChecked.isAccessible}
                     onChange={onFormChange}
                   />
                   <label className='form-check-label' htmlFor='accessible'>
@@ -157,7 +165,7 @@ const BusinessProfile = () => {
                     name='isWifi'
                     type='checkbox'
                     className='form-check-input'
-                    checked={businessProfileForm.features.isWifi}
+                    checked={isChecked.isWifi}
                     onChange={onFormChange}
                   />
                   <label className='form-check-label' htmlFor='wifi'>
@@ -169,7 +177,7 @@ const BusinessProfile = () => {
                     name='isFreeParking'
                     type='checkbox'
                     className='form-check-input'
-                    checked={businessProfileForm.features.isFreeParking}
+                    checked={isChecked.isFreeParking}
                     onChange={onFormChange}
                   />
                   <label className='form-check-label' htmlFor='freeParking'>
@@ -185,7 +193,7 @@ const BusinessProfile = () => {
                     type='checkbox'
                     className='form-check-input'
                     onChange={onFormChange}
-                    checked={businessProfileForm.services.isWaxing}
+                    checked={isChecked.isWaxing}
                   />
                   <label className='form-check-label' htmlFor='waxing'>
                     Waxing
@@ -196,7 +204,7 @@ const BusinessProfile = () => {
                     name='isExtensions'
                     type='checkbox'
                     className='form-check-input'
-                    checked={businessProfileForm.services.isExtensions}
+                    checked={isChecked.isExtensions}
                     onChange={onFormChange}
                   />
                   <label className='form-check-label' htmlFor='extensions'>
@@ -208,7 +216,7 @@ const BusinessProfile = () => {
                     name='isBlowOuts'
                     type='checkbox'
                     className='form-check-input'
-                    checked={businessProfileForm.services.isBlowOuts}
+                    checked={isChecked.isBlowOuts}
                     onChange={onFormChange}
                   />
                   <label className='form-check-label' htmlFor='blowOuts'>
@@ -220,7 +228,7 @@ const BusinessProfile = () => {
                     name='isColoring'
                     type='checkbox'
                     className='form-check-input'
-                    checked={businessProfileForm.services.isColoring}
+                    checked={isChecked.isColoring}
                     onChange={onFormChange}
                   />
                   <label className='form-check-label' htmlFor='coloring'>
@@ -232,7 +240,7 @@ const BusinessProfile = () => {
                     name='isMakeUp'
                     type='checkbox'
                     className='form-check-input'
-                    checked={businessProfileForm.services.isMakeUp}
+                    checked={isChecked.isMakeUp}
                     onChange={onFormChange}
                   />
                   <label className='form-check-label' htmlFor='make-up'>
