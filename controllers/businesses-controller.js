@@ -17,7 +17,7 @@ const createBusiness = async (req, res, next) => {
     mainPicture,
     email,
     status,
-    password,
+    userId,
   } = req.body
 
   const newBusiness = new Business({
@@ -33,7 +33,7 @@ const createBusiness = async (req, res, next) => {
     mainPicture,
     email,
     status,
-    password,
+    userId,
   })
 
   try {
