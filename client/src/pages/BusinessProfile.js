@@ -1,13 +1,18 @@
 // React Components
-import { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 
+import { useHistory } from 'react-router-dom'
 // Custom Imports
 import ContentHeader from '../components/ContentHeader'
 import { AuthContext } from '../contexts/GlobalContext'
 
 const BusinessProfile = () => {
+  const history = useHistory()
+
+  // Import User State Object from Context
   const { userState, setUserState } = useContext(AuthContext)
-  console.log('BP userState', userState)
+  // console.log('AuthContext - userState:', userState)
+
   const [businessProfileForm, setBusinessProfileForm] = useState({
     businessName: '',
     description: '',
@@ -36,25 +41,86 @@ const BusinessProfile = () => {
     isColoring: false,
     isMakeUp: false
   })
+  const [userId, setUserId] = useState(null)
+
+  useEffect(() => {
+    setUserId(userState.user?._id)
+    console.log(userId)
+  }, [userState])
+
   const onFormChange = event => {
     const value =
       event.target.type === 'checkbox'
         ? event.target.checked
         : event.target.value
+
     setBusinessProfileForm({
       ...businessProfileForm,
       [event.target.name]: value
     })
-    console.log(businessProfileForm)
+
+    setIsChecked({
+      ...isChecked,
+      [event.target.name]: value
+    })
+
+    // Alt approach with multi-level nested state
+    // setBusinessProfileForm({
+    //   ...businessProfileForm,
+    //   [event.target.name]: value,
+    //   features: {
+    //     // ...businessProfileForm.features,
+    //     [event.target.name]: value
+    //   },
+    //   services: {
+    //     // ...businessProfileForm.services,
+    //     [event.target.name]: value
+    //   }
+    // })
+
+    // setBusinessProfileForm({
+    //   features: Object.assign({}, businessProfileForm.features, {
+    //     [event.target.name]: value
+    //   })
+    // })
   }
 
-  // Todo:
-  const saveNewBusiness = async () => {}
+  const saveNewBusiness = async () => {
+    let newBusiness = {
+      ...businessProfileForm,
+      userId: userId
+    }
 
-  // Todo:
+    const requestOptions = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ ...newBusiness })
+    }
+
+    try {
+      const response = await fetch('/api/businesses', requestOptions)
+      if (!response.ok) {
+        throw new Error('New business profile not saved! Please resubmit')
+      }
+      const json = await response.json()
+      const responseData = json
+
+      // Todo: Save responseData to state?
+      console.log(responseData)
+      alert('Profile creation successful. Thank you!!')
+    } catch (error) {
+      console.error('Error:', error.response.data)
+    }
+  }
+
   const profileSubmitHandler = event => {
     event?.preventDefault()
-    console.log(businessProfileForm)
+    saveNewBusiness()
+    
+    // Todo: Confirm redirect destination?
+    history.push('/')
   }
   return (
     <>
