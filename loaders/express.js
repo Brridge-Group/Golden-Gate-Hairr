@@ -6,6 +6,7 @@ const cors = require('cors')
 const itemsRoutes = require('../routes/items-route')
 const businessRoutes = require('../routes/business-route')
 const usersRoutes = require('../routes/users-route')
+// const authorizesRoutes = require('../routes/authorizes-route')
 
 const loader = async (app) => {
   app.use(express.json())
@@ -16,6 +17,7 @@ const loader = async (app) => {
   app.use('/api/items', itemsRoutes)
   app.use('/api/businesses', businessRoutes)
   app.use('/api/users', usersRoutes)
+  // app.use('/api/authorize', authorizesRoutes)
 
   // The "catchall" handler: for any request that doesn't
   // match one above, send back React's index.html file.

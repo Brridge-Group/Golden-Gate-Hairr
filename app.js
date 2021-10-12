@@ -1,6 +1,11 @@
 const loaders = require('./loaders')
 const express = require('express')
 const config = require('./config')
+// const bcrypt = require('bcryptjs')
+// const jwt = require('jsonwebtoken')
+
+// const User = require('./model/user')
+// const auth = require('./middleware/auth')
 
 const startServer = async () => {
   const app = express()
@@ -8,7 +13,7 @@ const startServer = async () => {
   await loaders(app)
 
   const port = config.port || 5000
-  app.listen(port, err => {
+  app.listen(port, (err) => {
     if (err) {
       console.log(err)
       return

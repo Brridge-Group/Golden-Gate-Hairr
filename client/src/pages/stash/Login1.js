@@ -1,41 +1,43 @@
 import React, { useState } from 'react'
 import ContentHeader from '../components/ContentHeader'
 import { useHistory } from 'react-router'
+import axios from 'axios'
 
-const Login = () => {
-  const [loginUser, setLoginUser] = useState({
+const Login = (props) => {
+  // console.log('in login', props)
+  const [user, setUser] = useState({
     email: '',
     password: '',
   })
   const history = useHistory()
 
-  const { email, password } = loginUser
+  const { email, password } = user
+
+  // const handleChange = (e) => {
+  //   setUser({ ...user, [e.target.name]: e.target.value })
+  // }
 
   const handleChange = (e) => {
-    setLoginUser({ ...loginUser, [e.target.name]: e.target.value })
+    const { name, value } = e.target
+    setUser({
+      ...user, //spread operator
+      [name]: value,
+    })
   }
-
   const routeChange = () => {
     history.push('/signup')
   }
-  const handleSubmit = async () => {
-    console.log('in handle submit', loginUser)
-    try {
-      const response = await fetch('api/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accepts: 'application/json',
-        },
-        body: JSON.stringify({ loginUser }),
+  const handleSubmit = (e) => {
+    e.preventDefault(e)
+    console.log('in handle submit', user)
+    fetch('api/login', { method: 'POST' })
+      // axios.post("http://localhost:6969/Login",user)
+      // axios.post("api/login",user)
+      // axios.post('api/login', user)
+      .then((res) => {
+        alert(res.data.message)
+        props.setLogInUser(res.data.user)
       })
-      if (!response.ok) {
-        throw new Error('Could not signup')
-      }
-      console.log(setLoginUser(response))
-      setLoginUser(response)
-      history.push('/')
-    } catch (err) {}
   }
 
   return (
@@ -72,7 +74,7 @@ const Login = () => {
               />
             </div>
             <div className='login-btns'>
-              <button type='submit' className='btn btn-primary'>
+              <button onClick={handleSubmit} className='btn btn-primary'>
                 Login
               </button>
               <button onClick={routeChange} className='btn btn-primary'>

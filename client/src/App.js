@@ -10,38 +10,36 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 import SideBar from './components/SideBar'
 import './App.css'
+import AuthContext from './contexts/AuthContext'
 
 import BusinessDetails from './pages/BusinessDetails'
 import UserRegistration from './pages/UserRegistration'
 import Login from './pages/Login'
 
 const App = () => {
-  const [logInuser, setLogInUser] = useState({})
+  // const [user, setUser] = useState(null)
+  // const [authenticated, setAuthenticated] = useState(false)
+
+  // const login = async (credentials) => {
+  //   const response = await this.authService.login(credentials)
+  //   if (response) {
+  //     setUser(response)
+  //     setAuthenticated(true)
+  //   }
+  // }
   let routes
 
   routes = (
     <Switch>
       <Route exact path='/'>
-        {/* {user && user._id ? <Home /> : <Login />} */}
         <Home />
       </Route>
       <Route path='/login'>
-        <Login setLogInUser={setLogInUser} logInuser={logInuser} />
+        <Login />
       </Route>
       <Route path='/signup'>
         <UserRegistration />
       </Route>
-
-      {/* <Route exact path='/'>
-        <Home />
-      </Route> */}
-      {/* <Route exact path='/signup'>
-        <UserRegistration />
-      </Route>
-      <Route exact path='/login'>
-        <Login />
-      </Route> */}
-
       <Route exact path='/business-details'>
         <BusinessDetails />
       </Route>
@@ -55,7 +53,11 @@ const App = () => {
         <Header />
         <SideBar />
         <div className='content-wrapper'>
-          <div className='content'>{routes}</div>
+          <div className='content'>
+            {/* <AuthContext value={user}> */}
+            {routes}
+            {/* </AuthContext> */}
+          </div>
         </div>
         <Footer />
       </div>
