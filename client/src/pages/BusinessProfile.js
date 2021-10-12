@@ -16,11 +16,13 @@ const BusinessProfile = () => {
   const [businessProfileForm, setBusinessProfileForm] = useState({
     businessName: '',
     description: '',
+    email: '',
     address1: '',
     address2: '',
     city: '',
-    state: ''
-    // Todo: Remove multi-level nested state?
+    state: '',
+    zipCode: ''
+    // TODO: Remove multi-level nested state?
     // features: { isAccessible: false, isWifi: false, isFreeParking: false },
     // services: {
     //   isWaxing: false,
@@ -133,187 +135,227 @@ const BusinessProfile = () => {
           {/* <-- Form Start --> */}
           <form onSubmit={profileSubmitHandler}>
             <div className='card-body'>
-              <div className='form-group'>
-                <label htmlFor='businessName'>Business Name</label>
-                <input
-                  name='businessName'
-                  type='text'
-                  className='form-control'
-                  placeholder='Business Name'
-                  value={businessProfileForm.businessName}
-                  onChange={onFormChange}
-                />
-              </div>
-              <div className='form-group'>
-                <label htmlFor='description'>Description</label>
-                <input
-                  name='description'
-                  type='text'
-                  className='form-control'
-                  placeholder='Business Description / Slogan'
-                  value={businessProfileForm.description}
-                  onChange={onFormChange}
-                />
-              </div>
-              <div className='form-group'>
-                <label htmlFor='address1'>Address Line 1</label>
-                <input
-                  name='address1'
-                  type='text'
-                  className='form-control'
-                  placeholder='Street Address, P.O. Box, C/O'
-                  value={businessProfileForm.address1}
-                  onChange={onFormChange}
-                />
-              </div>
-              <div className='form-group'>
-                <label htmlFor='address2'>Address Line 2</label>
-                <input
-                  name='address2'
-                  type='text'
-                  className='form-control'
-                  placeholder='Apartment, Suite, Unit, Building, Floor, ETC.'
-                  value={businessProfileForm.address2}
-                  onChange={onFormChange}
-                />
-              </div>
-              <div className='form-group'>
-                <label htmlFor='cityTown'>City / Town</label>
-                <input
-                  name='city'
-                  type='text'
-                  className='form-control'
-                  placeholder='City / Town'
-                  value={businessProfileForm.city}
-                  onChange={onFormChange}
-                />
-              </div>
-              <div className='form-group'>
-                <label htmlFor='stateProvinceRegion'>
-                  State / Province / Region
-                </label>
-                <input
-                  name='state'
-                  type='text'
-                  className='form-control'
-                  placeholder='State / Province / Region'
-                  value={businessProfileForm.state}
-                  onChange={onFormChange}
-                />
-              </div>
-              <div className='form-group'>
-                <label htmlFor='zipPostalCode'>Zip / Postal Code</label>
-                <input
-                  name='zipCode'
-                  type='text'
-                  className='form-control'
-                  placeholder='Zip / Postal Code'
-                  value={businessProfileForm.zipCode}
-                  onChange={onFormChange}
-                />
-              </div>
-              <div className='form-group'>
-                <label htmlFor='features'>Features</label>
-                <div className='form-check'>
+              <fieldset>
+                <div className='form-group'>
+                  <label htmlFor='businessName'>Business Name</label>
                   <input
-                    name='isAccessible'
-                    type='checkbox'
-                    className='form-check-input'
-                    checked={isChecked.isAccessible}
+                    id='businessName'
+                    name='businessName'
+                    type='text'
+                    className='form-control'
+                    placeholder='Business Name'
+                    value={businessProfileForm.businessName}
+                    onChange={onFormChange}
+                    required
+                  />
+                </div>
+                <div className='form-group'>
+                  <label htmlFor='description'>Description</label>
+                  <input
+                    id='description'
+                    name='description'
+                    type='text'
+                    className='form-control'
+                    placeholder='Business Description / Slogan'
+                    value={businessProfileForm.description}
                     onChange={onFormChange}
                   />
-                  <label className='form-check-label' htmlFor='accessible'>
-                    Wheelchair Accessible
-                  </label>
                 </div>
-                <div className='form-check'>
+                <div className='form-group'>
+                  <label htmlFor='email'>Email</label>
                   <input
-                    name='isWifi'
-                    type='checkbox'
-                    className='form-check-input'
-                    checked={isChecked.isWifi}
+                    id='email'
+                    name='email'
+                    type='email'
+                    className='form-control'
+                    placeholder='Business@EmailAddress.com'
+                    value={businessProfileForm.email}
                     onChange={onFormChange}
                   />
-                  <label className='form-check-label' htmlFor='wifi'>
-                    Wifi
-                  </label>
                 </div>
-                <div className='form-check'>
+              </fieldset>
+              <fieldset>
+                <div className='form-group'>
+                  <label htmlFor='address1'>Address Line 1</label>
                   <input
-                    name='isFreeParking'
-                    type='checkbox'
-                    className='form-check-input'
-                    checked={isChecked.isFreeParking}
+                    id='address1'
+                    name='address1'
+                    type='text'
+                    className='form-control'
+                    placeholder='Street Address, P.O. Box, C/O'
+                    value={businessProfileForm.address1}
+                    onChange={onFormChange}
+                    required
+                  />
+                </div>
+                <div className='form-group'>
+                  <label htmlFor='address2'>Address Line 2</label>
+                  <input
+                    id='address2'
+                    name='address2'
+                    type='text'
+                    className='form-control'
+                    placeholder='Apartment, Suite, Unit, Building, Floor, ETC.'
+                    value={businessProfileForm.address2}
                     onChange={onFormChange}
                   />
-                  <label className='form-check-label' htmlFor='freeParking'>
-                    Free Parking
-                  </label>
                 </div>
-              </div>
-              <div className='form-group'>
-                <label htmlFor='services'>Services</label>
-                <div className='form-check'>
+                <div className='form-group'>
+                  <label htmlFor='cityTown'>City / Town</label>
                   <input
-                    name='isWaxing'
-                    type='checkbox'
-                    className='form-check-input'
+                    id='cityTown'
+                    name='city'
+                    type='text'
+                    className='form-control'
+                    placeholder='City / Town'
+                    value={businessProfileForm.city}
                     onChange={onFormChange}
-                    checked={isChecked.isWaxing}
+                    required
                   />
-                  <label className='form-check-label' htmlFor='waxing'>
-                    Waxing
-                  </label>
                 </div>
-                <div className='form-check'>
+                <div className='form-group'>
+                  <label htmlFor='stateProvinceRegion'>
+                    State / Province / Region
+                  </label>
                   <input
-                    name='isExtensions'
-                    type='checkbox'
-                    className='form-check-input'
-                    checked={isChecked.isExtensions}
+                    id='stateProvinceRegion'
+                    name='state'
+                    type='text'
+                    className='form-control'
+                    placeholder='State / Province / Region'
+                    value={businessProfileForm.state}
                     onChange={onFormChange}
+                    required
                   />
-                  <label className='form-check-label' htmlFor='extensions'>
-                    Extensions
-                  </label>
                 </div>
-                <div className='form-check'>
+                <div className='form-group'>
+                  <label htmlFor='zipPostalCode'>Zip / Postal Code</label>
                   <input
-                    name='isBlowOuts'
-                    type='checkbox'
-                    className='form-check-input'
-                    checked={isChecked.isBlowOuts}
+                    id='zipPostalCode'
+                    name='zipCode'
+                    type='text'
+                    className='form-control'
+                    placeholder='Zip / Postal Code'
+                    value={businessProfileForm.zipCode}
                     onChange={onFormChange}
+                    required
                   />
-                  <label className='form-check-label' htmlFor='blowOuts'>
-                    Blow Outs
-                  </label>
                 </div>
-                <div className='form-check'>
-                  <input
-                    name='isColoring'
-                    type='checkbox'
-                    className='form-check-input'
-                    checked={isChecked.isColoring}
-                    onChange={onFormChange}
-                  />
-                  <label className='form-check-label' htmlFor='coloring'>
-                    Coloring
-                  </label>
+              </fieldset>
+              <fieldset>
+                <div className='form-group'>
+                  <label htmlFor='features'>Features</label>
+                  <div className='form-check'>
+                    <input
+                      id='accessible'
+                      name='isAccessible'
+                      type='checkbox'
+                      className='form-check-input'
+                      checked={isChecked.isAccessible}
+                      onChange={onFormChange}
+                    />
+                    <label className='form-check-label' htmlFor='accessible'>
+                      Wheelchair Accessible
+                    </label>
+                  </div>
+                  <div className='form-check'>
+                    <input
+                      id='wifi'
+                      name='isWifi'
+                      type='checkbox'
+                      className='form-check-input'
+                      checked={isChecked.isWifi}
+                      onChange={onFormChange}
+                    />
+                    <label className='form-check-label' htmlFor='wifi'>
+                      Wifi
+                    </label>
+                  </div>
+                  <div className='form-check'>
+                    <input
+                      id='freeParking'
+                      name='isFreeParking'
+                      type='checkbox'
+                      className='form-check-input'
+                      checked={isChecked.isFreeParking}
+                      onChange={onFormChange}
+                    />
+                    <label className='form-check-label' htmlFor='freeParking'>
+                      Free Parking
+                    </label>
+                  </div>
                 </div>
-                <div className='form-check'>
-                  <input
-                    name='isMakeUp'
-                    type='checkbox'
-                    className='form-check-input'
-                    checked={isChecked.isMakeUp}
-                    onChange={onFormChange}
-                  />
-                  <label className='form-check-label' htmlFor='make-up'>
-                    Make-up
-                  </label>
+              </fieldset>
+              <fieldset>
+                <div className='form-group'>
+                  <label htmlFor='services'>Services</label>
+                  <div className='form-check'>
+                    <input
+                      id='waxing'
+                      name='isWaxing'
+                      type='checkbox'
+                      className='form-check-input'
+                      onChange={onFormChange}
+                      checked={isChecked.isWaxing}
+                    />
+                    <label className='form-check-label' htmlFor='waxing'>
+                      Waxing
+                    </label>
+                  </div>
+                  <div className='form-check'>
+                    <input
+                      id='extensions'
+                      name='isExtensions'
+                      type='checkbox'
+                      className='form-check-input'
+                      checked={isChecked.isExtensions}
+                      onChange={onFormChange}
+                    />
+                    <label className='form-check-label' htmlFor='extensions'>
+                      Extensions
+                    </label>
+                  </div>
+                  <div className='form-check'>
+                    <input
+                      id='blowOuts'
+                      name='isBlowOuts'
+                      type='checkbox'
+                      className='form-check-input'
+                      checked={isChecked.isBlowOuts}
+                      onChange={onFormChange}
+                    />
+                    <label className='form-check-label' htmlFor='blowOuts'>
+                      Blow Outs
+                    </label>
+                  </div>
+                  <div className='form-check'>
+                    <input
+                      id='coloring'
+                      name='isColoring'
+                      type='checkbox'
+                      className='form-check-input'
+                      checked={isChecked.isColoring}
+                      onChange={onFormChange}
+                    />
+                    <label className='form-check-label' htmlFor='coloring'>
+                      Coloring
+                    </label>
+                  </div>
+                  <div className='form-check'>
+                    <input
+                      id='makeUp'
+                      name='isMakeUp'
+                      type='checkbox'
+                      className='form-check-input'
+                      checked={isChecked.isMakeUp}
+                      onChange={onFormChange}
+                    />
+                    <label className='form-check-label' htmlFor='make-up'>
+                      Make-up
+                    </label>
+                  </div>
                 </div>
-              </div>
+              </fieldset>
               <button type='submit' className='btn btn-primary'>
                 Submit
               </button>
