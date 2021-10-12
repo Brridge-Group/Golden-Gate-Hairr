@@ -45,6 +45,9 @@ const BusinessProfile = () => {
   })
   const [userId, setUserId] = useState(null)
 
+  // TODO (Backlog): Error Handling UI
+  const [_error, set_Error] = useState(null)
+
   useEffect(() => {
     setUserId(userState.user?._id)
     console.log(userId)
@@ -61,6 +64,7 @@ const BusinessProfile = () => {
       [event.target.name]: value
     })
 
+    // TODO (Backlog): Save to database. Currently sending, but not being saved.
     setIsChecked({
       ...isChecked,
       [event.target.name]: value
@@ -104,25 +108,31 @@ const BusinessProfile = () => {
     try {
       const response = await fetch('/api/businesses', requestOptions)
       if (!response.ok) {
-        throw new Error('New business profile not saved! Please resubmit')
+        throw new Error('New business profile not saved! Please resubmit.')
       }
       const json = await response.json()
       const responseData = json
 
-      // Todo: Save responseData to state?
+      // TODO: Save responseData to state?
       console.log(responseData)
       alert('Profile creation successful. Thank you!!')
+
+      // TODO: Redirect to home
+      // If successful then ...
+      // set flag to trigger push?
     } catch (error) {
-      console.error('Error:', error.response.data)
+      console.error('Profile not created.', error.message)
+      set_Error(error.message)
     }
   }
 
   const profileSubmitHandler = event => {
     event?.preventDefault()
     saveNewBusiness()
-    
-    // Todo: Confirm redirect destination?
-    history.push('/')
+
+    // TODO: Redirect to home
+    // If successful then ...
+    // history.push('/')
   }
   return (
     <>
@@ -131,9 +141,20 @@ const BusinessProfile = () => {
           <ContentHeader title='Business Profile Page' />
         </header>
         <div className='card card-primary'>
-          <div className='card-header'>Business Profile</div>
+          <div className='card-header'>Business Profile Creation</div>
           {/* <-- Form Start --> */}
           <form onSubmit={profileSubmitHandler}>
+            <span
+              className='d-flex justify-content-center align-self-center mx-auto'
+              style={{
+                color: 'red',
+                fontSize: '1.5rem',
+                textAlign: 'center',
+                width: '20rem'
+              }}
+            >
+              {_error}
+            </span>
             <div className='card-body'>
               <fieldset>
                 <div className='form-group'>
