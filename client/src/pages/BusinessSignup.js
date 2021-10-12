@@ -1,11 +1,14 @@
 // React Components
-import { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
+import { useMountedState } from 'react-use'
 
 // Custom Imports
 import ContentHeader from '../components/ContentHeader'
 import { AuthContext } from '../contexts/GlobalContext'
 const BusinessSignup = () => {
+  const isMounted = useMountedState()
+
   const [businessRegForm, setBusinessRegForm] = useState({
     firstName: '',
     lastName: '',
@@ -18,13 +21,18 @@ const BusinessSignup = () => {
 
   const [isNewBusUserCreated, setIsNewBusUserCreated] = useState(false)
 
-  // Todo: Error Handling UI
+  // TODO (Backlog): Error Handling UI
   const [_error, set_Error] = useState(null)
 
   const { firstName, lastName, email, password, confirmedPassword } =
     businessRegForm
 
   const history = useHistory()
+
+  useEffect(() => {
+    setUserState(userState)
+    console.log(userState)
+  }, [userState])
 
   const onFormChange = event => {
     setBusinessRegForm({
@@ -72,7 +80,9 @@ const BusinessSignup = () => {
     if (password !== confirmedPassword) {
       alert('The provided passwords do not match. Please try again.')
     } else {
-      saveNewBusinessUser()
+      if (isMounted) {
+        saveNewBusinessUser()
+      }
       history.push('/business/profile')
     }
   }
