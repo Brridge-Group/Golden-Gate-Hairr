@@ -1,8 +1,6 @@
 const loaders = require('./loaders')
 const express = require('express')
 const config = require('./config')
-// const bcrypt = require('bcryptjs')
-// const jwt = require('jsonwebtoken')
 
 // const User = require('./model/user')
 // const auth = require('./middleware/auth')

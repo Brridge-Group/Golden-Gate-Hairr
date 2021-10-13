@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import ContentHeader from '../components/ContentHeader'
+import ContentHeader from '../../components/ContentHeader'
 import { useHistory } from 'react-router'
 import axios from 'axios'
 
