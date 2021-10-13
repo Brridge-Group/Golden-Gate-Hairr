@@ -5,7 +5,6 @@
   "insertPragma": false,
   "jsxBracketSameLine": false,
   "jsxSingleQuote": true,
-  "printWidth": 200,
   "proseWrap": "preserve",
   "quoteProps": "as-needed",
   "requirePragma": false,
@@ -15,4 +14,3 @@
   "trailingComma": "es5",
   "useTabs": false
 }
-
