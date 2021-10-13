@@ -21,6 +21,9 @@ import BusinessDetails from './pages/BusinessDetails'
 import BusinessSignup from './pages/BusinessSignup'
 import BusinessProfile from './pages/BusinessProfile'
 
+// Context Imports
+import { AuthProvider } from './contexts/GlobalContext'
+
 const App = () => {
   let routes
 
@@ -62,14 +65,16 @@ const App = () => {
   )
 
   return (
-    <Router>
-      <Header />
-      <SideBar />
-      <div className='content-wrapper'>
-        <div className='content'>{routes}</div>
-      </div>
-      <Footer />
-    </Router>
+    <AuthProvider>
+      <Router>
+        <Header />
+        <SideBar />
+        <div className='content-wrapper'>
+          <div className='content'>{routes}</div>
+        </div>
+        <Footer />
+      </Router>
+    </AuthProvider>
   )
 }
 
