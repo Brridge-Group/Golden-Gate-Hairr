@@ -26,6 +26,7 @@ const BusinessSignup = () => {
                     type='text'
                     className='form-control'
                     placeholder='First Name'
+                    aria-labelledby='firstName'
                     
                   />
                   <div className='input-group-append'>
@@ -40,6 +41,7 @@ const BusinessSignup = () => {
                     type='text'
                     className='form-control'
                     placeholder='Last Name'
+                    aria-labelledby='lastName'
                     
                   />
                   <div className='input-group-append'>
@@ -54,6 +56,7 @@ const BusinessSignup = () => {
                     type='email'
                     className='form-control'
                     placeholder='Email'
+                    aria-labelledby='email'
                     
                   />
                   <div className='input-group-append'>
@@ -69,6 +72,7 @@ const BusinessSignup = () => {
                     className='form-control'
                     placeholder='Password'
                     minLength='6'
+                    aria-labelledby='password'
                     
                   />
                   <div className='input-group-append'>
@@ -84,6 +88,7 @@ const BusinessSignup = () => {
                     className='form-control'
                     placeholder='Confirm password'
                     minLength='6'
+                    aria-labelledby='confirmedPassword'
                     
                   />
                   <div className='input-group-append'>
@@ -96,6 +101,7 @@ const BusinessSignup = () => {
                   <button
                     type='submit'
                     className='btn btn-primary btn-block col-5'
+                    aria-labelledby='submitButton'
                   >
                     Register
                   </button>
