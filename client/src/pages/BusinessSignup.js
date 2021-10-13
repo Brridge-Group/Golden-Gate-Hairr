@@ -5,8 +5,8 @@ const BusinessSignup = () => {
 
   return (
     <>
-      <ContentHeader title='Business Signup' />
       <section className='content-wrapper bus-signup ml-0'>
+      <ContentHeader title='Business Signup' />
         <div className='register-box mx-auto'>
           <div className='card card-outline card-primary'>
             <div className='card-header text-center'>
