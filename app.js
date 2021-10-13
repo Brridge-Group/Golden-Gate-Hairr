@@ -2,9 +2,6 @@ const loaders = require('./loaders')
 const express = require('express')
 const config = require('./config')
 
-// const User = require('./model/user')
-// const auth = require('./middleware/auth')
-
 const startServer = async () => {
   const app = express()
 

@@ -21,7 +21,7 @@ const Login = () => {
   const handleSubmit = async () => {
     console.log('in handle submit', loginUser)
     try {
-      const response = await fetch('api/login', {
+      const response = await fetch('api/authorize/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
