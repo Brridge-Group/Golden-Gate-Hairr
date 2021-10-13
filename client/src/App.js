@@ -17,6 +17,8 @@ import UpdateItem from './pages/UpdateItem'
 
 import UserRegistration from './pages/UserRegistration'
 import Search from './pages/Search'
+import SearchResults from './pages/SearchResults'
+
 import BusinessesFiltered from './pages/BusinessesFiltered'
 import BusinessDetails from './pages/BusinessDetails'
 
@@ -33,6 +35,9 @@ const App = () => {
       </Route>
       <Route exact path='/search'>
         <Search />
+      </Route>
+      <Route exact path='/search/:city'>
+        <SearchResults />
       </Route>
       <Route exact path='/items'>
         <ListItems />

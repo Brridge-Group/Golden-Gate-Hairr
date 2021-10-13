@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import BusinessesFiltered from './BusinessesFiltered'
+import { useParams } from 'react-router'
 
 const SearchResults = (props) => {
-  console.log('in businesses props', props)
+  const city = useParams().city
+  console.log('in businesses props', city)
 
   let result = []
   const [allData, setAllData] = useState([])
@@ -35,7 +37,7 @@ const SearchResults = (props) => {
   }
 
   const dontSendBusiness = () => {
-    console.log('in dont sendBusiness')
+    // console.log('in dont sendBusiness')
   }
   props.isMounted ? sendBusiness() : dontSendBusiness()
 

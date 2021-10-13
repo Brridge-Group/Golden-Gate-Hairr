@@ -1,26 +1,22 @@
 import React, { useState } from 'react'
 import ContentHeader from '../components/ContentHeader'
 import SearchResults from './SearchResults'
-import { useHistory } from 'react-router-dom'
 
 const Search = () => {
   const [searchTerm, setSearchTerm] = useState('')
   const [mounted, setMounted] = useState(false)
-  const history = useHistory()
 
-  const handleSearch = (e) => {
-    let value = e.target.value
-    const inputCase =
-      value.charAt(0).toUpperCase() + value.slice(1).toLowerCase()
-    setSearchTerm(inputCase)
-    // history.push(`/search/${inputCase}`)
-  }
+  // const handleSearch = (e) => {
+  //   let value = e.target.value
+  //   const inputCase =
+  //     value.charAt(0).toUpperCase() + value.slice(1).toLowerCase()
+  //   setSearchTerm(inputCase)
+  // }
 
   const buttonOnClick = () => {
-    console.log('button', searchTerm)
     setMounted(true)
-    history.push(`/search/${searchTerm}`)
   }
+  // redirect to search results with search term included in the url so search results page can read it
 
   return (
     <React.Fragment>
