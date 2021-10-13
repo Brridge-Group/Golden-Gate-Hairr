@@ -19,9 +19,10 @@ const Login = () => {
     history.push('/signup')
   }
   const handleSubmit = async () => {
+    // debugger
     console.log('in handle submit', loginUser)
     try {
-      const response = await fetch('api/authorize/login', {
+      const response = await fetch('/api/authorize/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -33,11 +34,14 @@ const Login = () => {
       //   throw new Error('Could not signup')
       // }
       if (!response.ok) {
+        // debugger
         throw new Error('Could not signup')
       }
       console.log(setLoginUser(response))
       history.push('/')
-    } catch (err) {}
+    } catch (err) {
+      // debugger
+    }
   }
 
   return (
