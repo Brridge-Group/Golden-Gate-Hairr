@@ -116,10 +116,6 @@ const BusinessProfile = () => {
       // TODO: Save responseData to state?
       console.log(responseData)
       alert('Profile creation successful. Thank you!!')
-
-      // TODO: Redirect to home
-      // If successful then ...
-      // set flag to trigger push?
     } catch (error) {
       console.error('Profile not created.', error.message)
       set_Error(error.message)
@@ -128,11 +124,7 @@ const BusinessProfile = () => {
 
   const profileSubmitHandler = event => {
     event?.preventDefault()
-    saveNewBusiness()
-
-    // TODO: Redirect to home
-    // If successful then ...
-    // history.push('/')
+    saveNewBusiness().then(history.push('/'))
   }
   return (
     <>
