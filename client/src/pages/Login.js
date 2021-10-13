@@ -29,11 +29,13 @@ const Login = () => {
         },
         body: JSON.stringify({ loginUser }),
       })
+      // if (!response.ok) {
+      //   throw new Error('Could not signup')
+      // }
       if (!response.ok) {
         throw new Error('Could not signup')
       }
       console.log(setLoginUser(response))
-      setLoginUser(response)
       history.push('/')
     } catch (err) {}
   }
