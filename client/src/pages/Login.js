@@ -27,7 +27,7 @@ const Login = () => {
           'Content-Type': 'application/json',
           Accepts: 'application/json',
         },
-        body: JSON.stringify({ loginUser }),
+        body: JSON.stringify({ ...loginUser }),
       })
       // if (!response.ok) {
       //   throw new Error('Could not signup')
@@ -74,7 +74,10 @@ const Login = () => {
               />
             </div>
             <div className='login-btns'>
-              <button type='submit' className='btn btn-primary'>
+              <button
+                onChange={handleChange}
+                type='submit'
+                className='btn btn-primary'>
                 Login
               </button>
               <button onClick={routeChange} className='btn btn-primary'>
