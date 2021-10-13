@@ -14,7 +14,7 @@ const BusinessSignup = () => {
     lastName: '',
     email: '',
     password: '',
-    confirmedPassword: ''
+    confirmedPassword: '',
   })
 
   const { userState, setUserState } = useContext(AuthContext)
@@ -31,13 +31,12 @@ const BusinessSignup = () => {
 
   useEffect(() => {
     setUserState(userState)
-    console.log(userState)
   }, [userState])
 
   const onFormChange = event => {
     setBusinessRegForm({
       ...businessRegForm,
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
     })
   }
 
@@ -48,15 +47,15 @@ const BusinessSignup = () => {
       email,
       password,
       type: 2,
-      createdDate: Date.now()
+      createdDate: Date.now(),
     }
 
     const requestOptions = {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ ...newBusinessUser })
+      body: JSON.stringify({ ...newBusinessUser }),
     }
 
     try {
@@ -89,11 +88,9 @@ const BusinessSignup = () => {
 
   return (
     <>
-      <section className='content-wrapper bus-signup'>
-        <header className='bus-signup--header'>
-          <ContentHeader title='Business Signup' />
-        </header>
-        <div className='register-box d-flex vw-100 justify-content-center'>
+      <ContentHeader title='Business Signup' />
+      <section className='content-wrapper bus-signup ml-0'>
+        <div className='register-box mx-auto'>
           <div className='card card-outline card-primary'>
             <div className='card-header text-center'>
               <a href='/' className='h1'>
