@@ -1,19 +1,34 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import ContentHeader from '../components/ContentHeader'
+import { useHistory } from 'react-router-dom'
+import { Redirect } from 'react-router'
 
-const BusinessDetails = (props) => {
-  console.log('in deets', props)
+const BusinessesFiltered = (props) => {
+  const [redirect, setRedirect] = useState(false)
 
-  const [indieBus, setIndieBus] = useState('')
-  useEffect(() => {
-    console.log('in use effect', props.history.location.business)
-    setIndieBus(props.history.location.business)
-  }, [])
-  console.log('indieBus state', indieBus)
+  const history = useHistory()
+
+  const doSetRedirect = () => {
+    setRedirect(true)
+  }
+  const renderRedirect = () => {
+    console.log('in render redirect, props.business', props.business)
+    if (redirect) {
+      return (
+        <Redirect
+          to={{
+            pathname: '/business-details',
+            business: props.business,
+          }}
+        />
+      )
+    }
+    //   // history.push('/business-details')
+  }
 
   return (
     <React.Fragment>
-      <ContentHeader title='Business Details ' />
+      <ContentHeader title='Filter Business Page' />
       <div className='card w-50 mx-auto'>
         <div className='card-body'>
           <ul className='products-list product-list-in-card'>
@@ -63,24 +78,19 @@ const BusinessDetails = (props) => {
                       style={{ width: '10%' }}
                     />
                   </p>
-                  <button className='btn btn-default'>Review</button>
+                  {renderRedirect()}
+                  <button className='btn btn-default' onClick={doSetRedirect}>
+                    Review
+                  </button>
                 </div>
                 <div>
-                  <h1 className='product title'>{indieBus.businessName}</h1>
+                  <h1 className='product title'>{props.name}</h1>
                   <div>
-                    {indieBus.address1} {indieBus.city}, {indieBus.state}{' '}
-                    {indieBus.zipCode}
-                    <br /> phone: {indieBus.phone} <br />
-                    email: {indieBus.email}
+                    {props.address} {props.city}, {props.state} {props.zipCode}
                   </div>
                   <div className='product-description c'>
-                    {indieBus.description}
+                    {props.description}
                   </div>
-                  <button
-                    className='btn btn-default'
-                    style={{ marginTop: '10px' }}>
-                    Book Now
-                  </button>
                 </div>
               </figure>
             </li>
@@ -91,4 +101,4 @@ const BusinessDetails = (props) => {
   )
 }
 
-export default BusinessDetails
+export default BusinessesFiltered
