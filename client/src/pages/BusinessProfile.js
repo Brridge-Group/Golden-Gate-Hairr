@@ -11,7 +11,6 @@ const BusinessProfile = () => {
 
   // Import User State Object from Context
   const { userState, setUserState } = useContext(AuthContext)
-  // console.log('AuthContext - userState:', userState)
 
   const [businessProfileForm, setBusinessProfileForm] = useState({
     businessName: '',
@@ -21,16 +20,7 @@ const BusinessProfile = () => {
     address2: '',
     city: '',
     state: '',
-    zipCode: ''
-    // TODO: Remove multi-level nested state?
-    // features: { isAccessible: false, isWifi: false, isFreeParking: false },
-    // services: {
-    //   isWaxing: false,
-    //   isExtensions: false,
-    //   isBlowOuts: false,
-    //   isColoring: false,
-    //   isMakeUp: false
-    // }
+    zipCode: '',
   })
 
   const [isChecked, setIsChecked] = useState({
@@ -41,7 +31,7 @@ const BusinessProfile = () => {
     isExtensions: false,
     isBlowOuts: false,
     isColoring: false,
-    isMakeUp: false
+    isMakeUp: false,
   })
   const [userId, setUserId] = useState(null)
 
@@ -50,7 +40,6 @@ const BusinessProfile = () => {
 
   useEffect(() => {
     setUserId(userState.user?._id)
-    console.log(userId)
   }, [userState])
 
   const onFormChange = event => {
@@ -61,48 +50,30 @@ const BusinessProfile = () => {
 
     setBusinessProfileForm({
       ...businessProfileForm,
-      [event.target.name]: value
+      [event.target.name]: value,
     })
 
     // TODO (Backlog): Save to database. Currently sending, but not being saved.
     setIsChecked({
       ...isChecked,
-      [event.target.name]: value
+      [event.target.name]: value,
     })
-
-    // Alt approach with multi-level nested state
-    // setBusinessProfileForm({
-    //   ...businessProfileForm,
-    //   [event.target.name]: value,
-    //   features: {
-    //     // ...businessProfileForm.features,
-    //     [event.target.name]: value
-    //   },
-    //   services: {
-    //     // ...businessProfileForm.services,
-    //     [event.target.name]: value
-    //   }
-    // })
-
-    // setBusinessProfileForm({
-    //   features: Object.assign({}, businessProfileForm.features, {
-    //     [event.target.name]: value
-    //   })
-    // })
   }
 
   const saveNewBusiness = async () => {
     let newBusiness = {
       ...businessProfileForm,
-      userId: userId
+      userId: userId,
     }
+
+    // TODO (Backlog): Add {isChecked} to save in database. Currently sending, but not being saved.
 
     const requestOptions = {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ ...newBusiness })
+      body: JSON.stringify({ ...newBusiness }),
     }
 
     try {
@@ -113,8 +84,6 @@ const BusinessProfile = () => {
       const json = await response.json()
       const responseData = json
 
-      // TODO: Save responseData to state?
-      console.log(responseData)
       alert('Profile creation successful. Thank you!!')
     } catch (error) {
       console.error('Profile not created.', error.message)
@@ -142,7 +111,7 @@ const BusinessProfile = () => {
                 color: 'red',
                 fontSize: '1.5rem',
                 textAlign: 'center',
-                width: '20rem'
+                width: '20rem',
               }}
             >
               {_error}
@@ -176,15 +145,7 @@ const BusinessProfile = () => {
                 </div>
                 <div className='form-group'>
                   <label htmlFor='email'>Email</label>
-                  <input
-                    id='email'
-                    name='email'
-                    type='email'
-                    className='form-control'
-                    placeholder='Business@EmailAddress.com'
-                    value={businessProfileForm.email}
-                    onChange={onFormChange}
-                  />
+                  <input id='email' name='email' type='email' className='form-control' placeholder='Business@EmailAddress.com' value={businessProfileForm.email} onChange={onFormChange} />
                 </div>
               </fieldset>
               <fieldset>
@@ -215,21 +176,10 @@ const BusinessProfile = () => {
                 </div>
                 <div className='form-group'>
                   <label htmlFor='cityTown'>City / Town</label>
-                  <input
-                    id='cityTown'
-                    name='city'
-                    type='text'
-                    className='form-control'
-                    placeholder='City / Town'
-                    value={businessProfileForm.city}
-                    onChange={onFormChange}
-                    required
-                  />
+                  <input id='cityTown' name='city' type='text' className='form-control' placeholder='City / Town' value={businessProfileForm.city} onChange={onFormChange} required />
                 </div>
                 <div className='form-group'>
-                  <label htmlFor='stateProvinceRegion'>
-                    State / Province / Region
-                  </label>
+                  <label htmlFor='stateProvinceRegion'>State / Province / Region</label>
                   <input
                     id='stateProvinceRegion'
                     name='state'
@@ -243,56 +193,26 @@ const BusinessProfile = () => {
                 </div>
                 <div className='form-group'>
                   <label htmlFor='zipPostalCode'>Zip / Postal Code</label>
-                  <input
-                    id='zipPostalCode'
-                    name='zipCode'
-                    type='text'
-                    className='form-control'
-                    placeholder='Zip / Postal Code'
-                    value={businessProfileForm.zipCode}
-                    onChange={onFormChange}
-                    required
-                  />
+                  <input id='zipPostalCode' name='zipCode' type='text' className='form-control' placeholder='Zip / Postal Code' value={businessProfileForm.zipCode} onChange={onFormChange} required />
                 </div>
               </fieldset>
               <fieldset>
                 <div className='form-group'>
                   <label htmlFor='features'>Features</label>
                   <div className='form-check'>
-                    <input
-                      id='accessible'
-                      name='isAccessible'
-                      type='checkbox'
-                      className='form-check-input'
-                      checked={isChecked.isAccessible}
-                      onChange={onFormChange}
-                    />
+                    <input id='accessible' name='isAccessible' type='checkbox' className='form-check-input' checked={isChecked.isAccessible} onChange={onFormChange} />
                     <label className='form-check-label' htmlFor='accessible'>
                       Wheelchair Accessible
                     </label>
                   </div>
                   <div className='form-check'>
-                    <input
-                      id='wifi'
-                      name='isWifi'
-                      type='checkbox'
-                      className='form-check-input'
-                      checked={isChecked.isWifi}
-                      onChange={onFormChange}
-                    />
+                    <input id='wifi' name='isWifi' type='checkbox' className='form-check-input' checked={isChecked.isWifi} onChange={onFormChange} />
                     <label className='form-check-label' htmlFor='wifi'>
                       Wifi
                     </label>
                   </div>
                   <div className='form-check'>
-                    <input
-                      id='freeParking'
-                      name='isFreeParking'
-                      type='checkbox'
-                      className='form-check-input'
-                      checked={isChecked.isFreeParking}
-                      onChange={onFormChange}
-                    />
+                    <input id='freeParking' name='isFreeParking' type='checkbox' className='form-check-input' checked={isChecked.isFreeParking} onChange={onFormChange} />
                     <label className='form-check-label' htmlFor='freeParking'>
                       Free Parking
                     </label>
@@ -303,66 +223,31 @@ const BusinessProfile = () => {
                 <div className='form-group'>
                   <label htmlFor='services'>Services</label>
                   <div className='form-check'>
-                    <input
-                      id='waxing'
-                      name='isWaxing'
-                      type='checkbox'
-                      className='form-check-input'
-                      onChange={onFormChange}
-                      checked={isChecked.isWaxing}
-                    />
+                    <input id='waxing' name='isWaxing' type='checkbox' className='form-check-input' onChange={onFormChange} checked={isChecked.isWaxing} />
                     <label className='form-check-label' htmlFor='waxing'>
                       Waxing
                     </label>
                   </div>
                   <div className='form-check'>
-                    <input
-                      id='extensions'
-                      name='isExtensions'
-                      type='checkbox'
-                      className='form-check-input'
-                      checked={isChecked.isExtensions}
-                      onChange={onFormChange}
-                    />
+                    <input id='extensions' name='isExtensions' type='checkbox' className='form-check-input' checked={isChecked.isExtensions} onChange={onFormChange} />
                     <label className='form-check-label' htmlFor='extensions'>
                       Extensions
                     </label>
                   </div>
                   <div className='form-check'>
-                    <input
-                      id='blowOuts'
-                      name='isBlowOuts'
-                      type='checkbox'
-                      className='form-check-input'
-                      checked={isChecked.isBlowOuts}
-                      onChange={onFormChange}
-                    />
+                    <input id='blowOuts' name='isBlowOuts' type='checkbox' className='form-check-input' checked={isChecked.isBlowOuts} onChange={onFormChange} />
                     <label className='form-check-label' htmlFor='blowOuts'>
                       Blow Outs
                     </label>
                   </div>
                   <div className='form-check'>
-                    <input
-                      id='coloring'
-                      name='isColoring'
-                      type='checkbox'
-                      className='form-check-input'
-                      checked={isChecked.isColoring}
-                      onChange={onFormChange}
-                    />
+                    <input id='coloring' name='isColoring' type='checkbox' className='form-check-input' checked={isChecked.isColoring} onChange={onFormChange} />
                     <label className='form-check-label' htmlFor='coloring'>
                       Coloring
                     </label>
                   </div>
                   <div className='form-check'>
-                    <input
-                      id='makeUp'
-                      name='isMakeUp'
-                      type='checkbox'
-                      className='form-check-input'
-                      checked={isChecked.isMakeUp}
-                      onChange={onFormChange}
-                    />
+                    <input id='makeUp' name='isMakeUp' type='checkbox' className='form-check-input' checked={isChecked.isMakeUp} onChange={onFormChange} />
                     <label className='form-check-label' htmlFor='make-up'>
                       Make-up
                     </label>
@@ -380,4 +265,5 @@ const BusinessProfile = () => {
     </>
   )
 }
+
 export default BusinessProfile
