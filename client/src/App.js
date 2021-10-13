@@ -19,6 +19,7 @@ import UserRegistration from './pages/UserRegistration'
 import Search from './pages/Search'
 import BusinessesFiltered from './pages/BusinessesFiltered'
 import BusinessDetails from './pages/BusinessDetails'
+import BusinessSignup from './pages/BusinessSignup'
 
 const App = () => {
   let routes
@@ -45,6 +46,9 @@ const App = () => {
       </Route>
       <Route exact path='/businesses'>
         <BusinessesFiltered />
+      </Route>
+      <Route path='/business-signup' exact>
+        <BusinessSignup />
       </Route>
 
       <Route

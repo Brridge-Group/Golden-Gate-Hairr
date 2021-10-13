@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react'
 
-const ContentHeader = (props) => {
+const ContentHeader = props => {
   return (
     <React.Fragment>
       <div className='content-header'>
@@ -15,7 +15,10 @@ const ContentHeader = (props) => {
                   <a href='/'>Home</a>
                 </li>
                 <li className='breadcrumb-item'>
-                  <a href='/business-details'>For Business</a>
+                  <a href='/business-details'>Business Details</a>
+                </li>
+                <li className='breadcrumb-item'>
+                  <a href='/business-signup'>Business Signup</a>
                 </li>
               </ol>
             </div>
@@ -24,6 +27,6 @@ const ContentHeader = (props) => {
       </div>
     </React.Fragment>
   )
-};
+}
 
-export default ContentHeader;
+export default ContentHeader

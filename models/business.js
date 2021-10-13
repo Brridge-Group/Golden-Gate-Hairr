@@ -14,9 +14,13 @@ const businessSchema = new mongoose.Schema({
   state: { type: String },
   country: { type: String },
   mainPicture: { type: String },
-  email: { type: String },
+  email: { type: String, required: true, unique: true },
   status: { type: Number, default: 1 }
-})
+//   ,
+//   features: { type:ObjectId, ref: "features"}
+//   ,
+//   services: { type:ObjectId, ref: "services"}
+// })
 
 // 3rd parameter to match exact collection name in the DB. Mongoose automatically finds the plural of the modal name declared here if third parameter is not present.
 module.exports = mongoose.model('Business', businessSchema, 'businesses')
