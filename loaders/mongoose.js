@@ -1,8 +1,5 @@
 const mongoose = require('mongoose')
 const config = require('../config')
-const bcrypt = require('bcryptjs')
-const jwt = require('jsonwebtoken')
-const auth = require('../middleware/auth')
 
 const loader = async () => {
   const connection = await mongoose.connect(config.databaseURL, {

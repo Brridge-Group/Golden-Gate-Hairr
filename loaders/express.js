@@ -1,6 +1,5 @@
 const express = require('express')
 const path = require('path')
-const generatePassword = require('password-generator')
 const cors = require('cors')
 
 const itemsRoutes = require('../routes/items-route')

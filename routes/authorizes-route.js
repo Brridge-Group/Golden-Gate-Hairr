@@ -8,6 +8,6 @@ const router = express.Router()
 router.post('/', authorizesController.register)
 
 // login
-router.post('/:id', authorizesController.login)
+router.post('/login', authorizesController.login)
 
 module.exports = router
