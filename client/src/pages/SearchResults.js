@@ -6,11 +6,8 @@ const SearchResults = () => {
   const citySearch = useParams().city
   console.log('in businesses props', citySearch)
 
-  let result = []
-  let busFilter = []
-  const [allData, setAllData] = useState([])
+  const busFilter = []
   const [filterResults, setfilterResults] = useState([])
-  // const [products, setProducts] = useState([])
 
   useEffect(() => {
     console.log('in fetchBus')
@@ -36,9 +33,7 @@ const SearchResults = () => {
       }
     }
     fetchBusinesses()
-    console.log('line 38', allData)
   }, [])
-  console.log(allData, 'fifi', filterResults)
 
   return (
     <React.Fragment>
