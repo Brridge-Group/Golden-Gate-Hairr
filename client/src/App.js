@@ -48,7 +48,7 @@ const App = () => {
       <Route exact path='/items/:id'>
         <UpdateItem />
       </Route>
-      <Route exact path='/businesses'>
+      <Route exact path='/businesses/:city'>
         <BusinessesFiltered />
       </Route>
 

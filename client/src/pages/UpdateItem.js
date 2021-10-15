@@ -15,6 +15,7 @@ const UpdateItem = () => {
       try {
         const response = await fetch(`/api/items/${itemId}`, { method: 'GET' })
         const responseData = await response.json()
+        console.log('in fetch item', responseData)
 
         if (!response.ok) {
           throw new Error(responseData.message)

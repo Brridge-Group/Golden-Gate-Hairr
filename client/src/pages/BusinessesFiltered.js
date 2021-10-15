@@ -2,8 +2,12 @@ import React, { useState } from 'react'
 import ContentHeader from '../components/ContentHeader'
 import { useHistory } from 'react-router-dom'
 import { Redirect } from 'react-router'
+import { useParams } from 'react-router'
 
 const BusinessesFiltered = (props) => {
+  const wahwah = useParams().city
+
+  console.log('in bus filtered', props, props.business)
   const [redirect, setRedirect] = useState(false)
 
   const history = useHistory()
@@ -28,7 +32,7 @@ const BusinessesFiltered = (props) => {
 
   return (
     <React.Fragment>
-      <ContentHeader title='Filter Business Page' />
+      {/* <ContentHeader title='Filter Business Page' /> */}
       <div className='card w-50 mx-auto'>
         <div className='card-body'>
           <ul className='products-list product-list-in-card'>
