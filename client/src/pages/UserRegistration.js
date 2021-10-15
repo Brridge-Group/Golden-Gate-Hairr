@@ -14,6 +14,7 @@ const UserRegistration = () => {
   const history = useHistory()
 
   const { firstName, lastName, email, password, password2 } = userForm
+
   const onChange = (e) =>
     setUserForm({ ...userForm, [e.target.name]: e.target.value })
 

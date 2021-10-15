@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken')
 const User = require('../models/user')
 const auth = require('../middleware/auth')
 
-const register = async (req, res, next) => {
+const register = async (req, res) => {
   try {
     // Get user input
     const { firstName, lastName, email, password } = req.body
@@ -12,7 +12,6 @@ const register = async (req, res, next) => {
     if (!(email && password && firstName && lastName)) {
       res.status(400).send('All input is required')
     }
-
     // check if user already exist
     // Validate if user exist in our database
     const oldUser = await User.findOne({ email })
@@ -20,7 +19,6 @@ const register = async (req, res, next) => {
     if (oldUser) {
       return res.status(409).send('User Already Exist. Please Login')
     }
-
     //Encrypt user password
     encryptedPassword = await bcrypt.hash(password, 10)
 
@@ -31,7 +29,6 @@ const register = async (req, res, next) => {
       email: email.toLowerCase(), // sanitize: convert email to lowercase
       password: encryptedPassword,
     })
-
     // Create token
     const token = jwt.sign(
       { user_id: user._id, email },
@@ -55,14 +52,12 @@ const login = async (req, res) => {
   try {
     // Get user input
     const { email, password } = req.body
-
     // Validate user input
     if (!(email && password)) {
       res.status(400).send('All input is required')
     }
     // Validate if user exist in our database
     const user = await User.findOne({ email })
-
     if (user && (await bcrypt.compare(password, user.password))) {
       // Create token
       const token = jwt.sign(
@@ -72,10 +67,8 @@ const login = async (req, res) => {
           expiresIn: '2h',
         }
       )
-
       // save user token
       user.token = token
-
       // user
       res.status(200).json(user)
     }
@@ -84,7 +77,13 @@ const login = async (req, res) => {
     console.log(err)
   }
 }
+const welcome =
+  (auth,
+  (req, res) => {
+    res.status(200).send('Welcome 🙌 ')
+  })
 
 // ...
-exports.login = login
 exports.register = register
+exports.login = login
+exports.welcome = welcome

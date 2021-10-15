@@ -18,8 +18,8 @@ const Login = () => {
   const routeChange = () => {
     history.push('/signup')
   }
-  const handleSubmit = async () => {
-    // debugger
+  const handleSubmit = async (e) => {
+    e.preventDefault()
     console.log('in handle submit', loginUser)
     try {
       const response = await fetch('/api/authorize/login', {
@@ -30,18 +30,12 @@ const Login = () => {
         },
         body: JSON.stringify({ ...loginUser }),
       })
-      // if (!response.ok) {
-      //   throw new Error('Could not signup')
-      // }
+
       if (!response.ok) {
-        // debugger
         throw new Error('Could not signup')
       }
-      console.log(setLoginUser(response))
       history.push('/')
-    } catch (err) {
-      // debugger
-    }
+    } catch (err) {}
   }
 
   return (

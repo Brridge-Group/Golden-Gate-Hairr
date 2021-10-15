@@ -10,4 +10,7 @@ router.post('/', authorizesController.register)
 // login
 router.post('/login', authorizesController.login)
 
+// verify auth login
+router.get('/welcome', authorizesController.welcome)
+
 module.exports = router
