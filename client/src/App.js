@@ -14,18 +14,15 @@ import SideBar from './components/SideBar'
 import AuthContext from './contexts/AuthContext'
 
 import Login from './pages/Login'
-import ListItems from './pages/ListItems'
-import NewItem from './pages/NewItem'
-import UpdateItem from './pages/UpdateItem'
-
 import UserRegistration from './pages/UserRegistration'
 import Search from './pages/Search'
 import BusinessesFiltered from './pages/BusinessesFiltered'
 import BusinessDetails from './pages/BusinessDetails'
 import BusinessSignup from './pages/BusinessSignup'
+import { AuthProvider } from './contexts/GlobalContext'
 
 const App = () => {
-  // const [user, setUser] = useState(null)
+  const [user, setUser] = useState(null)
   // const [authenticated, setAuthenticated] = useState(false)
 
   // const login = async (credentials) => {
@@ -55,15 +52,7 @@ const App = () => {
       <Route exact path='/search'>
         <Search />
       </Route>
-      <Route exact path='/items'>
-        <ListItems />
-      </Route>
-      <Route exact path='/items/new'>
-        <NewItem />
-      </Route>
-      <Route exact path='/items/:id'>
-        <UpdateItem />
-      </Route>
+
       <Route exact path='/businesses'>
         <BusinessesFiltered />
       </Route>
@@ -81,25 +70,16 @@ const App = () => {
   )
 
   return (
-    <Router>
-      <div className='App'>
+    <AuthProvider>
+      <Router>
         <Header />
         <SideBar />
         <div className='content-wrapper'>
-          <div className='content'>
-            <AuthContext value={user}>
-            {routes}
-            </AuthContext>
-          </div>
+          <div className='content'>{routes}</div>
         </div>
         <Footer />
-      <Header />
-      <SideBar />
-      {/* <div className='content-wrapper'>
-      </div> */}
-      <Footer />
-      </div>
-    </Router>
+      </Router>
+    </AuthProvider>
   )
 }
 
