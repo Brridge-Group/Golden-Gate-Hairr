@@ -23,6 +23,7 @@ const BusinessesFiltered = (props) => {
         />
       )
     }
+    //   // history.push('/business-details')
   }
 
   return (

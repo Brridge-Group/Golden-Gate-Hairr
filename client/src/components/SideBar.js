@@ -56,6 +56,12 @@ const SideBar = () => {
                   <p>Log In</p>
                 </NavLink>
               </li>
+              <li className='nav-item'>
+                <NavLink to='/search' className='nav-link'>
+                  <i className='nav-icon fas fa-search'></i>
+                  <p>Search</p>
+                </NavLink>
+              </li>
             </ul>
           </nav>
         </div>
