@@ -82,8 +82,6 @@ const BusinessProfile = () => {
         throw new Error('New business profile not saved! Please resubmit.')
       }
       const json = await response.json()
-      const responseData = json
-
       alert('Profile creation successful. Thank you!!')
     } catch (error) {
       console.error('Profile not created.', error.message)
@@ -349,3 +347,5 @@ const BusinessProfile = () => {
 }
 
 export default BusinessProfile
+
+// At component mount fetch JSON {} to build form
