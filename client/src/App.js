@@ -14,12 +14,15 @@ import SideBar from './components/SideBar'
 import ListItems from './pages/ListItems'
 import NewItem from './pages/NewItem'
 import UpdateItem from './pages/UpdateItem'
-
 import UserRegistration from './pages/UserRegistration'
 import Search from './pages/Search'
 import BusinessesFiltered from './pages/BusinessesFiltered'
 import BusinessDetails from './pages/BusinessDetails'
 import BusinessSignup from './pages/BusinessSignup'
+import BusinessProfile from './pages/BusinessProfile'
+
+// Context Imports
+import { AuthProvider } from './contexts/GlobalContext'
 
 const App = () => {
   let routes
@@ -47,28 +50,31 @@ const App = () => {
       <Route exact path='/businesses'>
         <BusinessesFiltered />
       </Route>
-      <Route path='/business-signup' exact>
+      <Route exact path='/business-signup'>
         <BusinessSignup />
       </Route>
-
+      <Route exact path='/business/profile'>
+        <BusinessProfile />
+      </Route>
       <Route
         path='/business-details'
-        render={(props) => <BusinessDetails {...props} />}
+        render={props => <BusinessDetails {...props} />}
       />
-
       <Redirect to='/' />
     </Switch>
   )
 
   return (
-    <Router>
-      <Header />
-      <SideBar />
-      <div className='content-wrapper'>
-        <div className='content'>{routes}</div>
-      </div>
-      <Footer />
-    </Router>
+    <AuthProvider>
+      <Router>
+        <Header />
+        <SideBar />
+        <div className='content-wrapper'>
+          <div className='content'>{routes}</div>
+        </div>
+        <Footer />
+      </Router>
+    </AuthProvider>
   )
 }
 
