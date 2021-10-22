@@ -32,7 +32,7 @@ const Login = () => {
       })
 
       if (!response.ok) {
-        throw new Error('Could not signup')
+        throw new Error('Could not login')
       }
       history.push('/')
     } catch (err) {}

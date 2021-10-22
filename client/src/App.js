@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './App.css'
 import {
   BrowserRouter as Router,
@@ -6,12 +6,14 @@ import {
   Redirect,
   Switch,
   useHistory,
+  Link,
 } from 'react-router-dom'
 import Home from './pages/Home'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import SideBar from './components/SideBar'
 import AuthContext from './contexts/AuthContext'
+import AuthService from './services/auth-service'
 
 import Login from './pages/Login'
 import UserRegistration from './pages/UserRegistration'
@@ -19,10 +21,28 @@ import Search from './pages/Search'
 import BusinessesFiltered from './pages/BusinessesFiltered'
 import BusinessDetails from './pages/BusinessDetails'
 import BusinessSignup from './pages/BusinessSignup'
+// import Profile from './pages/Profile'
+// import BoardUser from './pages/BoardUser'
 import { AuthProvider } from './contexts/GlobalContext'
 
 const App = () => {
   const [user, setUser] = useState(null)
+  const [currentUser, setCurrentUser] = useState(undefined)
+
+  useEffect(() => {
+    const user = AuthService.getCurrentUser()
+
+    if (user) {
+      setCurrentUser(user)
+      // setShowModeratorBoard(user.roles.includes('ROLE_MODERATOR'))
+      // setShowAdminBoard(user.roles.includes('ROLE_ADMIN'))
+    }
+  }, [])
+
+  const logOut = () => {
+    AuthService.logout()
+  }
+
   // const [authenticated, setAuthenticated] = useState(false)
 
   // const login = async (credentials) => {

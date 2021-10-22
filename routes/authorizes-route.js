@@ -5,7 +5,7 @@ const authorizesController = require('../controllers/authorizes-controller')
 const router = express.Router()
 
 // register
-router.post('/', authorizesController.register)
+router.post('/register', authorizesController.register)
 
 // login
 router.post('/login', authorizesController.login)
