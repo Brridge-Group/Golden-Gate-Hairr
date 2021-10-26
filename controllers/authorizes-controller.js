@@ -49,6 +49,8 @@ const register = async (req, res) => {
 }
 
 const login = async (req, res) => {
+  debugger
+
   try {
     // Get user input
     const { email, password } = req.body
@@ -57,6 +59,7 @@ const login = async (req, res) => {
       res.status(400).send('All input is required')
     }
     // Validate if user exist in our database
+    debugger
     const user = await User.findOne({ email })
     if (user && (await bcrypt.compare(password, user.password))) {
       // Create token
@@ -71,6 +74,13 @@ const login = async (req, res) => {
       user.token = token
       // user
       res.status(200).json(user)
+      debugger
+      // res.status(200).send({
+      //   id: user._id,
+      //   password: user.password,
+      //   email: user.email,
+      //   accessToken: token,
+      // })
     }
     res.status(400).send('Invalid Credentials')
   } catch (err) {

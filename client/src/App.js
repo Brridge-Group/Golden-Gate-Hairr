@@ -21,8 +21,8 @@ import Search from './pages/Search'
 import BusinessesFiltered from './pages/BusinessesFiltered'
 import BusinessDetails from './pages/BusinessDetails'
 import BusinessSignup from './pages/BusinessSignup'
-// import Profile from './pages/Profile'
-// import BoardUser from './pages/BoardUser'
+import Profile from './components/Profile'
+import BoardUser from './pages/BoardUser'
 import { AuthProvider } from './contexts/GlobalContext'
 
 const App = () => {
@@ -71,6 +71,9 @@ const App = () => {
 
       <Route exact path='/search'>
         <Search />
+      </Route>
+      <Route exact path='/profile'>
+        <Profile />
       </Route>
 
       <Route exact path='/businesses'>
