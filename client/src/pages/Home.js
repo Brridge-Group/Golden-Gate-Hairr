@@ -9,6 +9,7 @@ const Home = () => {
   useEffect(() => {
     UserService.getPublicContent().then(
       (response) => {
+        console.log('in home', response)
         setContent(response.data)
       },
       (error) => {
@@ -38,7 +39,7 @@ const Home = () => {
             ipsum primis in faucibus orci luctus et ultrices posuere cubilia
             curae.
           </p>
-          <h3>{content}</h3>
+          {/* <h3>{content}</h3> */}
           <a href='#l' className='btn btn-primary'>
             Do Something
           </a>
