@@ -1,12 +1,95 @@
+// React Components
+import React, { useState, useContext, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
+import { useMountedState } from 'react-use'
 
 // Custom Imports
 import ContentHeader from '../components/ContentHeader'
+import { AuthContext } from '../contexts/GlobalContext'
 const BusinessSignup = () => {
+  const isMounted = useMountedState()
+
+  const [businessRegForm, setBusinessRegForm] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    confirmedPassword: '',
+  })
+
+  const { userState, setUserState } = useContext(AuthContext)
+
+  const [isNewBusUserCreated, setIsNewBusUserCreated] = useState(false)
+
+  // TODO (Backlog): Error Handling UI
+  const [_error, set_Error] = useState(null)
+
+  const { firstName, lastName, email, password, confirmedPassword } =
+    businessRegForm
+
+  const history = useHistory()
+
+  useEffect(() => {
+    setUserState(userState)
+  }, [userState])
+
+  const onFormChange = event => {
+    setBusinessRegForm({
+      ...businessRegForm,
+      [event.target.name]: event.target.value,
+    })
+  }
+
+  const saveNewBusinessUser = async () => {
+    const newBusinessUser = {
+      firstName,
+      lastName,
+      email,
+      password,
+      type: 2,
+      createdDate: Date.now(),
+    }
+
+    const requestOptions = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ ...newBusinessUser }),
+    }
+
+    try {
+      const response = await fetch('/api/users', requestOptions)
+      const json = await response.json()
+      setUserState(json)
+      setIsNewBusUserCreated(true)
+      alert('Registration Successful')
+    } catch (error) {
+      set_Error(error)
+      console.error(
+        'A new business user registration error occurred. Error Message:',
+        error
+      )
+    }
+  }
+
+  const registrationSubmitHandler = event => {
+    event?.preventDefault()
+
+    if (password !== confirmedPassword) {
+      alert('The provided passwords do not match. Please try again.')
+    } else {
+      if (isMounted) {
+        saveNewBusinessUser()
+      }
+      history.push('/business/profile')
+    }
+  }
 
   return (
     <>
-      <section className='content-wrapper bus-signup ml-0'>
       <ContentHeader title='Business Signup' />
+      <section className='content-wrapper bus-signup ml-0'>
         <div className='register-box mx-auto'>
           <div className='card card-outline card-primary'>
             <div className='card-header text-center'>
@@ -19,15 +102,15 @@ const BusinessSignup = () => {
                 Register a new Business <br></br> <span>User Profile</span>
               </p>
 
-              <form>
+              <form onSubmit={registrationSubmitHandler}>
                 <div className='input-group mb-3'>
                   <input
                     name='firstName'
                     type='text'
                     className='form-control'
                     placeholder='First Name'
-                    aria-labelledby='firstName'
-                    
+                    value={firstName}
+                    onChange={onFormChange}
                   />
                   <div className='input-group-append'>
                     <div className='input-group-text'>
@@ -41,8 +124,8 @@ const BusinessSignup = () => {
                     type='text'
                     className='form-control'
                     placeholder='Last Name'
-                    aria-labelledby='lastName'
-                    
+                    value={lastName}
+                    onChange={onFormChange}
                   />
                   <div className='input-group-append'>
                     <div className='input-group-text'>
@@ -56,8 +139,8 @@ const BusinessSignup = () => {
                     type='email'
                     className='form-control'
                     placeholder='Email'
-                    aria-labelledby='email'
-                    
+                    value={email}
+                    onChange={onFormChange}
                   />
                   <div className='input-group-append'>
                     <div className='input-group-text'>
@@ -71,9 +154,9 @@ const BusinessSignup = () => {
                     type='password'
                     className='form-control'
                     placeholder='Password'
+                    value={password}
                     minLength='6'
-                    aria-labelledby='password'
-                    
+                    onChange={onFormChange}
                   />
                   <div className='input-group-append'>
                     <div className='input-group-text'>
@@ -87,9 +170,9 @@ const BusinessSignup = () => {
                     type='password'
                     className='form-control'
                     placeholder='Confirm password'
+                    value={confirmedPassword}
                     minLength='6'
-                    aria-labelledby='confirmedPassword'
-                    
+                    onChange={onFormChange}
                   />
                   <div className='input-group-append'>
                     <div className='input-group-text'>
@@ -101,7 +184,6 @@ const BusinessSignup = () => {
                   <button
                     type='submit'
                     className='btn btn-primary btn-block col-5'
-                    aria-labelledby='submitButton'
                   >
                     Register
                   </button>

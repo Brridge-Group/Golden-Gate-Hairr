@@ -6,8 +6,7 @@ const getUsers = async (req, res, next) => {
   let users
   try {
     users = await User.find()
-  } catch (err) {
-    const error = new HttpError("Couldn't retrieve users!" + err, 500)
+  } catch (error) {
     return next(error)
   }
 
@@ -34,8 +33,7 @@ const createUser = async (req, res, next) => {
   try {
     await createdUser.save()
     console.log(createdUser._id)
-  } catch (err) {
-    const error = new HttpError('Creating user failed, please try again.', 500)
+  } catch (error) {
     return next(error)
   }
 

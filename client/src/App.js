@@ -16,13 +16,19 @@ import AuthContext from './contexts/AuthContext'
 import AuthService from './services/auth-service'
 
 import Login from './pages/Login'
+import ListItems from './pages/ListItems'
+import NewItem from './pages/NewItem'
+import UpdateItem from './pages/UpdateItem'
 import UserRegistration from './pages/UserRegistration'
 import Search from './pages/Search'
+import SearchResults from './pages/SearchResults'
+
 import BusinessesFiltered from './pages/BusinessesFiltered'
 import BusinessDetails from './pages/BusinessDetails'
 import BusinessSignup from './pages/BusinessSignup'
-import Profile from './components/Profile'
-import BoardUser from './pages/BoardUser'
+import BusinessProfile from './pages/BusinessProfile'
+
+// Context Imports
 import { AuthProvider } from './contexts/GlobalContext'
 
 const App = () => {
@@ -76,18 +82,24 @@ const App = () => {
         <Profile />
       </Route>
 
-      <Route exact path='/businesses'>
-        <BusinessesFiltered />
-      </Route>
-      <Route path='/business-signup' exact>
-        <BusinessSignup />
+      <Route exact path='/businesses'></Route>
+      <Route exact path='/search/:city'>
+        <SearchResults />
       </Route>
 
+      <Route exact path='/businesses/:city'>
+        <BusinessesFiltered />
+      </Route>
+      <Route exact path='/business-signup'>
+        <BusinessSignup />
+      </Route>
+      <Route exact path='/business/profile'>
+        <BusinessProfile />
+      </Route>
       <Route
         path='/business-details'
         render={(props) => <BusinessDetails {...props} />}
       />
-
       <Redirect to='/' />
     </Switch>
   )

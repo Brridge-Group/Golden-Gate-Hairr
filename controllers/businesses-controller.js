@@ -5,7 +5,7 @@ const Business = require('../models/business')
 // Create Business
 const createBusiness = async (req, res, next) => {
   const {
-    name,
+    businessName,
     description,
     createDate,
     address1,
@@ -16,11 +16,12 @@ const createBusiness = async (req, res, next) => {
     country,
     mainPicture,
     email,
-    status
+    status,
+    userId,
   } = req.body
 
   const newBusiness = new Business({
-    name,
+    businessName,
     description,
     createDate,
     address1,
@@ -31,7 +32,8 @@ const createBusiness = async (req, res, next) => {
     country,
     mainPicture,
     email,
-    status
+    status,
+    userId,
   })
 
   try {
@@ -67,7 +69,9 @@ const getBusinesses = async (req, res, next) => {
     return next(error)
   }
   res.json({
-    businesses: businesses.map(business => business.toObject({ getter: true }))
+    businesses: businesses.map((business) =>
+      business.toObject({ getter: true })
+    ),
   })
 }
 
@@ -77,7 +81,7 @@ const updateBusiness = async (req, res, next) => {
 
   const {
     userId,
-    name,
+    businessName,
     description,
     address1,
     address2,
@@ -87,7 +91,7 @@ const updateBusiness = async (req, res, next) => {
     country,
     mainPicture,
     email,
-    status
+    status,
   } = req.body
 
   let business
@@ -98,7 +102,7 @@ const updateBusiness = async (req, res, next) => {
     return next(error)
   }
   business.userId = userId
-  business.name = name
+  business.businessName = businessName
   business.description = description
   business.address1 = address1
   business.address2 = address2

@@ -4,7 +4,7 @@ const { ObjectId } = mongoose.Schema
 
 const businessSchema = new mongoose.Schema({
   userId: { type: ObjectId },
-  name: { type: String },
+  businessName: { type: String },
   description: { type: String },
   createDate: { type: Date, default: Date.now },
   address1: { type: String },
