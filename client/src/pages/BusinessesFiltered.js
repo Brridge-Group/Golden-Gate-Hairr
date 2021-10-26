@@ -9,6 +9,9 @@ const BusinessesFiltered = (props) => {
 
   const history = useHistory()
 
+  const star =
+    'https://raw.githubusercontent.com/Brridge-Group/Golden-Gate-Hairr/6e0316ba1b16f06902c1558650c0c04f3ba5c42b/client/public/star.svg'
+
   const doSetRedirect = () => {
     setRedirect(true)
   }
@@ -37,6 +40,7 @@ const BusinessesFiltered = (props) => {
                 className='indie-card'
                 style={{
                   display: 'flex',
+                  overflow: 'hidden',
                 }}>
                 <div
                   className='pic-star-container'
@@ -57,38 +61,24 @@ const BusinessesFiltered = (props) => {
                       marginTop: '5px',
                       justifyContent: 'space-around',
                     }}>
-                    <img
-                      src='star.svg'
-                      alt='Star Icon'
-                      style={{ width: '10%' }}
-                    />
-                    <img
-                      src='star.svg'
-                      alt='Star Icon'
-                      style={{ width: '10%' }}
-                    />
-                    <img
-                      src='star.svg'
-                      alt='Star Icon'
-                      style={{ width: '10%' }}
-                    />
-                    <img
-                      src='star.svg'
-                      alt='Star Icon'
-                      style={{ width: '10%' }}
-                    />
+                    <img src={star} alt='Star Icon' style={{ width: '10%' }} />
+                    <img src={star} alt='Star Icon' style={{ width: '10%' }} />
+                    <img src={star} alt='Star Icon' style={{ width: '10%' }} />
+                    <img src={star} alt='Star Icon' style={{ width: '10%' }} />
                   </p>
                   {renderRedirect()}
                   <button className='btn btn-default' onClick={doSetRedirect}>
                     Review
                   </button>
                 </div>
-                <div>
+                <div className='product-container' style={{ width: '72%' }}>
                   <h1 className='product title'>{props.name}</h1>
                   <div>
                     {props.address} {props.city}, {props.state} {props.zipCode}
                   </div>
-                  <div className='product-description c'>
+                  <div
+                    className='product-description c'
+                    style={{ whiteSpace: 'wrap' }}>
                     {props.description}
                   </div>
                 </div>
