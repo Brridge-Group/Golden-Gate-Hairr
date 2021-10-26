@@ -76,9 +76,7 @@ const BusinessesFiltered = (props) => {
                   <div>
                     {props.address} {props.city}, {props.state} {props.zipCode}
                   </div>
-                  <div
-                    className='product-description c'
-                    style={{ whiteSpace: 'wrap' }}>
+                  <div className='product-description '>
                     {props.description}
                   </div>
                 </div>

@@ -1,3 +1,6 @@
 .content-header h1 {
   color: transparent;
 }
+.products-list .product-description {
+  white-space: unset;
+}

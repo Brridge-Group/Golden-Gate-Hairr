@@ -73,7 +73,7 @@ const BusinessDetails = (props) => {
                     <br /> phone: {indieBus.phone} <br />
                     email: {indieBus.email}
                   </div>
-                  <div className='product-description c'>
+                  <div className='product-description'>
                     {indieBus.description}
                   </div>
                   <button
