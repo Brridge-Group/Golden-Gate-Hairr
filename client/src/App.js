@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import './App.css'
 import {
   BrowserRouter as Router,
@@ -12,13 +12,9 @@ import Home from './pages/Home'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import SideBar from './components/SideBar'
-import AuthContext from './contexts/AuthContext'
-import AuthService from './services/auth-service'
+// import AuthService from './services/auth-service'
 
 import Login from './pages/Login'
-import ListItems from './pages/ListItems'
-import NewItem from './pages/NewItem'
-import UpdateItem from './pages/UpdateItem'
 import UserRegistration from './pages/UserRegistration'
 import Search from './pages/Search'
 import SearchResults from './pages/SearchResults'
@@ -27,27 +23,49 @@ import BusinessesFiltered from './pages/BusinessesFiltered'
 import BusinessDetails from './pages/BusinessDetails'
 import BusinessSignup from './pages/BusinessSignup'
 import BusinessProfile from './pages/BusinessProfile'
+import Profile from './pages/Profile'
 
 // Context Imports
 import { AuthProvider } from './contexts/GlobalContext'
+import { AuthContext } from './contexts/GlobalContext'
 
-const App = () => {
-  const [user, setUser] = useState(null)
-  const [currentUser, setCurrentUser] = useState(undefined)
+const App = (props) => {
+  console.log(props)
 
-  useEffect(() => {
-    const user = AuthService.getCurrentUser()
+  const value = useContext(AuthContext)
+  // const [userState, setUserState] = useState('')
 
-    if (user) {
-      setCurrentUser(user)
-      // setShowModeratorBoard(user.roles.includes('ROLE_MODERATOR'))
-      // setShowAdminBoard(user.roles.includes('ROLE_ADMIN'))
-    }
-  }, [])
+  // const loadData = () => {
+  //   isAuthenticated().then((data) => {
+  //     if (data.error) {
+  //       console.log('error', data.error)
+  //     } else {
+  //       setUserState({
+  //         ...userState,
+  //         firstName: data.user.firstName,
+  //         lastName: data.user.lastName,
+  //         email: data.user.email,
+  //         _id: data.user._id,
+  //         createdDate: data.user.createdDate,
+  //         type: data.user.type,
+  //       })
+  //     }
+  //   })
+  // }
 
-  const logOut = () => {
-    AuthService.logout()
+  // useEffect(() => {
+  //   loadData()
+  // }, [])
+
+  const isAuthenticated = async () => {
+    return await fetch(`api/authorize/login`)
+      .then((response) => response.json())
+      .catch((err) => console.log(err))
   }
+
+  // const logOut = () => {
+  //   AuthService.logout()
+  // }
 
   // const [authenticated, setAuthenticated] = useState(false)
 
@@ -71,10 +89,6 @@ const App = () => {
       <Route path='/signup'>
         <UserRegistration />
       </Route>
-      {/* <Route exact path='/business-details'>
-        <BusinessDetails />
-        </Route> */}
-
       <Route exact path='/search'>
         <Search />
       </Route>

@@ -4,7 +4,6 @@ import { useHistory } from 'react-router-dom'
 import { Redirect } from 'react-router'
 
 const BusinessesFiltered = (props) => {
-  console.log('in bus filtered', props, props.business)
   const [redirect, setRedirect] = useState(false)
 
   const history = useHistory()
@@ -16,7 +15,6 @@ const BusinessesFiltered = (props) => {
     setRedirect(true)
   }
   const renderRedirect = () => {
-    console.log('in render redirect, props.business', props.business)
     if (redirect) {
       return (
         <Redirect

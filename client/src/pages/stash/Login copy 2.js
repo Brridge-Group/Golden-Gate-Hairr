@@ -2,8 +2,8 @@ import React, { useState, useRef } from 'react'
 import Form from 'react-validation/build/form'
 import Input from 'react-validation/build/input'
 import CheckButton from 'react-validation/build/button'
-import AuthService from '../services/auth-service'
-import ContentHeader from '../components/ContentHeader'
+import AuthService from '../../services/auth-service'
+import ContentHeader from '../../components/ContentHeader'
 import { useHistory } from 'react-router'
 
 const required = (value) => {
