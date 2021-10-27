@@ -1,5 +1,5 @@
 const express = require('express')
-const { verifyToken } = require('../middlewares')
+// const { verifyToken } = require('../middlewares')
 
 const usersController = require('../controllers/users-controller')
 

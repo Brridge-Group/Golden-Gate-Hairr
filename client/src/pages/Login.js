@@ -35,7 +35,7 @@ const Login = () => {
         throw new Error('Could not login')
       }
       console.log(response)
-      history.push('/profile')
+      // history.push('/profile')
     } catch (err) {}
   }
 

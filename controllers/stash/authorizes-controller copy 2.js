@@ -38,13 +38,10 @@ const register = async (req, res) => {
       }
     )
     // save user token
-    // user.token = token
+    user.token = token
 
     // return new user
-    console.log(token)
-    return res.status(201).send({ success: true, user, token })
-
-    // res.status(201).json(user)
+    res.status(201).json(user)
   } catch (err) {
     console.log(err)
   }
@@ -52,6 +49,8 @@ const register = async (req, res) => {
 }
 
 const login = async (req, res) => {
+  debugger
+
   try {
     // Get user input
     const { email, password } = req.body
@@ -60,6 +59,7 @@ const login = async (req, res) => {
       res.status(400).send('All input is required')
     }
     // Validate if user exist in our database
+    debugger
     const user = await User.findOne({ email })
     if (user && (await bcrypt.compare(password, user.password))) {
       // Create token
@@ -71,13 +71,10 @@ const login = async (req, res) => {
         }
       )
       // save user token
-      // user.token = token
+      user.token = token
       // user
-      console.log('login', token)
-      return res.send({ token: token, user, success: true })
-
-      // res.status(200).json(user)
-      // debugger
+      res.status(200).json(user)
+      debugger
       // res.status(200).send({
       //   id: user._id,
       //   password: user.password,

@@ -33,6 +33,7 @@ const App = (props) => {
   console.log(props)
 
   const value = useContext(AuthContext)
+  console.log(value)
   // const [userState, setUserState] = useState('')
 
   // const loadData = () => {
@@ -119,16 +120,16 @@ const App = (props) => {
   )
 
   return (
-    <AuthProvider>
-      <Router>
-        <Header />
-        <SideBar />
-        <div className='content-wrapper'>
-          <div className='content'>{routes}</div>
-        </div>
-        <Footer />
-      </Router>
-    </AuthProvider>
+    // <AuthProvider>
+    <Router>
+      <Header />
+      <SideBar />
+      <div className='content-wrapper'>
+        <div className='content'>{routes}</div>
+      </div>
+      <Footer />
+    </Router>
+    // </AuthProvider>
   )
 }
 
