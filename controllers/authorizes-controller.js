@@ -30,21 +30,21 @@ const register = async (req, res) => {
       password: encryptedPassword,
     })
     // Create token
-    const token = jwt.sign(
-      { user_id: user._id, email },
-      process.env.TOKEN_KEY,
-      {
-        expiresIn: '2h',
-      }
-    )
+    // const token = jwt.sign(
+    //   { user_id: user._id, email },
+    //   process.env.TOKEN_KEY,
+    //   {
+    //     expiresIn: '2h',
+    //   }
+    // )
     // save user token
     // user.token = token
-
-    // return new user
-    console.log(token)
-    return res.status(201).send({ success: true, user, token })
-
+    // console.log(user)
+    // // return new user
     // res.status(201).json(user)
+
+    const token = jwt.sign(user.toObject(), process.env.TOKEN_KEY)
+    return res.status(201).send({ success: true, user: user.toObject(), token })
   } catch (err) {
     console.log(err)
   }
@@ -52,6 +52,7 @@ const register = async (req, res) => {
 }
 
 const login = async (req, res) => {
+  console.log('in auth login')
   try {
     // Get user input
     const { email, password } = req.body
@@ -63,27 +64,28 @@ const login = async (req, res) => {
     const user = await User.findOne({ email })
     if (user && (await bcrypt.compare(password, user.password))) {
       // Create token
-      const token = jwt.sign(
-        { user_id: user._id, email },
-        process.env.TOKEN_KEY,
-        {
-          expiresIn: '2h',
-        }
-      )
+      // const token = jwt.sign(
+      //   { user_id: user._id, email },
+      //   process.env.TOKEN_KEY,
+      //   {
+      //     expiresIn: '2h',
+      //   }
+      // )
       // save user token
       // user.token = token
       // user
-      console.log('login', token)
-      return res.send({ token: token, user, success: true })
-
       // res.status(200).json(user)
-      // debugger
       // res.status(200).send({
       //   id: user._id,
       //   password: user.password,
       //   email: user.email,
       //   accessToken: token,
       // })
+
+      const token = jwt.sign(user.toObject(), process.env.TOKEN_KEY)
+
+      // Send the token back to the client app.
+      return res.send({ token: token, user: user.toObject(), success: true })
     }
     res.status(400).send('Invalid Credentials')
   } catch (err) {
@@ -96,7 +98,6 @@ const welcome =
     res.status(200).send('Welcome 🙌 ')
   })
 
-// ...
 exports.register = register
 exports.login = login
 exports.welcome = welcome

@@ -31,7 +31,7 @@ const UserRegistration = () => {
         password2,
       }
       try {
-        const response = await fetch('/api/authorize', {
+        const response = await fetch('/api/authorize/register', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

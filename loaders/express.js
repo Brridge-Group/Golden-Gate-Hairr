@@ -1,6 +1,7 @@
 const express = require('express')
 const path = require('path')
 const cors = require('cors')
+const expressJwt = require('express-jwt')
 
 const itemsRoutes = require('../routes/items-route')
 const businessRoutes = require('../routes/business-route')
@@ -17,6 +18,10 @@ const loader = async (app) => {
   app.use('/api/businesses', businessRoutes)
   app.use('/api/users', usersRoutes)
   app.use('/api/authorize', authorizesRoutes)
+  app.use(
+    '/api',
+    expressJwt({ secret: process.env.TOKEN_KEY, algorithms: ['HS256'] })
+  )
 
   // The "catchall" handler: for any request that doesn't
   // match one above, send back React's index.html file.
@@ -27,6 +32,17 @@ const loader = async (app) => {
 
   app.enable('trust proxy')
   app.use(cors())
+
+  // near the top with the other imports
+
+  // Make the app use the express-jwt authentication middleware on anything starting with "/api"
+  // We'll give expressJwt a config object with a secret and a specified algorithm
+
+  // Add `/api` before your existing `app.use` of the todo routes.
+  // This way, it must go through the express-jwt middleware before
+  // accessing any todos, making sure we can reference the "currently
+  // logged-in user" in our todo routes.
+  // app.use("/api/todo", require("./routes/todo"));
 
   // ...More middlewares
 
