@@ -2,16 +2,11 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
-import { AuthProvider } from './contexts/GlobalContext'
 import { AppContextProvider } from './contexts/AppContext'
 
 ReactDOM.render(
   <AppContextProvider>
-    {/* <React.StrictMode> */}
-    {/* <AuthProvider> */}
     <App />
-    {/* </AuthProvider> */}
-    {/* </React.StrictMode> */}
   </AppContextProvider>,
   document.getElementById('root')
 )

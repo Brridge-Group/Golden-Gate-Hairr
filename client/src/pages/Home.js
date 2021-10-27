@@ -1,27 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 
 import ContentHeader from '../components/ContentHeader'
-// import UserService from '../services/user-service'
 
 const Home = () => {
-  const [content, setContent] = useState('')
-
-  // useEffect(() => {
-  //   UserService.getPublicContent().then(
-  //     (response) => {
-  //       console.log('in home', response)
-  //       setContent(response.data)
-  //     },
-  //     (error) => {
-  //       const _content =
-  //         (error.response && error.response.data) ||
-  //         error.message ||
-  //         error.toString()
-
-  //       setContent(_content)
-  //     }
-  //   )
-  // }, [])
   return (
     <React.Fragment>
       <ContentHeader title='Home' />
@@ -39,7 +20,6 @@ const Home = () => {
             ipsum primis in faucibus orci luctus et ultrices posuere cubilia
             curae.
           </p>
-          {/* <h3>{content}</h3> */}
           <a href='#l' className='btn btn-primary'>
             Do Something
           </a>

@@ -4,13 +4,10 @@ const authorizesController = require('../controllers/authorizes-controller')
 
 const router = express.Router()
 
-// register
-router.post('/register', authorizesController.register)
+// signup
+router.post('/signup', authorizesController.signup)
 
 // login
 router.post('/login', authorizesController.login)
-
-// verify auth login
-router.get('/welcome', authorizesController.welcome)
 
 module.exports = router

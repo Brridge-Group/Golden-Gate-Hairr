@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
+import { withContext } from '../contexts/AppContext'
 
 import ContentHeader from '../components/ContentHeader'
 
-const UserRegistration = () => {
+const Signup = (props) => {
   const [userForm, setUserForm] = useState({
     firstName: '',
     lastName: '',
@@ -23,28 +24,7 @@ const UserRegistration = () => {
     if (password !== password2) {
       alert('Passwords do not match')
     } else {
-      const newUser = {
-        firstName,
-        lastName,
-        email,
-        password,
-        password2,
-      }
-      try {
-        const response = await fetch('/api/authorize/register', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ ...newUser }),
-        })
-
-        if (!response.ok) {
-          throw new Error('Could not save new user')
-        }
-
-        history.push('/users')
-      } catch (err) {}
+      props.signup(userForm)
     }
   }
 
@@ -129,4 +109,4 @@ const UserRegistration = () => {
   )
 }
 
-export default UserRegistration
+export default withContext(Signup)

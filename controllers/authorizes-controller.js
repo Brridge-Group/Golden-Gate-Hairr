@@ -1,9 +1,8 @@
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const User = require('../models/user')
-const auth = require('../middleware/auth')
 
-const register = async (req, res) => {
+const signup = async (req, res) => {
   try {
     // Get user input
     const { firstName, lastName, email, password } = req.body
@@ -29,19 +28,6 @@ const register = async (req, res) => {
       email: email.toLowerCase(), // sanitize: convert email to lowercase
       password: encryptedPassword,
     })
-    // Create token
-    // const token = jwt.sign(
-    //   { user_id: user._id, email },
-    //   process.env.TOKEN_KEY,
-    //   {
-    //     expiresIn: '2h',
-    //   }
-    // )
-    // save user token
-    // user.token = token
-    // console.log(user)
-    // // return new user
-    // res.status(201).json(user)
 
     const token = jwt.sign(user.toObject(), process.env.TOKEN_KEY)
     return res.status(201).send({ success: true, user: user.toObject(), token })
@@ -52,7 +38,6 @@ const register = async (req, res) => {
 }
 
 const login = async (req, res) => {
-  console.log('in auth login')
   try {
     // Get user input
     const { email, password } = req.body
@@ -63,25 +48,6 @@ const login = async (req, res) => {
     // Validate if user exist in our database
     const user = await User.findOne({ email })
     if (user && (await bcrypt.compare(password, user.password))) {
-      // Create token
-      // const token = jwt.sign(
-      //   { user_id: user._id, email },
-      //   process.env.TOKEN_KEY,
-      //   {
-      //     expiresIn: '2h',
-      //   }
-      // )
-      // save user token
-      // user.token = token
-      // user
-      // res.status(200).json(user)
-      // res.status(200).send({
-      //   id: user._id,
-      //   password: user.password,
-      //   email: user.email,
-      //   accessToken: token,
-      // })
-
       const token = jwt.sign(user.toObject(), process.env.TOKEN_KEY)
 
       // Send the token back to the client app.
@@ -92,12 +58,5 @@ const login = async (req, res) => {
     console.log(err)
   }
 }
-const welcome =
-  (auth,
-  (req, res) => {
-    res.status(200).send('Welcome 🙌 ')
-  })
-
-exports.register = register
+exports.signup = signup
 exports.login = login
-exports.welcome = welcome

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 
-const AppContext = React.createContext()
+export const AppContext = React.createContext()
 
 export const AppContextProvider = (props) => {
   const [user, setUser] = useState(
@@ -9,8 +9,17 @@ export const AppContextProvider = (props) => {
   )
   const [token, setToken] = useState(localStorage.getItem('token') || '')
 
+  const [userState, setUserState] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    _id: '',
+    createdDate: '',
+    type: '',
+  })
+
   const signup = (userInfo) => {
-    return axios.post('/api/authorize/register', userInfo).then((response) => {
+    return axios.post('/api/authorize/signup', userInfo).then((response) => {
       const { user, token } = response.data
       localStorage.setItem('token', token)
       localStorage.setItem('user', JSON.stringify(user))
@@ -45,6 +54,8 @@ export const AppContextProvider = (props) => {
         signup,
         login,
         logout,
+        userState,
+        setUserState,
       }}>
       {props.children}
     </AppContext.Provider>

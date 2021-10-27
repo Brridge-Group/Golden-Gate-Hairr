@@ -5,7 +5,7 @@ import { useMountedState } from 'react-use'
 
 // Custom Imports
 import ContentHeader from '../components/ContentHeader'
-import { AuthContext } from '../contexts/GlobalContext'
+import { AppContext } from '../contexts/AppContext'
 const BusinessSignup = () => {
   const isMounted = useMountedState()
 
@@ -17,7 +17,7 @@ const BusinessSignup = () => {
     confirmedPassword: '',
   })
 
-  const { userState, setUserState } = useContext(AuthContext)
+  const { userState, setUserState } = useContext(AppContext)
 
   const [isNewBusUserCreated, setIsNewBusUserCreated] = useState(false)
 
@@ -33,7 +33,7 @@ const BusinessSignup = () => {
     setUserState(userState)
   }, [userState])
 
-  const onFormChange = event => {
+  const onFormChange = (event) => {
     setBusinessRegForm({
       ...businessRegForm,
       [event.target.name]: event.target.value,
@@ -73,7 +73,7 @@ const BusinessSignup = () => {
     }
   }
 
-  const registrationSubmitHandler = event => {
+  const registrationSubmitHandler = (event) => {
     event?.preventDefault()
 
     if (password !== confirmedPassword) {
@@ -183,8 +183,7 @@ const BusinessSignup = () => {
                 <div className='row d-flex justify-content-center'>
                   <button
                     type='submit'
-                    className='btn btn-primary btn-block col-5'
-                  >
+                    className='btn btn-primary btn-block col-5'>
                     Register
                   </button>
                 </div>

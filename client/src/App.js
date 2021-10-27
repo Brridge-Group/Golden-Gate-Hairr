@@ -1,21 +1,18 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useEffect } from 'react'
 import './App.css'
 import {
   BrowserRouter as Router,
   Route,
   Redirect,
   Switch,
-  useHistory,
-  Link,
 } from 'react-router-dom'
 import Home from './pages/Home'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import SideBar from './components/SideBar'
-// import AuthService from './services/auth-service'
 
 import Login from './pages/Login'
-import UserRegistration from './pages/UserRegistration'
+import Signup from './pages/Signup'
 import Search from './pages/Search'
 import SearchResults from './pages/SearchResults'
 
@@ -26,57 +23,38 @@ import BusinessProfile from './pages/BusinessProfile'
 import Profile from './pages/Profile'
 
 // Context Imports
-import { AuthProvider } from './contexts/GlobalContext'
-import { AuthContext } from './contexts/GlobalContext'
 
 const App = (props) => {
   console.log(props)
 
-  const value = useContext(AuthContext)
-  console.log(value)
-  // const [userState, setUserState] = useState('')
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+    const user = localStorage.getItem('user')
+    const currentUser = user
+    console.log('current user', currentUser)
+  }, [])
 
-  // const loadData = () => {
-  //   isAuthenticated().then((data) => {
-  //     if (data.error) {
-  //       console.log('error', data.error)
-  //     } else {
-  //       setUserState({
-  //         ...userState,
-  //         firstName: data.user.firstName,
-  //         lastName: data.user.lastName,
-  //         email: data.user.email,
-  //         _id: data.user._id,
-  //         createdDate: data.user.createdDate,
-  //         type: data.user.type,
-  //       })
-  //     }
-  //   })
+  // componentDidMount(token) {
+  // 	token = localStorage.getItem('token');
+
+  // 	if (token) {
+  // 		// load up their shit
+  // 		// fetch('http://localhost:3000/api/v1/auto_login', {
+  // 		// fetch(`https://petstoo-api.netlify.app/api/v1/auto_login`, {
+  // 			fetch(`https://pacific-hollows-81769.herokuapp.com/api/v1/auto_login`, {
+  // 			headers: {
+  // 				Authorization: token
+  // 			}
+  // 		})
+  // 			.then((resp) => resp.json())
+  // 			.then((resp) => {
+  // 				this.setState({
+  // 					currentUser: resp
+  // 				});
+  // 			});
+  // 	}
   // }
 
-  // useEffect(() => {
-  //   loadData()
-  // }, [])
-
-  const isAuthenticated = async () => {
-    return await fetch(`api/authorize/login`)
-      .then((response) => response.json())
-      .catch((err) => console.log(err))
-  }
-
-  // const logOut = () => {
-  //   AuthService.logout()
-  // }
-
-  // const [authenticated, setAuthenticated] = useState(false)
-
-  // const login = async (credentials) => {
-  //   const response = await this.authService.login(credentials)
-  //   if (response) {
-  //     setUser(response)
-  //     setAuthenticated(true)
-  //   }
-  // }
   let routes
 
   routes = (
@@ -88,7 +66,7 @@ const App = (props) => {
         <Login />
       </Route>
       <Route path='/signup'>
-        <UserRegistration />
+        <Signup />
       </Route>
       <Route exact path='/search'>
         <Search />
@@ -120,7 +98,6 @@ const App = (props) => {
   )
 
   return (
-    // <AuthProvider>
     <Router>
       <Header />
       <SideBar />
@@ -129,7 +106,6 @@ const App = (props) => {
       </div>
       <Footer />
     </Router>
-    // </AuthProvider>
   )
 }
 

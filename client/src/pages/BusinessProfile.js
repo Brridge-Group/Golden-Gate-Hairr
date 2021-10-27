@@ -4,13 +4,13 @@ import React, { useState, useContext, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 // Custom Imports
 import ContentHeader from '../components/ContentHeader'
-import { AuthContext } from '../contexts/GlobalContext'
+import { AppContext } from '../contexts/AppContext'
 
 const BusinessProfile = () => {
   const history = useHistory()
 
   // Import User State Object from Context
-  const { userState, setUserState } = useContext(AuthContext)
+  const { userState, setUserState } = useContext(AppContext)
 
   const [businessProfileForm, setBusinessProfileForm] = useState({
     businessName: '',
@@ -42,7 +42,7 @@ const BusinessProfile = () => {
     setUserId(userState.user?._id)
   }, [userState])
 
-  const onFormChange = event => {
+  const onFormChange = (event) => {
     const value =
       event.target.type === 'checkbox'
         ? event.target.checked
@@ -89,7 +89,7 @@ const BusinessProfile = () => {
     }
   }
 
-  const profileSubmitHandler = event => {
+  const profileSubmitHandler = (event) => {
     event?.preventDefault()
     saveNewBusiness().then(history.push('/'))
   }
@@ -108,8 +108,7 @@ const BusinessProfile = () => {
                 fontSize: '1.5rem',
                 textAlign: 'center',
                 width: '20rem',
-              }}
-            >
+              }}>
               {_error}
             </span>
             <div className='card-body'>

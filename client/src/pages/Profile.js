@@ -1,41 +1,9 @@
-import React, { Component } from 'react'
-import AuthService from '../services/auth-service'
+import React from 'react'
+import { withContext } from '../contexts/AppContext'
 
-class Profile extends Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      currentUser: AuthService.getCurrentUser(),
-    }
-  }
-
-  render() {
-    console.log('in profile', this.state)
-    const { currentUser } = this.state
-
-    return (
-      <div className='container'>
-        <header className='jumbotron'>
-          <h3>{/* <strong>{currentUser.firstName}</strong> Profile */}</h3>
-        </header>
-        {/* <p>
-          <strong>Token:</strong> {currentUser.accessToken.substring(0, 20)} ...{' '}
-          {currentUser.accessToken.substr(currentUser.accessToken.length - 20)}
-        </p>
-        <p>
-          <strong>Id:</strong> {currentUser.id}
-        </p>
-        <p>
-          <strong>Email:</strong> {currentUser.email}
-        </p> */}
-        {/* <strong>Authorities:</strong>
-        <ul>
-          {currentUser.roles &&
-            currentUser.roles.map((role, index) => <li key={index}>{role}</li>)}
-        </ul> */}
-      </div>
-    )
-  }
+const Profile = (props) => {
+  console.log(props)
+  return <div>in profile</div>
 }
-export default Profile
+
+export default withContext(Profile)

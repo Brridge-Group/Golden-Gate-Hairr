@@ -1,7 +1,8 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+import { withContext } from '../contexts/AppContext'
 
-const SideBar = () => {
+const SideBar = (props) => {
   return (
     <React.Fragment>
       <aside className='main-sidebar sidebar-dark-primary elevation-4'>
@@ -62,6 +63,16 @@ const SideBar = () => {
                   <p>Business Sign Up</p>
                 </NavLink>
               </li>
+              <li className='nav-item'>
+                <NavLink
+                  to='/logout'
+                  exact
+                  className='nav-link'
+                  onClick={props.logout}>
+                  <i className='nav-icon fas fa-sign-out-alt'></i>
+                  <p>Log Out</p>
+                </NavLink>
+              </li>
 
               <li className='nav-item'>
                 <NavLink to='/search' className='nav-link'>
@@ -77,4 +88,4 @@ const SideBar = () => {
   )
 }
 
-export default SideBar
+export default withContext(SideBar)
