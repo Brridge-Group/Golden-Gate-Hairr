@@ -4,7 +4,6 @@ import { useHistory } from 'react-router'
 import { withContext } from '../contexts/AppContext'
 
 const Login = (props) => {
-  console.log(props)
   const [loginUser, setLoginUser] = useState({
     email: '',
     password: '',
@@ -23,10 +22,28 @@ const Login = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     console.log('in handle submit', loginUser)
-    props.login(loginUser)
-    // .then(() => this.props.history.push("/todos"))
-    // .then(() => console.log('hi'))
+    props
+      .signup(loginUser)
+      // .then(() => this.props.history.push("/todos"))
+      .then(() => console.log('hi'))
     // props.signup(this.state)
+
+    try {
+      const response = await fetch('/api/authorize/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accepts: 'application/json',
+        },
+        body: JSON.stringify({ ...loginUser }),
+      })
+
+      if (!response.ok) {
+        throw new Error('Could not login')
+      }
+      console.log(response)
+      // history.push('/profile')
+    } catch (err) {}
   }
 
   return (
