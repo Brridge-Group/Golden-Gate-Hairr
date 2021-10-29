@@ -1,9 +1,11 @@
 import React from 'react'
-import { withContext } from '../contexts/AppContext'
+// import { withContext } from '../contexts/AppContext'
 
 const Profile = (props) => {
-  console.log(props)
-  return <div>in profile</div>
+  // const { currentUser } = props
+  console.log('in profile currentuser', props.currentUser)
+
+  return <div>hi {props.currentUser.firstName}!</div>
 }
 
-export default withContext(Profile)
+export default Profile

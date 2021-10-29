@@ -24,6 +24,9 @@ const Login = (props) => {
     e.preventDefault()
     console.log('in handle submit', loginUser)
     props.login(loginUser).then(() => history.push('/profile'))
+    // console.log(setLoginUser)
+    // history.push(`/profile/${loginUser}`)
+    // )
   }
 
   return (

@@ -16,7 +16,7 @@ const signup = async (req, res) => {
     const oldUser = await User.findOne({ email })
 
     if (oldUser) {
-      return res.status(409).send('User Already Exist. Please Login')
+      return res.status(409).send('User Already Exists. Please Login')
     }
     //Encrypt user password
     encryptedPassword = await bcrypt.hash(password, 10)

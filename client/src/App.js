@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useReducer, useState } from 'react'
 import './App.css'
 import {
   BrowserRouter as Router,
@@ -26,34 +26,14 @@ import Profile from './pages/Profile'
 
 const App = (props) => {
   console.log(props)
+  const [currentUser, setCurrentUser] = useState('')
 
   useEffect(() => {
     const token = localStorage.getItem('token')
-    const user = localStorage.getItem('user')
-    const currentUser = user
-    console.log('current user', currentUser)
+    //IMPORTANT use json.parse here
+    const currentUser = JSON.parse(localStorage.getItem('user'))
+    setCurrentUser(currentUser)
   }, [])
-
-  // componentDidMount(token) {
-  // 	token = localStorage.getItem('token');
-
-  // 	if (token) {
-  // 		// load up their shit
-  // 		// fetch('http://localhost:3000/api/v1/auto_login', {
-  // 		// fetch(`https://petstoo-api.netlify.app/api/v1/auto_login`, {
-  // 			fetch(`https://pacific-hollows-81769.herokuapp.com/api/v1/auto_login`, {
-  // 			headers: {
-  // 				Authorization: token
-  // 			}
-  // 		})
-  // 			.then((resp) => resp.json())
-  // 			.then((resp) => {
-  // 				this.setState({
-  // 					currentUser: resp
-  // 				});
-  // 			});
-  // 	}
-  // }
 
   let routes
 
@@ -71,8 +51,8 @@ const App = (props) => {
       <Route exact path='/search'>
         <Search />
       </Route>
-      <Route exact path='/profile'>
-        <Profile />
+      <Route exact path='/profile/'>
+        <Profile currentUser={currentUser} />
       </Route>
 
       <Route exact path='/businesses'></Route>
