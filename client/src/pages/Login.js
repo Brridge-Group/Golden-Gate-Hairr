@@ -4,7 +4,6 @@ import { useHistory } from 'react-router'
 import { withContext } from '../contexts/AppContext'
 
 const Login = (props) => {
-  console.log(props)
   const [loginUser, setLoginUser] = useState({
     email: '',
     password: '',
@@ -12,6 +11,12 @@ const Login = (props) => {
   const history = useHistory()
 
   const { email, password } = loginUser
+  const [errorMessage, setErrorMessage] = useState('')
+
+  const clearInputs = () => {
+    setLoginUser(loginUser)
+    setErrorMessage(errorMessage)
+  }
 
   const handleChange = (e) => {
     setLoginUser({ ...loginUser, [e.target.name]: e.target.value })
@@ -23,10 +28,16 @@ const Login = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     console.log('in handle submit', loginUser)
-    props.login(loginUser).then(() => history.push('/profile'))
-    // console.log(setLoginUser)
-    // history.push(`/profile/${loginUser}`)
-    // )
+    props
+      .login(loginUser)
+      // .then(() => clearInputs())
+      .then(() => history.push('/profile'))
+
+      .catch((err) => {
+        if (err.response) {
+          setErrorMessage(err.response.data)
+        }
+      })
   }
 
   return (
@@ -74,6 +85,9 @@ const Login = (props) => {
               </button>
             </div>
           </form>
+          {errorMessage && (
+            <p style={{ color: 'grey', marginTop: '10px' }}>{errorMessage}</p>
+          )}
         </div>
       </div>
     </React.Fragment>

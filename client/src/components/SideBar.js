@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom'
 import { withContext } from '../contexts/AppContext'
 
 const SideBar = (props) => {
+  console.log('in sidebar', props.token, props.user)
   return (
     <React.Fragment>
       <aside className='main-sidebar sidebar-dark-primary elevation-4'>
@@ -11,9 +12,11 @@ const SideBar = (props) => {
             src='/assets/dist/img/AdminLTELogo.png'
             alt='AdminLTE Logo'
             className='brand-image img-circle elevation-3'
-            style={{ opacity: 0.8 }}
+            style={{ opacity: 0 }}
           />
-          <span className='brand-text font-weight-light'>app name</span>
+          <span className='brand-text font-weight-light' style={{ opacity: 0 }}>
+            app name
+          </span>
         </a>
 
         <div className='sidebar'>
@@ -27,7 +30,7 @@ const SideBar = (props) => {
             </div>
             <div className='info'>
               <a href='#s' className='d-block'>
-                John Smith
+                {props.user.firstName} {props.user.lastName}
               </a>
             </div>
           </div>
@@ -44,33 +47,46 @@ const SideBar = (props) => {
                   <p>Home</p>
                 </NavLink>
               </li>
+              {!props.token ? (
+                <React.Fragment>
+                  <li className='nav-item'>
+                    <NavLink to='/signup' exact className='nav-link'>
+                      <i className='nav-icon fas fa-user-plus'></i>
+                      <p>Sign Up</p>
+                    </NavLink>
+                  </li>
+                  <li className='nav-item'>
+                    <NavLink to='/login' exact className='nav-link'>
+                      <i className='nav-icon fas fa-user-plus'></i>
+                      <p>Log In</p>
+                    </NavLink>
+                  </li>
+                </React.Fragment>
+              ) : (
+                <React.Fragment>
+                  <li className='nav-item'>
+                    <NavLink to='/profile' exact className='nav-link'>
+                      <i className='nav-icon fas fa-user-plus'></i>
+                      <p>Profile</p>
+                    </NavLink>
+                  </li>
+                  <li className='nav-item'>
+                    <NavLink
+                      to='/logout'
+                      exact
+                      className='nav-link'
+                      onClick={props.logout}>
+                      <i className='nav-icon fas fa-sign-out-alt'></i>
+                      <p>Log Out</p>
+                    </NavLink>
+                  </li>
+                </React.Fragment>
+              )}
 
-              <li className='nav-item'>
-                <NavLink to='/signup' exact className='nav-link'>
-                  <i className='nav-icon fas fa-user-plus'></i>
-                  <p>Sign Up</p>
-                </NavLink>
-              </li>
-              <li className='nav-item'>
-                <NavLink to='/login' exact className='nav-link'>
-                  <i className='nav-icon fas fa-user-plus'></i>
-                  <p>Log In</p>
-                </NavLink>
-              </li>
               <li className='nav-item'>
                 <NavLink to='/business-signup' exact className='nav-link'>
                   <i className='nav-icon fas fa-user-plus'></i>
                   <p>Business Sign Up</p>
-                </NavLink>
-              </li>
-              <li className='nav-item'>
-                <NavLink
-                  to='/logout'
-                  exact
-                  className='nav-link'
-                  onClick={props.logout}>
-                  <i className='nav-icon fas fa-sign-out-alt'></i>
-                  <p>Log Out</p>
                 </NavLink>
               </li>
 

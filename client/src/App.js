@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useState } from 'react'
+import React, { useEffect, useReducer, useState, useContext } from 'react'
 import './App.css'
 import {
   BrowserRouter as Router,
@@ -23,17 +23,10 @@ import BusinessProfile from './pages/BusinessProfile'
 import Profile from './pages/Profile'
 
 // Context Imports
+import { AppContext } from './contexts/AppContext'
 
 const App = (props) => {
-  console.log(props)
-  const [currentUser, setCurrentUser] = useState('')
-
-  useEffect(() => {
-    const token = localStorage.getItem('token')
-    //IMPORTANT use json.parse here
-    const currentUser = JSON.parse(localStorage.getItem('user'))
-    setCurrentUser(currentUser)
-  }, [])
+  console.log('in app', props)
 
   let routes
 
@@ -52,7 +45,7 @@ const App = (props) => {
         <Search />
       </Route>
       <Route exact path='/profile/'>
-        <Profile currentUser={currentUser} />
+        <Profile />
       </Route>
 
       <Route exact path='/businesses'></Route>

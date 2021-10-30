@@ -12,19 +12,31 @@ const Signup = (props) => {
     password: '',
     password2: '',
   })
+  const [errorMessage, setErrorMessage] = useState('')
   const history = useHistory()
 
   const { firstName, lastName, email, password, password2 } = userForm
 
-  const onChange = (e) =>
+  const clearInputs = () => {
+    setUserForm(userForm)
+    setErrorMessage(errorMessage)
+  }
+
+  const onChange = (e) => {
     setUserForm({ ...userForm, [e.target.name]: e.target.value })
+  }
 
   const registrationSubmitHandler = async (e) => {
     e.preventDefault()
     if (password !== password2) {
       alert('Passwords do not match')
     } else {
-      props.signup(userForm)
+      props
+        .signup(userForm)
+        .then(() => clearInputs())
+        .catch((err) => {
+          setErrorMessage(err.response.data)
+        })
     }
   }
 
@@ -103,6 +115,9 @@ const Signup = (props) => {
               Submit
             </button>
           </form>
+          {errorMessage && (
+            <p style={{ color: 'grey', marginTop: '10px' }}>{errorMessage}</p>
+          )}
         </div>
       </div>
     </React.Fragment>
