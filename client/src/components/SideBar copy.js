@@ -1,8 +1,11 @@
 import React, { useContext } from 'react'
 import { NavLink } from 'react-router-dom'
-import { withContext } from '../contexts/AppContext'
+import { withContext, AppContext } from '../contexts/AppContext'
 
 const SideBar = (props) => {
+  const { userLoggedin, setUserLoggedin } = useContext(AppContext)
+  const { token, setToken } = useContext(AppContext)
+
   console.log('in sidebar', props.token, props.user, props.children)
   return (
     <React.Fragment>
@@ -47,7 +50,7 @@ const SideBar = (props) => {
                   <p>Home</p>
                 </NavLink>
               </li>
-              {!props.token ? (
+              {!token ? (
                 <React.Fragment>
                   <li className='nav-item'>
                     <NavLink to='/signup' exact className='nav-link'>

@@ -44,8 +44,8 @@ export const AppContextProvider = (props) => {
   const logout = () => {
     localStorage.removeItem('token')
     localStorage.removeItem('user')
-    setToken(token)
-    setUser(user)
+    setToken('')
+    setUser({})
   }
 
   return (
