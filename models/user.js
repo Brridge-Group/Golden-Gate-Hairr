@@ -11,6 +11,7 @@ const userSchema = new Schema({
   type: { type: Number, default: 1 },
   createdDate: { type: Date, default: Date.now },
   token: { type: String },
+  isOwner: false,
 })
 
 module.exports = mongoose.model('User', userSchema)

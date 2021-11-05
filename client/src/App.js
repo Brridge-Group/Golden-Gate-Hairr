@@ -13,6 +13,8 @@ import SideBar from './components/SideBar'
 
 import Login from './pages/Login'
 import Signup from './pages/Signup'
+import SignupCombine from './pages/SignupCombine'
+
 import Search from './pages/Search'
 import SearchResults from './pages/SearchResults'
 
@@ -40,6 +42,9 @@ const App = (props) => {
       </Route>
       <Route path='/signup'>
         <Signup />
+      </Route>
+      <Route path='/signup-combine'>
+        <SignupCombine />
       </Route>
       <Route exact path='/search'>
         <Search />
