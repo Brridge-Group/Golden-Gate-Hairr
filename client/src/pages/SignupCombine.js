@@ -5,13 +5,13 @@ import { withContext } from '../contexts/AppContext'
 import ContentHeader from '../components/ContentHeader'
 
 const SignupCombine = (props) => {
-  // console.log('in signupcombine', isChecked)
   const [userForm, setUserForm] = useState({
     firstName: '',
     lastName: '',
     email: '',
     password: '',
     password2: '',
+    isOwner: false,
   })
   const [isChecked, setIsChecked] = useState({
     owner: false,
@@ -21,13 +21,13 @@ const SignupCombine = (props) => {
   const [errorMessage, setErrorMessage] = useState('')
   const history = useHistory()
 
-  const { firstName, lastName, email, password, password2 } = userForm
+  const { firstName, lastName, email, password, password2, isOwner } = userForm
 
-  const clearInputs = () => {
-    setUserForm(userForm)
-    setErrorMessage(errorMessage)
-  }
-
+  // const clearInputs = () => {
+  //   setUserForm(userForm)
+  //   setErrorMessage(errorMessage)
+  // }
+  //
   const onChange = (e) => {
     const value =
       e.target.type === 'checkbox' ? e.target.checked : e.target.value
@@ -137,11 +137,10 @@ const SignupCombine = (props) => {
                   type='checkbox'
                   className='form-check-input'
                   onChange={onChange}
+                  value={isOwner}
                   checked={isChecked.isOwner}
                 />
-                <label className='form-check-label' htmlFor='freeParking'>
-                  Check If True
-                </label>
+                <label className='form-check-label'>Check If True</label>
               </div>
             </div>
 

@@ -9,15 +9,6 @@ export const AppContextProvider = (props) => {
   )
   const [token, setToken] = useState(localStorage.getItem('token') || '')
 
-  const [userState, setUserState] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    _id: '',
-    createdDate: '',
-    type: '',
-  })
-
   const signup = (userInfo) => {
     return axios.post('/api/authorize/signup', userInfo).then((response) => {
       const { token, user } = response.data
@@ -54,8 +45,6 @@ export const AppContextProvider = (props) => {
         signup,
         login,
         logout,
-        userState,
-        setUserState,
         user,
         setUser,
         token,
