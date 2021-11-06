@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { withContext } from '../contexts/AppContext'
 
@@ -23,21 +23,16 @@ const SignupCombine = (props) => {
 
   const { firstName, lastName, email, password, password2, isOwner } = userForm
 
-  // const clearInputs = () => {
-  //   setUserForm(userForm)
-  //   setErrorMessage(errorMessage)
-  // }
-  //
   const onChange = (e) => {
     const value =
       e.target.type === 'checkbox' ? e.target.checked : e.target.value
+
+    setUserForm({ ...userForm, [e.target.name]: value })
 
     setIsChecked({
       isChecked,
       [e.target.name]: value,
     })
-
-    setUserForm({ ...userForm, [e.target.name]: e.target.value })
   }
 
   const registrationSubmitHandler = async (e) => {
@@ -45,6 +40,7 @@ const SignupCombine = (props) => {
     if (password !== password2) {
       alert('Passwords do not match')
     } else {
+      console.log('handler userForm', userForm)
       props
         .signup(userForm)
         .then(() =>
@@ -137,7 +133,7 @@ const SignupCombine = (props) => {
                   type='checkbox'
                   className='form-check-input'
                   onChange={onChange}
-                  value={isOwner}
+                  // value={isOwner}
                   checked={isChecked.isOwner}
                 />
                 <label className='form-check-label'>Check If True</label>

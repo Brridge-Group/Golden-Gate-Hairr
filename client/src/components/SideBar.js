@@ -50,7 +50,7 @@ const SideBar = (props) => {
               {!props.token ? (
                 <React.Fragment>
                   <li className='nav-item'>
-                    <NavLink to='/signup' exact className='nav-link'>
+                    <NavLink to='/signup-combine' exact className='nav-link'>
                       <i className='nav-icon fas fa-user-plus'></i>
                       <p>Sign Up</p>
                     </NavLink>

@@ -10,7 +10,7 @@ const BusinessProfile = () => {
   const history = useHistory()
 
   // Import User State Object from Context
-  const { userState, setUserState } = useContext(AppContext)
+  const { user, setUser } = useContext(AppContext)
 
   const [businessProfileForm, setBusinessProfileForm] = useState({
     businessName: '',
@@ -39,8 +39,8 @@ const BusinessProfile = () => {
   const [_error, set_Error] = useState(null)
 
   useEffect(() => {
-    setUserId(userState.user?._id)
-  }, [userState])
+    setUserId(user.user?._id)
+  }, [user])
 
   const onFormChange = (event) => {
     const value =
