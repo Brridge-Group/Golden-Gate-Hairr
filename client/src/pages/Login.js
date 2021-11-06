@@ -13,10 +13,10 @@ const Login = (props) => {
   const { email, password } = loginUser
   const [errorMessage, setErrorMessage] = useState('')
 
-  const clearInputs = () => {
-    setLoginUser(loginUser)
-    setErrorMessage(errorMessage)
-  }
+  // const clearInputs = () => {
+  //   setLoginUser(loginUser)
+  //   setErrorMessage(errorMessage)
+  // }
 
   const handleChange = (e) => {
     setLoginUser({ ...loginUser, [e.target.name]: e.target.value })

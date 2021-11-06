@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { withContext } from '../contexts/AppContext'
 
@@ -21,7 +21,7 @@ const SignupCombine = (props) => {
   const [errorMessage, setErrorMessage] = useState('')
   const history = useHistory()
 
-  const { firstName, lastName, email, password, password2, isOwner } = userForm
+  const { firstName, lastName, email, password, password2 } = userForm
 
   const onChange = (e) => {
     const value =
@@ -133,7 +133,6 @@ const SignupCombine = (props) => {
                   type='checkbox'
                   className='form-check-input'
                   onChange={onChange}
-                  // value={isOwner}
                   checked={isChecked.isOwner}
                 />
                 <label className='form-check-label'>Check If True</label>

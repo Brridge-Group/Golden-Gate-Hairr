@@ -1,9 +1,8 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { withContext } from '../contexts/AppContext'
 
 const SideBar = (props) => {
-  console.log('in sidebar', props.token, props.user, props.children)
   return (
     <React.Fragment>
       <aside className='main-sidebar sidebar-dark-primary elevation-4'>
@@ -82,13 +81,6 @@ const SideBar = (props) => {
                   </li>
                 </React.Fragment>
               )}
-
-              <li className='nav-item'>
-                <NavLink to='/business-signup' exact className='nav-link'>
-                  <i className='nav-icon fas fa-user-plus'></i>
-                  <p>Business Sign Up</p>
-                </NavLink>
-              </li>
 
               <li className='nav-item'>
                 <NavLink to='/search' className='nav-link'>

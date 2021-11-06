@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useState, useContext } from 'react'
+import React from 'react'
 import './App.css'
 import {
   BrowserRouter as Router,
@@ -12,7 +12,6 @@ import Footer from './components/Footer'
 import SideBar from './components/SideBar'
 
 import Login from './pages/Login'
-import Signup from './pages/Signup'
 import SignupCombine from './pages/SignupCombine'
 
 import Search from './pages/Search'
@@ -20,16 +19,12 @@ import SearchResults from './pages/SearchResults'
 
 import BusinessesFiltered from './pages/BusinessesFiltered'
 import BusinessDetails from './pages/BusinessDetails'
-import BusinessSignup from './pages/BusinessSignup'
 import BusinessProfile from './pages/BusinessProfile'
 import Profile from './pages/Profile'
 
 // Context Imports
-import { AppContext } from './contexts/AppContext'
 
-const App = (props) => {
-  console.log('in app', props)
-
+const App = () => {
   let routes
 
   routes = (
@@ -40,9 +35,7 @@ const App = (props) => {
       <Route path='/login'>
         <Login />
       </Route>
-      <Route path='/signup'>
-        <Signup />
-      </Route>
+
       <Route path='/signup-combine'>
         <SignupCombine />
       </Route>
@@ -61,9 +54,7 @@ const App = (props) => {
       <Route exact path='/businesses/:city'>
         <BusinessesFiltered />
       </Route>
-      <Route exact path='/business-signup'>
-        <BusinessSignup />
-      </Route>
+
       <Route exact path='/business/profile'>
         <BusinessProfile />
       </Route>
