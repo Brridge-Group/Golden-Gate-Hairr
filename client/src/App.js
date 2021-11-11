@@ -6,13 +6,12 @@ import {
   Redirect,
   Switch,
 } from 'react-router-dom'
-import Home from './pages/Home'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import SideBar from './components/SideBar'
 
 import Login from './pages/Login'
-import SignupCombine from './pages/SignupCombine'
+import Signup from './pages/Signup'
 
 import Search from './pages/Search'
 import SearchResults from './pages/SearchResults'
@@ -30,18 +29,16 @@ const App = () => {
   routes = (
     <Switch>
       <Route exact path='/'>
-        <Home />
+        <Search />
       </Route>
       <Route path='/login'>
         <Login />
       </Route>
 
-      <Route path='/signup-combine'>
-        <SignupCombine />
+      <Route path='/signup'>
+        <Signup />
       </Route>
-      <Route exact path='/search'>
-        <Search />
-      </Route>
+
       <Route exact path='/profile/'>
         <Profile />
       </Route>

@@ -4,7 +4,6 @@ import { useParams } from 'react-router'
 
 const SearchResults = () => {
   const citySearch = useParams().city
-  console.log('in businesses props', citySearch)
 
   const busFilter = []
   const [filterResults, setfilterResults] = useState([])

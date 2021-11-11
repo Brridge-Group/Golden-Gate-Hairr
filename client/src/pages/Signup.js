@@ -4,7 +4,7 @@ import { withContext } from '../contexts/AppContext'
 
 import ContentHeader from '../components/ContentHeader'
 
-const SignupCombine = (props) => {
+const Signup = (props) => {
   const [userForm, setUserForm] = useState({
     firstName: '',
     lastName: '',
@@ -16,7 +16,7 @@ const SignupCombine = (props) => {
   const [isChecked, setIsChecked] = useState({
     owner: false,
   })
-  console.log('in signupcombine', isChecked)
+  console.log('in Signup', isChecked)
 
   const [errorMessage, setErrorMessage] = useState('')
   const history = useHistory()
@@ -155,4 +155,4 @@ const SignupCombine = (props) => {
   )
 }
 
-export default withContext(SignupCombine)
+export default withContext(Signup)

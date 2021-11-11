@@ -29,7 +29,9 @@ const SideBar = (props) => {
             </div>
             <div className='info'>
               <a href='#s' className='d-block'>
-                {props.user.firstName} {props.user.lastName}
+                {!props.token
+                  ? ``
+                  : `welcome ${props.user.firstName} ${props.user.lastName}`}
               </a>
             </div>
           </div>
@@ -49,7 +51,7 @@ const SideBar = (props) => {
               {!props.token ? (
                 <React.Fragment>
                   <li className='nav-item'>
-                    <NavLink to='/signup-combine' exact className='nav-link'>
+                    <NavLink to='/signup' exact className='nav-link'>
                       <i className='nav-icon fas fa-user-plus'></i>
                       <p>Sign Up</p>
                     </NavLink>
@@ -81,13 +83,6 @@ const SideBar = (props) => {
                   </li>
                 </React.Fragment>
               )}
-
-              <li className='nav-item'>
-                <NavLink to='/search' className='nav-link'>
-                  <i className='nav-icon fas fa-search'></i>
-                  <p>Search</p>
-                </NavLink>
-              </li>
             </ul>
           </nav>
         </div>
