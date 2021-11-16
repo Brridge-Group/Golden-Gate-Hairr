@@ -8,7 +8,6 @@ const userSchema = new Schema({
   email: { type: String, unique: true },
   password: { type: String, required: true },
   password2: { type: String },
-  type: { type: Number, default: 1 },
   createdDate: { type: Date, default: Date.now },
   token: { type: String },
   isOwner: { type: Boolean, default: false },

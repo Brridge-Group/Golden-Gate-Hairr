@@ -38,6 +38,7 @@ const signup = async (req, res) => {
 }
 
 const login = async (req, res) => {
+  debugger
   try {
     // Get user input
     const { email, password } = req.body

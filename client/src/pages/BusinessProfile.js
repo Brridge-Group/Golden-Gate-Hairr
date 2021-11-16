@@ -1,16 +1,16 @@
 // React Components
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState } from 'react'
 
 import { useHistory } from 'react-router-dom'
 // Custom Imports
 import ContentHeader from '../components/ContentHeader'
-import { AppContext } from '../contexts/AppContext'
+import { withContext } from '../contexts/AppContext'
 
-const BusinessProfile = () => {
+const BusinessProfile = (props) => {
   const history = useHistory()
 
   // Import User State Object from Context
-  const { user, setUser } = useContext(AppContext)
+  console.log('in busprofile, user', props.user._id)
 
   const [businessProfileForm, setBusinessProfileForm] = useState({
     businessName: '',
@@ -21,6 +21,7 @@ const BusinessProfile = () => {
     city: '',
     state: '',
     zipCode: '',
+    userId: '',
   })
 
   const [isChecked, setIsChecked] = useState({
@@ -33,14 +34,9 @@ const BusinessProfile = () => {
     isColoring: false,
     isMakeUp: false,
   })
-  const [userId, setUserId] = useState(null)
 
   // TODO (Backlog): Error Handling UI
   const [_error, set_Error] = useState(null)
-
-  useEffect(() => {
-    setUserId(user.user?._id)
-  }, [user])
 
   const onFormChange = (event) => {
     const value =
@@ -63,7 +59,7 @@ const BusinessProfile = () => {
   const saveNewBusiness = async () => {
     let newBusiness = {
       ...businessProfileForm,
-      userId: userId,
+      userId: props.user._id,
     }
 
     // TODO (Backlog): Add {isChecked} to save in database. Currently sending, but not being saved.
@@ -345,6 +341,6 @@ const BusinessProfile = () => {
   )
 }
 
-export default BusinessProfile
+export default withContext(BusinessProfile)
 
 // At component mount fetch JSON {} to build form
