@@ -218,13 +218,15 @@ const BusinessProfile = (props) => {
                   <label htmlFor='phoneNumber'>Phone Number</label>
                   <input
                     id='phoneNumber'
-                    name='phoneNumber'
+                    name='phone'
                     type='text'
                     className='form-control'
                     placeholder='Phone Number'
                     value={businessProfileForm.phone}
                     onChange={onFormChange}
                     required
+                    maxlength='10'
+                    minlength='10'
                   />
                 </div>
               </fieldset>
