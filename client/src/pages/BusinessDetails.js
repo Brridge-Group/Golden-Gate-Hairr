@@ -5,9 +5,15 @@ import ContentHeader from '../components/ContentHeader'
 const BusinessDetails = (props) => {
   console.log('bus details props', props)
   const [business, setBusiness] = useState('')
+  const [phone, setPhone] = useState(false)
+
   useEffect(() => {
     setBusiness(props.history.location.business)
   }, [props.history.location.business])
+
+  const handleClick = () => {
+    setPhone(true)
+  }
 
   return (
     <React.Fragment>
@@ -74,12 +80,15 @@ const BusinessDetails = (props) => {
                     {business.zipCode}
                     <br />
                     email: {business.email}
-                    phone: {business.phone} <br />
+                    <div className={phone ? 'visable-phone' : 'hidden-phone'}>
+                      phone: {business.phone}
+                    </div>
                   </div>
                   <div className='product-description'>
                     {business.description}
                   </div>
                   <button
+                    onClick={handleClick}
                     className='btn btn-default'
                     style={{ marginTop: '10px' }}>
                     Book Now

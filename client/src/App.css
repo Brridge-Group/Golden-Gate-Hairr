@@ -17,3 +17,9 @@ button.btn.btn-primary {
 /* .card {
   margin: 0;
 } */
+.hidden-phone {
+  visibility: hidden;
+}
+.visible-phone {
+  visibility: visible;
+}
