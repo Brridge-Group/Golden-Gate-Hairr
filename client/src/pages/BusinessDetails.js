@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
+import { withContext } from '../contexts/AppContext'
 import ContentHeader from '../components/ContentHeader'
 
 const BusinessDetails = (props) => {
+  console.log('bus details props', props)
   const [business, setBusiness] = useState('')
   useEffect(() => {
     setBusiness(props.history.location.business)
@@ -59,7 +61,11 @@ const BusinessDetails = (props) => {
                       style={{ width: '10%' }}
                     />
                   </p>
-                  <button className='btn btn-default'>Review</button>
+                  {props.token ? (
+                    <button className='btn btn-default'>Review</button>
+                  ) : (
+                    ''
+                  )}
                 </div>
                 <div>
                   <h1 className='product title'>{business.businessName}</h1>
@@ -88,4 +94,4 @@ const BusinessDetails = (props) => {
   )
 }
 
-export default BusinessDetails
+export default withContext(BusinessDetails)

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import ContentHeader from '../components/ContentHeader'
 import { Redirect } from 'react-router'
+import Features from './Features'
 
 const BusinessesFiltered = (props) => {
   const [redirect, setRedirect] = useState(false)
