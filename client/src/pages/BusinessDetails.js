@@ -3,7 +3,6 @@ import { withContext } from '../contexts/AppContext'
 import ContentHeader from '../components/ContentHeader'
 
 const BusinessDetails = (props) => {
-  console.log('bus details props', props)
   const [business, setBusiness] = useState('')
   const [phone, setPhone] = useState(false)
 

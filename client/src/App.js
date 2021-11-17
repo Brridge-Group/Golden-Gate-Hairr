@@ -34,31 +34,28 @@ const App = () => {
       <Route path='/login'>
         <Login />
       </Route>
-
       <Route path='/signup'>
         <Signup />
       </Route>
-
       <Route exact path='/profile/'>
         <Profile />
       </Route>
-
       <Route exact path='/businesses'></Route>
       <Route exact path='/search/:city'>
         <SearchResults />
       </Route>
-
       <Route exact path='/businesses/:city'>
         <BusinessesFiltered />
       </Route>
-
       <Route exact path='/business/profile'>
         <BusinessProfile />
       </Route>
       <Route
+        exact
         path='/business-details'
         render={(props) => <BusinessDetails {...props} />}
       />
+
       <Redirect to='/' />
     </Switch>
   )
