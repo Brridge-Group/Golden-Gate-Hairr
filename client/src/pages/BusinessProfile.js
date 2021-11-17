@@ -21,6 +21,7 @@ const BusinessProfile = (props) => {
     city: '',
     state: '',
     zipCode: '',
+    phone: '',
     userId: '',
   })
 
