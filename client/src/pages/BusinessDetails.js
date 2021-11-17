@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react'
 import ContentHeader from '../components/ContentHeader'
 
 const BusinessDetails = (props) => {
-  const [indieBus, setIndieBus] = useState('')
+  const [business, setBusiness] = useState('')
   useEffect(() => {
-    setIndieBus(props.history.location.business)
+    setBusiness(props.history.location.business)
   }, [props.history.location.business])
 
   return (
@@ -62,15 +62,15 @@ const BusinessDetails = (props) => {
                   <button className='btn btn-default'>Review</button>
                 </div>
                 <div>
-                  <h1 className='product title'>{indieBus.businessName}</h1>
+                  <h1 className='product title'>{business.businessName}</h1>
                   <div>
-                    {indieBus.address1} {indieBus.city}, {indieBus.state}{' '}
-                    {indieBus.zipCode}
-                    <br /> phone: {indieBus.phone} <br />
-                    email: {indieBus.email}
+                    {business.address1} {business.city}, {business.state}{' '}
+                    {business.zipCode}
+                    <br /> phone: {business.phone} <br />
+                    email: {business.email}
                   </div>
                   <div className='product-description'>
-                    {indieBus.description}
+                    {business.description}
                   </div>
                   <button
                     className='btn btn-default'
