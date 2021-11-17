@@ -214,6 +214,19 @@ const BusinessProfile = (props) => {
                     required
                   />
                 </div>
+                <div className='form-group'>
+                  <label htmlFor='phoneNumber'>Phone Number</label>
+                  <input
+                    id='phoneNumber'
+                    name='phoneNumber'
+                    type='text'
+                    className='form-control'
+                    placeholder='Phone Number'
+                    value={businessProfileForm.phone}
+                    onChange={onFormChange}
+                    required
+                  />
+                </div>
               </fieldset>
               <fieldset>
                 <div className='form-group'>

@@ -15,7 +15,7 @@ const businessSchema = new mongoose.Schema({
   country: { type: String },
   mainPicture: { type: String },
   email: { type: String, required: true, unique: true },
-  status: { type: Number, default: 1 },
+  phone: { type: String },
   features: [{ type: ObjectId, ref: 'features' }],
   services: [{ type: ObjectId, ref: 'services' }],
 })
