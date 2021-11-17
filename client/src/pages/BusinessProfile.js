@@ -22,7 +22,6 @@ const BusinessProfile = (props) => {
     state: '',
     zipCode: '',
     phone: '',
-    userId: '',
   })
 
   const [isChecked, setIsChecked] = useState({

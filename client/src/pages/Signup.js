@@ -16,16 +16,11 @@ const Signup = (props) => {
   const [isChecked, setIsChecked] = useState({
     owner: false,
   })
-  // console.log('in Signup', isChecked)
 
   const [errorMessage, setErrorMessage] = useState('')
   const history = useHistory()
 
   const { firstName, lastName, email, password, password2 } = userForm
-
-  // const { userState, setUserState } = useContext(AuthContext)
-
-  const [isNewBusUserCreated, setIsNewBusUserCreated] = useState(false)
 
   const onChange = (e) => {
     const value =

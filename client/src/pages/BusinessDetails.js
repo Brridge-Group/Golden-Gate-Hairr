@@ -66,8 +66,9 @@ const BusinessDetails = (props) => {
                   <div>
                     {business.address1} {business.city}, {business.state}{' '}
                     {business.zipCode}
-                    <br /> phone: {business.phone} <br />
+                    <br />
                     email: {business.email}
+                    phone: {business.phone} <br />
                   </div>
                   <div className='product-description'>
                     {business.description}
