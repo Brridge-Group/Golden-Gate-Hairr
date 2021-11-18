@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { withContext } from '../contexts/AppContext'
 import ContentHeader from '../components/ContentHeader'
+import '../stylesheets/Businesses.css'
 
 const BusinessDetails = (props) => {
   const [business, setBusiness] = useState('')
@@ -21,30 +22,14 @@ const BusinessDetails = (props) => {
         <div className='card-body'>
           <ul className='products-list product-list-in-card'>
             <li className='item'>
-              <figure
-                className='indie-card'
-                style={{
-                  display: 'flex',
-                }}>
-                <div
-                  className='pic-star-container'
-                  style={{
-                    marginRight: '20px',
-                    display: 'flex',
-                    flexDirection: 'column',
-                  }}>
+              <figure className='indie-card'>
+                <div className='pic-star-container'>
                   <img
                     src='https://via.placeholder.com/100'
                     alt='Placeholder Business Profile'
                     className='image-fluid'
                   />
-                  <p
-                    className='bus-details--rating '
-                    style={{
-                      display: 'flex',
-                      marginTop: '5px',
-                      justifyContent: 'space-around',
-                    }}>
+                  <p className='bus-details--rating '>
                     <img
                       src='star.svg'
                       alt='Star Icon'

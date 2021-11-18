@@ -15,7 +15,6 @@ import Signup from './pages/Signup'
 
 import Search from './pages/Search'
 import SearchResults from './pages/SearchResults'
-
 import BusinessesFiltered from './pages/BusinessesFiltered'
 import BusinessDetails from './pages/BusinessDetails'
 import BusinessProfile from './pages/BusinessProfile'
@@ -47,6 +46,9 @@ const App = () => {
       <Route exact path='/businesses/:city'>
         <BusinessesFiltered />
       </Route>
+      {/* <Route exact path='/businesses/:city'>
+        <Businesses />
+      </Route> */}
       <Route exact path='/business/profile'>
         <BusinessProfile />
       </Route>
@@ -65,6 +67,7 @@ const App = () => {
       <Header />
       <SideBar />
       <div className='content-wrapper'>
+        {/* {routes} */}
         <div className='content'>{routes}</div>
       </div>
       <Footer />

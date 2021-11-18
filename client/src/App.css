@@ -11,15 +11,10 @@ button.btn.btn-primary {
 .products-list .product-description {
   white-space: unset;
 }
-.features-container {
-  background: yellowgreen;
+
+.wrapper {
+  background: #f4f6f9;
 }
-/* .card {
-  margin: 0;
-} */
-/* .hidden-phone {
-  visibility: hidden;
-} */
-.visible-phone {
-  visibility: visible;
+.content {
+  margin-top: 50px;
 }
