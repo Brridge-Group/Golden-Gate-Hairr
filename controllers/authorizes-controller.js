@@ -1,8 +1,6 @@
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const User = require('../models/user')
-const db = require('../models')
-const ROLES = db.ROLES
 
 const signup = async (req, res) => {
   try {
@@ -61,21 +59,5 @@ const login = async (req, res) => {
     console.log(err)
   }
 }
-
-checkRolesExisted = (req, res, next) => {
-  if (req.body.roles) {
-    for (let i = 0; i < req.body.roles.length; i++) {
-      if (!ROLES.includes(req.body.roles[i])) {
-        res.status(400).send({
-          message: `Failed! Role ${req.body.roles[i]} does not exist!`,
-        })
-        return
-      }
-    }
-  }
-
-  next()
-}
 exports.signup = signup
 exports.login = login
-exports.checkRolesExisted = checkRolesExisted
