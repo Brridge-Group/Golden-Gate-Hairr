@@ -1,13 +1,66 @@
 // React Components
 import React, { useState, useContext, useEffect } from 'react'
-
 import { useHistory } from 'react-router-dom'
+
 // Custom Imports
 import ContentHeader from '../components/ContentHeader'
 import { AuthContext } from '../contexts/GlobalContext'
 
 const BusinessProfile = () => {
   const history = useHistory()
+
+  const [checkboxes, setCheckboxes] = useState([])
+  const [isChecked2, setIsChecked2] = useState({})
+  // Fetch Features && Services from the database and store into state on component
+  useEffect(() => {
+    const fetchItems = async () => {
+      try {
+        // Fetch Features from the database
+        const featuresResp = await fetch('/api/features', { method: 'GET' })
+        const featuresData = await featuresResp.json()
+        console.log(featuresData)
+
+        if (!featuresResp.ok) {
+          throw new Error(featuresData.message)
+        }
+
+        // Fetch Services from the database
+        const servicesResp = await fetch('/api/services', { method: 'GET' })
+        const servicesData = await servicesResp.json()
+        console.log(servicesData)
+
+        if (!servicesResp.ok) {
+          throw new Error(servicesData.message)
+        }
+
+        // Set Features && Services `names` to a state array
+        setCheckboxes(
+          featuresData.features.filter(feature => {
+            checkboxes.push(feature.name)
+          }),
+
+          servicesData.services.filter(service => {
+            checkboxes.push(service.name)
+          })
+        )
+        // Convert fetched data into object of isChecked values
+        if (checkboxes.length > 1) {
+          let newObj = {}
+          newObj = Object.fromEntries(
+            checkboxes.map(checkbox => [checkbox, false])
+          )
+          setIsChecked2(newObj)
+          console.log('newObj', newObj)
+          console.log('isChecked2', isChecked2)
+        }
+        console.log('checkboxes', checkboxes)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
+    fetchItems()
+  }, [checkboxes, isChecked2])
 
   // Import User State Object from Context
   const { userState, setUserState } = useContext(AuthContext)
@@ -33,6 +86,7 @@ const BusinessProfile = () => {
     isColoring: false,
     isMakeUp: false,
   })
+
   const [userId, setUserId] = useState(null)
 
   // TODO (Backlog): Error Handling UI
@@ -220,7 +274,34 @@ const BusinessProfile = () => {
                   />
                 </div>
               </fieldset>
-              <fieldset>
+              {/* Needs to be a map based on the dynamic data */}
+              <div className='form-group'>
+                <label htmlFor='features'>Features</label>
+                {checkboxes.map((checkbox, index) => (
+                  <div className='form-check'>
+                    <label
+                      className='form-check-label'
+                      htmlFor='accessible'
+                      key={index}
+                    >
+                      <input
+                        id='accessible'
+                        name='accessible'
+                        type='checkbox'
+                        className='form-check-input'
+                        checked={isChecked2.newObj.accessible}
+                        onChange={onFormChange}
+                      />
+                      {checkbox}
+                    </label>
+                  </div>
+                ))}
+              </div>
+              {checkboxes.map((label, index) => (
+                <h1>{label}</h1>
+              ))}
+
+              {/* <fieldset>
                 <div className='form-group'>
                   <label htmlFor='features'>Features</label>
                   <div className='form-check'>
@@ -333,7 +414,7 @@ const BusinessProfile = () => {
                     </label>
                   </div>
                 </div>
-              </fieldset>
+              </fieldset> */}
               <button type='submit' className='btn btn-primary'>
                 Submit
               </button>
@@ -341,6 +422,9 @@ const BusinessProfile = () => {
             {/* <-- Form Ends --> */}
           </form>
         </div>
+        {checkboxes.map((label, index) => {
+          return <h1>{label}</h1>
+        })}
       </section>
     </>
   )
