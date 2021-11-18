@@ -15,11 +15,11 @@
 .filtered-businesses {
   width: 75%;
 }
-.card-body {
+.card-body.filtered {
   padding: 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.4);
 }
-.card-body:last-child {
+.card-body.filtered:last-child {
   border: 0;
 }
 

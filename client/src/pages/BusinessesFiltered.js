@@ -27,7 +27,7 @@ const BusinessesFiltered = (props) => {
 
   return (
     <React.Fragment>
-      <div className='card-body'>
+      <div className='card-body filtered'>
         {renderRedirect()}
         <div onClick={doSetRedirect} style={{ cursor: 'pointer' }}>
           <ul className='products-list product-list-in-card'>
