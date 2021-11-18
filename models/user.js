@@ -11,6 +11,12 @@ const userSchema = new Schema({
   createdDate: { type: Date, default: Date.now },
   token: { type: String },
   isOwner: { type: Boolean, default: false },
+  roles: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Role',
+    },
+  ],
 })
 
 module.exports = mongoose.model('User', userSchema)
