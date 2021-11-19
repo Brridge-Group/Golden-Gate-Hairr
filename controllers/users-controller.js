@@ -17,15 +17,8 @@ const getUsers = async (req, res, next) => {
 
 const createUser = async (req, res, next) => {
   console.log(req.body)
-  const {
-    firstName,
-    lastName,
-    email,
-    password,
-    password2,
-    type,
-    createdDate,
-  } = req.body
+  const { firstName, lastName, email, password, password2, type, createdDate } =
+    req.body
 
   const createdUser = new User({
     firstName,
@@ -111,8 +104,26 @@ const deleteUser = async (req, res, next) => {
   res.json({ message: 'Deleted successfully' })
 }
 
+const allAccess = (req, res) => {
+  res.status(200).send('Public Content.')
+}
+
+const userBoard = (req, res) => {
+  res.status(200).send('User Content.')
+}
+
+// const adminBoard = (req, res) => {
+//   res.status(200).send('Admin Content.')
+// }
+
+// const moderatorBoard = (req, res) => {
+//   res.status(200).send('Moderator Content.')
+// }
+
 exports.getUsers = getUsers
 exports.createUser = createUser
 exports.updateUser = updateUser
 exports.getUser = getUser
 exports.deleteUser = deleteUser
+exports.allAccess = allAccess
+exports.userBoard = userBoard

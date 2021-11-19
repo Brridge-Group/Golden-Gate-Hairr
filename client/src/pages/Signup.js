@@ -1,49 +1,62 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { useHistory } from 'react-router-dom'
+import { withContext } from '../contexts/AppContext'
 
 import ContentHeader from '../components/ContentHeader'
 
-const UserRegistration = () => {
+const Signup = (props) => {
   const [userForm, setUserForm] = useState({
     firstName: '',
     lastName: '',
     email: '',
     password: '',
     password2: '',
+    isOwner: false,
   })
+  const [isChecked, setIsChecked] = useState({
+    owner: false,
+  })
+  // console.log('in Signup', isChecked)
+
+  const [errorMessage, setErrorMessage] = useState('')
   const history = useHistory()
 
   const { firstName, lastName, email, password, password2 } = userForm
-  const onChange = (e) =>
-    setUserForm({ ...userForm, [e.target.name]: e.target.value })
+
+  // const { userState, setUserState } = useContext(AuthContext)
+
+  const [isNewBusUserCreated, setIsNewBusUserCreated] = useState(false)
+
+  const onChange = (e) => {
+    const value =
+      e.target.type === 'checkbox' ? e.target.checked : e.target.value
+
+    setUserForm({ ...userForm, [e.target.name]: value })
+
+    setIsChecked({
+      isChecked,
+      [e.target.name]: value,
+    })
+  }
 
   const registrationSubmitHandler = async (e) => {
     e.preventDefault()
     if (password !== password2) {
       alert('Passwords do not match')
     } else {
-      const newUser = {
-        firstName,
-        lastName,
-        email,
-        password,
-        password2,
-      }
-      try {
-        const response = await fetch('/api/users', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ ...newUser }),
+      console.log('handler userForm', userForm)
+      props
+        .signup(userForm)
+        .then(() =>
+          !isChecked.isOwner
+            ? history.push('/profile')
+            : history.push('/business/profile')
+        )
+        .catch((err) => {
+          if (err.response) {
+            setErrorMessage(err.response.data)
+          }
         })
-
-        if (!response.ok) {
-          throw new Error('Could not save new user')
-        }
-
-        history.push('/users')
-      } catch (err) {}
     }
   }
 
@@ -57,7 +70,7 @@ const UserRegistration = () => {
         <div className='card-body'>
           <form className='form' onSubmit={registrationSubmitHandler}>
             <div className='form-group'>
-              <label>First Name</label>
+              <label htmlFor='first-name'>First Name</label>
               <input
                 name='firstName'
                 type='text'
@@ -69,7 +82,7 @@ const UserRegistration = () => {
               />
             </div>
             <div className='form-group'>
-              <label>Last Name</label>
+              <label htmlFor='last-name'>Last Name</label>
               <input
                 name='lastName'
                 type='text'
@@ -81,7 +94,7 @@ const UserRegistration = () => {
               />
             </div>
             <div className='form-group'>
-              <label>Email</label>
+              <label htmlFor='email'>Email</label>
               <input
                 name='email'
                 type='email'
@@ -92,7 +105,7 @@ const UserRegistration = () => {
               />
             </div>
             <div className='form-group'>
-              <label>Password</label>
+              <label htmlFor='password'>Password</label>
               <input
                 name='password'
                 type='password'
@@ -104,7 +117,7 @@ const UserRegistration = () => {
               />
             </div>
             <div className='form-group'>
-              <label>Confirm Password</label>
+              <label htmlFor='confirm-password'>Confirm Password</label>
               <input
                 name='password2'
                 type='password'
@@ -115,6 +128,21 @@ const UserRegistration = () => {
                 value={password2}
               />
             </div>
+
+            <div className='form-group'>
+              <label htmlFor='owner'>Business Owner</label>
+              <div className='form-check'>
+                <input
+                  name='isOwner'
+                  type='checkbox'
+                  className='form-check-input'
+                  onChange={onChange}
+                  checked={isChecked.isOwner}
+                />
+                <label className='form-check-label'>Check If True</label>
+              </div>
+            </div>
+
             <button
               onChange={onChange}
               type='submit'
@@ -122,10 +150,13 @@ const UserRegistration = () => {
               Submit
             </button>
           </form>
+          {errorMessage && (
+            <p style={{ color: 'grey', marginTop: '10px' }}>{errorMessage}</p>
+          )}
         </div>
       </div>
     </React.Fragment>
   )
 }
 
-export default UserRegistration
+export default withContext(Signup)

@@ -4,26 +4,21 @@ import { useParams } from 'react-router'
 
 const SearchResults = () => {
   const citySearch = useParams().city
-  console.log('in businesses props', citySearch)
 
   const busFilter = []
   const [filterResults, setfilterResults] = useState([])
 
   useEffect(() => {
-    console.log('in fetchBus')
     const fetchBusinesses = async () => {
       try {
         const response = await fetch('/api/businesses', { method: 'GET' })
-        // const response = await fetch(`/api/businesses/city/${citySearch}`, {
-        //   method: 'GET',
-        // })
+
         const responseData = await response.json()
         if (!response.ok) {
           throw new Error(response.message)
         }
         responseData.businesses.filter((business) => {
           if (business.city === citySearch) {
-            console.log('yes')
             busFilter.push(business)
           }
         })

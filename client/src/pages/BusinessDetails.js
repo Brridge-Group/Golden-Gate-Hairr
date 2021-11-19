@@ -2,14 +2,10 @@ import React, { useEffect, useState } from 'react'
 import ContentHeader from '../components/ContentHeader'
 
 const BusinessDetails = (props) => {
-  console.log('in deets', props)
-
   const [indieBus, setIndieBus] = useState('')
   useEffect(() => {
-    console.log('in use effect', props.history.location.business)
     setIndieBus(props.history.location.business)
-  }, [])
-  console.log('indieBus state', indieBus)
+  }, [props.history.location.business])
 
   return (
     <React.Fragment>

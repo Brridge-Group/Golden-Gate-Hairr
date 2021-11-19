@@ -1,4 +1,5 @@
 const express = require('express')
+// const { verifyToken } = require('../middlewares')
 
 const usersController = require('../controllers/users-controller')
 
@@ -18,5 +19,9 @@ router.patch('/:id', usersController.updateUser)
 
 //Delete User
 router.delete('/:id', usersController.deleteUser)
+
+// router.get('/test/all', controller.allAccess)
+
+// router.get('/test/user', [verifyToken], controller.userBoard)
 
 module.exports = router

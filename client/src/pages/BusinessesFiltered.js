@@ -1,13 +1,9 @@
 import React, { useState } from 'react'
 import ContentHeader from '../components/ContentHeader'
-import { useHistory } from 'react-router-dom'
 import { Redirect } from 'react-router'
 
 const BusinessesFiltered = (props) => {
-  console.log('in bus filtered', props, props.business)
   const [redirect, setRedirect] = useState(false)
-
-  const history = useHistory()
 
   const star =
     'https://raw.githubusercontent.com/Brridge-Group/Golden-Gate-Hairr/6e0316ba1b16f06902c1558650c0c04f3ba5c42b/client/public/star.svg'
@@ -16,7 +12,6 @@ const BusinessesFiltered = (props) => {
     setRedirect(true)
   }
   const renderRedirect = () => {
-    console.log('in render redirect, props.business', props.business)
     if (redirect) {
       return (
         <Redirect
