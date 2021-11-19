@@ -1,16 +1,16 @@
 // React Components
 import React, { useState } from 'react'
-
-import { useHistory } from 'react-router-dom'
-// Custom Imports
 import ContentHeader from '../components/ContentHeader'
 import { withContext } from '../contexts/AppContext'
+import { useHistory } from 'react-router-dom'
+// Custom Imports
+import PhoneInput from 'react-phone-input-2'
+import 'react-phone-input-2/lib/style.css'
 
 const BusinessProfile = (props) => {
   const history = useHistory()
 
-  // Import User State Object from Context
-  console.log('in busprofile, user', props.user._id)
+  const [mobile, setmobile] = useState('')
 
   const [businessProfileForm, setBusinessProfileForm] = useState({
     businessName: '',
@@ -60,6 +60,7 @@ const BusinessProfile = (props) => {
     let newBusiness = {
       ...businessProfileForm,
       userId: props.user._id,
+      phone: mobile,
     }
 
     // TODO (Backlog): Add {isChecked} to save in database. Currently sending, but not being saved.
@@ -216,17 +217,15 @@ const BusinessProfile = (props) => {
                 </div>
                 <div className='form-group'>
                   <label htmlFor='phoneNumber'>Phone Number</label>
-                  <input
-                    id='phoneNumber'
-                    name='phone'
-                    type='text'
+                  <PhoneInput
+                    placeholder='Enter phone number'
                     className='form-control'
-                    placeholder='Phone Number'
-                    value={businessProfileForm.phone}
-                    onChange={onFormChange}
+                    country={'us'}
+                    value={mobile}
+                    onChange={(mobile) => setmobile(mobile)}
                     required
-                    maxlength='10'
-                    minlength='10'
+                    onlyCountries={['us']}
+                    disableDropdown
                   />
                 </div>
               </fieldset>

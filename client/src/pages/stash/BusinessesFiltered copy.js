@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import ContentHeader from '../components/ContentHeader'
+import ContentHeader from '../../components/ContentHeader'
 import { Redirect } from 'react-router'
 
 const BusinessesFiltered = (props) => {
