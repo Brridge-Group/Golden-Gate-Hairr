@@ -1,1 +1,13 @@
-
+.login-btns {
+  display: flex;
+  margin-right: 10px;
+}
+button.btn.btn-primary {
+  margin-right: 20px;
+}
+.content-header h1 {
+  color: transparent;
+}
+.products-list .product-description {
+  white-space: unset;
+}

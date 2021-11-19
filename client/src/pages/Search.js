@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import ContentHeader from '../components/ContentHeader'
-import SearchResults from './SearchResults'
+import { useHistory } from 'react-router-dom'
 
 const Search = () => {
   const [searchTerm, setSearchTerm] = useState('')
-  const [mounted, setMounted] = useState(false)
+  const history = useHistory()
 
   const handleSearch = (e) => {
     let value = e.target.value
@@ -14,7 +14,8 @@ const Search = () => {
   }
 
   const buttonOnClick = () => {
-    setMounted(true)
+    console.log('button', searchTerm)
+    history.push(`/search/${searchTerm}`)
   }
 
   return (
@@ -48,7 +49,6 @@ const Search = () => {
           </div>
         </div>
       </div>
-      <SearchResults term={searchTerm} isMounted={mounted} />
     </React.Fragment>
   )
 }

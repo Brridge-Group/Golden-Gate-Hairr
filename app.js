@@ -8,7 +8,7 @@ const startServer = async () => {
   await loaders(app)
 
   const port = config.port || 5000
-  app.listen(port, err => {
+  app.listen(port, (err) => {
     if (err) {
       console.log(err)
       return

@@ -1,7 +1,8 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+import { withContext } from '../contexts/AppContext'
 
-const SideBar = () => {
+const SideBar = (props) => {
   return (
     <React.Fragment>
       <aside className='main-sidebar sidebar-dark-primary elevation-4'>
@@ -10,9 +11,11 @@ const SideBar = () => {
             src='/assets/dist/img/AdminLTELogo.png'
             alt='AdminLTE Logo'
             className='brand-image img-circle elevation-3'
-            style={{ opacity: 0.8 }}
+            style={{ opacity: 0 }}
           />
-          <span className='brand-text font-weight-light'>Hello World</span>
+          <span className='brand-text font-weight-light' style={{ opacity: 0 }}>
+            app name
+          </span>
         </a>
 
         <div className='sidebar'>
@@ -26,7 +29,9 @@ const SideBar = () => {
             </div>
             <div className='info'>
               <a href='#s' className='d-block'>
-                John Smith
+                {!props.token
+                  ? ``
+                  : `welcome ${props.user.firstName} ${props.user.lastName}`}
               </a>
             </div>
           </div>
@@ -43,24 +48,41 @@ const SideBar = () => {
                   <p>Home</p>
                 </NavLink>
               </li>
-              <li className='nav-item'>
-                <NavLink to='/items' className='nav-link'>
-                  <i className='nav-icon fas fa-list'></i>
-                  <p>Items</p>
-                </NavLink>
-              </li>
-              <li className='nav-item'>
-                <NavLink to='/sign-up' exact className='nav-link'>
-                  <i className='nav-icon fas fa-user-plus'></i>
-                  <p>Sign Up</p>
-                </NavLink>
-              </li>
-              <li className='nav-item'>
-                <NavLink to='/search' className='nav-link'>
-                  <i className='nav-icon fas fa-search'></i>
-                  <p>Search</p>
-                </NavLink>
-              </li>
+              {!props.token ? (
+                <React.Fragment>
+                  <li className='nav-item'>
+                    <NavLink to='/signup' exact className='nav-link'>
+                      <i className='nav-icon fas fa-user-plus'></i>
+                      <p>Sign Up</p>
+                    </NavLink>
+                  </li>
+                  <li className='nav-item'>
+                    <NavLink to='/login' exact className='nav-link'>
+                      <i className='nav-icon fas fa-user-plus'></i>
+                      <p>Log In</p>
+                    </NavLink>
+                  </li>
+                </React.Fragment>
+              ) : (
+                <React.Fragment>
+                  <li className='nav-item'>
+                    <NavLink to='/profile' exact className='nav-link'>
+                      <i className='nav-icon fas fa-user-plus'></i>
+                      <p>Profile</p>
+                    </NavLink>
+                  </li>
+                  <li className='nav-item'>
+                    <NavLink
+                      to='/logout'
+                      exact
+                      className='nav-link'
+                      onClick={props.logout}>
+                      <i className='nav-icon fas fa-sign-out-alt'></i>
+                      <p>Log Out</p>
+                    </NavLink>
+                  </li>
+                </React.Fragment>
+              )}
             </ul>
           </nav>
         </div>
@@ -69,4 +91,4 @@ const SideBar = () => {
   )
 }
 
-export default SideBar
+export default withContext(SideBar)
