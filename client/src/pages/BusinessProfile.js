@@ -5,62 +5,63 @@ import { useHistory } from 'react-router-dom'
 // Custom Imports
 import ContentHeader from '../components/ContentHeader'
 import { withContext } from '../contexts/AppContext'
+import { AppContext } from '../contexts/AppContext'
 
-const BusinessProfile = (props) => {
+const BusinessProfile = props => {
   const history = useHistory()
 
-  const [checkboxes, setCheckboxes] = useState([])
-  const [isChecked2, setIsChecked2] = useState({})
-  // Fetch Features && Services from the database and store into state on component
-  useEffect(() => {
-    const fetchItems = async () => {
-      try {
-        // Fetch Features from the database
-        const featuresResp = await fetch('/api/features', { method: 'GET' })
-        const featuresData = await featuresResp.json()
-        console.log(featuresData)
+  // const [checkboxes, setCheckboxes] = useState([])
+  // const [isChecked2, setIsChecked2] = useState({})
+  // // Fetch Features && Services from the database and store into state on component
+  // useEffect(() => {
+  //   const fetchItems = async () => {
+  //     try {
+  //       // Fetch Features from the database
+  //       const featuresResp = await fetch('/api/features', { method: 'GET' })
+  //       const featuresData = await featuresResp.json()
+  //       console.log(featuresData)
 
-        if (!featuresResp.ok) {
-          throw new Error(featuresData.message)
-        }
+  //       if (!featuresResp.ok) {
+  //         throw new Error(featuresData.message)
+  //       }
 
-        // Fetch Services from the database
-        const servicesResp = await fetch('/api/services', { method: 'GET' })
-        const servicesData = await servicesResp.json()
-        console.log(servicesData)
+  //       // Fetch Services from the database
+  //       const servicesResp = await fetch('/api/services', { method: 'GET' })
+  //       const servicesData = await servicesResp.json()
+  //       console.log(servicesData)
 
-        if (!servicesResp.ok) {
-          throw new Error(servicesData.message)
-        }
+  //       if (!servicesResp.ok) {
+  //         throw new Error(servicesData.message)
+  //       }
 
-        // Set Features && Services `names` to a state array
-        setCheckboxes(
-          featuresData.features.filter(feature => {
-            checkboxes.push(feature.name)
-          }),
+  //       // Set Features && Services `names` to a state array
+  //       setCheckboxes(
+  //         featuresData.features.filter(feature => {
+  //           checkboxes.push(feature.name)
+  //         }),
 
-          servicesData.services.filter(service => {
-            checkboxes.push(service.name)
-          })
-        )
-        // Convert fetched data into object of isChecked values
-        if (checkboxes.length > 1) {
-          let newObj = {}
-          newObj = Object.fromEntries(
-            checkboxes.map(checkbox => [checkbox, false])
-          )
-          setIsChecked2(newObj)
-          console.log('newObj', newObj)
-          console.log('isChecked2', isChecked2)
-        }
-        console.log('checkboxes', checkboxes)
-      } catch (error) {
-        console.log(error)
-      }
-    }
+  //         servicesData.services.filter(service => {
+  //           checkboxes.push(service.name)
+  //         })
+  //       )
+  //       // Convert fetched data into object of isChecked values
+  //       if (checkboxes.length > 1) {
+  //         let newObj = {}
+  //         newObj = Object.fromEntries(
+  //           checkboxes.map(checkbox => [checkbox, false])
+  //         )
+  //         setIsChecked2(newObj)
+  //         console.log('newObj', newObj)
+  //         console.log('isChecked2', isChecked2)
+  //       }
+  //       console.log('checkboxes', checkboxes)
+  //     } catch (error) {
+  //       console.log(error)
+  //     }
+  //   }
 
-    fetchItems()
-  }, [checkboxes, isChecked2])
+  //   fetchItems()
+  // }, [checkboxes, isChecked2])
 
   // Import User State Object from Context
   console.log('in busprofile, user', props.user._id)
@@ -91,7 +92,7 @@ const BusinessProfile = (props) => {
   // TODO (Backlog): Error Handling UI
   const [_error, set_Error] = useState(null)
 
-  const onFormChange = (event) => {
+  const onFormChange = event => {
     const value =
       event.target.type === 'checkbox'
         ? event.target.checked
@@ -103,8 +104,8 @@ const BusinessProfile = (props) => {
     })
 
     // TODO (Backlog): Save to database. Currently sending, but not being saved.
-    setIsChecked({
-      ...isChecked,
+    setIsChecked2({
+      ...isChecked2,
       [event.target.name]: value,
     })
   }
@@ -138,10 +139,87 @@ const BusinessProfile = (props) => {
     }
   }
 
-  const profileSubmitHandler = (event) => {
+  const profileSubmitHandler = event => {
     event?.preventDefault()
     saveNewBusiness().then(history.push('/'))
   }
+
+  //* ---------------------------------------------------------
+
+
+  // Import User State Object from Context
+  const {
+    user,
+    fetchFeatures,
+    fetchServices,
+    feats,
+    setFeats,
+    services,
+    setServices,
+  } = useContext(AppContext)
+
+  console.log('feats', feats)
+  console.log('services', services)
+  // console.log(user)
+
+  const [checkboxNames, setCheckboxNames] = useState([])
+  const [isChecked2, setIsChecked2] = useState({})
+  useEffect(() => {
+    async function getFeaturesServices() {
+      const feats = await fetchFeatures()
+      const services = await fetchServices()
+      let featuresServices = []
+      props.feats.features?.filter(featureName => {
+        console.log(featureName.name)
+        featuresServices.push(featureName.name)
+      }) &&
+        props.services.services?.filter(serviceName => {
+          console.log(serviceName.name)
+          featuresServices.push(serviceName.name)
+        })
+      console.log(featuresServices)
+      setCheckboxNames([...featuresServices])
+    }
+    getFeaturesServices()
+
+    // let featuresServices = []
+    // props.feats.features?.filter(featureName => {
+    //   console.log(featureName.name)
+    //   featuresServices.push(featureName.name)
+    // })
+    // props.services.services?.filter(serviceName => {
+    //   console.log(serviceName.name)
+    //   featuresServices.push(serviceName.name)
+    // })
+    // console.log(featuresServices)
+    // setCheckboxNames([...checkboxNames, ...featuresServices])
+  }, [])
+
+  useEffect(() => {
+    async function setCheckboxesObj() {
+      await checkboxNames
+      // debugger
+      console.log(checkboxNames)
+      if (checkboxNames.length > 1) {
+        let newObj = {}
+        newObj = Object.fromEntries(
+          checkboxNames.map(checkbox => [checkbox, false])
+        )
+        setIsChecked2({ ...newObj })
+        console.log('newObj', newObj)
+        console.log('isChecked2', isChecked2)
+      }
+      // TODO: ?Store the checkbox Names as a variable after sanitizing to use as name, id, htmlFor and checked={isChecked2.${}}
+      // Determine to use first word in string of name of checkbox, i.e. MakeUp Application === makeup
+      // Object.keys(obj).map(k => { res[k] = () => k; return k;});
+    }
+    setCheckboxesObj()
+  }, [checkboxNames])
+
+  // console.log('props.checkboxes', props.checkboxes)
+  console.log('checkboxNames', checkboxNames)
+  //* ---------------------------------------------------------
+
   return (
     <>
       <ContentHeader title='Business Profile Page' />
@@ -157,7 +235,8 @@ const BusinessProfile = (props) => {
                 fontSize: '1.5rem',
                 textAlign: 'center',
                 width: '20rem',
-              }}>
+              }}
+            >
               {_error}
             </span>
             <div className='card-body'>
@@ -271,29 +350,46 @@ const BusinessProfile = (props) => {
               {/* Needs to be a map based on the dynamic data */}
               <div className='form-group'>
                 <label htmlFor='features'>Features</label>
-                {checkboxes.map((checkbox, index) => (
-                  <div className='form-check'>
+                {checkboxNames.map((checkboxName, index) => (
+                  <div className='form-check' key={`${checkboxName}_` + index}>
+                    <label
+                      className='form-check-label'
+                      htmlFor={checkboxName}
+                      style={{ textTransform: 'capitalize' }}
+                    >
+                      <input
+                        className='form-check-input'
+                        type='checkbox'
+                        name={checkboxName.name}
+                        id={checkboxName.id}
+                        checked={checkboxName.isChecked}
+                        onChange={onFormChange}
+                      />
+                      {checkboxName}
+                    </label>
+                  </div>
+                ))}
+                {/* <div className='form-check'>
                     <label
                       className='form-check-label'
                       htmlFor='accessible'
                       key={index}
                     >
                       <input
-                        id='accessible'
+                        // id='accessible'
                         name='accessible'
                         type='checkbox'
                         className='form-check-input'
-                        checked={isChecked2.newObj.accessible}
+                        checked={`isChecked2.newObj.${checkbox}`}
                         onChange={onFormChange}
                       />
                       {checkbox}
                     </label>
-                  </div>
-                ))}
+                  </div> */}
               </div>
-              {checkboxes.map((label, index) => (
-                <h1>{label}</h1>
-              ))}
+              {/* {props.feats.features?.filter(label, index => {
+                return <h5 key={index}>{features.name}</h5>
+              })} */}
 
               {/* <fieldset>
                 <div className='form-group'>
@@ -416,14 +512,9 @@ const BusinessProfile = (props) => {
             {/* <-- Form Ends --> */}
           </form>
         </div>
-        {checkboxes.map((label, index) => {
-          return <h1>{label}</h1>
-        })}
       </section>
     </>
   )
 }
 
 export default withContext(BusinessProfile)
-
-// At component mount fetch JSON {} to build form
