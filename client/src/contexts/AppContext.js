@@ -42,7 +42,7 @@ export const AppContextProvider = props => {
     setUser({})
   }
 
-  // Declare Services and Features to state
+  // Initialize  Services and Features to state
   const [feats, setFeats] = useState([])
   const [services, setServices] = useState([])
 
