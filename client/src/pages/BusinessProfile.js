@@ -10,62 +10,67 @@ import { AppContext } from '../contexts/AppContext'
 const BusinessProfile = props => {
   const history = useHistory()
 
-  // const [checkboxes, setCheckboxes] = useState([])
-  // const [isChecked2, setIsChecked2] = useState({})
-  // // Fetch Features && Services from the database and store into state on component
-  // useEffect(() => {
-  //   const fetchItems = async () => {
-  //     try {
-  //       // Fetch Features from the database
-  //       const featuresResp = await fetch('/api/features', { method: 'GET' })
-  //       const featuresData = await featuresResp.json()
-  //       console.log(featuresData)
+  // Import State Objects from Context
+  const {
+    fetchFeatures,
+    fetchServices,
+    feats,
+    setFeats,
+    services,
+    setServices,
+  } = useContext(AppContext)
 
-  //       if (!featuresResp.ok) {
-  //         throw new Error(featuresData.message)
-  //       }
+  // Initialize list of checkbox Names and checkbox checked status object
+  const [checkboxNames, setCheckboxNames] = useState([])
+  const [isChecked, setIsChecked] = useState({})
 
-  //       // Fetch Services from the database
-  //       const servicesResp = await fetch('/api/services', { method: 'GET' })
-  //       const servicesData = await servicesResp.json()
-  //       console.log(servicesData)
+  // Fetch Services and Features
+  useEffect(() => {
+    async function getFeaturesServices() {
+      const feats = await fetchFeatures()
+      const services = await fetchServices()
+      let featuresServices = []
+      props.feats.features?.filter(featureName => {
+        console.log(featureName.name)
+        featuresServices.push(featureName.name)
+      }) &&
+        props.services.services?.filter(serviceName => {
+          console.log(serviceName.name)
+          featuresServices.push(serviceName.name)
+        })
+      console.log(featuresServices)
+      setCheckboxNames([...featuresServices])
+    }
+    getFeaturesServices()
+  }, [])
 
-  //       if (!servicesResp.ok) {
-  //         throw new Error(servicesData.message)
-  //       }
+  // Construct a new object with `keys` from the list of checkbox names set to a boolean value of `false`
+  useEffect(() => {
+    async function setCheckboxesObj() {
+      await checkboxNames
 
-  //       // Set Features && Services `names` to a state array
-  //       setCheckboxes(
-  //         featuresData.features.filter(feature => {
-  //           checkboxes.push(feature.name)
-  //         }),
+      if (checkboxNames.length > 1) {
+        let newObj = {}
+        newObj = Object.fromEntries(
+          checkboxNames.map(checkbox => [checkbox.toLowerCase(), false])
+        )
+        setIsChecked({ ...newObj })
+        console.log('newObj', newObj)
+        console.log('isChecked', isChecked)
+      }
+      // (Backlog) TODO: ? Store the checkbox Names as a variable after sanitizing to use as name, id, htmlFor and checked={isChecked.${}}
+      // Determine to use first word in string of name of checkbox, i.e. MakeUp Application === makeup
+      // Object.keys(obj).map(k => { res[k] = () => k; return k;})
+    }
+    setCheckboxesObj()
+  }, [checkboxNames])
 
-  //         servicesData.services.filter(service => {
-  //           checkboxes.push(service.name)
-  //         })
-  //       )
-  //       // Convert fetched data into object of isChecked values
-  //       if (checkboxes.length > 1) {
-  //         let newObj = {}
-  //         newObj = Object.fromEntries(
-  //           checkboxes.map(checkbox => [checkbox, false])
-  //         )
-  //         setIsChecked2(newObj)
-  //         console.log('newObj', newObj)
-  //         console.log('isChecked2', isChecked2)
-  //       }
-  //       console.log('checkboxes', checkboxes)
-  //     } catch (error) {
-  //       console.log(error)
-  //     }
-  //   }
-
-  //   fetchItems()
-  // }, [checkboxes, isChecked2])
-
-  // Import User State Object from Context
+  console.log('feats', feats)
+  console.log('services', services)
+  console.log('checkboxNames', checkboxNames)
   console.log('in busprofile, user', props.user._id)
 
+  // Initialize business profile form state object
   const [businessProfileForm, setBusinessProfileForm] = useState({
     businessName: '',
     description: '',
@@ -78,18 +83,7 @@ const BusinessProfile = props => {
     userId: '',
   })
 
-  const [isChecked, setIsChecked] = useState({
-    isAccessible: false,
-    isWifi: false,
-    isFreeParking: false,
-    isWaxing: false,
-    isExtensions: false,
-    isBlowOuts: false,
-    isColoring: false,
-    isMakeUp: false,
-  })
-
-  // TODO (Backlog): Error Handling UI
+  // (Backlog) TODO: Error Handling UI
   const [_error, set_Error] = useState(null)
 
   const onFormChange = event => {
@@ -102,10 +96,11 @@ const BusinessProfile = props => {
       ...businessProfileForm,
       [event.target.name]: value,
     })
+    console.log('e', { [event.target.name]: value })
 
-    // TODO (Backlog): Save to database. Currently sending, but not being saved.
-    setIsChecked2({
-      ...isChecked2,
+    // (Backlog) TODO: Save to database. Currently sending, but not being saved.
+    setIsChecked({
+      ...isChecked,
       [event.target.name]: value,
     })
   }
@@ -116,7 +111,7 @@ const BusinessProfile = props => {
       userId: props.user._id,
     }
 
-    // TODO (Backlog): Add {isChecked} to save in database. Currently sending, but not being saved.
+    // (Backlog) TODO: Add {isChecked} to save in database. Currently sending, but not being saved.
 
     const requestOptions = {
       method: 'POST',
@@ -143,81 +138,6 @@ const BusinessProfile = props => {
     event?.preventDefault()
     saveNewBusiness().then(history.push('/'))
   }
-
-  //* ---------------------------------------------------------
-
-  // Import User State Object from Context
-  const {
-    user,
-    fetchFeatures,
-    fetchServices,
-    feats,
-    setFeats,
-    services,
-    setServices,
-  } = useContext(AppContext)
-
-  console.log('feats', feats)
-  console.log('services', services)
-  // console.log(user)
-
-  const [checkboxNames, setCheckboxNames] = useState([])
-  const [isChecked2, setIsChecked2] = useState({})
-  useEffect(() => {
-    async function getFeaturesServices() {
-      const feats = await fetchFeatures()
-      const services = await fetchServices()
-      let featuresServices = []
-      props.feats.features?.filter(featureName => {
-        console.log(featureName.name)
-        featuresServices.push(featureName.name)
-      }) &&
-        props.services.services?.filter(serviceName => {
-          console.log(serviceName.name)
-          featuresServices.push(serviceName.name)
-        })
-      console.log(featuresServices)
-      setCheckboxNames([...featuresServices])
-    }
-    getFeaturesServices()
-
-    // let featuresServices = []
-    // props.feats.features?.filter(featureName => {
-    //   console.log(featureName.name)
-    //   featuresServices.push(featureName.name)
-    // })
-    // props.services.services?.filter(serviceName => {
-    //   console.log(serviceName.name)
-    //   featuresServices.push(serviceName.name)
-    // })
-    // console.log(featuresServices)
-    // setCheckboxNames([...checkboxNames, ...featuresServices])
-  }, [])
-
-  useEffect(() => {
-    async function setCheckboxesObj() {
-      await checkboxNames
-      // debugger
-      console.log(checkboxNames)
-      if (checkboxNames.length > 1) {
-        let newObj = {}
-        newObj = Object.fromEntries(
-          checkboxNames.map(checkbox => [checkbox, false])
-        )
-        setIsChecked2({ ...newObj })
-        console.log('newObj', newObj)
-        console.log('isChecked2', isChecked2)
-      }
-      // TODO: ?Store the checkbox Names as a variable after sanitizing to use as name, id, htmlFor and checked={isChecked2.${}}
-      // Determine to use first word in string of name of checkbox, i.e. MakeUp Application === makeup
-      // Object.keys(obj).map(k => { res[k] = () => k; return k;});
-    }
-    setCheckboxesObj()
-  }, [checkboxNames])
-
-  // console.log('props.checkboxes', props.checkboxes)
-  console.log('checkboxNames', checkboxNames)
-  //* ---------------------------------------------------------
 
   return (
     <>
