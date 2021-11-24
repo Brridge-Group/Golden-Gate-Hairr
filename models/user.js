@@ -11,6 +11,11 @@ const userSchema = new Schema({
   createdDate: { type: Date, default: Date.now },
   token: { type: String },
   isOwner: { type: Boolean, default: false },
+  role: {
+    type: String,
+    enum: ['user', 'owner', 'admin'],
+    default: 'user',
+  },
 })
 
 module.exports = mongoose.model('User', userSchema)

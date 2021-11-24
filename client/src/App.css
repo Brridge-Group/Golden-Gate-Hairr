@@ -11,3 +11,10 @@ button.btn.btn-primary {
 .products-list .product-description {
   white-space: unset;
 }
+
+.wrapper {
+  background: #f4f6f9;
+}
+.content {
+  margin-top: 50px;
+}

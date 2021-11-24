@@ -1,31 +1,29 @@
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { withContext } from '../contexts/AppContext'
 
 import ContentHeader from '../components/ContentHeader'
 
 const Signup = (props) => {
+  console.log('signup, props', props.user, props)
   const [userForm, setUserForm] = useState({
     firstName: '',
     lastName: '',
     email: '',
     password: '',
     password2: '',
-    isOwner: false,
+    isOwner: props.value || '',
   })
+
+  // this.state = { value: props.value || "" };
   const [isChecked, setIsChecked] = useState({
     owner: false,
   })
-  // console.log('in Signup', isChecked)
 
   const [errorMessage, setErrorMessage] = useState('')
   const history = useHistory()
 
-  const { firstName, lastName, email, password, password2 } = userForm
-
-  // const { userState, setUserState } = useContext(AuthContext)
-
-  const [isNewBusUserCreated, setIsNewBusUserCreated] = useState(false)
+  const { firstName, lastName, email, password, password2, isOwner } = userForm
 
   const onChange = (e) => {
     const value =
@@ -138,6 +136,7 @@ const Signup = (props) => {
                   className='form-check-input'
                   onChange={onChange}
                   checked={isChecked.isOwner}
+                  value={isOwner}
                 />
                 <label className='form-check-label'>Check If True</label>
               </div>
