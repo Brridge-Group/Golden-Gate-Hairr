@@ -2,7 +2,7 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { withContext } from '../contexts/AppContext'
 
-const SideBar = (props) => {
+const SideBar = props => {
   return (
     <React.Fragment>
       <aside className='main-sidebar sidebar-dark-primary elevation-4'>

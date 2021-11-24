@@ -3,7 +3,7 @@ import { withContext } from '../contexts/AppContext'
 import ContentHeader from '../components/ContentHeader'
 import '../stylesheets/Businesses.css'
 
-const BusinessDetails = (props) => {
+const BusinessDetails = props => {
   const [business, setBusiness] = useState('')
   const [phone, setPhone] = useState(false)
 

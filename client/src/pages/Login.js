@@ -3,7 +3,7 @@ import ContentHeader from '../components/ContentHeader'
 import { useHistory } from 'react-router'
 import { withContext } from '../contexts/AppContext'
 
-const Login = (props) => {
+const Login = props => {
   const [loginUser, setLoginUser] = useState({
     email: '',
     password: '',
@@ -18,14 +18,14 @@ const Login = (props) => {
   //   setErrorMessage(errorMessage)
   // }
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     setLoginUser({ ...loginUser, [e.target.name]: e.target.value })
   }
 
   const routeChange = () => {
     history.push('/signup')
   }
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault()
     console.log('in handle submit', loginUser)
     props
@@ -33,7 +33,7 @@ const Login = (props) => {
       // .then(() => clearInputs())
       .then(() => history.push('/profile'))
 
-      .catch((err) => {
+      .catch(err => {
         if (err.response) {
           setErrorMessage(err.response.data)
         }

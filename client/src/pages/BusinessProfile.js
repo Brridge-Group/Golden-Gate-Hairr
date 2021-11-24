@@ -7,7 +7,7 @@ import { useHistory } from 'react-router-dom'
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 
-const BusinessProfile = (props) => {
+const BusinessProfile = props => {
   const history = useHistory()
 
   const [mobile, setmobile] = useState('')
@@ -38,7 +38,7 @@ const BusinessProfile = (props) => {
   // TODO (Backlog): Error Handling UI
   const [_error, set_Error] = useState(null)
 
-  const onFormChange = (event) => {
+  const onFormChange = event => {
     const value =
       event.target.type === 'checkbox'
         ? event.target.checked
@@ -86,7 +86,7 @@ const BusinessProfile = (props) => {
     }
   }
 
-  const profileSubmitHandler = (event) => {
+  const profileSubmitHandler = event => {
     event?.preventDefault()
     saveNewBusiness().then(history.push('/'))
   }
@@ -222,7 +222,7 @@ const BusinessProfile = (props) => {
                     className='form-control'
                     country={'us'}
                     value={mobile}
-                    onChange={(mobile) => setmobile(mobile)}
+                    onChange={mobile => setmobile(mobile)}
                     required
                     onlyCountries={['us']}
                     disableDropdown

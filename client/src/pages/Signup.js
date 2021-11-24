@@ -4,7 +4,7 @@ import { withContext } from '../contexts/AppContext'
 
 import ContentHeader from '../components/ContentHeader'
 
-const Signup = (props) => {
+const Signup = props => {
   console.log('signup, props', props.user, props)
   const [userForm, setUserForm] = useState({
     firstName: '',
@@ -25,7 +25,7 @@ const Signup = (props) => {
 
   const { firstName, lastName, email, password, password2, isOwner } = userForm
 
-  const onChange = (e) => {
+  const onChange = e => {
     const value =
       e.target.type === 'checkbox' ? e.target.checked : e.target.value
 
@@ -37,7 +37,7 @@ const Signup = (props) => {
     })
   }
 
-  const registrationSubmitHandler = async (e) => {
+  const registrationSubmitHandler = async e => {
     e.preventDefault()
     if (password !== password2) {
       alert('Passwords do not match')
@@ -50,7 +50,7 @@ const Signup = (props) => {
             ? history.push('/profile')
             : history.push('/business/profile')
         )
-        .catch((err) => {
+        .catch(err => {
           if (err.response) {
             setErrorMessage(err.response.data)
           }
