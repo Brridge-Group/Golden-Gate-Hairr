@@ -1,5 +1,5 @@
 // React Components
-import React, { useState, useContext, useEffect } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 
 // Custom Imports
@@ -146,7 +146,6 @@ const BusinessProfile = props => {
 
   //* ---------------------------------------------------------
 
-
   // Import User State Object from Context
   const {
     user,
@@ -225,7 +224,7 @@ const BusinessProfile = props => {
       <ContentHeader title='Business Profile Page' />
       <section className='content-wrapper bus-profile ml-0'>
         <div className='card card-primary w-75 mx-auto'>
-          <div className='card-header'>Business Profile Creation</div>
+          <div className='card-header'>New Business Profile</div>
           {/* <-- Form Start --> */}
           <form onSubmit={profileSubmitHandler}>
             <span
@@ -300,7 +299,7 @@ const BusinessProfile = props => {
                     name='address2'
                     type='text'
                     className='form-control'
-                    placeholder='Apartment, Suite, Unit, Building, Floor, ETC.'
+                    placeholder='Apt, Suite, Unit, Bld, Floor, Etc.'
                     value={businessProfileForm.address2}
                     onChange={onFormChange}
                   />
@@ -347,9 +346,8 @@ const BusinessProfile = props => {
                   />
                 </div>
               </fieldset>
-              {/* Needs to be a map based on the dynamic data */}
               <div className='form-group'>
-                <label htmlFor='features'>Features</label>
+                <label htmlFor='featuresServices'>Features & Services</label>
                 {checkboxNames.map((checkboxName, index) => (
                   <div className='form-check' key={`${checkboxName}_` + index}>
                     <label
@@ -369,142 +367,7 @@ const BusinessProfile = props => {
                     </label>
                   </div>
                 ))}
-                {/* <div className='form-check'>
-                    <label
-                      className='form-check-label'
-                      htmlFor='accessible'
-                      key={index}
-                    >
-                      <input
-                        // id='accessible'
-                        name='accessible'
-                        type='checkbox'
-                        className='form-check-input'
-                        checked={`isChecked2.newObj.${checkbox}`}
-                        onChange={onFormChange}
-                      />
-                      {checkbox}
-                    </label>
-                  </div> */}
               </div>
-              {/* {props.feats.features?.filter(label, index => {
-                return <h5 key={index}>{features.name}</h5>
-              })} */}
-
-              {/* <fieldset>
-                <div className='form-group'>
-                  <label htmlFor='features'>Features</label>
-                  <div className='form-check'>
-                    <input
-                      id='accessible'
-                      name='isAccessible'
-                      type='checkbox'
-                      className='form-check-input'
-                      checked={isChecked.isAccessible}
-                      onChange={onFormChange}
-                    />
-                    <label className='form-check-label' htmlFor='accessible'>
-                      Wheelchair Accessible
-                    </label>
-                  </div>
-                  <div className='form-check'>
-                    <input
-                      id='wifi'
-                      name='isWifi'
-                      type='checkbox'
-                      className='form-check-input'
-                      checked={isChecked.isWifi}
-                      onChange={onFormChange}
-                    />
-                    <label className='form-check-label' htmlFor='wifi'>
-                      Wifi
-                    </label>
-                  </div>
-                  <div className='form-check'>
-                    <input
-                      id='freeParking'
-                      name='isFreeParking'
-                      type='checkbox'
-                      className='form-check-input'
-                      checked={isChecked.isFreeParking}
-                      onChange={onFormChange}
-                    />
-                    <label className='form-check-label' htmlFor='freeParking'>
-                      Free Parking
-                    </label>
-                  </div>
-                </div>
-              </fieldset>
-              <fieldset>
-                <div className='form-group'>
-                  <label htmlFor='services'>Services</label>
-                  <div className='form-check'>
-                    <input
-                      id='waxing'
-                      name='isWaxing'
-                      type='checkbox'
-                      className='form-check-input'
-                      onChange={onFormChange}
-                      checked={isChecked.isWaxing}
-                    />
-                    <label className='form-check-label' htmlFor='waxing'>
-                      Waxing
-                    </label>
-                  </div>
-                  <div className='form-check'>
-                    <input
-                      id='extensions'
-                      name='isExtensions'
-                      type='checkbox'
-                      className='form-check-input'
-                      checked={isChecked.isExtensions}
-                      onChange={onFormChange}
-                    />
-                    <label className='form-check-label' htmlFor='extensions'>
-                      Extensions
-                    </label>
-                  </div>
-                  <div className='form-check'>
-                    <input
-                      id='blowOuts'
-                      name='isBlowOuts'
-                      type='checkbox'
-                      className='form-check-input'
-                      checked={isChecked.isBlowOuts}
-                      onChange={onFormChange}
-                    />
-                    <label className='form-check-label' htmlFor='blowOuts'>
-                      Blow Outs
-                    </label>
-                  </div>
-                  <div className='form-check'>
-                    <input
-                      id='coloring'
-                      name='isColoring'
-                      type='checkbox'
-                      className='form-check-input'
-                      checked={isChecked.isColoring}
-                      onChange={onFormChange}
-                    />
-                    <label className='form-check-label' htmlFor='coloring'>
-                      Coloring
-                    </label>
-                  </div>
-                  <div className='form-check'>
-                    <input
-                      id='makeUp'
-                      name='isMakeUp'
-                      type='checkbox'
-                      className='form-check-input'
-                      checked={isChecked.isMakeUp}
-                      onChange={onFormChange}
-                    />
-                    <label className='form-check-label' htmlFor='make-up'>
-                      Make-up
-                    </label>
-                  </div>
-                </div>
-              </fieldset> */}
               <button type='submit' className='btn btn-primary'>
                 Submit
               </button>
