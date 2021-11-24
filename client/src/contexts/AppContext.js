@@ -1,4 +1,4 @@
-import React, { useState, createContext, useEffect } from 'react'
+import { useState, createContext } from 'react'
 import axios from 'axios'
 
 export const AppContext = createContext()
@@ -42,8 +42,7 @@ export const AppContextProvider = props => {
     setUser({})
   }
 
-  // ---------------------------------------------------------
-  // Set Features
+  // Declare Services and Features to state
   const [feats, setFeats] = useState([])
   const [services, setServices] = useState([])
 
@@ -76,7 +75,6 @@ export const AppContextProvider = props => {
       })
   }
 
-  // ---------------------------------------------------------
   return (
     <AppContext.Provider
       value={{
