@@ -6,7 +6,7 @@ const Search = () => {
   const [searchTerm, setSearchTerm] = useState('')
   const history = useHistory()
 
-  const handleSearch = (e) => {
+  const handleSearch = e => {
     let value = e.target.value
     const inputCase =
       value.charAt(0).toUpperCase() + value.slice(1).toLowerCase()
@@ -36,7 +36,7 @@ const Search = () => {
             </label>
             <input
               type='text'
-              onChange={(e) => handleSearch(e)}
+              onChange={e => handleSearch(e)}
               placeholder='city'
               style={{ marginLeft: 10, marginRight: 10 }}
             />

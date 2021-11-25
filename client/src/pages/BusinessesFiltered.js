@@ -3,7 +3,7 @@ import ContentHeader from '../components/ContentHeader'
 import { Redirect } from 'react-router'
 import '../stylesheets/Businesses.css'
 
-const BusinessesFiltered = (props) => {
+const BusinessesFiltered = props => {
   const [redirect, setRedirect] = useState(false)
 
   const star =

@@ -19,7 +19,7 @@ const SearchResults = () => {
         if (!response.ok) {
           throw new Error(response.message)
         }
-        responseData.businesses.filter((business) => {
+        responseData.businesses.filter(business => {
           if (business.city === citySearch) {
             busFilter.push(business)
           }
@@ -41,7 +41,7 @@ const SearchResults = () => {
             <Filters />
           </div>
           <div className='filtered-businesses'>
-            {filterResults.map((business) => {
+            {filterResults.map(business => {
               return (
                 <BusinessesFiltered
                   name={business.businessName}

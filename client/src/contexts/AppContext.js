@@ -3,7 +3,7 @@ import axios from 'axios'
 
 export const AppContext = createContext()
 
-export const AppContextProvider = (props) => {
+export const AppContextProvider = props => {
   console.log('in appcontext props', props)
   const [user, setUser] = useState(
     JSON.parse(localStorage.getItem('user')) || {}
@@ -11,8 +11,8 @@ export const AppContextProvider = (props) => {
 
   const [token, setToken] = useState(localStorage.getItem('token') || '')
 
-  const signup = (userInfo) => {
-    return axios.post('/api/authorize/signup', userInfo).then((response) => {
+  const signup = userInfo => {
+    return axios.post('/api/authorize/signup', userInfo).then(response => {
       const { token, user } = response.data
       localStorage.setItem('token', token)
       localStorage.setItem('user', JSON.stringify(user))
@@ -23,9 +23,9 @@ export const AppContextProvider = (props) => {
     })
   }
 
-  const login = (credentials) => {
+  const login = credentials => {
     console.log('creditionals', credentials)
-    return axios.post('/api/authorize/login', credentials).then((response) => {
+    return axios.post('/api/authorize/login', credentials).then(response => {
       const { token, user } = response.data
       localStorage.setItem('token', token)
       localStorage.setItem('user', JSON.stringify(user))
@@ -58,11 +58,11 @@ export const AppContextProvider = (props) => {
   )
 }
 
-export const withContext = (Component) => {
-  return (props) => {
+export const withContext = Component => {
+  return props => {
     return (
       <AppContext.Consumer>
-        {(globalState) => {
+        {globalState => {
           return <Component {...globalState} {...props} />
         }}
       </AppContext.Consumer>
