@@ -2,8 +2,9 @@ const express = require('express')
 const path = require('path')
 const cors = require('cors')
 const expressJwt = require('express-jwt')
+const bodyParser = require('body-parser');
 
-const itemsRoutes = require('../routes/items-route')
+
 const businessRoutes = require('../routes/business-route')
 const usersRoutes = require('../routes/users-route')
 const authorizesRoutes = require('../routes/authorizes-route')
@@ -14,7 +15,6 @@ const loader = async (app) => {
   // Serve static files from the React app
   app.use(express.static(path.join(__dirname, '../client/build')))
 
-  app.use('/api/items', itemsRoutes)
   app.use('/api/businesses', businessRoutes)
   app.use('/api/users', usersRoutes)
   app.use('/api/authorize', authorizesRoutes)
@@ -22,6 +22,8 @@ const loader = async (app) => {
     '/api',
     expressJwt({ secret: process.env.TOKEN_KEY, algorithms: ['HS256'] })
   )
+  app.use(bodyParser.urlencoded({ extended: true }));
+
 
   // The "catchall" handler: for any request that doesn't
   // match one above, send back React's index.html file.

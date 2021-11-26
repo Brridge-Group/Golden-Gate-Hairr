@@ -13,7 +13,7 @@ const userSchema = new Schema({
   isOwner: { type: Boolean, default: false },
   role: {
     type: String,
-    enum: ['user', 'owner', 'admin'],
+    enum: ['user', 'owner', 'moderator','admin'],
     default: 'user',
   },
 })
