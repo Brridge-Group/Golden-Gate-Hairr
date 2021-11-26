@@ -6,7 +6,9 @@ const User = require('../models/user')
 const signup = async (req, res) => {
   try {
     // Get user input
-    const { firstName, lastName, email, password, role } = req.body
+    const { firstName, lastName, email, password, isOwner } = req.body
+    // const { firstName, lastName, email, password, role } = req.body
+
     // Validate user input
     if (!(email && password && firstName && lastName)) {
       res.status(400).send('All input is required')
@@ -27,7 +29,8 @@ const signup = async (req, res) => {
       lastName,
       email: email.toLowerCase(), // sanitize: convert email to lowercase
       password: encryptedPassword,
-      role: role || "user",
+      // role: role || "user",
+      isOwner
     })
 
     const token = jwt.sign(user.toObject(), process.env.TOKEN_KEY)

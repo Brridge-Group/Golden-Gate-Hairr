@@ -12,10 +12,9 @@ const Signup = props => {
     email: '',
     password: '',
     password2: '',
-    isOwner: props.value || '',
+    isOwner: Boolean,
   })
-
-  // this.state = { value: props.value || "" };
+// const roles = ['user', 'owner']
   const [isChecked, setIsChecked] = useState({
     owner: false,
   })
@@ -39,6 +38,7 @@ const Signup = props => {
 
   const registrationSubmitHandler = async e => {
     e.preventDefault()
+
     if (password !== password2) {
       alert('Passwords do not match')
     } else {
@@ -137,6 +137,7 @@ const Signup = props => {
                   onChange={onChange}
                   checked={isChecked.isOwner}
                   value={isOwner}
+
                 />
                 <label className='form-check-label'>Check If True</label>
               </div>
