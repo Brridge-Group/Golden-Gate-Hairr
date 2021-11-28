@@ -3,6 +3,7 @@
   width: 80%;
   margin: auto;
   flex-direction: column;
+  margin-top: 80px
 }
 .business-container {
   display: flex;

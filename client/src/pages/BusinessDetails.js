@@ -9,12 +9,15 @@ import { useHistory } from 'react-router-dom'
 
 
 
-const BusinessDetails = props=> {
+const BusinessDetails = props => {
   const history = useHistory();
   const { state } = useLocation()
   const business = state.business
+
   const [phone, setPhone] = useState(false)
   const [hidden, setHidden] = useState(false);
+
+  const deleteNameSpace = business.businessName.replace(/\s+/g, '')
 
   const handleClick = () => {
     setPhone(true)
@@ -25,10 +28,10 @@ const BusinessDetails = props=> {
     // <Redirect
     //       to={{
     //         pathname: `/${business.businessName}/review`,
-    //         // state: { business: props.business },
+    //         state: business,
     //       }}
     //     />
-    history.push(`./review`);
+    history.push(`/${deleteNameSpace}/review`);
   }
 
   return (

@@ -18,3 +18,25 @@ button.btn.btn-primary {
 .content {
   margin-top: 50px;
 }
+
+.btn-review {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+.btn-review.on {
+  color: #000;
+}
+.btn-review.off {
+  color: #ccc;
+}
+
+.search.form-group {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
