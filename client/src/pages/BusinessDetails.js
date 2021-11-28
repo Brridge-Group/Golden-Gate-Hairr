@@ -4,16 +4,14 @@ import { withContext } from '../contexts/AppContext'
 import ContentHeader from '../components/ContentHeader'
 import '../stylesheets/Businesses.css'
 import star from '../images/star.svg'
-import { useLocation } from 'react-router-dom'
-import { useHistory } from 'react-router-dom'
-
+import { useLocation, useHistory } from 'react-router-dom'
 
 
 const BusinessDetails = props => {
+
   const history = useHistory();
   const { state } = useLocation()
   const business = state.business
-
   const [phone, setPhone] = useState(false)
   const [hidden, setHidden] = useState(false);
 
@@ -25,13 +23,7 @@ const BusinessDetails = props => {
   }
 
   const reviewRoute = () => {
-    // <Redirect
-    //       to={{
-    //         pathname: `/${business.businessName}/review`,
-    //         state: business,
-    //       }}
-    //     />
-    history.push(`/${deleteNameSpace}/review`);
+    history.push(`/${deleteNameSpace}/review`,{business: business} );
   }
 
   return (
@@ -72,7 +64,7 @@ const BusinessDetails = props => {
                   </p>
                   {props.token ? (
                     <button className='btn btn-default'
-                      onClick={reviewRoute }>
+                      onClick={reviewRoute}>
                   Review</button>
                   ) : (
                     ''

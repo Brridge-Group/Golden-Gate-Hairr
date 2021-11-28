@@ -5,7 +5,6 @@ import star from '../images/star.svg'
 
 
 const BusinessesFiltered = props => {
-  console.log('bus fil props', props)
   const [redirect, setRedirect] = useState(false)
 
   const deleteNameSpace = props.name.replace(/\s+/g, '')

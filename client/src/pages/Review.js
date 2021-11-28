@@ -1,23 +1,29 @@
 import React, { useState } from 'react'
 import ContentHeader from '../components/ContentHeader'
-import { useLocation } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 
 
-const Review = (props) => {
-  console.log(props)
-  // const { state } = useLocation()
-  // const business = state.business
-  // console.log('in review',business)
+const Review = () => {
+  const history = useHistory();
+  const business = history.location.state.business;
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
+
+  console.log(business)
+
+  const submitReview = () => {
+
+  }
+
   return (
     <React.Fragment>
       <ContentHeader title='Search' />
       <div className='card w-50 mx-auto'>
       <div className='card-body' >
     <div className='review-container'>
-            <h6 className='m-0'>`Review your experience with ${ }` </h6>
+            <h6 className='m-0'>Review your experience with {business.businessName} </h6>
+            <form className='form' onSubmit={submitReview}>
     <div className="star-rating">
       {[...Array(5)].map((star, index) => {
         index += 1;
@@ -34,7 +40,9 @@ const Review = (props) => {
           </button>
         );
       })}
-      </div>
+            </div>
+
+            </form>
       </div>
       </div>
       </div>
