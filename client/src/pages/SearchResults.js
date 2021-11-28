@@ -51,6 +51,7 @@ const SearchResults = () => {
                   zipcode={business.zipcode}
                   city={business.city}
                   key={business._id}
+                  id={business._id}
                   business={business}
                 />
               )

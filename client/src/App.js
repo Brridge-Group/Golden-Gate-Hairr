@@ -46,15 +46,11 @@ const App = () => {
       <Route exact path='/businesses/:city'>
         <BusinessesFiltered />
       </Route>
-      {/* <Route exact path='/businesses/:city'>
-        <Businesses />
-      </Route> */}
       <Route exact path='/business/profile'>
         <BusinessProfile />
       </Route>
       <Route
-        exact
-        path='/business-details'
+        exact path='/:city/:name'
         render={(props) => <BusinessDetails {...props} />}
       />
 

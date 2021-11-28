@@ -1,13 +1,11 @@
 import React, { useState } from 'react'
-import ContentHeader from '../components/ContentHeader'
 import { Redirect } from 'react-router'
 import '../stylesheets/Businesses.css'
+import star from '../images/star.svg'
+
 
 const BusinessesFiltered = props => {
   const [redirect, setRedirect] = useState(false)
-
-  const star =
-    'https://raw.githubusercontent.com/Brridge-Group/Golden-Gate-Hairr/6e0316ba1b16f06902c1558650c0c04f3ba5c42b/client/public/star.svg'
 
   const doSetRedirect = () => {
     setRedirect(true)
@@ -17,8 +15,8 @@ const BusinessesFiltered = props => {
       return (
         <Redirect
           to={{
-            pathname: '/business-details',
-            business: props.business,
+            pathname: `/${props.city}/${props.name}`,
+            state: { business: props.business },
           }}
         />
       )
@@ -40,10 +38,26 @@ const BusinessesFiltered = props => {
                     className='image-fluid'
                   />
                   <p className='bus-details--rating '>
-                    <img src={star} alt='Star Icon' style={{ width: '10%' }} />
-                    <img src={star} alt='Star Icon' style={{ width: '10%' }} />
-                    <img src={star} alt='Star Icon' style={{ width: '10%' }} />
-                    <img src={star} alt='Star Icon' style={{ width: '10%' }} />
+                  <img
+                      src={star}
+                      alt='Star Icon'
+                      style={{ width: '10%' }}
+                    />
+                    <img
+                      src={star}
+                      alt='Star Icon'
+                      style={{ width: '10%' }}
+                    />
+                    <img
+                       src={star}
+                      alt='Star Icon'
+                      style={{ width: '10%' }}
+                    />
+                    <img
+                       src={star}
+                      alt='Star Icon'
+                      style={{ width: '10%' }}
+                    />
                   </p>
                 </div>
                 <div className='product-container' style={{ width: '72%' }}>

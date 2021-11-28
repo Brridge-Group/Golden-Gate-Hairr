@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React, {  useState } from 'react'
 import { withContext } from '../contexts/AppContext'
 import ContentHeader from '../components/ContentHeader'
 import '../stylesheets/Businesses.css'
+import star from '../images/star.svg'
+import { useLocation } from 'react-router-dom'
+
 
 const BusinessDetails = props => {
-  const [business, setBusiness] = useState('')
+  const { state } = useLocation()
+  const business = state.business
   const [phone, setPhone] = useState(false)
-
-  useEffect(() => {
-    setBusiness(props.history.location.business)
-  }, [props.history.location.business])
 
   const handleClick = () => {
     setPhone(true)
@@ -31,22 +31,22 @@ const BusinessDetails = props => {
                   />
                   <p className='bus-details--rating '>
                     <img
-                      src='star.svg'
+                      src={star}
                       alt='Star Icon'
                       style={{ width: '10%' }}
                     />
                     <img
-                      src='star.svg'
+                      src={star}
                       alt='Star Icon'
                       style={{ width: '10%' }}
                     />
                     <img
-                      src='star.svg'
+                      src={star}
                       alt='Star Icon'
                       style={{ width: '10%' }}
                     />
                     <img
-                      src='star.svg'
+                      src={star}
                       alt='Star Icon'
                       style={{ width: '10%' }}
                     />
