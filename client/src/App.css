@@ -18,6 +18,9 @@ button.btn.btn-primary {
 .content {
   margin-top: 50px;
 }
+.star-rating {
+  margin-top: 1rem
+}
 
 .btn-review {
   background-color: transparent;
@@ -38,5 +41,8 @@ button.btn.btn-primary {
   top: 50%;
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
+}
+.card-body.review {
+  text-align: center;
 }
 
