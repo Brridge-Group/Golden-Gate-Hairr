@@ -47,7 +47,7 @@ const Signup = props => {
         .signup(userForm)
         .then(() =>
           !isChecked.isOwner
-            ? history.push('/profile')
+            ? history.push('/')
             : history.push('/business/profile')
         )
         .catch(err => {

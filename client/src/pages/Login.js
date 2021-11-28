@@ -30,8 +30,7 @@ const Login = props => {
     console.log('in handle submit', loginUser)
     props
       .login(loginUser)
-      // .then(() => clearInputs())
-      .then(() => history.push('/profile'))
+      .then(() => history.push('/'))
 
       .catch(err => {
         if (err.response) {

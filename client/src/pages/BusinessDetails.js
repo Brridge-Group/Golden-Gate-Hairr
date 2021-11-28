@@ -10,9 +10,12 @@ const BusinessDetails = props => {
   const { state } = useLocation()
   const business = state.business
   const [phone, setPhone] = useState(false)
+  const [hidden, setHidden] = useState(false);
+
 
   const handleClick = () => {
     setPhone(true)
+    setHidden(true)
   }
 
   return (
@@ -64,19 +67,14 @@ const BusinessDetails = props => {
                     {business.zipCode}
                     <br />
                     email: {business.email}
-                    <div className={phone ? 'visable-phone' : 'hidden-phone'}>
-                      phone: {business.phone}
-                    </div>
                   </div>
                   <div className='product-description'>
                     {business.description}
                   </div>
-                  <button
-                    onClick={handleClick}
-                    className='btn btn-default'
-                    style={{ marginTop: '10px' }}>
-                    Book Now
-                  </button>
+                    <div className={phone ? 'phone visable-phone' : 'hidden-phone'} >
+                      phone: {business.phone}
+                    </div>
+              {!hidden && <button className='btn btn-default'onClick={handleClick}> Book Now</button>}
                 </div>
               </figure>
             </li>
