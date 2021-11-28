@@ -13,6 +13,7 @@ const Signup = props => {
     password: '',
     password2: '',
     isOwner: Boolean,
+    role:''
   })
 // const roles = ['user', 'owner']
   const [isChecked, setIsChecked] = useState({

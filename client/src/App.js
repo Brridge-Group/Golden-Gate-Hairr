@@ -10,15 +10,17 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 import SideBar from './components/SideBar'
 
+
 import Login from './pages/Login'
 import Signup from './pages/Signup'
 
-import Search from './pages/Search'
-import SearchResults from './pages/SearchResults'
 import BusinessesFiltered from './pages/BusinessesFiltered'
 import BusinessDetails from './pages/BusinessDetails'
 import BusinessProfile from './pages/BusinessProfile'
 import Profile from './pages/Profile'
+import Review from './pages/Review'
+import Search from './pages/Search'
+import SearchResults from './pages/SearchResults'
 
 
 const App = () => {
@@ -37,6 +39,9 @@ const App = () => {
       </Route>
       <Route exact path='/profile/'>
         <Profile />
+      </Route>
+      <Route exact path='/:name/review/'>
+        <Review />
       </Route>
       <Route exact path='/businesses'></Route>
       <Route exact path='/search/:city'>

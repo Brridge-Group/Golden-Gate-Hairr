@@ -7,15 +7,18 @@ import star from '../images/star.svg'
 const BusinessesFiltered = props => {
   const [redirect, setRedirect] = useState(false)
 
+  const nameDeleteSpace = props.name.replace(/\s+/g, '')
+
   const doSetRedirect = () => {
     setRedirect(true)
   }
+
   const renderRedirect = () => {
     if (redirect) {
       return (
         <Redirect
           to={{
-            pathname: `/${props.city}/${props.name}`,
+            pathname: `/${props.city}/${nameDeleteSpace}`,
             state: { business: props.business },
           }}
         />
