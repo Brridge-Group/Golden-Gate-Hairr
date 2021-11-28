@@ -20,7 +20,6 @@ import BusinessDetails from './pages/BusinessDetails'
 import BusinessProfile from './pages/BusinessProfile'
 import Profile from './pages/Profile'
 
-// Context Imports
 
 const App = () => {
   let routes
@@ -53,7 +52,6 @@ const App = () => {
         exact path='/:city/:name'
         render={(props) => <BusinessDetails {...props} />}
       />
-
       <Redirect to='/' />
     </Switch>
   )

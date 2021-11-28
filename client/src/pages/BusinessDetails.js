@@ -12,7 +12,6 @@ const BusinessDetails = props => {
   const [phone, setPhone] = useState(false)
   const [hidden, setHidden] = useState(false);
 
-
   const handleClick = () => {
     setPhone(true)
     setHidden(true)
