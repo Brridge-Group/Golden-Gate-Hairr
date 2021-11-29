@@ -5,8 +5,8 @@ const Schema = mongoose.Schema
 const reviewSchema = new Schema({
   userId: { type: ObjectId },
   businessId: {type: ObjectId},
-  review: { type: String },
-  rating: {type: Number}
+  comment: { type: String },
+  rating: {type: Number, required: true}
 
 })
 

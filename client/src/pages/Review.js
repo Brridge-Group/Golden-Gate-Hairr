@@ -56,7 +56,7 @@ const Review = () => {
               <textarea
                 name='comment'
                 type='text'
-                className='form-control'
+                className='form-control text-area'
                 onChange={handleChange}
                 value={comment}
               />
