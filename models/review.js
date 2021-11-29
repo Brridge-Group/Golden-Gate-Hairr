@@ -1,8 +1,8 @@
 const mongoose = require('mongoose')
 
-const Schema = mongoose.Schema
+const { ObjectId } = mongoose.Schema
 
-const reviewSchema = new Schema({
+const reviewSchema = new mongoose.Schema({
   userId: { type: ObjectId },
   businessId: {type: ObjectId},
   comment: { type: String },
@@ -10,4 +10,4 @@ const reviewSchema = new Schema({
 
 })
 
-module.exports = mongoose.model('Review', reviewSchema)
+module.exports = mongoose.model('Review', reviewSchema, 'reviews')

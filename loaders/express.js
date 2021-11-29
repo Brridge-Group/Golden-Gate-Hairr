@@ -4,9 +4,9 @@ const cors = require('cors')
 const expressJwt = require('express-jwt')
 const bodyParser = require('body-parser');
 
-
 const businessRoutes = require('../routes/business-route')
 const usersRoutes = require('../routes/users-route')
+const reviewRoutes = require('../routes/review-route')
 const authorizesRoutes = require('../routes/authorizes-route')
 
 const loader = async (app) => {
@@ -17,6 +17,7 @@ const loader = async (app) => {
 
   app.use('/api/businesses', businessRoutes)
   app.use('/api/users', usersRoutes)
+  app.use('/api/reviews', reviewRoutes)
   app.use('/api/authorize', authorizesRoutes)
   app.use(
     '/api',
@@ -36,7 +37,7 @@ const loader = async (app) => {
   app.use(cors())
 
   // near the top with the other imports
-
+//following from bob zirolls tutorial
   // Make the app use the express-jwt authentication middleware on anything starting with "/api"
   // We'll give expressJwt a config object with a secret and a specified algorithm
 
