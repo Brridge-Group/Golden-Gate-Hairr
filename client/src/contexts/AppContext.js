@@ -1,4 +1,4 @@
-import React, { useState, createContext } from 'react'
+import { useState, createContext } from 'react'
 import axios from 'axios'
 
 export const AppContext = createContext()
@@ -52,7 +52,8 @@ export const AppContextProvider = props => {
         setUser,
         token,
         setToken,
-      }}>
+      }}
+    >
       {props.children}
     </AppContext.Provider>
   )

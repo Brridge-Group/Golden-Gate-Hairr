@@ -1,19 +1,16 @@
-import React, { useState } from 'react'
-import { Redirect } from 'react-router'
+import { useState } from 'react'
 import { withContext } from '../contexts/AppContext'
 import ContentHeader from '../components/ContentHeader'
 import '../stylesheets/Businesses.css'
 import star from '../images/star.svg'
 import { useLocation, useHistory } from 'react-router-dom'
 
-
 const BusinessDetails = props => {
-
-  const history = useHistory();
+  const history = useHistory()
   const { state } = useLocation()
   const business = state.business
   const [phone, setPhone] = useState(false)
-  const [hidden, setHidden] = useState(false);
+  const [hidden, setHidden] = useState(false)
 
   const deleteNameSpace = business.businessName.replace(/\s+/g, '')
 
@@ -23,11 +20,11 @@ const BusinessDetails = props => {
   }
 
   const reviewRoute = () => {
-    history.push(`/${deleteNameSpace}/review`,{business: business} );
+    history.push(`/${deleteNameSpace}/review`, { business: business })
   }
 
   return (
-    <React.Fragment>
+    <>
       <ContentHeader title='Business Details ' />
       <div className='card w-50 mx-auto'>
         <div className='card-body'>
@@ -41,31 +38,15 @@ const BusinessDetails = props => {
                     className='image-fluid'
                   />
                   <p className='bus-details--rating '>
-                    <img
-                      src={star}
-                      alt='Star Icon'
-                      style={{ width: '10%' }}
-                    />
-                    <img
-                      src={star}
-                      alt='Star Icon'
-                      style={{ width: '10%' }}
-                    />
-                    <img
-                      src={star}
-                      alt='Star Icon'
-                      style={{ width: '10%' }}
-                    />
-                    <img
-                      src={star}
-                      alt='Star Icon'
-                      style={{ width: '10%' }}
-                    />
+                    <img src={star} alt='Star Icon' style={{ width: '10%' }} />
+                    <img src={star} alt='Star Icon' style={{ width: '10%' }} />
+                    <img src={star} alt='Star Icon' style={{ width: '10%' }} />
+                    <img src={star} alt='Star Icon' style={{ width: '10%' }} />
                   </p>
                   {props.token ? (
-                    <button className='btn btn-default'
-                      onClick={reviewRoute}>
-                  Review</button>
+                    <button className='btn btn-default' onClick={reviewRoute}>
+                      Review
+                    </button>
                   ) : (
                     ''
                   )}
@@ -81,17 +62,24 @@ const BusinessDetails = props => {
                   <div className='product-description'>
                     {business.description}
                   </div>
-                    <div className={phone ? 'phone visable-phone' : 'hidden-phone'} >
-                      phone: {business.phone}
-                    </div>
-              {!hidden && <button className='btn btn-default'onClick={handleClick}> Book Now</button>}
+                  <div
+                    className={phone ? 'phone visable-phone' : 'hidden-phone'}
+                  >
+                    phone: {business.phone}
+                  </div>
+                  {!hidden && (
+                    <button className='btn btn-default' onClick={handleClick}>
+                      {' '}
+                      Book Now
+                    </button>
+                  )}
                 </div>
               </figure>
             </li>
           </ul>
         </div>
       </div>
-    </React.Fragment>
+    </>
   )
 }
 

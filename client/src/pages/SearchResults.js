@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import BusinessesFiltered from './BusinessesFiltered'
+import { useState, useEffect } from 'react'
+import BusinessCard from '../components/BusinessCard'
 import Filters from '../components/Filters'
 
 import { useParams } from 'react-router'
@@ -33,7 +33,7 @@ const SearchResults = () => {
   }, [])
 
   return (
-    <React.Fragment>
+    <>
       <div className='business-wrapper'>
         <h5>Hairstylists located in {citySearch}</h5>
         <div className='business-container'>
@@ -43,7 +43,7 @@ const SearchResults = () => {
           <div className='filtered-businesses'>
             {filterResults.map(business => {
               return (
-                <BusinessesFiltered
+                <BusinessCard
                   name={business.businessName}
                   description={business.description}
                   address={business.address1}
@@ -59,7 +59,7 @@ const SearchResults = () => {
           </div>
         </div>
       </div>
-    </React.Fragment>
+    </>
   )
 }
 

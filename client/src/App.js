@@ -1,4 +1,3 @@
-import React from 'react'
 import './App.css'
 import {
   BrowserRouter as Router,
@@ -10,18 +9,16 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 import SideBar from './components/SideBar'
 
-
 import Login from './pages/Login'
 import Signup from './pages/Signup'
 
-import BusinessesFiltered from './pages/BusinessesFiltered'
+import BusinessCard from './components/BusinessCard'
 import BusinessDetails from './pages/BusinessDetails'
 import BusinessProfile from './pages/BusinessProfile'
 import Profile from './pages/Profile'
 import Review from './pages/Review'
 import Search from './pages/Search'
 import SearchResults from './pages/SearchResults'
-
 
 const App = () => {
   let routes
@@ -48,14 +45,15 @@ const App = () => {
         <SearchResults />
       </Route>
       <Route exact path='/businesses/:city'>
-        <BusinessesFiltered />
+        <BusinessCard />
       </Route>
       <Route exact path='/business/profile'>
         <BusinessProfile />
       </Route>
       <Route
-        exact path='/:city/:name'
-        render={(props) => <BusinessDetails {...props} />}
+        exact
+        path='/:city/:name'
+        render={props => <BusinessDetails {...props} />}
       />
       <Redirect to='/' />
     </Switch>

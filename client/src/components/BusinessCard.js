@@ -1,10 +1,9 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Redirect } from 'react-router'
 import '../stylesheets/Businesses.css'
 import star from '../images/star.svg'
 
-
-const BusinessesFiltered = props => {
+const BusinessCard = props => {
   const [redirect, setRedirect] = useState(false)
 
   const deleteNameSpace = props.name.replace(/\s+/g, '')
@@ -27,7 +26,7 @@ const BusinessesFiltered = props => {
   }
 
   return (
-    <React.Fragment>
+    <>
       <div className='card-body filtered'>
         {renderRedirect()}
         <div onClick={doSetRedirect} style={{ cursor: 'pointer' }}>
@@ -41,26 +40,10 @@ const BusinessesFiltered = props => {
                     className='image-fluid'
                   />
                   <p className='bus-details--rating '>
-                  <img
-                      src={star}
-                      alt='Star Icon'
-                      style={{ width: '10%' }}
-                    />
-                    <img
-                      src={star}
-                      alt='Star Icon'
-                      style={{ width: '10%' }}
-                    />
-                    <img
-                       src={star}
-                      alt='Star Icon'
-                      style={{ width: '10%' }}
-                    />
-                    <img
-                       src={star}
-                      alt='Star Icon'
-                      style={{ width: '10%' }}
-                    />
+                    <img src={star} alt='Star Icon' style={{ width: '10%' }} />
+                    <img src={star} alt='Star Icon' style={{ width: '10%' }} />
+                    <img src={star} alt='Star Icon' style={{ width: '10%' }} />
+                    <img src={star} alt='Star Icon' style={{ width: '10%' }} />
                   </p>
                 </div>
                 <div className='product-container' style={{ width: '72%' }}>
@@ -77,8 +60,8 @@ const BusinessesFiltered = props => {
           </ul>
         </div>
       </div>
-    </React.Fragment>
+    </>
   )
 }
 
-export default BusinessesFiltered
+export default BusinessCard

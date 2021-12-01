@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { withContext } from '../contexts/AppContext'
 
@@ -13,9 +13,9 @@ const Signup = props => {
     password: '',
     password2: '',
     isOwner: Boolean,
-    role:''
+    role: '',
   })
-// const roles = ['user', 'owner']
+  // const roles = ['user', 'owner']
   const [isChecked, setIsChecked] = useState({
     owner: false,
   })
@@ -60,7 +60,7 @@ const Signup = props => {
   }
 
   return (
-    <React.Fragment>
+    <>
       <ContentHeader title='Registration' />
       <div className='card w-50 mx-auto'>
         <div className='card-header'>
@@ -138,7 +138,6 @@ const Signup = props => {
                   onChange={onChange}
                   checked={isChecked.isOwner}
                   value={isOwner}
-
                 />
                 <label className='form-check-label'>Check If True</label>
               </div>
@@ -147,7 +146,8 @@ const Signup = props => {
             <button
               onChange={onChange}
               type='submit'
-              className='btn btn-primary'>
+              className='btn btn-primary'
+            >
               Submit
             </button>
           </form>
@@ -156,7 +156,7 @@ const Signup = props => {
           )}
         </div>
       </div>
-    </React.Fragment>
+    </>
   )
 }
 

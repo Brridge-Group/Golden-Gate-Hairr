@@ -1,5 +1,5 @@
 // React Components
-import React, { useState } from 'react'
+import { useState } from 'react'
 import ContentHeader from '../components/ContentHeader'
 import { withContext } from '../contexts/AppContext'
 import { useHistory } from 'react-router-dom'
@@ -105,7 +105,8 @@ const BusinessProfile = props => {
                 fontSize: '1.5rem',
                 textAlign: 'center',
                 width: '20rem',
-              }}>
+              }}
+            >
               {_error}
             </span>
             <div className='card-body'>

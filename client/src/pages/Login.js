@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import ContentHeader from '../components/ContentHeader'
 import { useHistory } from 'react-router'
 import { withContext } from '../contexts/AppContext'
@@ -40,7 +40,7 @@ const Login = props => {
   }
 
   return (
-    <React.Fragment>
+    <>
       <ContentHeader title='Log In' />
 
       <div className='card w-50 mx-auto'>
@@ -76,7 +76,8 @@ const Login = props => {
               <button
                 onChange={handleChange}
                 type='submit'
-                className='btn btn-primary'>
+                className='btn btn-primary'
+              >
                 Login
               </button>
               <button onClick={routeChange} className='btn btn-primary'>
@@ -89,7 +90,7 @@ const Login = props => {
           )}
         </div>
       </div>
-    </React.Fragment>
+    </>
   )
 }
 

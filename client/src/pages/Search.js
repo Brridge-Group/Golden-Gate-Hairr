@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import ContentHeader from '../components/ContentHeader'
 import { useHistory } from 'react-router-dom'
 
@@ -19,15 +19,11 @@ const Search = () => {
   }
 
   return (
-    <React.Fragment>
+    <>
       <ContentHeader title='Search' />
       <div className='card w-50 mx-auto'>
         <div className='card-body' style={{ height: 200 }}>
-          <div
-            style={{ textAlign: 'center' }}
-            className='search form-group'
-          >
-
+          <div style={{ textAlign: 'center' }} className='search form-group'>
             <label htmlFor='search'>
               <h6 className='m-0'>I'm looking for a hair stylist in </h6>
             </label>
@@ -40,13 +36,14 @@ const Search = () => {
 
             <button
               style={{ border: 'none', background: 'none' }}
-              onClick={buttonOnClick}>
+              onClick={buttonOnClick}
+            >
               <i className='fas fa-search'></i>
             </button>
           </div>
         </div>
       </div>
-    </React.Fragment>
+    </>
   )
 }
 
