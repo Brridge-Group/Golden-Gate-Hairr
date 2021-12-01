@@ -1,4 +1,4 @@
-import React, { useState, createContext } from 'react'
+import { useState, createContext } from 'react'
 import axios from 'axios'
 
 export const AppContext = createContext()
@@ -24,7 +24,7 @@ export const AppContextProvider = props => {
   }
 
   const login = credentials => {
-    console.log('creditionals', credentials)
+    console.log('credentials', credentials)
     return axios.post('/api/authorize/login', credentials).then(response => {
       const { token, user } = response.data
       localStorage.setItem('token', token)
@@ -42,6 +42,39 @@ export const AppContextProvider = props => {
     setUser({})
   }
 
+  // Initialize  Services and Features to state
+  const [feats, setFeats] = useState([])
+  const [services, setServices] = useState([])
+
+  const fetchFeatures = () => {
+    fetch('/api/features', { method: 'GET' })
+      .then(resp => {
+        if (resp.status >= 200 && resp.status <= 299) {
+          return resp.json()
+        } else {
+          throw new Error(resp.statusText)
+        }
+      })
+      .then(data => setFeats(data))
+      .catch(error => {
+        console.log('Error fetching features', error)
+      })
+  }
+  const fetchServices = () => {
+    fetch('/api/services', { method: 'GET' })
+      .then(resp => {
+        if (resp.status >= 200 && resp.status <= 299) {
+          return resp.json()
+        } else {
+          throw new Error(resp.statusText)
+        }
+      })
+      .then(data => setServices(data))
+      .catch(error => {
+        console.log('Error fetching services', error)
+      })
+  }
+
   return (
     <AppContext.Provider
       value={{
@@ -52,7 +85,14 @@ export const AppContextProvider = props => {
         setUser,
         token,
         setToken,
-      }}>
+        fetchFeatures,
+        fetchServices,
+        feats,
+        setFeats,
+        services,
+        setServices,
+      }}
+    >
       {props.children}
     </AppContext.Provider>
   )

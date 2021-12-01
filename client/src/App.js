@@ -55,7 +55,7 @@ const App = () => {
       <Route
         exact
         path='/business-details'
-        render={(props) => <BusinessDetails {...props} />}
+        render={props => <BusinessDetails {...props} />}
       />
 
       <Redirect to='/' />
