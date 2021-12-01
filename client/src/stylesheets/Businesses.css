@@ -1,0 +1,53 @@
+.business-wrapper {
+  display: flex;
+  width: 80%;
+  margin: auto;
+  flex-direction: column;
+}
+.business-container {
+  display: flex;
+}
+.business-features-placeholder {
+  width: 25%;
+  background: snow;
+  border-right: 10px solid #f4f6f9;
+}
+.filtered-businesses {
+  width: 75%;
+}
+.card-body.filtered {
+  padding: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+}
+.card-body.filtered:last-child {
+  border: 0;
+}
+
+.indie-card {
+  display: flex;
+  overflow: hidden;
+  margin: 20px;
+}
+.pic-star-container {
+  margin-right: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.bus-details--rating {
+  display: flex;
+  margin-top: 5px;
+  justify-content: space-around;
+}
+h5 {
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+  background: white;
+}
+
+.hidden-phone {
+  visibility: hidden;
+}
+.visible-phone {
+  visibility: visible;
+}

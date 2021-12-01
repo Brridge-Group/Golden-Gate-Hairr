@@ -1,33 +1,31 @@
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { withContext } from '../contexts/AppContext'
 
 import ContentHeader from '../components/ContentHeader'
 
-const Signup = (props) => {
+const Signup = props => {
+  console.log('signup, props', props.user, props)
   const [userForm, setUserForm] = useState({
     firstName: '',
     lastName: '',
     email: '',
     password: '',
     password2: '',
-    isOwner: false,
+    isOwner: props.value || '',
   })
+
+  // this.state = { value: props.value || "" };
   const [isChecked, setIsChecked] = useState({
     owner: false,
   })
-  // console.log('in Signup', isChecked)
 
   const [errorMessage, setErrorMessage] = useState('')
   const history = useHistory()
 
-  const { firstName, lastName, email, password, password2 } = userForm
+  const { firstName, lastName, email, password, password2, isOwner } = userForm
 
-  // const { userState, setUserState } = useContext(AuthContext)
-
-  const [isNewBusUserCreated, setIsNewBusUserCreated] = useState(false)
-
-  const onChange = (e) => {
+  const onChange = e => {
     const value =
       e.target.type === 'checkbox' ? e.target.checked : e.target.value
 
@@ -39,7 +37,7 @@ const Signup = (props) => {
     })
   }
 
-  const registrationSubmitHandler = async (e) => {
+  const registrationSubmitHandler = async e => {
     e.preventDefault()
     if (password !== password2) {
       alert('Passwords do not match')
@@ -52,7 +50,7 @@ const Signup = (props) => {
             ? history.push('/profile')
             : history.push('/business/profile')
         )
-        .catch((err) => {
+        .catch(err => {
           if (err.response) {
             setErrorMessage(err.response.data)
           }
@@ -138,6 +136,7 @@ const Signup = (props) => {
                   className='form-check-input'
                   onChange={onChange}
                   checked={isChecked.isOwner}
+                  value={isOwner}
                 />
                 <label className='form-check-label'>Check If True</label>
               </div>

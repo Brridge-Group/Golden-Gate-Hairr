@@ -7,6 +7,9 @@ import ContentHeader from '../components/ContentHeader'
 import { withContext } from '../contexts/AppContext'
 import { AppContext } from '../contexts/AppContext'
 
+// 3rd Party Imports
+import PhoneInput from 'react-phone-input-2'
+import 'react-phone-input-2/lib/style.css'
 const BusinessProfile = props => {
   const history = useHistory()
 
@@ -83,6 +86,8 @@ const BusinessProfile = props => {
   console.log('services', services)
   console.log('checkboxNames', checkboxNames)
   console.log('in busprofile, user', props.user._id)
+  
+  const [mobile, setmobile] = useState('')
 
   // Initialize business profile form state object
   const [businessProfileForm, setBusinessProfileForm] = useState({
@@ -94,7 +99,7 @@ const BusinessProfile = props => {
     city: '',
     state: '',
     zipCode: '',
-    userId: '',
+    phone: '',
   })
 
   // (Backlog) TODO: Error Handling UI
@@ -123,6 +128,7 @@ const BusinessProfile = props => {
     let newBusiness = {
       ...businessProfileForm,
       userId: props.user._id,
+      phone: mobile,
     }
 
     // (Backlog) TODO: Add {isChecked} to save in database. Currently sending, but not being saved.
@@ -277,6 +283,19 @@ const BusinessProfile = props => {
                     value={businessProfileForm.zipCode}
                     onChange={onFormChange}
                     required
+                  />
+                </div>
+                <div className='form-group'>
+                  <label htmlFor='phoneNumber'>Phone Number</label>
+                  <PhoneInput
+                    placeholder='Enter phone number'
+                    className='form-control'
+                    country={'us'}
+                    value={mobile}
+                    onChange={mobile => setmobile(mobile)}
+                    required
+                    onlyCountries={['us']}
+                    disableDropdown
                   />
                 </div>
               </fieldset>
