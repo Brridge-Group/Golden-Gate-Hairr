@@ -16,6 +16,7 @@ const createBusiness = async (req, res, next) => {
     country,
     mainPicture,
     email,
+    phone,
     status,
     userId,
   } = req.body
@@ -32,6 +33,7 @@ const createBusiness = async (req, res, next) => {
     country,
     mainPicture,
     email,
+    phone,
     status,
     userId,
   })
@@ -89,6 +91,7 @@ const updateBusiness = async (req, res, next) => {
     country,
     mainPicture,
     email,
+    phone,
     status,
   } = req.body
 
@@ -111,6 +114,7 @@ const updateBusiness = async (req, res, next) => {
   business.mainPicture = mainPicture
   business.email = email
   business.status = status
+  business.phone = phone
 
   try {
     const update = await business.save()

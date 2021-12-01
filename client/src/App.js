@@ -15,7 +15,6 @@ import Signup from './pages/Signup'
 
 import Search from './pages/Search'
 import SearchResults from './pages/SearchResults'
-
 import BusinessesFiltered from './pages/BusinessesFiltered'
 import BusinessDetails from './pages/BusinessDetails'
 import BusinessProfile from './pages/BusinessProfile'
@@ -34,31 +33,31 @@ const App = () => {
       <Route path='/login'>
         <Login />
       </Route>
-
       <Route path='/signup'>
         <Signup />
       </Route>
-
       <Route exact path='/profile/'>
         <Profile />
       </Route>
-
       <Route exact path='/businesses'></Route>
       <Route exact path='/search/:city'>
         <SearchResults />
       </Route>
-
       <Route exact path='/businesses/:city'>
         <BusinessesFiltered />
       </Route>
-
+      {/* <Route exact path='/businesses/:city'>
+        <Businesses />
+      </Route> */}
       <Route exact path='/business/profile'>
         <BusinessProfile />
       </Route>
       <Route
+        exact
         path='/business-details'
         render={props => <BusinessDetails {...props} />}
       />
+
       <Redirect to='/' />
     </Switch>
   )
@@ -68,6 +67,7 @@ const App = () => {
       <Header />
       <SideBar />
       <div className='content-wrapper'>
+        {/* {routes} */}
         <div className='content'>{routes}</div>
       </div>
       <Footer />

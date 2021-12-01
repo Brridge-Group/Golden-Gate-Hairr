@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import BusinessesFiltered from './BusinessesFiltered'
+import Filters from '../components/Filters'
+
 import { useParams } from 'react-router'
 
 const SearchResults = () => {
@@ -17,7 +19,7 @@ const SearchResults = () => {
         if (!response.ok) {
           throw new Error(response.message)
         }
-        responseData.businesses.filter((business) => {
+        responseData.businesses.filter(business => {
           if (business.city === citySearch) {
             busFilter.push(business)
           }
@@ -32,20 +34,30 @@ const SearchResults = () => {
 
   return (
     <React.Fragment>
-      {filterResults.map((business) => {
-        return (
-          <BusinessesFiltered
-            name={business.businessName}
-            description={business.description}
-            address={business.address1}
-            state={business.state}
-            zipcode={business.zipcode}
-            city={business.city}
-            key={business._id}
-            business={business}
-          />
-        )
-      })}
+      <div className='business-wrapper'>
+        <h5>Hairstylists located in {citySearch}</h5>
+        <div className='business-container'>
+          <div className='business-features-placeholder'>
+            <Filters />
+          </div>
+          <div className='filtered-businesses'>
+            {filterResults.map(business => {
+              return (
+                <BusinessesFiltered
+                  name={business.businessName}
+                  description={business.description}
+                  address={business.address1}
+                  state={business.state}
+                  zipcode={business.zipcode}
+                  city={business.city}
+                  key={business._id}
+                  business={business}
+                />
+              )
+            })}
+          </div>
+        </div>
+      </div>
     </React.Fragment>
   )
 }

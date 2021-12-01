@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ContentHeader = (props) => {
+const ContentHeader = props => {
   return (
     <React.Fragment>
       <div className='content-header'>
