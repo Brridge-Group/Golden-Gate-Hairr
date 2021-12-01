@@ -22,6 +22,8 @@ const BusinessProfile = props => {
 
   // Initialize list of checkbox Names and checkbox checked status object
   const [checkboxNames, setCheckboxNames] = useState([])
+  const [checkboxFeatsNames, setCheckboxFeatsNames] = useState([])
+  const [checkboxServicesNames, setCheckboxServicesNames] = useState([])
   const [isChecked, setIsChecked] = useState({})
 
   // Fetch Services and Features
@@ -30,16 +32,28 @@ const BusinessProfile = props => {
       const feats = await fetchFeatures()
       const services = await fetchServices()
       let featuresServices = []
+      let servicesArr = []
+      let featuresArr = []
+      // props.feats.features?.filter(featureName => {
+      //   console.log(featureName.name)
+      //   featuresServices.push(featureName.name)
+      // }) &&
+      //   props.services.services?.filter(serviceName => {
+      //     console.log(serviceName.name)
+      //     featuresServices.push(serviceName.name)
+      //   })
+      // console.log(featuresServices)
+      // setCheckboxNames([...featuresServices])
+      props.services.services?.filter(serviceName => {
+        console.log(serviceName.name)
+        servicesArr.push(serviceName.name)
+      })
+      setCheckboxServicesNames([...servicesArr])
       props.feats.features?.filter(featureName => {
         console.log(featureName.name)
-        featuresServices.push(featureName.name)
-      }) &&
-        props.services.services?.filter(serviceName => {
-          console.log(serviceName.name)
-          featuresServices.push(serviceName.name)
-        })
-      console.log(featuresServices)
-      setCheckboxNames([...featuresServices])
+        featuresArr.push(featureName.name)
+      })
+      setCheckboxFeatsNames([...featuresArr])
     }
     getFeaturesServices()
   }, [])
@@ -63,7 +77,7 @@ const BusinessProfile = props => {
       // Object.keys(obj).map(k => { res[k] = () => k; return k;})
     }
     setCheckboxesObj()
-  }, [checkboxNames])
+  }, [checkboxNames, checkboxFeatsNames])
 
   console.log('feats', feats)
   console.log('services', services)
@@ -267,23 +281,51 @@ const BusinessProfile = props => {
                 </div>
               </fieldset>
               <div className='form-group'>
-                <label htmlFor='featuresServices'>Features & Services</label>
-                {checkboxNames.map((checkboxName, index) => (
-                  <div className='form-check' key={`${checkboxName}_` + index}>
+                <label htmlFor='features'>Features</label>
+                {checkboxFeatsNames.map((checkboxFeatsName, index) => (
+                  <div
+                    className='form-check'
+                    key={`${checkboxFeatsName}_` + index}
+                  >
                     <label
                       className='form-check-label'
-                      htmlFor={checkboxName}
+                      htmlFor={checkboxFeatsName}
                       style={{ textTransform: 'capitalize' }}
                     >
                       <input
                         className='form-check-input'
                         type='checkbox'
-                        name={checkboxName.name}
-                        id={checkboxName.id}
-                        checked={checkboxName.isChecked}
+                        name={checkboxFeatsName.name}
+                        id={checkboxFeatsName.id}
+                        checked={checkboxFeatsName.isChecked}
                         onChange={onFormChange}
                       />
-                      {checkboxName}
+                      {checkboxFeatsName}
+                    </label>
+                  </div>
+                ))}
+              </div>
+              <div className='form-group'>
+                <label htmlFor='services'>Services</label>
+                {checkboxServicesNames.map((checkboxServicesName, index) => (
+                  <div
+                    className='form-check'
+                    key={`${checkboxServicesName}_` + index}
+                  >
+                    <label
+                      className='form-check-label'
+                      htmlFor={checkboxServicesName}
+                      style={{ textTransform: 'capitalize' }}
+                    >
+                      <input
+                        className='form-check-input'
+                        type='checkbox'
+                        name={checkboxServicesName.name}
+                        id={checkboxServicesName.id}
+                        checked={checkboxServicesName.isChecked}
+                        onChange={onFormChange}
+                      />
+                      {checkboxServicesName}
                     </label>
                   </div>
                 ))}
