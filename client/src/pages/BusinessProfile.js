@@ -1,17 +1,81 @@
 // React Components
-import { useState } from 'react'
+import { useState, useContext, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
+
+// Custom Imports
 import ContentHeader from '../components/ContentHeader'
 import { withContext } from '../contexts/AppContext'
-import { useHistory } from 'react-router-dom'
-// Custom Imports
+import { AppContext } from '../contexts/AppContext'
+
+// 3rd Party Imports
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
-
 const BusinessProfile = props => {
   const history = useHistory()
 
+  // Import State Objects from Context
+  const {
+    fetchFeatures,
+    fetchServices,
+    feats,
+    setFeats,
+    services,
+    setServices,
+  } = useContext(AppContext)
+
+  // Initialize list of checkbox Names and checkbox checked status object
+  const [checkboxNames, setCheckboxNames] = useState([])
+  const [isChecked, setIsChecked] = useState({})
+
+  // Fetch Services and Features
+  useEffect(() => {
+    async function getFeaturesServices() {
+      const feats = await fetchFeatures()
+      const services = await fetchServices()
+      let featuresServices = []
+      props.feats.features?.filter(featureName => {
+        console.log(featureName.name)
+        featuresServices.push(featureName.name)
+      }) &&
+        props.services.services?.filter(serviceName => {
+          console.log(serviceName.name)
+          featuresServices.push(serviceName.name)
+        })
+      console.log(featuresServices)
+      setCheckboxNames([...featuresServices])
+    }
+    getFeaturesServices()
+  }, [])
+
+  // Construct a new object with `keys` from the list of checkbox names set to a boolean value of `false`
+  useEffect(() => {
+    async function setCheckboxesObj() {
+      await checkboxNames
+
+      if (checkboxNames.length > 1) {
+        let newObj = {}
+        newObj = Object.fromEntries(
+          checkboxNames.map(checkbox => [checkbox.toLowerCase(), false])
+        )
+        setIsChecked({ ...newObj })
+        console.log('newObj', newObj)
+        console.log('isChecked', isChecked)
+      }
+      // (Backlog) TODO: ? Store the checkbox Names as a variable after sanitizing to use as name, id, htmlFor and checked={isChecked.${}}
+      // Determine to use first word in string of name of checkbox, i.e. MakeUp Application === makeup
+      // Object.keys(obj).map(k => { res[k] = () => k; return k;})
+    }
+    setCheckboxesObj()
+  }, [checkboxNames])
+
+  console.log('feats', feats)
+  console.log('services', services)
+  console.log('checkboxNames', checkboxNames)
+  console.log('in busprofile, user', props.user._id)
+
   const [mobile, setmobile] = useState('')
 
+  // Initialize business profile form state object
   const [businessProfileForm, setBusinessProfileForm] = useState({
     businessName: '',
     description: '',
@@ -24,18 +88,7 @@ const BusinessProfile = props => {
     phone: '',
   })
 
-  const [isChecked, setIsChecked] = useState({
-    isAccessible: false,
-    isWifi: false,
-    isFreeParking: false,
-    isWaxing: false,
-    isExtensions: false,
-    isBlowOuts: false,
-    isColoring: false,
-    isMakeUp: false,
-  })
-
-  // TODO (Backlog): Error Handling UI
+  // (Backlog) TODO: Error Handling UI
   const [_error, set_Error] = useState(null)
 
   const onFormChange = event => {
@@ -48,8 +101,9 @@ const BusinessProfile = props => {
       ...businessProfileForm,
       [event.target.name]: value,
     })
+    console.log('e', { [event.target.name]: value })
 
-    // TODO (Backlog): Save to database. Currently sending, but not being saved.
+    // (Backlog) TODO: Save to database. Currently sending, but not being saved.
     setIsChecked({
       ...isChecked,
       [event.target.name]: value,
@@ -63,7 +117,7 @@ const BusinessProfile = props => {
       phone: mobile,
     }
 
-    // TODO (Backlog): Add {isChecked} to save in database. Currently sending, but not being saved.
+    // (Backlog) TODO: Add {isChecked} to save in database. Currently sending, but not being saved.
 
     const requestOptions = {
       method: 'POST',
@@ -90,12 +144,13 @@ const BusinessProfile = props => {
     event?.preventDefault()
     saveNewBusiness().then(history.push('/'))
   }
+
   return (
     <>
       <ContentHeader title='Business Profile Page' />
       <section className='content-wrapper bus-profile ml-0'>
         <div className='card card-primary w-75 mx-auto'>
-          <div className='card-header'>Business Profile Creation</div>
+          <div className='card-header'>New Business Profile</div>
           {/* <-- Form Start --> */}
           <form onSubmit={profileSubmitHandler}>
             <span
@@ -170,7 +225,7 @@ const BusinessProfile = props => {
                     name='address2'
                     type='text'
                     className='form-control'
-                    placeholder='Apartment, Suite, Unit, Building, Floor, ETC.'
+                    placeholder='Apt, Suite, Unit, Bld, Floor, Etc.'
                     value={businessProfileForm.address2}
                     onChange={onFormChange}
                   />
@@ -230,120 +285,28 @@ const BusinessProfile = props => {
                   />
                 </div>
               </fieldset>
-              <fieldset>
-                <div className='form-group'>
-                  <label htmlFor='features'>Features</label>
-                  <div className='form-check'>
-                    <input
-                      id='accessible'
-                      name='isAccessible'
-                      type='checkbox'
-                      className='form-check-input'
-                      checked={isChecked.isAccessible}
-                      onChange={onFormChange}
-                    />
-                    <label className='form-check-label' htmlFor='accessible'>
-                      Wheelchair Accessible
+              <div className='form-group'>
+                <label htmlFor='featuresServices'>Features & Services</label>
+                {checkboxNames.map((checkboxName, index) => (
+                  <div className='form-check' key={`${checkboxName}_` + index}>
+                    <label
+                      className='form-check-label'
+                      htmlFor={checkboxName}
+                      style={{ textTransform: 'capitalize' }}
+                    >
+                      <input
+                        className='form-check-input'
+                        type='checkbox'
+                        name={checkboxName.name}
+                        id={checkboxName.id}
+                        checked={checkboxName.isChecked}
+                        onChange={onFormChange}
+                      />
+                      {checkboxName}
                     </label>
                   </div>
-                  <div className='form-check'>
-                    <input
-                      id='wifi'
-                      name='isWifi'
-                      type='checkbox'
-                      className='form-check-input'
-                      checked={isChecked.isWifi}
-                      onChange={onFormChange}
-                    />
-                    <label className='form-check-label' htmlFor='wifi'>
-                      Wifi
-                    </label>
-                  </div>
-                  <div className='form-check'>
-                    <input
-                      id='freeParking'
-                      name='isFreeParking'
-                      type='checkbox'
-                      className='form-check-input'
-                      checked={isChecked.isFreeParking}
-                      onChange={onFormChange}
-                    />
-                    <label className='form-check-label' htmlFor='freeParking'>
-                      Free Parking
-                    </label>
-                  </div>
-                </div>
-              </fieldset>
-              <fieldset>
-                <div className='form-group'>
-                  <label htmlFor='services'>Services</label>
-                  <div className='form-check'>
-                    <input
-                      id='waxing'
-                      name='isWaxing'
-                      type='checkbox'
-                      className='form-check-input'
-                      onChange={onFormChange}
-                      checked={isChecked.isWaxing}
-                    />
-                    <label className='form-check-label' htmlFor='waxing'>
-                      Waxing
-                    </label>
-                  </div>
-                  <div className='form-check'>
-                    <input
-                      id='extensions'
-                      name='isExtensions'
-                      type='checkbox'
-                      className='form-check-input'
-                      checked={isChecked.isExtensions}
-                      onChange={onFormChange}
-                    />
-                    <label className='form-check-label' htmlFor='extensions'>
-                      Extensions
-                    </label>
-                  </div>
-                  <div className='form-check'>
-                    <input
-                      id='blowOuts'
-                      name='isBlowOuts'
-                      type='checkbox'
-                      className='form-check-input'
-                      checked={isChecked.isBlowOuts}
-                      onChange={onFormChange}
-                    />
-                    <label className='form-check-label' htmlFor='blowOuts'>
-                      Blow Outs
-                    </label>
-                  </div>
-                  <div className='form-check'>
-                    <input
-                      id='coloring'
-                      name='isColoring'
-                      type='checkbox'
-                      className='form-check-input'
-                      checked={isChecked.isColoring}
-                      onChange={onFormChange}
-                    />
-                    <label className='form-check-label' htmlFor='coloring'>
-                      Coloring
-                    </label>
-                  </div>
-                  <div className='form-check'>
-                    <input
-                      id='makeUp'
-                      name='isMakeUp'
-                      type='checkbox'
-                      className='form-check-input'
-                      checked={isChecked.isMakeUp}
-                      onChange={onFormChange}
-                    />
-                    <label className='form-check-label' htmlFor='make-up'>
-                      Make-up
-                    </label>
-                  </div>
-                </div>
-              </fieldset>
+                ))}
+              </div>
               <button type='submit' className='btn btn-primary'>
                 Submit
               </button>
@@ -357,5 +320,3 @@ const BusinessProfile = props => {
 }
 
 export default withContext(BusinessProfile)
-
-// At component mount fetch JSON {} to build form

@@ -39,7 +39,7 @@ const createBusiness = async (req, res, next) => {
   try {
     await newBusiness.save()
   } catch (error) {
-    console.log('err', error)
+    console.log('error', error)
     return next(error)
   }
   res.status(201).json({ business: newBusiness })
@@ -69,9 +69,7 @@ const getBusinesses = async (req, res, next) => {
     return next(error)
   }
   res.json({
-    businesses: businesses.map((business) =>
-      business.toObject({ getter: true })
-    ),
+    businesses: businesses.map(business => business.toObject({ getter: true })),
   })
 }
 
