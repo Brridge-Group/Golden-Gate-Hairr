@@ -37,7 +37,7 @@ const Review = props => {
     }
 
     try {
-      console.log('in try')
+      console.log('in try, new review', newReview)
       const response = await fetch('/api/reviews', requestOptions)
       if (!response.ok) {
         throw new Error('New review not saved! Please resubmit.')

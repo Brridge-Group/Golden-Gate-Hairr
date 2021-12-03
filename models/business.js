@@ -18,13 +18,7 @@ const businessSchema = new mongoose.Schema({
   phone: { type: String },
   features: [{ type: ObjectId, ref: 'features' }],
   services: [{ type: ObjectId, ref: 'services' }],
-  reviews: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-
-      ref: 'Review',
-    },
-  ],
+  reviews: [{ type: ObjectId, ref: 'reviews' }],
 })
 
 // 3rd parameter to match exact collection name in the DB. Mongoose automatically finds the plural of the modal name declared here if third parameter is not present.

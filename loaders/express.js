@@ -5,7 +5,7 @@ const expressJwt = require('express-jwt')
 const bodyParser = require('body-parser')
 
 const usersRoutes = require('../routes/users-route')
-const reviewRoutes = require('../routes/review-route')
+const reviewsRoutes = require('../routes/reviews-route')
 // Require Routes
 const businessesRoutes = require('../routes/businesses-route')
 const featuresRoutes = require('../routes/features-route')
@@ -19,7 +19,7 @@ const loader = async app => {
   app.use(express.static(path.join(__dirname, '../client/build')))
 
   app.use('/api/users', usersRoutes)
-  app.use('/api/reviews', reviewRoutes)
+  app.use('/api/reviews', reviewsRoutes)
   app.use('/api/businesses', businessesRoutes)
   app.use('/api/features', featuresRoutes)
   app.use('/api/services', servicesRoutes)
