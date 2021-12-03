@@ -45,33 +45,58 @@ export const AppContextProvider = props => {
   // Initialize  Services and Features to state
   const [feats, setFeats] = useState([])
   const [services, setServices] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [featuresNamesArr, setFeaturesNamesArr] = useState([])
+  const [servicesNamesArr, setServicesNamesArr] = useState([])
 
   const fetchFeatures = () => {
+    //pass func agr inside of the then callback data on line 58 to setCheckboxNames with data from BusProfile
+
     fetch('/api/features', { method: 'GET' })
       .then(resp => {
         if (resp.status >= 200 && resp.status <= 299) {
+          setLoading(true)
           return resp.json()
         } else {
           throw new Error(resp.statusText)
         }
       })
-      .then(data => setFeats(data))
+      .then(data => {
+        console.log('data', data)
+        const feats = data.features.map(feat => {
+          console.log(data)
+          return feat.name
+        })
+        setFeaturesNamesArr(feats)
+
+        setLoading(false)
+      })
       .catch(error => {
         console.log('Error fetching features', error)
+        setLoading(false)
       })
   }
   const fetchServices = () => {
     fetch('/api/services', { method: 'GET' })
       .then(resp => {
         if (resp.status >= 200 && resp.status <= 299) {
+          setLoading(true)
           return resp.json()
         } else {
           throw new Error(resp.statusText)
         }
       })
-      .then(data => setServices(data))
+      .then(data => {
+        const services = data.services.map(service => {
+          console.log(data)
+          return service.name
+        })
+        setServicesNamesArr(services)
+        setLoading(false)
+      })
       .catch(error => {
         console.log('Error fetching services', error)
+        setLoading(false)
       })
   }
 
@@ -87,10 +112,16 @@ export const AppContextProvider = props => {
         setToken,
         fetchFeatures,
         fetchServices,
-        feats,
-        setFeats,
-        services,
-        setServices,
+        // feats,
+        // setFeats,
+        // services,
+        // setServices,
+        loading,
+        setLoading,
+        featuresNamesArr,
+        setFeaturesNamesArr,
+        servicesNamesArr,
+        setServicesNamesArr,
       }}
     >
       {props.children}
