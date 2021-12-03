@@ -21,7 +21,6 @@ const Review = props => {
     setReviewForm({ ...reviewForm, [e.target.name]: e.target.value })
   }
   const saveNewReview = async () => {
-    console.log('in save new review')
     let newReview = {
       ...reviewForm,
       userId: props.user._id,
@@ -52,7 +51,6 @@ const Review = props => {
   }
 
   const submitReview = e => {
-    console.log('in submit review')
     e.preventDefault()
     saveNewReview().then(history.push('/'))
   }
