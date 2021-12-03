@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import ContentHeader from '../components/ContentHeader'
-// import { withContext } from '../contexts/AppContext'
+import { withContext } from '../contexts/AppContext'
 import { useHistory } from 'react-router-dom'
 
-const Review = () => {
+const Review = props => {
   const history = useHistory()
   const business = history.location.state.business
   const [rating, setRating] = useState(0)
@@ -15,29 +15,18 @@ const Review = () => {
   // TODO (Backlog): Error Handling UI
   const [_error, set_Error] = useState(null)
 
-  console.log(
-    'business, business._id, business.userId',
-    business,
-    business._id,
-    business.userId
-  )
   const { comment } = reviewForm
-
-  //delete once saving review has been implemented, along with deleting button onClick
-  const routeChange = () => {
-    history.push('/')
-  }
 
   const handleChange = e => {
     setReviewForm({ ...reviewForm, [e.target.name]: e.target.value })
   }
-  //need business id here
   const saveNewReview = async () => {
+    console.log('in save new review')
     let newReview = {
       ...reviewForm,
-      userId: business.userId,
+      userId: props.user._id,
       businessId: business._id,
-      starRating: rating,
+      rating: rating,
     }
 
     const requestOptions = {
@@ -49,6 +38,7 @@ const Review = () => {
     }
 
     try {
+      console.log('in try')
       const response = await fetch('/api/reviews', requestOptions)
       if (!response.ok) {
         throw new Error('New review not saved! Please resubmit.')
@@ -62,6 +52,7 @@ const Review = () => {
   }
 
   const submitReview = e => {
+    console.log('in submit review')
     e.preventDefault()
     saveNewReview().then(history.push('/'))
   }
@@ -110,7 +101,6 @@ const Review = () => {
               onChange={handleChange}
               type='submit'
               className='btn btn-primary'
-              onClick={routeChange}
             >
               Submit
             </button>
@@ -121,4 +111,4 @@ const Review = () => {
   )
 }
 
-export default Review
+export default withContext(Review)
