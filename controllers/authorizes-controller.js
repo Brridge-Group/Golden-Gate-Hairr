@@ -2,12 +2,10 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const User = require('../models/user')
 
-
 const signup = async (req, res) => {
   try {
     // Get user input
-    const { firstName, lastName, email, password, isOwner } = req.body
-    // const { firstName, lastName, email, password, role } = req.body
+    const { firstName, lastName, email, password, role, isOwner } = req.body
 
     // Validate user input
     if (!(email && password && firstName && lastName)) {
@@ -29,10 +27,9 @@ const signup = async (req, res) => {
       lastName,
       email: email.toLowerCase(), // sanitize: convert email to lowercase
       password: encryptedPassword,
-      // role: role || "user",
-      isOwner
+      role,
+      // isOwner,
     })
-
     const token = jwt.sign(user.toObject(), process.env.TOKEN_KEY)
     return res.status(201).send({ success: true, user: user.toObject(), token })
   } catch (err) {

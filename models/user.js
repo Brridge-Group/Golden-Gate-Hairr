@@ -10,7 +10,6 @@ const userSchema = new Schema({
   password2: { type: String },
   createdDate: { type: Date, default: Date.now },
   token: { type: String },
-  isOwner: { type: Boolean, default: false },
   role: {
     type: String,
     enum: ['user', 'owner', 'moderator', 'admin'],
