@@ -15,6 +15,7 @@ const userSchema = new Schema({
     enum: ['user', 'owner', 'moderator', 'admin'],
     default: 'user',
   },
+  reviews: [{ type: Schema.Types.ObjectId, ref: 'Review' }],
 })
 
 module.exports = mongoose.model('User', userSchema)
