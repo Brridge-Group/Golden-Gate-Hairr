@@ -63,6 +63,7 @@ export const AppContextProvider = props => {
       })
       .then(data => {
         console.log('data', data)
+        setFeats(data)
         const feats = data.features.map(feat => {
           console.log(data)
           return feat.name
@@ -87,6 +88,7 @@ export const AppContextProvider = props => {
         }
       })
       .then(data => {
+        setServices(data)
         const services = data.services.map(service => {
           console.log(data)
           return service.name
@@ -112,10 +114,10 @@ export const AppContextProvider = props => {
         setToken,
         fetchFeatures,
         fetchServices,
-        // feats,
-        // setFeats,
-        // services,
-        // setServices,
+        feats,
+        setFeats,
+        services,
+        setServices,
         loading,
         setLoading,
         featuresNamesArr,
