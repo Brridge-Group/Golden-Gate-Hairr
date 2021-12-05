@@ -20,6 +20,8 @@ const BusinessProfile = props => {
   const [isChecked, setIsChecked] = useState({})
   const [loading, setLoading] = useState(true)
 
+  const [features, setFeatures] = useState([])
+  const [services, setServices] = useState([])
   // console.log('feats', props.feats)
   // console.log('services', props.services)
   // console.log('checkboxNames', checkboxNames)
@@ -94,7 +96,8 @@ const BusinessProfile = props => {
   }, [])
 
   // useEffect(() => {
-  //   console.log(feats.features)
+  console.log(props.feats)
+  console.log(props.services)
 
   //   const features = new Map(
   //     Object.keys(props.feats.features).map(key => [key, feats.features[key]])>
@@ -104,9 +107,17 @@ const BusinessProfile = props => {
   //   // })
   //   console.log('features', features)
   //   console.log('arr', arr)
-  //   // feats.features.map(el => el.name)
-  // }, [])
+  useEffect(() => {
+    const features = props.feats.features?.map(el => {
+      let featsName = el.name
+      let featsId = el._id
+      let featsIsChecked = el.isChecked
 
+      return [featsName, featsId, featsIsChecked]
+    })
+    setFeatures(features)
+  }, [props.feats, props.services])
+  console.log('features:', features)
   // Construct a new object with `keys` from the list of checkbox names set to a boolean value of `false`
   useEffect(() => {
     async function setCheckboxesObj() {
@@ -343,7 +354,8 @@ const BusinessProfile = props => {
                   </fieldset>
                   <div className='form-group'>
                     <label htmlFor='features'>Features</label>
-                    {props.featuresNamesArr.map((checkboxFeatsName, index) => (
+
+                    {features.map((feature, index) => (
                       <div
                         className='form-check'
                         key={`${checkboxFeatsName}_` + index}
@@ -356,12 +368,17 @@ const BusinessProfile = props => {
                           <input
                             className='form-check-input'
                             type='checkbox'
-                            name={checkboxFeatsName.name}
-                            id={checkboxFeatsName.id}
-                            checked={checkboxFeatsName.isChecked}
+                          name={feature[0]}
+                          id={feature[1]}
+                          checked={feature.isChecked}
+                          key={`${feature}_` + index}
                             onChange={onFormChange}
                           />
-                          {checkboxFeatsName}
+                        <label
+                          className='form-check-label'
+                          htmlFor={feature[1]}
+                        >
+                          {feature[0]}
                         </label>
                       </div>
                     ))}
