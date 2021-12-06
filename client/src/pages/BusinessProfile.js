@@ -22,6 +22,7 @@ const BusinessProfile = props => {
 
   const [features, setFeatures] = useState([])
   const [services, setServices] = useState([])
+
   // console.log('feats', props.feats)
   // console.log('services', props.services)
   // console.log('checkboxNames', checkboxNames)
@@ -97,48 +98,57 @@ const BusinessProfile = props => {
 
   console.log(props.featuresArr)
   console.log(props.feats)
+  console.log('props.feats', props.feats.features)
   console.log(props.services)
 
-  //   const features = new Map(
-  //     Object.keys(props.feats.features).map(key => [key, feats.features[key]])>
-  //   )
-  //   // feats.features.map(el => {
-  //   //   setArr(el.name)
-  //   // })
-  //   console.log('features', features)
-  //   console.log('arr', arr)
-  useEffect(() => {
-    const features = props.feats.features?.map(el => {
-      let featsName = el.name
-      let featsId = el._id
-      let featsIsChecked = el.isChecked
+  // const a = props.feats.features?.map(el => {
+  //   let featsName = el.name
+  //   let featsId = el._id
+  //   let featsIsChecked = el.isChecked
 
-      return [featsName, featsId, featsIsChecked]
-    })
+  //   return [featsName, featsId, featsIsChecked]
+  // })
+
+  useEffect(() => {
+    // const features = props.feats.features?.map(el => {
+    //   let featsName = el.name
+    //   let featsId = el._id
+    //   let featsIsChecked = el.isChecked
+
+    //   return [featsName, featsId, featsIsChecked]
+    // })
+
+    // const features = new Map(
+    //   Object.keys(props.feats).map(key => [key, props.feats[key]])
+    //   // Object.keys(props.feats).map(key => [key, feats.features[key]])
+    // )
     setFeatures(features)
   }, [props.feats, props.services])
   console.log('features:', features)
-  // Construct a new object with `keys` from the list of checkbox names set to a boolean value of `false`
-  useEffect(() => {
-    async function setCheckboxesObj() {
-      await checkboxNames
+  // console.log('features:', features[0].value)
+  // [0].value[1]._id
 
-      if (checkboxNames.length > 1) {
-        let newObj = {}
-        newObj = Object.fromEntries(
-          checkboxNames.map(checkbox => [checkbox.toLowerCase(), false])
-        )
-        setIsChecked({ ...newObj })
-        console.log('newObj', newObj)
-        console.log('isChecked', isChecked)
-      }
-      // (Backlog) TODO: ? Store the checkbox Names as a variable after sanitizing to use as name, id, htmlFor and checked={isChecked.${}}
-      // Determine to use first word in string of name of checkbox, i.e. MakeUp Application === makeup
-      // Object.keys(obj).map(k => { res[k] = () => k; return k;})
-    }
-    setCheckboxesObj()
-    // setLoading(false)
-  }, [checkboxNames])
+  // Construct a new object with `keys` from the list of checkbox names set to a boolean value of `false`
+  // useEffect(() => {
+  //   async function setCheckboxesObj() {
+  //     await checkboxNames
+
+  //     if (checkboxNames.length > 1) {
+  //       let newObj = {}
+  //       newObj = Object.fromEntries(
+  //         checkboxNames.map(checkbox => [checkbox.toLowerCase(), false])
+  //       )
+  //       setIsChecked({ ...newObj })
+  //       console.log('newObj', newObj)
+  //       console.log('isChecked', isChecked)
+  //     }
+  //     // (Backlog) TODO: ? Store the checkbox Names as a variable after sanitizing to use as name, id, htmlFor and checked={isChecked.${}}
+  //     // Determine to use first word in string of name of checkbox, i.e. MakeUp Application === makeup
+  //     // Object.keys(obj).map(k => { res[k] = () => k; return k;})
+  //   }
+  //   setCheckboxesObj()
+  //   // setLoading(false)
+  // }, [checkboxNames])
 
   // Initialize business profile form state object
   const [businessProfileForm, setBusinessProfileForm] = useState({
@@ -358,23 +368,17 @@ const BusinessProfile = props => {
                     {props.featuresArr?.map((feature, index) => (
                       <div
                         className='form-check'
-                        key={`${checkboxFeatsName}_` + index}
-                      >
-                        <label
-                          className='form-check-label'
-                          htmlFor={checkboxFeatsName}
-                          style={{ textTransform: 'capitalize' }}
+                        style={{ textTransform: 'capitalize' }}
                         key={`${feature}_` + index}
-                        >
-                          <input
-                            className='form-check-input'
-                            type='checkbox'
+                      >
+                        <input
+                          className='form-check-input'
+                          type='checkbox'
                           name={feature[0]}
                           id={feature[1]}
                           checked={feature.isChecked}
-                          key={`${feature}_` + index}
-                            onChange={onFormChange}
-                          />
+                          onChange={onFormChange}
+                        />
                         <label
                           className='form-check-label'
                           htmlFor={feature[1]}
@@ -387,34 +391,27 @@ const BusinessProfile = props => {
                   <div className='form-group'>
                     <label htmlFor='services'>Services</label>
                     {props.servicesArr?.map((service, index) => (
-                      (checkboxServicesName, index) => (
-                        <div
-                          className='form-check'
-                          key={`${checkboxServicesName}_` + index}
-                        >
-                          <label
-                            className='form-check-label'
-                            htmlFor={checkboxServicesName}
-                            style={{ textTransform: 'capitalize' }}
+                      <div
+                        className='form-check'
+                        style={{ textTransform: 'capitalize' }}
                         key={`${service}_` + index}
-                          >
-                            <input
-                              className='form-check-input'
-                              type='checkbox'
+                      >
+                        <input
+                          className='form-check-input'
+                          type='checkbox'
                           name={service[0]}
                           id={service[1]}
                           checked={service.isChecked}
-                              onChange={onFormChange}
-                            />
+                          onChange={onFormChange}
+                        />
                         <label
                           className='form-check-label'
                           htmlFor={service[1]}
                         >
                           {service[0]}
-                          </label>
-                        </div>
+                        </label>
+                      </div>
                     ))}
-                    )}
                   </div>
                   <button type='submit' className='btn btn-primary'>
                     Submit
