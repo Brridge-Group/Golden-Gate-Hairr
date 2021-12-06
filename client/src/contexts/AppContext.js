@@ -45,9 +45,9 @@ export const AppContextProvider = props => {
   // Initialize  Services and Features to state
   const [feats, setFeats] = useState([])
   const [services, setServices] = useState([])
+  const [featuresArr, setFeaturesArr] = useState([])
+  const [servicesArr, setServicesArr] = useState([])
   const [loading, setLoading] = useState(true)
-  const [featuresNamesArr, setFeaturesNamesArr] = useState([])
-  const [servicesNamesArr, setServicesNamesArr] = useState([])
 
   const fetchFeatures = () => {
     //pass func agr inside of the then callback data on line 58 to setCheckboxNames with data from BusProfile
@@ -62,14 +62,17 @@ export const AppContextProvider = props => {
         }
       })
       .then(data => {
-        console.log('data', data)
+        // console.log('data', data)
         setFeats(data)
-        const feats = data.features.map(feat => {
-          console.log(data)
-          return feat.name
-        })
-        setFeaturesNamesArr(feats)
+        const feats = data.features.map(el => {
+          let featsName = el.name
+          let featsId = el._id
+          let featsIsChecked = el.isChecked
 
+          return [featsName, featsId, featsIsChecked]
+        })
+        // setPosts(json.data.children.map(c => c.data))
+        setFeaturesArr(feats)
         setLoading(false)
       })
       .catch(error => {
@@ -89,11 +92,18 @@ export const AppContextProvider = props => {
       })
       .then(data => {
         setServices(data)
-        const services = data.services.map(service => {
-          console.log(data)
-          return service.name
+        const services = data.services.map(el => {
+          let servicesName = el.name
+          let servicesId = el._id
+          let servicesIsChecked = el.isChecked
+
+          return [servicesName, servicesId, servicesIsChecked]
         })
-        setServicesNamesArr(services)
+        // const services = data.services.map(service => {
+        //   console.log(data)
+        //   return service.name
+        // })
+        setServicesArr(services)
         setLoading(false)
       })
       .catch(error => {
@@ -120,10 +130,10 @@ export const AppContextProvider = props => {
         setServices,
         loading,
         setLoading,
-        featuresNamesArr,
-        setFeaturesNamesArr,
-        servicesNamesArr,
-        setServicesNamesArr,
+        featuresArr,
+        setFeaturesArr,
+        servicesArr,
+        setServicesArr,
       }}
     >
       {props.children}
