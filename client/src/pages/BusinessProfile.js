@@ -95,7 +95,7 @@ const BusinessProfile = props => {
     }
   }, [])
 
-  // useEffect(() => {
+  console.log(props.featuresArr)
   console.log(props.feats)
   console.log(props.services)
 
@@ -355,7 +355,7 @@ const BusinessProfile = props => {
                   <div className='form-group'>
                     <label htmlFor='features'>Features</label>
 
-                    {features.map((feature, index) => (
+                    {props.featuresArr?.map((feature, index) => (
                       <div
                         className='form-check'
                         key={`${checkboxFeatsName}_` + index}
@@ -364,6 +364,7 @@ const BusinessProfile = props => {
                           className='form-check-label'
                           htmlFor={checkboxFeatsName}
                           style={{ textTransform: 'capitalize' }}
+                        key={`${feature}_` + index}
                         >
                           <input
                             className='form-check-input'
@@ -385,7 +386,7 @@ const BusinessProfile = props => {
                   </div>
                   <div className='form-group'>
                     <label htmlFor='services'>Services</label>
-                    {props.servicesNamesArr.map(
+                    {props.servicesArr?.map((service, index) => (
                       (checkboxServicesName, index) => (
                         <div
                           className='form-check'
@@ -395,19 +396,24 @@ const BusinessProfile = props => {
                             className='form-check-label'
                             htmlFor={checkboxServicesName}
                             style={{ textTransform: 'capitalize' }}
+                        key={`${service}_` + index}
                           >
                             <input
                               className='form-check-input'
                               type='checkbox'
-                              name={checkboxServicesName.name}
-                              id={checkboxServicesName.id}
-                              checked={checkboxServicesName.isChecked}
+                          name={service[0]}
+                          id={service[1]}
+                          checked={service.isChecked}
                               onChange={onFormChange}
                             />
-                            {checkboxServicesName}
+                        <label
+                          className='form-check-label'
+                          htmlFor={service[1]}
+                        >
+                          {service[0]}
                           </label>
                         </div>
-                      )
+                    ))}
                     )}
                   </div>
                   <button type='submit' className='btn btn-primary'>
