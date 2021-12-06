@@ -23,132 +23,31 @@ const BusinessProfile = props => {
   const [features, setFeatures] = useState([])
   const [services, setServices] = useState([])
 
-  // console.log('feats', props.feats)
-  // console.log('services', props.services)
-  // console.log('checkboxNames', checkboxNames)
-  console.log('in busprofile, user', props.user._id)
+  console.log('Biz UserId', props.user._id)
 
   const [mobile, setmobile] = useState('')
 
-  // useEffect(() => {
-  //   setLoading(true)
-  //   fetchFeatures()
-  //   fetchServices()
-
-  //   setLoading(false)
-  //   let servicesArr = []
-  //   let featuresArr = []
-  //   feats.features?.map(el => {
-  //     console.log(el.name)
-  //   })
-  //   props.services.services?.filter(serviceName => {
-  //     // console.log(serviceName.name)
-  //     servicesArr.push(serviceName.name)
-  //   })
-  //   props.feats.features?.filter(featureName => {
-  //     // console.log(featureName.name)
-  //     featuresArr.push(featureName.name)
-  //   })
-
-  //   setCheckboxServicesNames([...servicesArr])
-  //   setCheckboxFeatsNames([...featuresArr])
-  // }, [])
-  // console.log('checkboxFeatsNames', checkboxFeatsNames)
-  // console.log('checkboxServicesNames', checkboxServicesNames)
-
   // Fetch Services and Features
+  // ?Determine to use first word in string of name of checkbox, i.e. MakeUp Application === makeup
   useEffect(() => {
     setLoading(true)
     const getFeaturesServices = async () => {
       setLoading(true)
       await props.fetchFeatures()
       await props.fetchServices()
-      // let featuresServices = []
-      // let servicesArr = []
-      // let featuresArr = []
-
-      // props.services.services?.filter(serviceName => {
-      //   // console.log(serviceName.name)
-      //   servicesArr.push(serviceName.name)
-      // })
-      // props.feats.features?.filter(featureName => {
-      //   // console.log(featureName.name)
-      //   featuresArr.push(featureName.name)
-      // })
-      // setCheckboxServicesNames([...servicesArr])
-      // setCheckboxFeatsNames([...featuresArr])
     }
     getFeaturesServices()
-
-    // if (
-    //   props.feats.features?.length >= 1 &&
-    //   props.services.services?.length >= 1
-    // ) {
-    //   // setLoading(false)
-    //   setLoading(false)
-    // }
-
-    // console.log('checkboxFeatsNames', checkboxFeatsNames)
-    // console.log('checkboxServicesNames', checkboxServicesNames)
     return function clean() {
-      // props.loading = false
       setLoading(false)
     }
   }, [])
 
-  console.log(props.featuresArr)
-  console.log(props.feats)
-  console.log('props.feats', props.feats.features)
-  console.log(props.services)
-
-  // const a = props.feats.features?.map(el => {
-  //   let featsName = el.name
-  //   let featsId = el._id
-  //   let featsIsChecked = el.isChecked
-
-  //   return [featsName, featsId, featsIsChecked]
-  // })
-
   useEffect(() => {
-    // const features = props.feats.features?.map(el => {
-    //   let featsName = el.name
-    //   let featsId = el._id
-    //   let featsIsChecked = el.isChecked
-
-    //   return [featsName, featsId, featsIsChecked]
-    // })
-
-    // const features = new Map(
-    //   Object.keys(props.feats).map(key => [key, props.feats[key]])
-    //   // Object.keys(props.feats).map(key => [key, feats.features[key]])
-    // )
-    setFeatures(features)
+    setFeatures(props.feats.features)
+    setServices(props.services.services)
   }, [props.feats, props.services])
-  console.log('features:', features)
-  // console.log('features:', features[0].value)
-  // [0].value[1]._id
-
-  // Construct a new object with `keys` from the list of checkbox names set to a boolean value of `false`
-  // useEffect(() => {
-  //   async function setCheckboxesObj() {
-  //     await checkboxNames
-
-  //     if (checkboxNames.length > 1) {
-  //       let newObj = {}
-  //       newObj = Object.fromEntries(
-  //         checkboxNames.map(checkbox => [checkbox.toLowerCase(), false])
-  //       )
-  //       setIsChecked({ ...newObj })
-  //       console.log('newObj', newObj)
-  //       console.log('isChecked', isChecked)
-  //     }
-  //     // (Backlog) TODO: ? Store the checkbox Names as a variable after sanitizing to use as name, id, htmlFor and checked={isChecked.${}}
-  //     // Determine to use first word in string of name of checkbox, i.e. MakeUp Application === makeup
-  //     // Object.keys(obj).map(k => { res[k] = () => k; return k;})
-  //   }
-  //   setCheckboxesObj()
-  //   // setLoading(false)
-  // }, [checkboxNames])
+  console.log('services bus profile state', services)
+  console.log('features bus profile state', features)
 
   // Initialize business profile form state object
   const [businessProfileForm, setBusinessProfileForm] = useState({
@@ -176,12 +75,12 @@ const BusinessProfile = props => {
       ...businessProfileForm,
       [event.target.name]: value,
     })
-    console.log('e', { [event.target.name]: value })
+    // console.log('e', { [event.target.name]: value })
 
     // (Backlog) TODO: Save to database. Currently sending, but not being saved.
     setIsChecked({
       ...isChecked,
-      [event.target.name]: value,
+        [event.target.id]: value,
     })
   }
 
