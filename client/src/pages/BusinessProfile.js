@@ -2,7 +2,6 @@
 import { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 
-
 // Custom Imports
 import { withContext } from '../contexts/AppContext'
 import LoadSpinner from '../components/LoadSpinner'
@@ -25,10 +24,9 @@ const BusinessProfile = props => {
   // const [features, setFeatures] = useState([])
   // const [services, setServices] = useState([])
 
-  console.log('Biz UserId', props.user._id)
-
   // Fetch Services and Features
-  // ?Determine to use first word in string of name of checkbox, i.e. MakeUp Application === makeup
+
+  // (Backlog) TODO: [ ] - ? Determine to use first word in string of name of checkbox, i.e. MakeUp Application === makeup
   useEffect(() => {
     setLoading(true)
     const getFeaturesServices = async () => {
@@ -37,10 +35,13 @@ const BusinessProfile = props => {
       await props.fetchServices()
     }
     getFeaturesServices()
+    console.log('Biz UserId', props.user._id)
     return function clean() {
       setLoading(false)
     }
   }, [])
+
+  // // (Backlog) TODO: [ ] - ? Remove the useEffect below set to save full features and services data object from context to component state
 
   // useEffect(() => {
   //   setFeatures(props.feats.features)
@@ -363,7 +364,7 @@ const BusinessProfile = props => {
           </section>
         </>
       ) : (
-        <LoadSpinner />
+        loading && <LoadSpinner />
       )}
     </>
   )
