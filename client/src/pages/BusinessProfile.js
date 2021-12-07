@@ -2,8 +2,11 @@
 import { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 
+
 // Custom Imports
 import { withContext } from '../contexts/AppContext'
+import LoadSpinner from '../components/LoadSpinner'
+import '../stylesheets/LoadSpinner.css'
 
 // 3rd Party Imports
 import PhoneInput from 'react-phone-input-2'
@@ -360,7 +363,7 @@ const BusinessProfile = props => {
           </section>
         </>
       ) : (
-        <div>Loading...</div>
+        <LoadSpinner />
       )}
     </>
   )
