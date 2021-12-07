@@ -17,7 +17,9 @@ const BusinessProfile = props => {
   const [checkboxNames, setCheckboxNames] = useState([])
   // const [checkboxFeatsNames, setCheckboxFeatsNames] = useState([])
   // const [checkboxServicesNames, setCheckboxServicesNames] = useState([])
-  const [isChecked, setIsChecked] = useState({})
+  const [isChecked, setIsChecked] = useState(false)
+  const [isFeatsChecked, setIsFeatsChecked] = useState([])
+  const [isServicesChecked, setIsServicesChecked] = useState([])
   const [loading, setLoading] = useState(true)
 
   const [features, setFeatures] = useState([])
@@ -78,20 +80,62 @@ const BusinessProfile = props => {
     // console.log('e', { [event.target.name]: value })
 
     // (Backlog) TODO: Save to database. Currently sending, but not being saved.
-    setIsChecked({
-      ...isChecked,
-        [event.target.id]: value,
-    })
+    if (event.target.type === 'checkbox') {
+      setIsChecked({
+        ...isChecked,
+        [event.target.name]: value,
+      })
+      
+      if (event.target.name.includes('service')) {
+        setIsServicesChecked({
+          ...isServicesChecked,
+          [event.target.id]: value,
+        })
+      }
+
+      if (event.target.name.includes('feature')) {
+        setIsFeatsChecked({
+          ...isFeatsChecked,
+          [event.target.id]: value,
+        })
+      }
+    }
+    console.log('businessProfileForm', businessProfileForm)
   }
 
   const saveNewBusiness = async () => {
+    // Save only the features and services set to true to the businesses collection database.
+    let savedFormFeats = Object.entries(isFeatsChecked)
+      .map(key => {
+        if (key[1] === true) {
+          return [key[0]]
+        }
+      })
+      .filter(el => {
+        if (el !== undefined) {
+        }
+        return el
+      })
+
+    let savedFormServices = Object.entries(isServicesChecked)
+      .map(key => {
+        if (key[1] === true) {
+          return [key[0]]
+        }
+      })
+      .filter(el => {
+        if (el !== undefined) {
+        }
+        return el
+      })
+
     let newBusiness = {
       ...businessProfileForm,
+      features: savedFormFeats,
+      services: savedFormServices,
       userId: props.user._id,
       phone: mobile,
     }
-
-    // (Backlog) TODO: Add {isChecked} to save in database. Currently sending, but not being saved.
 
     const requestOptions = {
       method: 'POST',
@@ -116,6 +160,9 @@ const BusinessProfile = props => {
 
   const profileSubmitHandler = event => {
     event?.preventDefault()
+
+    console.log('isServicesChecked', isServicesChecked)
+    console.log('isFeatsChecked', isFeatsChecked)
     saveNewBusiness().then(history.push('/'))
   }
 
@@ -273,9 +320,9 @@ const BusinessProfile = props => {
                         <input
                           className='form-check-input'
                           type='checkbox'
-                          name={feature[0]}
+                          name={`feature-${feature[0]}`}
                           id={feature[1]}
-                          checked={feature.isChecked}
+                          defaultChecked={feature[2].isChecked}
                           onChange={onFormChange}
                         />
                         <label
@@ -298,9 +345,9 @@ const BusinessProfile = props => {
                         <input
                           className='form-check-input'
                           type='checkbox'
-                          name={service[0]}
+                          name={`service-${service[0]}`}
                           id={service[1]}
-                          checked={service.isChecked}
+                          defaultChecked={service[2].isChecked}
                           onChange={onFormChange}
                         />
                         <label
