@@ -15,14 +15,22 @@ const BusinessProfile = props => {
 
   const [mobile, setmobile] = useState('')
 
+  // // (Backlog) TODO: [ ] - ? Remove the useEffect below set to save full features and services data object from context to component state
+  // const [features, setFeatures] = useState([])
+  // const [services, setServices] = useState([])
+
+  // useEffect(() => {
+  //   setFeatures(props.feats.features)
+  //   setServices(props.services.services)
+  // }, [props.feats, props.services])
+  // console.log('services bus profile state', services)
+  // console.log('features bus profile state', features)
+
   // Initialize state objects for form checkboxes
   const [isChecked, setIsChecked] = useState(false)
   const [isFeatsChecked, setIsFeatsChecked] = useState([])
   const [isServicesChecked, setIsServicesChecked] = useState([])
   const [loading, setLoading] = useState(true)
-
-  // const [features, setFeatures] = useState([])
-  // const [services, setServices] = useState([])
 
   // Fetch Services and Features
 
@@ -40,15 +48,6 @@ const BusinessProfile = props => {
       setLoading(false)
     }
   }, [])
-
-  // // (Backlog) TODO: [ ] - ? Remove the useEffect below set to save full features and services data object from context to component state
-
-  // useEffect(() => {
-  //   setFeatures(props.feats.features)
-  //   setServices(props.services.services)
-  // }, [props.feats, props.services])
-  // console.log('services bus profile state', services)
-  // console.log('features bus profile state', features)
 
   // Initialize business profile form state object
   const [businessProfileForm, setBusinessProfileForm] = useState({
