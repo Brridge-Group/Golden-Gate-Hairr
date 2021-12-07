@@ -1,11 +1,9 @@
 // React Components
-import { useState, useContext, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 
 // Custom Imports
-import ContentHeader from '../components/ContentHeader'
 import { withContext } from '../contexts/AppContext'
-import { AppContext } from '../contexts/AppContext'
 
 // 3rd Party Imports
 import PhoneInput from 'react-phone-input-2'
@@ -13,21 +11,18 @@ import 'react-phone-input-2/lib/style.css'
 const BusinessProfile = props => {
   const history = useHistory()
 
-  // Initialize list of checkbox Names and checkbox checked status object
-  const [checkboxNames, setCheckboxNames] = useState([])
-  // const [checkboxFeatsNames, setCheckboxFeatsNames] = useState([])
-  // const [checkboxServicesNames, setCheckboxServicesNames] = useState([])
+  const [mobile, setmobile] = useState('')
+
+  // Initialize state objects for form checkboxes
   const [isChecked, setIsChecked] = useState(false)
   const [isFeatsChecked, setIsFeatsChecked] = useState([])
   const [isServicesChecked, setIsServicesChecked] = useState([])
   const [loading, setLoading] = useState(true)
 
-  const [features, setFeatures] = useState([])
-  const [services, setServices] = useState([])
+  // const [features, setFeatures] = useState([])
+  // const [services, setServices] = useState([])
 
   console.log('Biz UserId', props.user._id)
-
-  const [mobile, setmobile] = useState('')
 
   // Fetch Services and Features
   // ?Determine to use first word in string of name of checkbox, i.e. MakeUp Application === makeup
@@ -44,12 +39,12 @@ const BusinessProfile = props => {
     }
   }, [])
 
-  useEffect(() => {
-    setFeatures(props.feats.features)
-    setServices(props.services.services)
-  }, [props.feats, props.services])
-  console.log('services bus profile state', services)
-  console.log('features bus profile state', features)
+  // useEffect(() => {
+  //   setFeatures(props.feats.features)
+  //   setServices(props.services.services)
+  // }, [props.feats, props.services])
+  // console.log('services bus profile state', services)
+  // console.log('features bus profile state', features)
 
   // Initialize business profile form state object
   const [businessProfileForm, setBusinessProfileForm] = useState({
@@ -85,7 +80,7 @@ const BusinessProfile = props => {
         ...isChecked,
         [event.target.name]: value,
       })
-      
+
       if (event.target.name.includes('service')) {
         setIsServicesChecked({
           ...isServicesChecked,
@@ -100,11 +95,11 @@ const BusinessProfile = props => {
         })
       }
     }
-    console.log('businessProfileForm', businessProfileForm)
+    // console.log('BizOnFormChange', businessProfileForm)
   }
 
   const saveNewBusiness = async () => {
-    // Save only the features and services set to true to the businesses collection database.
+    // Save to the businesses collection database all features and services set to true.
     let savedFormFeats = Object.entries(isFeatsChecked)
       .map(key => {
         if (key[1] === true) {
@@ -160,9 +155,6 @@ const BusinessProfile = props => {
 
   const profileSubmitHandler = event => {
     event?.preventDefault()
-
-    console.log('isServicesChecked', isServicesChecked)
-    console.log('isFeatsChecked', isFeatsChecked)
     saveNewBusiness().then(history.push('/'))
   }
 
@@ -170,7 +162,6 @@ const BusinessProfile = props => {
     <>
       {!props.loading ? (
         <>
-          {/* <ContentHeader title='Business Profile Page' /> */}
           <section className='content-wrapper bus-profile ml-0'>
             <div className='card card-primary w-75 mx-auto'>
               <div className='card-header'>New Business Profile</div>

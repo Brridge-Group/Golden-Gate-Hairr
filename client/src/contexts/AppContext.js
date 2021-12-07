@@ -43,8 +43,8 @@ export const AppContextProvider = props => {
   }
 
   // Initialize  Services and Features to state
-  const [feats, setFeats] = useState([])
-  const [services, setServices] = useState([])
+  const [feats, setFeats] = useState([]) // Features full object
+  const [services, setServices] = useState([]) // Services full object
   const [featuresArr, setFeaturesArr] = useState([])
   const [servicesArr, setServicesArr] = useState([])
   const [loading, setLoading] = useState(true)
