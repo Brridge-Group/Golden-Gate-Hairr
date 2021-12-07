@@ -38,7 +38,7 @@ const SearchResults = () => {
         <h5>Hairstylists located in {citySearch}</h5>
         <div className='business-container'>
           <div className='business-features-placeholder'>
-            <Filters />
+            <Filters filterResults={filterResults} />
           </div>
           <div className='filtered-businesses'>
             {filterResults.map(business => {
