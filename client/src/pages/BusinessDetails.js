@@ -58,16 +58,6 @@ const BusinessDetails = props => {
       let businessCopy = await props.history.location.business
       let bizFeatsArr = []
       let bizServiceArr = []
-      // for (let i = 0; i < businessCopy?.features.length; i++) {
-      //   console.log('business.features[i]', businessCopy.features[i])
-      //   let bizFeats = businessCopy.features.map(feat => {
-      //     features.features.find(feat => {
-      //       if (feat.id === businessCopy.features[i]) {
-      //         return feat
-      //       }
-      //     })
-      //   })
-      // }
 
       businessCopy?.features.map(bizFeat => {
         // console.log('bizFeat', bizFeat)
@@ -88,19 +78,6 @@ const BusinessDetails = props => {
         setBizServiceArr(bizServiceArr)
       })
     }
-    // let bizFeats = business.features.map(feat => {
-    //   feat.find(feat => {
-    //     if (feat.id === business.features[i]) {
-    //       return feat
-    //     }
-    //   })
-    // })
-    // $reactTemp0.find(feat => {
-    //   if ('611d140afede12d4e2db1fcd' === feat._id) console.log(feat._id)
-    //   return true
-    // })
-    // console.log('business', business)
-    // }
     fetchDetails()
     return function clean() {
       setIsLoading(false)
