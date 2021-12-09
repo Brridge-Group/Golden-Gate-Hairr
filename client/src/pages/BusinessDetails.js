@@ -10,10 +10,10 @@ import '../stylesheets/Businesses.css'
 const BusinessDetails = props => {
   const [business, setBusiness] = useState(props.history.location.business)
   const [phone, setPhone] = useState(false)
-  console.log('business', business)
 
   useEffect(() => {
     setBusiness(props.history.location.business)
+    console.log('business', business)
   }, [props.history.location.business])
 
   const handleClick = () => {
@@ -27,10 +27,9 @@ const BusinessDetails = props => {
   useEffect(() => {
     setFeatures(props.feats)
     setServices(props.services)
+    // console.log('features', features)
+    // console.log('services', services)
   }, [props.features, props.services])
-
-  // console.log('features', features)
-  // console.log('services', services)
 
   const [isLoading, setIsLoading] = useState(true)
 
@@ -53,30 +52,39 @@ const BusinessDetails = props => {
   useEffect(() => {
     setIsLoading(true)
     const fetchDetails = async () => {
-      const bizFeats = await props.feats
-      const bizServices = await props.services
-      let businessCopy = await props.history.location.business
-      let bizFeatsArr = []
-      let bizServiceArr = []
+      setIsLoading(true)
+      const dbFeats = await props.feats //
+      const dbServices = await props.services //
 
+      let businessCopy = await props.history.location.business
+      let bizFeatsArr = [] //rename ?
+      let bizServiceArr = [] //rename ?
+
+      // Map through the business' features array and compare the id string while mapping through the features whole data obj and using the find method to search for a matching id. If one is found push the containing object to an array and return that array.
       businessCopy?.features.map(bizFeat => {
         // console.log('bizFeat', bizFeat)
-        bizFeats?.features.find(feat => {
+        dbFeats?.features.find(feat => {
           if (feat.id === bizFeat) {
             bizFeatsArr.push(feat)
           }
         })
-        setBizFeatsArr(bizFeatsArr)
       })
+
+      setBizFeatsArr(bizFeatsArr)
+      // console.log('bizFeatsArr', bizFeatsArr)
+
+      // Map through the business' services array and compare the id string while mapping through the services whole data obj and using the find method to search for a matching id. If a match is found push the containing object to an array and return that array.
       businessCopy?.services.map(bizService => {
         // console.log(bizService)
-        bizServices?.services.find(service => {
+        dbServices?.services.find(service => {
           if (service.id === bizService) {
             bizServiceArr.push(service)
           }
         })
-        setBizServiceArr(bizServiceArr)
       })
+
+      setBizServiceArr(bizServiceArr)
+      // console.log('bizServiceArr', bizServiceArr)
     }
     fetchDetails()
     return function clean() {
@@ -84,24 +92,25 @@ const BusinessDetails = props => {
     }
   }, [business])
 
-  useEffect(() => {
-    setIsLoading(true)
-    setBizFeatsArr(bizFeatsArr)
-    setBizServiceArr(bizServiceArr)
-    return function clean() {
-      setIsLoading(false)
-    }
-  }, [bizServiceArr, bizFeatsArr])
+  // // TODO: -> ? Remove
+  // useEffect(() => {
+  //   // no update functionality?
+  //   setIsLoading(true)
+  //   setBizFeatsArr(bizFeatsArr)
+  //   setBizServiceArr(bizServiceArr)
+  //   return function clean() {
+  //     setIsLoading(false)
+  //   }
+  // }, [bizServiceArr, bizFeatsArr])
 
-  console.log('bizServiceArr', bizServiceArr)
-  console.log('arr', bizFeatsArr)
+  // console.log('bizServiceArr', bizServiceArr)
+  // console.log('arr', bizFeatsArr)
 
   return (
     <>
       {!props.loading ? (
         <>
-          {/*(Backlog) TODO: [ ] - ? Remove all ContentHeaders or modify and utilize across app  */}
-          {/* <ContentHeader title='Business Details ' /> */}
+          {/*(Backlog) TODO: [ ] - ? Remove all ContentHeaders or modify and utilize across app   <ContentHeader title='Business Details ' /> */}
           <section className='content'>
             <div className='card mx-auto'>
               <div className='card-body'>
@@ -172,7 +181,6 @@ const BusinessDetails = props => {
                         </div>
                       </div>
                     </div>
-
                     <div className='d-flex justify-content-around'>
                       <div className='bus-details--features-list w-50'>
                         <p className='card-header border-bottom-0'>
