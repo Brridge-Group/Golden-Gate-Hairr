@@ -17,7 +17,7 @@ const BusinessCard = props => {
       return (
         <Redirect
           to={{
-            pathname: `/${props.city}/${deleteNameSpace}`,
+            pathname: `/${props.city.toLowerCase()}/${deleteNameSpace.toLowerCase()}`,
             state: { business: props.business },
           }}
         />
