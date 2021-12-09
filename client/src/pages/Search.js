@@ -5,11 +5,11 @@ import { useHistory } from 'react-router-dom'
 const Search = () => {
   const [searchTerm, setSearchTerm] = useState('')
   const history = useHistory()
+  // const cityLowerCase =
 
   const handleSearch = e => {
     let value = e.target.value
-    const inputCase =
-      value.charAt(0).toUpperCase() + value.slice(1).toLowerCase()
+    const inputCase = value.slice(0).toLowerCase()
     setSearchTerm(inputCase)
   }
 

@@ -6,6 +6,8 @@ import { useParams } from 'react-router'
 
 const SearchResults = () => {
   const citySearch = useParams().city
+  const cityCapitalize =
+    citySearch.charAt(0).toUpperCase() + citySearch.slice(1).toLowerCase()
 
   const busFilter = []
   const [filterResults, setfilterResults] = useState([])
@@ -20,7 +22,7 @@ const SearchResults = () => {
           throw new Error(response.message)
         }
         responseData.businesses.filter(business => {
-          if (business.city === citySearch) {
+          if (business.city.toLowerCase() === citySearch) {
             busFilter.push(business)
           }
         })
@@ -35,7 +37,7 @@ const SearchResults = () => {
   return (
     <>
       <div className='business-wrapper'>
-        <h5>Hairstylists located in {citySearch}</h5>
+        <h5>Hairstylists located in {cityCapitalize}</h5>
         <div className='business-container'>
           <div className='business-features-placeholder'>
             <Filters />
