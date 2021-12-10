@@ -177,6 +177,7 @@ const BusinessDetails = props => {
                           <div
                             className='bus-details--features'
                             style={{ textTransform: 'capitalize' }}
+                            key={feat.id}
                           >
                             <ul>
                               <li>
@@ -198,6 +199,7 @@ const BusinessDetails = props => {
                           <div
                             className='bus-details--service-name'
                             style={{ textTransform: 'capitalize' }}
+                            key={service.id}
                           >
                             <ul>
                               <li>
