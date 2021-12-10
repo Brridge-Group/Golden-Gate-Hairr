@@ -98,7 +98,7 @@ const BusinessDetails = props => {
         <>
           {/* (Backlog) TODO: [ ] - ? Remove all ContentHeaders or modify and utilize across app   */}
           {/* <ContentHeader title='Business Details ' /> */}
-          <section className='content'>
+          <section>
             <div className='card mx-auto'>
               <div className='card-body'>
                 <div className='products-list product-list-in-card d-flex justify-content-around align-content-center'>
