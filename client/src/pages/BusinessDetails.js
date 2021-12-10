@@ -53,24 +53,24 @@ const BusinessDetails = props => {
     setIsLoading(true)
     const fetchDetails = async () => {
       setIsLoading(true)
-      const dbFeats = await props.feats //
-      const dbServices = await props.services //
+      const dbFeats = await props.feats // Full features' data obj from context
+      const dbServices = await props.services // Full services' data obj from context
 
       let businessCopy = await props.history.location.business
-      let bizFeatsArr = [] //rename ?
-      let bizServiceArr = [] //rename ?
+      let tempBizFeatsArr = [] //rename ? temp?
+      let tempBizServiceArr = [] //rename ? temp?
 
       // Map through the business' features array and compare the id string while mapping through the features whole data obj and using the find method to search for a matching id. If one is found push the containing object to an array and return that array.
       businessCopy?.features.map(bizFeat => {
         // console.log('bizFeat', bizFeat)
         dbFeats?.features.find(feat => {
           if (feat.id === bizFeat) {
-            bizFeatsArr.push(feat)
+            tempBizFeatsArr.push(feat)
           }
         })
       })
 
-      setBizFeatsArr(bizFeatsArr)
+      setBizFeatsArr(tempBizFeatsArr)
       // console.log('bizFeatsArr', bizFeatsArr)
 
       // Map through the business' services array and compare the id string while mapping through the services whole data obj and using the find method to search for a matching id. If a match is found push the containing object to an array and return that array.
@@ -78,12 +78,12 @@ const BusinessDetails = props => {
         // console.log(bizService)
         dbServices?.services.find(service => {
           if (service.id === bizService) {
-            bizServiceArr.push(service)
+            tempBizServiceArr.push(service)
           }
         })
       })
 
-      setBizServiceArr(bizServiceArr)
+      setBizServiceArr(tempBizServiceArr)
       // console.log('bizServiceArr', bizServiceArr)
     }
     fetchDetails()
@@ -92,25 +92,12 @@ const BusinessDetails = props => {
     }
   }, [business])
 
-  // // TODO: -> ? Remove
-  // useEffect(() => {
-  //   // no update functionality?
-  //   setIsLoading(true)
-  //   setBizFeatsArr(bizFeatsArr)
-  //   setBizServiceArr(bizServiceArr)
-  //   return function clean() {
-  //     setIsLoading(false)
-  //   }
-  // }, [bizServiceArr, bizFeatsArr])
-
-  // console.log('bizServiceArr', bizServiceArr)
-  // console.log('arr', bizFeatsArr)
-
   return (
     <>
       {!props.loading ? (
         <>
-          {/*(Backlog) TODO: [ ] - ? Remove all ContentHeaders or modify and utilize across app   <ContentHeader title='Business Details ' /> */}
+          {/* (Backlog) TODO: [ ] - ? Remove all ContentHeaders or modify and utilize across app   */}
+          {/* <ContentHeader title='Business Details ' /> */}
           <section className='content'>
             <div className='card mx-auto'>
               <div className='card-body'>
