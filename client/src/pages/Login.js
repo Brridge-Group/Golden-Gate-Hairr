@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import ContentHeader from '../components/ContentHeader'
 import { useHistory } from 'react-router'
 import { withContext } from '../contexts/AppContext'
 
@@ -12,11 +11,6 @@ const Login = props => {
 
   const { email, password } = loginUser
   const [errorMessage, setErrorMessage] = useState('')
-
-  // const clearInputs = () => {
-  //   setLoginUser(loginUser)
-  //   setErrorMessage(errorMessage)
-  // }
 
   const handleChange = e => {
     setLoginUser({ ...loginUser, [e.target.name]: e.target.value })
@@ -41,8 +35,6 @@ const Login = props => {
 
   return (
     <>
-      <ContentHeader title='Log In' />
-
       <div className='card w-50 mx-auto'>
         <div className='card-header'>
           <h5 className='m-0'>Log In</h5>

@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { withContext } from '../contexts/AppContext'
-import ContentHeader from '../components/ContentHeader'
 import '../stylesheets/Businesses.css'
 import star from '../images/star.svg'
 import { Redirect } from 'react-router'
@@ -36,23 +35,9 @@ const BusinessDetails = props => {
       business: business,
     })
   }
-  // const reviewRoute = () => {
-  //   return (
-  //     <Redirect
-  //       to={{
-  //         pathname: `/${deleteNameSpace.toLowerCase()}/review`,
-  //         state: { business: props.business },
-  //       }}
-  //     />
-  //   )
-  // history.push(`/${deleteNameSpace.toLowerCase()}/review`, {
-  //   business: business,
-  // })
-  // }
 
   return (
     <>
-      <ContentHeader title='Business Details ' />
       <div className='card w-50 mx-auto'>
         <div className='card-body'>
           <ul className='products-list product-list-in-card'>

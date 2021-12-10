@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { withContext } from '../contexts/AppContext'
-import ContentHeader from '../components/ContentHeader'
 
 const Signup = props => {
   // console.log('signup, props', props.user, props)
@@ -22,15 +21,6 @@ const Signup = props => {
   const changeCase = e => {
     e.preventDefault()
     setUserForm(e.target.value.toLowerCase())
-    // firstName =
-    //   e.target.value.charAt(0).toUpperCase() +
-    //   e.target.value.slice(1).toLowerCase()
-
-    // lastName =
-    //   e.target.value.charAt(0).toUpperCase() +
-    //   e.target.value.slice(1).toLowerCase()
-
-    // email(e.target.value.toLowerCase())
   }
 
   const onChange = e => {
@@ -63,7 +53,6 @@ const Signup = props => {
 
   return (
     <>
-      <ContentHeader title='Registration' />
       <div className='card w-50 mx-auto'>
         <div className='card-header'>
           <h5 className='m-0'>Registration</h5>

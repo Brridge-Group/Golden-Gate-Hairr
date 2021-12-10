@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { withContext } from '../contexts/AppContext'
-import ContentHeader from '../components/ContentHeader'
 import '../stylesheets/Businesses.css'
 import star from '../images/star.svg'
 import { Redirect } from 'react-router'
@@ -52,7 +51,6 @@ const BusinessDetails = props => {
 
   return (
     <>
-      <ContentHeader title='Business Details ' />
       <div className='card w-50 mx-auto'>
         <div className='card-body'>
           <ul className='products-list product-list-in-card'>

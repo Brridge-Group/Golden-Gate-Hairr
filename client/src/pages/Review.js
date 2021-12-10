@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import ContentHeader from '../components/ContentHeader'
 import { withContext } from '../contexts/AppContext'
 import { useHistory } from 'react-router-dom'
 
@@ -57,7 +56,6 @@ const Review = props => {
 
   return (
     <>
-      <ContentHeader title='Search' />
       <div className='card w-50 mx-auto'>
         <div className='card-body review'>
           <h6 className='m-0'>

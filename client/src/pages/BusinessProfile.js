@@ -3,7 +3,6 @@ import { useState, useContext, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 
 // Custom Imports
-import ContentHeader from '../components/ContentHeader'
 import { withContext } from '../contexts/AppContext'
 import { AppContext } from '../contexts/AppContext'
 
@@ -147,7 +146,6 @@ const BusinessProfile = props => {
 
   return (
     <>
-      <ContentHeader title='Business Profile Page' />
       <section className='content-wrapper bus-profile ml-0'>
         <div className='card card-primary w-75 mx-auto'>
           <div className='card-header'>New Business Profile</div>
