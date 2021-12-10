@@ -8,18 +8,12 @@ import { useLocation, useHistory } from 'react-router-dom'
 const BusinessDetails = props => {
   console.log('busdetails, props', props)
   const history = useHistory()
+  //am using this to pull in content but
   const { state } = useLocation()
-  console.log(
-    'busdetails, history, location',
-    // history,
-    // history.location.state,
-    history.location.state.business,
-    history.location.state.business.city
-
-    // history.goBack
-  )
-
   const business = state.business
+  //could also use
+  // const business = history.location.state.business
+
   const [phone, setPhone] = useState(false)
   const [hidden, setHidden] = useState(false)
 
