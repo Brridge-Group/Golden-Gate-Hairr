@@ -1,8 +1,7 @@
 import { useState } from 'react'
-import { useParams } from 'react-router'
 import '../stylesheets/Businesses.css'
 import star from '../images/star.svg'
-import { useLocation, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 const BusinessCard = props => {
   const history = useHistory()

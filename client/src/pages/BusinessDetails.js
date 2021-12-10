@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { withContext } from '../contexts/AppContext'
 import '../stylesheets/Businesses.css'
 import star from '../images/star.svg'
-import { Redirect } from 'react-router'
 import { useLocation, useHistory } from 'react-router-dom'
 
 const BusinessDetails = props => {
