@@ -50,11 +50,15 @@ const App = () => {
       <Route exact path='/business/profile'>
         <BusinessProfile />
       </Route>
-      <Route
+      {/* <Route
         exact
         path='/:city/:name'
         render={props => <BusinessDetails {...props} />}
-      />
+      /> */}
+      <Route exact path='/:city/:name'>
+        <BusinessDetails />
+      </Route>
+
       <Redirect to='/' />
     </Switch>
   )

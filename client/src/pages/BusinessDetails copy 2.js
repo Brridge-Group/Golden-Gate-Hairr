@@ -3,13 +3,16 @@ import { withContext } from '../contexts/AppContext'
 import ContentHeader from '../components/ContentHeader'
 import '../stylesheets/Businesses.css'
 import star from '../images/star.svg'
-import { Redirect } from 'react-router'
+import { Redirect, useParams } from 'react-router'
 import { useLocation, useHistory } from 'react-router-dom'
 
 const BusinessDetails = props => {
-  console.log('busdetails, props', props)
+  const name = useParams().name
+  console.log('busdets', name)
+
+  // console.log('busdetails, props', props.state)
   const history = useHistory()
-  const { state } = useLocation()
+  // const { state } = useLocation()
   console.log(
     'busdetails, history, location',
     // history,
@@ -20,11 +23,11 @@ const BusinessDetails = props => {
     // history.goBack
   )
 
-  const business = state.business
+  const business = history.location.state.business
   const [phone, setPhone] = useState(false)
   const [hidden, setHidden] = useState(false)
 
-  const deleteNameSpace = business.businessName.replace(/\s+/g, '')
+  const deleteNameSpace = name.replace(/\s+/g, '')
 
   const handleClick = () => {
     setPhone(true)
@@ -41,7 +44,7 @@ const BusinessDetails = props => {
   //     <Redirect
   //       to={{
   //         pathname: `/${deleteNameSpace.toLowerCase()}/review`,
-  //         state: { business: props.business },
+  //         business: business,
   //       }}
   //     />
   //   )

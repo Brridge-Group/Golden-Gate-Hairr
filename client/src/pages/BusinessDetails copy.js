@@ -7,9 +7,9 @@ import { Redirect } from 'react-router'
 import { useLocation, useHistory } from 'react-router-dom'
 
 const BusinessDetails = props => {
-  console.log('busdetails, props', props)
+  // console.log('busdetails, props', props.state)
   const history = useHistory()
-  const { state } = useLocation()
+  // const { state } = useLocation()
   console.log(
     'busdetails, history, location',
     // history,
@@ -20,7 +20,7 @@ const BusinessDetails = props => {
     // history.goBack
   )
 
-  const business = state.business
+  const business = history.location.state.business
   const [phone, setPhone] = useState(false)
   const [hidden, setHidden] = useState(false)
 
@@ -31,24 +31,24 @@ const BusinessDetails = props => {
     setHidden(true)
   }
 
-  const reviewRoute = () => {
-    history.push(`/${deleteNameSpace.toLowerCase()}/review`, {
-      business: business,
-    })
-  }
   // const reviewRoute = () => {
-  //   return (
-  //     <Redirect
-  //       to={{
-  //         pathname: `/${deleteNameSpace.toLowerCase()}/review`,
-  //         state: { business: props.business },
-  //       }}
-  //     />
-  //   )
-  // history.push(`/${deleteNameSpace.toLowerCase()}/review`, {
-  //   business: business,
-  // })
+  //   history.push(`/${deleteNameSpace.toLowerCase()}/review`, {
+  //     business: business,
+  //   })
   // }
+  const reviewRoute = () => {
+    return (
+      <Redirect
+        to={{
+          pathname: `/${deleteNameSpace.toLowerCase()}/review`,
+          state: { business: props.business },
+        }}
+      />
+    )
+    // history.push(`/${deleteNameSpace.toLowerCase()}/review`, {
+    //   business: business,
+    // })
+  }
 
   return (
     <>
