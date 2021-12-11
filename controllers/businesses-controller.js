@@ -48,7 +48,6 @@ const createBusiness = async (req, res, next) => {
 // Get Business
 const getBusiness = async (req, res, next) => {
   let business
-
   const businessId = req.params.id
 
   try {
@@ -125,7 +124,6 @@ const updateBusiness = async (req, res, next) => {
 // Delete Business
 const deleteBusiness = async (req, res, next) => {
   let business
-
   const businessId = req.params.id
 
   try {
@@ -144,9 +142,21 @@ const deleteBusiness = async (req, res, next) => {
 
   res.json({ message: 'Selected Business Deleted Successfully!' })
 }
+const getAllReviews = async (req, res, next) => {
+  let business
+  const businessId = req.params.id
+
+  try {
+    business = await Business.findById(businessId).populate('reviews')
+  } catch (error) {
+    return next(error)
+  }
+  res.json({ business })
+}
 
 exports.getBusiness = getBusiness
 exports.getBusinesses = getBusinesses
 exports.createBusiness = createBusiness
 exports.updateBusiness = updateBusiness
 exports.deleteBusiness = deleteBusiness
+exports.getAllReviews = getAllReviews

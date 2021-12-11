@@ -18,10 +18,10 @@ const Signup = props => {
 
   const { firstName, lastName, email, password, password2, role } = userForm
 
-  const changeCase = e => {
-    e.preventDefault()
-    setUserForm(e.target.value.toLowerCase())
-  }
+  // const changeCase = e => {
+  //   e.preventDefault()
+  //   setUserForm(e.target.value.toLowerCase())
+  // }
 
   const onChange = e => {
     const value = e.target.value
@@ -67,7 +67,7 @@ const Signup = props => {
                 className='form-control'
                 placeholder='First Name'
                 onChange={onChange}
-                onMouseEnter={changeCase}
+                // onMouseEnter={changeCase}
                 value={firstName}
                 required
               />
@@ -80,7 +80,7 @@ const Signup = props => {
                 className='form-control'
                 placeholder='Last Name'
                 onChange={onChange}
-                onMouseEnter={changeCase}
+                // onMouseEnter={changeCase}
                 value={lastName}
                 required
               />
@@ -93,7 +93,7 @@ const Signup = props => {
                 className='form-control'
                 placeholder='Email'
                 onChange={onChange}
-                onMouseEnter={changeCase}
+                // onMouseEnter={changeCase}
                 value={email}
               />
             </div>

@@ -16,11 +16,20 @@ const Login = props => {
     setLoginUser({ ...loginUser, [e.target.name]: e.target.value })
   }
 
+  const changeCase = e => {
+    console.log('changeCase, e.target.value', e.target)
+    e.preventDefault()
+    setLoginUser(e.target.value.toLowerCase())
+  }
+
   const routeChange = () => {
     history.push('/signup')
   }
   const handleSubmit = async e => {
     e.preventDefault()
+    console.log('handle', e.target.value)
+    // setLoginUser(e.target.value.toLowerCase())
+
     console.log('in handle submit', loginUser)
     props
       .login(loginUser)
@@ -49,6 +58,7 @@ const Login = props => {
                 className='form-control'
                 placeholder='Email'
                 onChange={handleChange}
+                onMouseEnter={changeCase}
                 value={email}
                 autoComplete='off'
               />
