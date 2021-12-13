@@ -1,5 +1,3 @@
-const mongoose = require('mongoose')
-
 const Business = require('../models/business')
 
 // Create Business

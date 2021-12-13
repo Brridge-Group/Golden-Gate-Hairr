@@ -1,44 +1,47 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { withContext } from '../contexts/AppContext'
-
 import ContentHeader from '../components/ContentHeader'
 
 const Signup = props => {
-  console.log('signup, props', props.user, props)
+  // console.log('signup, props', props.user, props)
   const [userForm, setUserForm] = useState({
     firstName: '',
     lastName: '',
     email: '',
     password: '',
     password2: '',
-    isOwner: props.value || '',
-  })
-
-  // this.state = { value: props.value || "" };
-  const [isChecked, setIsChecked] = useState({
-    owner: false,
+    role: '',
   })
 
   const [errorMessage, setErrorMessage] = useState('')
   const history = useHistory()
 
-  const { firstName, lastName, email, password, password2, isOwner } = userForm
+  const { firstName, lastName, email, password, password2, role } = userForm
+
+  const changeCase = e => {
+    e.preventDefault()
+    setUserForm(e.target.value.toLowerCase())
+    // firstName =
+    //   e.target.value.charAt(0).toUpperCase() +
+    //   e.target.value.slice(1).toLowerCase()
+
+    // lastName =
+    //   e.target.value.charAt(0).toUpperCase() +
+    //   e.target.value.slice(1).toLowerCase()
+
+    // email(e.target.value.toLowerCase())
+  }
 
   const onChange = e => {
-    const value =
-      e.target.type === 'checkbox' ? e.target.checked : e.target.value
+    const value = e.target.value
 
     setUserForm({ ...userForm, [e.target.name]: value })
-
-    setIsChecked({
-      isChecked,
-      [e.target.name]: value,
-    })
   }
 
   const registrationSubmitHandler = async e => {
     e.preventDefault()
+
     if (password !== password2) {
       alert('Passwords do not match')
     } else {
@@ -46,9 +49,9 @@ const Signup = props => {
       props
         .signup(userForm)
         .then(() =>
-          !isChecked.isOwner
-            ? history.push('/profile')
-            : history.push('/business/profile')
+          role === 'owner'
+            ? history.push('/business/profile')
+            : history.push('/')
         )
         .catch(err => {
           if (err.response) {
@@ -59,7 +62,7 @@ const Signup = props => {
   }
 
   return (
-    <React.Fragment>
+    <>
       <ContentHeader title='Registration' />
       <div className='card w-50 mx-auto'>
         <div className='card-header'>
@@ -75,6 +78,7 @@ const Signup = props => {
                 className='form-control'
                 placeholder='First Name'
                 onChange={onChange}
+                onMouseEnter={changeCase}
                 value={firstName}
                 required
               />
@@ -87,6 +91,7 @@ const Signup = props => {
                 className='form-control'
                 placeholder='Last Name'
                 onChange={onChange}
+                onMouseEnter={changeCase}
                 value={lastName}
                 required
               />
@@ -99,6 +104,7 @@ const Signup = props => {
                 className='form-control'
                 placeholder='Email'
                 onChange={onChange}
+                onMouseEnter={changeCase}
                 value={email}
               />
             </div>
@@ -126,26 +132,37 @@ const Signup = props => {
                 value={password2}
               />
             </div>
-
             <div className='form-group'>
-              <label htmlFor='owner'>Business Owner</label>
               <div className='form-check'>
                 <input
-                  name='isOwner'
-                  type='checkbox'
+                  name='role'
+                  type='radio'
                   className='form-check-input'
                   onChange={onChange}
-                  checked={isChecked.isOwner}
-                  value={isOwner}
+                  checked={role === 'user'}
+                  value='user'
                 />
-                <label className='form-check-label'>Check If True</label>
+                <label className='form-check-label'>User</label>
               </div>
             </div>
-
+            <div className='form-group'>
+              <div className='form-check'>
+                <input
+                  name='role'
+                  type='radio'
+                  className='form-check-input'
+                  onChange={onChange}
+                  checked={role === 'owner'}
+                  value='owner'
+                />
+                <label className='form-check-label'>Owner</label>
+              </div>
+            </div>
             <button
               onChange={onChange}
               type='submit'
-              className='btn btn-primary'>
+              className='btn btn-primary'
+            >
               Submit
             </button>
           </form>
@@ -154,7 +171,7 @@ const Signup = props => {
           )}
         </div>
       </div>
-    </React.Fragment>
+    </>
   )
 }
 

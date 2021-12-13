@@ -1,4 +1,3 @@
-import React from 'react'
 import './App.css'
 import {
   BrowserRouter as Router,
@@ -13,14 +12,13 @@ import SideBar from './components/SideBar'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
 
-import Search from './pages/Search'
-import SearchResults from './pages/SearchResults'
-import BusinessesFiltered from './pages/BusinessesFiltered'
+import BusinessCard from './components/BusinessCard'
 import BusinessDetails from './pages/BusinessDetails'
 import BusinessProfile from './pages/BusinessProfile'
 import Profile from './pages/Profile'
-
-// Context Imports
+import Review from './pages/Review'
+import Search from './pages/Search'
+import SearchResults from './pages/SearchResults'
 
 const App = () => {
   let routes
@@ -39,25 +37,24 @@ const App = () => {
       <Route exact path='/profile/'>
         <Profile />
       </Route>
+      <Route exact path='/:name/review/'>
+        <Review />
+      </Route>
       <Route exact path='/businesses'></Route>
       <Route exact path='/search/:city'>
         <SearchResults />
       </Route>
       <Route exact path='/businesses/:city'>
-        <BusinessesFiltered />
+        <BusinessCard />
       </Route>
-      {/* <Route exact path='/businesses/:city'>
-        <Businesses />
-      </Route> */}
       <Route exact path='/business/profile'>
         <BusinessProfile />
       </Route>
       <Route
         exact
-        path='/business-details'
+        path='/:city/:name'
         render={props => <BusinessDetails {...props} />}
       />
-
       <Redirect to='/' />
     </Switch>
   )

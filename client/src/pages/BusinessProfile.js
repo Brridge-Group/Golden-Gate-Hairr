@@ -72,7 +72,7 @@ const BusinessProfile = props => {
   console.log('services', services)
   console.log('checkboxNames', checkboxNames)
   console.log('in busprofile, user', props.user._id)
-  
+
   const [mobile, setmobile] = useState('')
 
   // Initialize business profile form state object

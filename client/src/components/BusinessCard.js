@@ -1,24 +1,24 @@
-import React, { useState } from 'react'
-import ContentHeader from '../components/ContentHeader'
+import { useState } from 'react'
 import { Redirect } from 'react-router'
 import '../stylesheets/Businesses.css'
+import star from '../images/star.svg'
 
-const BusinessesFiltered = props => {
+const BusinessCard = props => {
   const [redirect, setRedirect] = useState(false)
 
-  const star =
-    'https://raw.githubusercontent.com/Brridge-Group/Golden-Gate-Hairr/6e0316ba1b16f06902c1558650c0c04f3ba5c42b/client/public/star.svg'
+  const deleteNameSpace = props.name.replace(/\s+/g, '')
 
   const doSetRedirect = () => {
     setRedirect(true)
   }
+
   const renderRedirect = () => {
     if (redirect) {
       return (
         <Redirect
           to={{
-            pathname: '/business-details',
-            business: props.business,
+            pathname: `/${props.city.toLowerCase()}/${deleteNameSpace.toLowerCase()}`,
+            state: { business: props.business },
           }}
         />
       )
@@ -26,7 +26,7 @@ const BusinessesFiltered = props => {
   }
 
   return (
-    <React.Fragment>
+    <>
       <div className='card-body filtered'>
         {renderRedirect()}
         <div onClick={doSetRedirect} style={{ cursor: 'pointer' }}>
@@ -60,8 +60,8 @@ const BusinessesFiltered = props => {
           </ul>
         </div>
       </div>
-    </React.Fragment>
+    </>
   )
 }
 
-export default BusinessesFiltered
+export default BusinessCard
