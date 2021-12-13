@@ -7,7 +7,7 @@ const reviewSchema = new mongoose.Schema({
   businessId: { type: ObjectId },
   comment: { type: String },
   rating: { type: Number, required: true },
-  // createDate: { type: Date, default: Date.now },
+  createDate: { type: Date, default: Date.now },
   // _creator : { type: Schema.Types.ObjectId, ref: 'User' },
 })
 

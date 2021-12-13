@@ -41,7 +41,8 @@ const loader = async app => {
   app.use(cors())
 
   // near the top with the other imports
-  //following from bob zirolls tutorial
+  //following from bob zirolls tutorial https://coursework.vschool.io/token-auth-with-jwts-part-1/
+
   // Make the app use the express-jwt authentication middleware on anything starting with "/api"
   // We'll give expressJwt a config object with a secret and a specified algorithm
 
