@@ -35,6 +35,27 @@ const createReview = async (req, res, next) => {
 
   res.status(201).json({ review: createdReview })
 }
+// const createReview = async (req, res, next) => {
+//   console.log(req.body)
+//   const { comment, rating } = req.body
+
+//   const createdReview = new Review({
+//     comment,
+//     rating,
+//   })
+
+//   try {
+//     await createdReview.save()
+//   } catch (err) {
+//     const error = new HttpError(
+//       'Creating review failed, please try again.',
+//       500
+//     )
+//     return next(error)
+//   }
+
+//   res.status(201).json({ review: createdReview })
+// }
 
 const updateReview = async (req, res, next) => {
   const reviewId = req.params.id
