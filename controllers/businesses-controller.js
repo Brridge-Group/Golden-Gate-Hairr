@@ -63,7 +63,10 @@ const getBusinesses = async (req, res, next) => {
   let businesses
 
   try {
-    businesses = await Business.find()
+    businesses = await Business.find().populate({
+      path: 'reviews',
+      select: 'comment rating',
+    })
   } catch (error) {
     return next(error)
   }
@@ -72,6 +75,15 @@ const getBusinesses = async (req, res, next) => {
   })
 }
 
+// app.get('/publishers', async (req, res) => {
+//   try {
+//      const data = await Publisher.find()
+//                                 .populate({path: 'booksPublished', select: 'name publishYear author'});
+//      res.status(200).json({success: true, data});
+//   } catch (err) {
+//      res.status(400).json({success: false, message:err.message});
+//   }
+// })
 // Update Business
 const updateBusiness = async (req, res, next) => {
   const businessId = req.params.id

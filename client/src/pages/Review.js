@@ -22,8 +22,8 @@ const Review = props => {
   const saveNewReview = async () => {
     let newReview = {
       ...reviewForm,
-      userId: props.user._id,
-      businessId: business._id,
+      author: props.user._id,
+      business: business._id,
       rating: rating,
     }
 

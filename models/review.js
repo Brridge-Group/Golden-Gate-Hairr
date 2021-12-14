@@ -10,7 +10,7 @@ const reviewSchema = new mongoose.Schema({
   rating: { type: Number, required: true },
   createDate: { type: Date, default: Date.now },
   author: { type: Schema.Types.ObjectId, ref: 'User' },
-  business: { type: Schema.Types.ObjectId, ref: 'Business' },
+  business: { type: Schema.Types.ObjectId, ref: 'Business', required: true },
 })
 
 module.exports = mongoose.model('Review', reviewSchema, 'reviews')

@@ -1,11 +1,12 @@
 const Review = require('../models/review')
+const Business = require('../models/business')
+const User = require('../models/user')
 
 const getReviews = async (req, res, next) => {
   let reviews
   try {
     reviews = await Review.find()
-  } catch (err) {
-    const error = new HttpError("Couldn't retrieve reviews!" + err, 500)
+  } catch (error) {
     return next(error)
   }
 
@@ -16,24 +17,23 @@ const getReviews = async (req, res, next) => {
 
 const createReview = async (req, res, next) => {
   console.log(req.body)
-  const { comment, rating } = req.body
+  const { comment, rating, business } = req.body
 
-  const createdReview = new Review({
+  const review = new Review({
     comment,
     rating,
+    business,
   })
 
   try {
-    await createdReview.save()
-  } catch (err) {
-    const error = new HttpError(
-      'Creating review failed, please try again.',
-      500
-    )
+    await review.save()
+  } catch (error) {
     return next(error)
   }
-
-  res.status(201).json({ review: createdReview })
+  let businessFind = await Business.findById(review.business)
+  businessFind.reviews.push(review)
+  await businessFind.save()
+  res.status(201).json({ review: review })
 }
 // const createReview = async (req, res, next) => {
 //   console.log(req.body)
