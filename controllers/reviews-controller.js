@@ -19,21 +19,23 @@ const createReview = async (req, res, next) => {
   console.log(req.body)
   const { comment, rating, business } = req.body
 
-  const review = new Review({
+  const createdReview = new Review({
     comment,
     rating,
     business,
   })
 
   try {
-    await review.save()
+    await createdReview.save()
   } catch (error) {
     return next(error)
   }
-  let businessFind = await Business.findById(review.business)
-  businessFind.reviews.push(review)
+  let businessFind = await Business.findById(createdReview.business)
+  console.log('businessFind', businessFind)
+  businessFind.reviews.push(createdReview)
   await businessFind.save()
-  res.status(201).json({ review: review })
+  console.log('review', createdReview)
+  res.status(201).json({ review: createdReview })
 }
 // const createReview = async (req, res, next) => {
 //   console.log(req.body)

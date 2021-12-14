@@ -63,10 +63,12 @@ const getBusinesses = async (req, res, next) => {
   let businesses
 
   try {
-    businesses = await Business.find().populate({
-      path: 'reviews',
-      select: 'comment rating',
-    })
+    businesses = await Business.find()
+    // try {
+    //   businesses = await Business.find().populate({
+    //     path: 'reviews',
+    //     select: 'comment rating',
+    //   })
   } catch (error) {
     return next(error)
   }
