@@ -17,47 +17,33 @@ const getReviews = async (req, res, next) => {
 
 const createReview = async (req, res, next) => {
   console.log(req.body)
-  const { comment, rating, business } = req.body
+  const { comment, rating, business, author } = req.body
 
-  const createdReview = new Review({
+  const newReview = new Review({
     comment,
     rating,
     business,
+    author,
   })
 
   try {
-    await createdReview.save()
+    await newReview.save()
   } catch (error) {
     return next(error)
   }
-  let businessFind = await Business.findById(createdReview.business)
+  let businessFind = await Business.findById(newReview.business)
   console.log('businessFind', businessFind)
-  businessFind.reviews.push(createdReview)
+  businessFind.reviews.push(newReview)
   await businessFind.save()
-  console.log('review', createdReview)
-  res.status(201).json({ review: createdReview })
+
+  let authorFind = await User.findById(newReview.author)
+  console.log('authorFind', authorFind)
+  authorFind.reviews.push(newReview)
+  await authorFind.save()
+
+  console.log('review', newReview)
+  res.status(201).json({ review: newReview })
 }
-// const createReview = async (req, res, next) => {
-//   console.log(req.body)
-//   const { comment, rating } = req.body
-
-//   const createdReview = new Review({
-//     comment,
-//     rating,
-//   })
-
-//   try {
-//     await createdReview.save()
-//   } catch (err) {
-//     const error = new HttpError(
-//       'Creating review failed, please try again.',
-//       500
-//     )
-//     return next(error)
-//   }
-
-//   res.status(201).json({ review: createdReview })
-// }
 
 const updateReview = async (req, res, next) => {
   const reviewId = req.params.id

@@ -4,12 +4,10 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const reviewSchema = new mongoose.Schema({
-  // userId: { type: ObjectId },
-  // businessId: { type: ObjectId },
   comment: { type: String },
   rating: { type: Number, required: true },
   createDate: { type: Date, default: Date.now },
-  author: { type: Schema.Types.ObjectId, ref: 'User' },
+  author: { type: Schema.Types.ObjectId, ref: 'User', required: true },
   business: { type: Schema.Types.ObjectId, ref: 'Business', required: true },
 })
 

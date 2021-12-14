@@ -64,11 +64,6 @@ const getBusinesses = async (req, res, next) => {
 
   try {
     businesses = await Business.find()
-    // try {
-    //   businesses = await Business.find().populate({
-    //     path: 'reviews',
-    //     select: 'comment rating',
-    //   })
   } catch (error) {
     return next(error)
   }
@@ -77,16 +72,6 @@ const getBusinesses = async (req, res, next) => {
   })
 }
 
-// app.get('/publishers', async (req, res) => {
-//   try {
-//      const data = await Publisher.find()
-//                                 .populate({path: 'booksPublished', select: 'name publishYear author'});
-//      res.status(200).json({success: true, data});
-//   } catch (err) {
-//      res.status(400).json({success: false, message:err.message});
-//   }
-// })
-// Update Business
 const updateBusiness = async (req, res, next) => {
   const businessId = req.params.id
 
@@ -156,21 +141,9 @@ const deleteBusiness = async (req, res, next) => {
 
   res.json({ message: 'Selected Business Deleted Successfully!' })
 }
-const getAllReviews = async (req, res, next) => {
-  let business
-  const businessId = req.params.id
-
-  try {
-    business = await Business.findById(businessId).populate('reviews')
-  } catch (error) {
-    return next(error)
-  }
-  res.json({ business })
-}
 
 exports.getBusiness = getBusiness
 exports.getBusinesses = getBusinesses
 exports.createBusiness = createBusiness
 exports.updateBusiness = updateBusiness
 exports.deleteBusiness = deleteBusiness
-exports.getAllReviews = getAllReviews

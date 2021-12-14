@@ -19,7 +19,4 @@ businessRouter.patch('/:id', businessesController.updateBusiness)
 // Delete Business
 businessRouter.delete('/:id', businessesController.deleteBusiness)
 
-// get all reviews
-businessRouter.get('/:id/reviews', businessesController.getAllReviews)
-
 module.exports = businessRouter
