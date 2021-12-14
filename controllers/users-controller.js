@@ -135,19 +135,6 @@ const deleteUser = async (req, res, next) => {
   res.json({ message: 'Deleted successfully' })
 }
 
-const getAllReviews = async (req, res, next) => {
-  let user
-  const userId = req.params.id
-
-  try {
-    user = await User.findById(userId).populate('reviews')
-  } catch (err) {
-    return next(err)
-  }
-
-  res.json({ user })
-}
-
 exports.getUsers = getUsers
 exports.createUser = createUser
 exports.updateUser = updateUser
@@ -155,4 +142,3 @@ exports.getUser = getUser
 exports.deleteUser = deleteUser
 exports.grantAccess = grantAccess
 exports.allowIfLoggedin = allowIfLoggedin
-exports.getAllReviews = getAllReviews

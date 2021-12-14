@@ -4,7 +4,7 @@ const usersController = require('../controllers/users-controller')
 
 const router = express.Router()
 
-//**greyed out routes after each route should be used once am using moderator and/or admin roles**
+//**greyed out routes after each route should be used once using moderator and/or admin roles**
 
 // Get All Users
 router.get('/', usersController.getUsers)
@@ -37,8 +37,5 @@ router.delete('/:id', usersController.deleteUser)
 //   usersController.allowIfLoggedin,
 //   usersController.deleteUser
 // )
-
-// get all reviews
-router.get('/:id/reviews', usersController.getAllReviews)
 
 module.exports = router

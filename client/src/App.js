@@ -50,11 +50,6 @@ const App = () => {
       <Route exact path='/business/profile'>
         <BusinessProfile />
       </Route>
-      {/* <Route
-        exact
-        path='/:city/:name'
-        render={props => <BusinessDetails {...props} />}
-      /> */}
       <Route exact path='/:city/:name'>
         <BusinessDetails />
       </Route>
@@ -68,7 +63,6 @@ const App = () => {
       <Header />
       <SideBar />
       <div className='content-wrapper'>
-        {/* {routes} */}
         <div className='content'>{routes}</div>
       </div>
       <Footer />
