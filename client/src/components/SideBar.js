@@ -1,10 +1,9 @@
-import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { withContext } from '../contexts/AppContext'
 
 const SideBar = props => {
   return (
-    <React.Fragment>
+    <>
       <aside className='main-sidebar sidebar-dark-primary elevation-4'>
         <a href='index3.html' className='brand-link'>
           <img
@@ -41,7 +40,8 @@ const SideBar = props => {
               className='nav nav-pills nav-sidebar flex-column'
               data-widget='treeview'
               role='menu'
-              data-accordion='false'>
+              data-accordion='false'
+            >
               <li className='nav-item'>
                 <NavLink to='/' exact className='nav-link'>
                   <i className='nav-icon fas fa-home'></i>
@@ -49,7 +49,7 @@ const SideBar = props => {
                 </NavLink>
               </li>
               {!props.token ? (
-                <React.Fragment>
+                <>
                   <li className='nav-item'>
                     <NavLink to='/signup' exact className='nav-link'>
                       <i className='nav-icon fas fa-user-plus'></i>
@@ -62,9 +62,9 @@ const SideBar = props => {
                       <p>Log In</p>
                     </NavLink>
                   </li>
-                </React.Fragment>
+                </>
               ) : (
-                <React.Fragment>
+                <>
                   <li className='nav-item'>
                     <NavLink to='/profile' exact className='nav-link'>
                       <i className='nav-icon fas fa-user-plus'></i>
@@ -76,18 +76,19 @@ const SideBar = props => {
                       to='/logout'
                       exact
                       className='nav-link'
-                      onClick={props.logout}>
+                      onClick={props.logout}
+                    >
                       <i className='nav-icon fas fa-sign-out-alt'></i>
                       <p>Log Out</p>
                     </NavLink>
                   </li>
-                </React.Fragment>
+                </>
               )}
             </ul>
           </nav>
         </div>
       </aside>
-    </React.Fragment>
+    </>
   )
 }
 

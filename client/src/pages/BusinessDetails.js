@@ -6,18 +6,21 @@ import { withContext } from '../contexts/AppContext'
 import ContentHeader from '../components/ContentHeader'
 import LoadSpinner from '../components/LoadSpinner'
 import '../stylesheets/Businesses.css'
+import star from '../images/star.svg'
+import { useLocation, useHistory } from 'react-router-dom'
 
 const BusinessDetails = props => {
-  const [business, setBusiness] = useState(props.history.location.business)
+  const history = useHistory()
+  const { state } = useLocation()
+  const business = state.business
   const [phone, setPhone] = useState(false)
+  const [hidden, setHidden] = useState(false)
 
-  useEffect(() => {
-    setBusiness(props.history.location.business)
-    console.log('business', business)
-  }, [props.history.location.business])
+  const deleteNameSpace = business.businessName.replace(/\s+/g, '')
 
   const handleClick = () => {
     setPhone(true)
+    setHidden(true)
   }
 
   // Initialize state for features and services whole data obj from context
@@ -92,6 +95,12 @@ const BusinessDetails = props => {
     }
   }, [business])
 
+  const reviewRoute = () => {
+    history.push(`/${deleteNameSpace.toLowerCase()}/review`, {
+      business: business,
+    })
+  }
+
   return (
     <>
       {!props.loading ? (
@@ -112,22 +121,22 @@ const BusinessDetails = props => {
                         />
                         <p className='bus-details--rating'>
                           <img
-                            src='star.svg'
+                            src={star}
                             alt='Star Icon'
                             style={{ width: '10%' }}
                           />
                           <img
-                            src='star.svg'
+                            src={star}
                             alt='Star Icon'
                             style={{ width: '10%' }}
                           />
                           <img
-                            src='star.svg'
+                            src={star}
                             alt='Star Icon'
                             style={{ width: '10%' }}
                           />
                           <img
-                            src='star.svg'
+                            src={star}
                             alt='Star Icon'
                             style={{ width: '10%' }}
                           />

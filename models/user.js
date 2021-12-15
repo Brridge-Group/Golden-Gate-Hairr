@@ -10,12 +10,12 @@ const userSchema = new Schema({
   password2: { type: String },
   createdDate: { type: Date, default: Date.now },
   token: { type: String },
-  isOwner: { type: Boolean, default: false },
   role: {
     type: String,
-    enum: ['user', 'owner', 'admin'],
+    enum: ['user', 'owner', 'moderator', 'admin'],
     default: 'user',
   },
+  reviews: [{ type: Schema.Types.ObjectId, ref: 'Review' }],
 })
 
 module.exports = mongoose.model('User', userSchema)

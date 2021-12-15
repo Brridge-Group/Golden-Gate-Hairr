@@ -1,4 +1,3 @@
-import React from 'react'
 import { withContext } from '../contexts/AppContext'
 
 const Profile = props => {
