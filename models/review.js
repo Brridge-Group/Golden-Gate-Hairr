@@ -11,4 +11,4 @@ const reviewSchema = new mongoose.Schema({
   business: { type: Schema.Types.ObjectId, ref: 'Business', required: true },
 })
 
-module.exports = mongoose.model('Review', reviewSchema, 'reviews')
+module.exports = mongoose.model('Review', reviewSchema)
