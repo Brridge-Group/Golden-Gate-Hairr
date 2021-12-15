@@ -17,6 +17,8 @@ const createBusiness = async (req, res, next) => {
     phone,
     status,
     userId,
+    features,
+    services,
   } = req.body
 
   const newBusiness = new Business({
@@ -34,6 +36,8 @@ const createBusiness = async (req, res, next) => {
     phone,
     status,
     userId,
+    features,
+    services,
   })
 
   try {
@@ -89,6 +93,8 @@ const updateBusiness = async (req, res, next) => {
     email,
     phone,
     status,
+    features,
+    services,
   } = req.body
 
   let business
@@ -111,6 +117,8 @@ const updateBusiness = async (req, res, next) => {
   business.email = email
   business.status = status
   business.phone = phone
+  business.features, features
+  business.services = services
 
   try {
     const update = await business.save()

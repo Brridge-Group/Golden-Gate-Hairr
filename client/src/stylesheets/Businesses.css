@@ -23,7 +23,24 @@
 .card-body.filtered:last-child {
   border: 0;
 }
-
+/* ----- */
+.card {
+  width: 75%;
+}
+.card-header {
+  padding: 12px 12px 20px 0px;
+}
+.bus-details--image {
+  display: flex;
+  overflow: hidden;
+  /* margin: 20px; */
+}
+.image--container {
+  /* margin-right: 20px; */
+  display: flex;
+  flex-direction: column;
+}
+/* ----- */
 .indie-card {
   display: flex;
   overflow: hidden;
