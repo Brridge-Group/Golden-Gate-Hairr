@@ -2,11 +2,12 @@ const express = require('express')
 const path = require('path')
 const cors = require('cors')
 const expressJwt = require('express-jwt')
+const bodyParser = require('body-parser')
 
-// Require Routes
-const itemsRoutes = require('../routes/items-route')
-const businessesRoutes = require('../routes/businesses-route')
 const usersRoutes = require('../routes/users-route')
+const reviewsRoutes = require('../routes/reviews-route')
+// Require Routes
+const businessesRoutes = require('../routes/businesses-route')
 const featuresRoutes = require('../routes/features-route')
 const servicesRoutes = require('../routes/services-route')
 const authorizesRoutes = require('../routes/authorizes-route')
@@ -17,9 +18,9 @@ const loader = async app => {
   // Serve static files from the React app
   app.use(express.static(path.join(__dirname, '../client/build')))
 
-  app.use('/api/items', itemsRoutes)
-  app.use('/api/businesses', businessesRoutes)
   app.use('/api/users', usersRoutes)
+  app.use('/api/reviews', reviewsRoutes)
+  app.use('/api/businesses', businessesRoutes)
   app.use('/api/features', featuresRoutes)
   app.use('/api/services', servicesRoutes)
   app.use('/api/authorize', authorizesRoutes)
@@ -27,6 +28,7 @@ const loader = async app => {
     '/api',
     expressJwt({ secret: process.env.TOKEN_KEY, algorithms: ['HS256'] })
   )
+  app.use(bodyParser.urlencoded({ extended: true }))
 
   // The "catchall" handler: for any request that doesn't
   // match one above, send back React's index.html file.
@@ -39,6 +41,7 @@ const loader = async app => {
   app.use(cors())
 
   // near the top with the other imports
+  //following from bob zirolls tutorial https://coursework.vschool.io/token-auth-with-jwts-part-1/
 
   // Make the app use the express-jwt authentication middleware on anything starting with "/api"
   // We'll give expressJwt a config object with a secret and a specified algorithm

@@ -1,22 +1,54 @@
-import React, { useEffect, useState } from 'react'
+import { useState, useEffect } from 'react'
 import { withContext } from '../contexts/AppContext'
 import ContentHeader from '../components/ContentHeader'
 import '../stylesheets/Businesses.css'
+import star from '../images/star.svg'
+import { useLocation, useHistory } from 'react-router-dom'
 
 const BusinessDetails = props => {
-  const [business, setBusiness] = useState('')
+  const history = useHistory()
+  const { state } = useLocation()
+  const business = state.business
   const [phone, setPhone] = useState(false)
+  const [hidden, setHidden] = useState(false)
 
-  useEffect(() => {
-    setBusiness(props.history.location.business)
-  }, [props.history.location.business])
+  const deleteNameSpace = business.businessName.replace(/\s+/g, '')
 
   const handleClick = () => {
     setPhone(true)
+    setHidden(true)
+  }
+
+  const [locationKeys, setLocationKeys] = useState([])
+
+  useEffect(() => {
+    return history.listen(location => {
+      if (history.action === 'PUSH') {
+        setLocationKeys([location.key])
+      }
+
+      if (history.action === 'POP') {
+        if (locationKeys[1] === location.key) {
+          setLocationKeys(([_, ...keys]) => keys)
+
+          // Handle forward event
+        } else {
+          setLocationKeys(keys => [location.key, ...keys])
+
+          // Handle back event
+        }
+      }
+    })
+  }, [locationKeys])
+
+  const reviewRoute = () => {
+    history.push(`/${deleteNameSpace.toLowerCase()}/review`, {
+      business: business,
+    })
   }
 
   return (
-    <React.Fragment>
+    <>
       <ContentHeader title='Business Details ' />
       <div className='card w-50 mx-auto'>
         <div className='card-body'>
@@ -30,29 +62,15 @@ const BusinessDetails = props => {
                     className='image-fluid'
                   />
                   <p className='bus-details--rating '>
-                    <img
-                      src='star.svg'
-                      alt='Star Icon'
-                      style={{ width: '10%' }}
-                    />
-                    <img
-                      src='star.svg'
-                      alt='Star Icon'
-                      style={{ width: '10%' }}
-                    />
-                    <img
-                      src='star.svg'
-                      alt='Star Icon'
-                      style={{ width: '10%' }}
-                    />
-                    <img
-                      src='star.svg'
-                      alt='Star Icon'
-                      style={{ width: '10%' }}
-                    />
+                    <img src={star} alt='Star Icon' style={{ width: '10%' }} />
+                    <img src={star} alt='Star Icon' style={{ width: '10%' }} />
+                    <img src={star} alt='Star Icon' style={{ width: '10%' }} />
+                    <img src={star} alt='Star Icon' style={{ width: '10%' }} />
                   </p>
                   {props.token ? (
-                    <button className='btn btn-default'>Review</button>
+                    <button className='btn btn-default' onClick={reviewRoute}>
+                      Review
+                    </button>
                   ) : (
                     ''
                   )}
@@ -64,26 +82,28 @@ const BusinessDetails = props => {
                     {business.zipCode}
                     <br />
                     email: {business.email}
-                    <div className={phone ? 'visable-phone' : 'hidden-phone'}>
-                      phone: {business.phone}
-                    </div>
                   </div>
                   <div className='product-description'>
                     {business.description}
                   </div>
-                  <button
-                    onClick={handleClick}
-                    className='btn btn-default'
-                    style={{ marginTop: '10px' }}>
-                    Book Now
-                  </button>
+                  <div
+                    className={phone ? 'phone visable-phone' : 'hidden-phone'}
+                  >
+                    phone: {business.phone}
+                  </div>
+                  {!hidden && (
+                    <button className='btn btn-default' onClick={handleClick}>
+                      {' '}
+                      Book Now
+                    </button>
+                  )}
                 </div>
               </figure>
             </li>
           </ul>
         </div>
       </div>
-    </React.Fragment>
+    </>
   )
 }
 

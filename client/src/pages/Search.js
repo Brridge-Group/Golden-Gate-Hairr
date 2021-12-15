@@ -1,15 +1,15 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import ContentHeader from '../components/ContentHeader'
 import { useHistory } from 'react-router-dom'
 
 const Search = () => {
   const [searchTerm, setSearchTerm] = useState('')
   const history = useHistory()
+  // const cityLowerCase =
 
   const handleSearch = e => {
     let value = e.target.value
-    const inputCase =
-      value.charAt(0).toUpperCase() + value.slice(1).toLowerCase()
+    const inputCase = value.slice(0).toLowerCase()
     setSearchTerm(inputCase)
   }
 
@@ -19,18 +19,11 @@ const Search = () => {
   }
 
   return (
-    <React.Fragment>
+    <>
       <ContentHeader title='Search' />
       <div className='card w-50 mx-auto'>
-        <div className='card-header'>
-          <h5 className='m-0' style={{ color: 'white ' }}>
-            Search
-          </h5>
-        </div>
         <div className='card-body' style={{ height: 200 }}>
-          <div
-            style={{ marginTop: 50, textAlign: 'center' }}
-            className='form-group'>
+          <div style={{ textAlign: 'center' }} className='search form-group'>
             <label htmlFor='search'>
               <h6 className='m-0'>I'm looking for a hair stylist in </h6>
             </label>
@@ -43,13 +36,14 @@ const Search = () => {
 
             <button
               style={{ border: 'none', background: 'none' }}
-              onClick={buttonOnClick}>
+              onClick={buttonOnClick}
+            >
               <i className='fas fa-search'></i>
             </button>
           </div>
         </div>
       </div>
-    </React.Fragment>
+    </>
   )
 }
 
