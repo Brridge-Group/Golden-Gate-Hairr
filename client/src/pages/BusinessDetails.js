@@ -63,7 +63,9 @@ const BusinessDetails = props => {
       const dbFeats = await props.feats // Full features' data obj from context
       const dbServices = await props.services // Full services' data obj from context
 
-      let businessCopy = await props.history.location.business
+      let businessCopy = await business
+      // let businessCopy = await props.history.location.business
+
       let tempBizFeatsArr = [] //rename ? temp?
       let tempBizServiceArr = [] //rename ? temp?
 
@@ -134,7 +136,6 @@ const BusinessDetails = props => {
                         )}
                       </div>
                     </figure>
-                    <div className='mx-auto d-flex flex-column'>{props.token ? <button className='btn btn-default'>Review</button> : ''}</div>
                   </div>
                   <div className='bus-details d-flex flex-column'>
                     <div className='d-flex justify-content-between'>
