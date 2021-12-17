@@ -7,6 +7,7 @@ import LoadSpinner from '../components/LoadSpinner'
 import '../stylesheets/Businesses.css'
 import star from '../images/star.svg'
 import { useLocation, useHistory } from 'react-router-dom'
+import GoogleMapReact from 'google-map-react'
 
 const BusinessDetails = props => {
   console.log('busdetails, props', props)
@@ -14,8 +15,14 @@ const BusinessDetails = props => {
   //am using this to pull in content but
   const { state } = useLocation()
   const business = state.business
-  //could also use
-  // const business = history.location.state.business
+  //could also use const business = history.location.state.business
+
+  const defaultProps = {
+    center: { lat: 40.73, lng: -73.93 },
+    zoom: 12,
+  }
+  //the center coordinates are NYC. I chose 12 as the zoom because it didn’t seem too far away or too close. The higher the number you choose, the more you zoom in on the map.
+  console.log(defaultProps)
 
   const [phone, setPhone] = useState(false)
   const [hidden, setHidden] = useState(false)
@@ -211,6 +218,20 @@ const BusinessDetails = props => {
       ) : (
         isLoading && <LoadSpinner />
       )}
+      <GoogleMapReact
+        bootstrapURLKeys={{
+          key: process.env.API_KEY,
+          language: 'en',
+        }}
+        defaultCenter={defaultProps.center}
+        center={defaultProps.center}
+        defaultZoom={defaultProps.zoom}
+        className='google-map'
+        style={{ position: 'absolute', width: '75%', height: '300px', left: '0', right: '0', marginLeft: 'auto', marginRight: 'auto' }}
+        // onChildMouseEnter={this.onChildMouseEnter}
+        // onChildMouseLeave={this.onChildMouseLeave}
+      />
+      {/* left: 0; right: 0; margin-left: auto; margin-right: auto; */}
     </>
   )
 }
