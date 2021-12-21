@@ -1,10 +1,5 @@
 import './App.css'
-import {
-  BrowserRouter as Router,
-  Route,
-  Redirect,
-  Switch,
-} from 'react-router-dom'
+import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import SideBar from './components/SideBar'
@@ -50,11 +45,7 @@ const App = () => {
       <Route exact path='/business/profile'>
         <BusinessProfile />
       </Route>
-      <Route
-        exact
-        path='/:city/:name'
-        render={props => <BusinessDetails {...props} />}
-      />
+      <Route exact path='/:city/:name' render={props => <BusinessDetails {...props} />} />
       <Redirect to='/' />
     </Switch>
   )
@@ -64,7 +55,6 @@ const App = () => {
       <Header />
       <SideBar />
       <div className='content-wrapper'>
-        {/* {routes} */}
         <div className='content'>{routes}</div>
       </div>
       <Footer />

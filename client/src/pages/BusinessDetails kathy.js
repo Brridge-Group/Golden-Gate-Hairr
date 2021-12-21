@@ -12,10 +12,8 @@ const BusinessDetails = props => {
   const history = useHistory()
   const { state } = useLocation()
   const business = state.business
-  //could also use const business = history.location.state.business
   const [phone, setPhone] = useState(false)
   const [hidden, setHidden] = useState(false)
-  console.log('props.history.location.business', props.history.location.business, 'state.business', state.business, 'props', props)
 
   const deleteNameSpace = business.businessName.replace(/\s+/g, '')
 
@@ -33,21 +31,21 @@ const BusinessDetails = props => {
     setServices(props.services)
     // console.log('features', features)
     // console.log('services', services)
-  }, [props.feats, props.services])
+  }, [props.features, props.services])
 
   const [isLoading, setIsLoading] = useState(true)
 
-  // useEffect(() => {
-  //   setIsLoading(true)
-  //   const fetchFeatsServices = async () => {
-  //     await props.fetchFeatures()
-  //     await props.fetchServices()
-  //   }
-  //   fetchFeatsServices()
-  //   return function clean() {
-  //     setIsLoading(false)
-  //   }
-  // }, [])
+  useEffect(() => {
+    setIsLoading(true)
+    const fetchFeatsServices = async () => {
+      await props.fetchFeatures()
+      await props.fetchServices()
+    }
+    fetchFeatsServices()
+    return function clean() {
+      setIsLoading(false)
+    }
+  }, [])
 
   // Initialize state for features and services  array from context
   const [bizFeatsArr, setBizFeatsArr] = useState([])
@@ -60,9 +58,7 @@ const BusinessDetails = props => {
       const dbFeats = await props.feats // Full features' data obj from context
       const dbServices = await props.services // Full services' data obj from context
 
-      // let businessCopy = await state.business
       let businessCopy = await props.history.location.business
-
       let tempBizFeatsArr = [] //rename ? temp?
       let tempBizServiceArr = [] //rename ? temp?
 
@@ -75,14 +71,7 @@ const BusinessDetails = props => {
           }
         })
       })
-      // businessCopy?.features.map(bizFeat => {
-      //   // console.log('bizFeat', bizFeat)
-      //   dbFeats?.features.find(feat => {
-      //     if (feat.id === bizFeat) {
-      //       tempBizFeatsArr.push(feat)
-      //     }
-      //   })
-      // })
+
       setBizFeatsArr(tempBizFeatsArr)
       // console.log('bizFeatsArr', bizFeatsArr)
 
@@ -113,7 +102,7 @@ const BusinessDetails = props => {
 
   return (
     <>
-      {!props.loading || !state.loading ? (
+      {!props.loading ? (
         <>
           {/* (Backlog) TODO: [ ] - ? Remove all ContentHeaders or modify and utilize across app   */}
 
@@ -202,12 +191,17 @@ const BusinessDetails = props => {
                     </div>
                     <div className='d-flex flex-column'>
                       <div className={phone ? 'visable-phone' : 'hidden-phone'}>phone: {business.phone}</div>
-                      {!hidden && (
-                        <button className='btn btn-default' onClick={handleClick}>
-                          {' '}
-                          Book Now
-                        </button>
-                      )}
+                      <button
+                        onClick={handleClick}
+                        className='btn btn-default'
+                        // style={{
+                        //   width: '75%',
+                        //   marginTop: '10px',
+                        //   margin: 'auto',
+                        // }}
+                      >
+                        Book Now
+                      </button>
                     </div>
                   </div>
                 </div>
