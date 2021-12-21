@@ -14,7 +14,7 @@ import Profile from './pages/Profile'
 import Review from './pages/Review'
 import Search from './pages/Search'
 import SearchResults from './pages/SearchResults'
-import MapThree from './components/MapThree'
+import Map from './components/Map'
 
 const App = () => {
   let routes
@@ -59,7 +59,7 @@ const App = () => {
       <Header />
       <SideBar />
       <div className='content-wrapper'>
-        {/* <MapThree /> */}
+        {/* <Map /> */}
         <div className='content'>{routes}</div>
       </div>
       <Footer />

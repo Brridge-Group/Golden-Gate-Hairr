@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import GoogleMapReact from 'google-map-react'
+require('dotenv').config()
 
 // const AnyReactComponent = ({ text }) => <div>{text}</div>
 
-class MapThree extends Component {
+class Map extends Component {
   static defaultProps = {
     center: { lat: 40.73, lng: -73.93 },
     zoom: 11,
@@ -27,4 +28,4 @@ class MapThree extends Component {
   }
 }
 
-export default MapThree
+export default Map

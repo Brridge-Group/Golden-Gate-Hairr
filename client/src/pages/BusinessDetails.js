@@ -7,7 +7,7 @@ import LoadSpinner from '../components/LoadSpinner'
 import '../stylesheets/Businesses.css'
 import star from '../images/star.svg'
 import { useLocation, useHistory } from 'react-router-dom'
-import MapThree from '../components/MapThree'
+import Map from '../components/Map'
 
 const BusinessDetails = props => {
   const history = useHistory()
@@ -126,6 +126,7 @@ const BusinessDetails = props => {
                     </ul>
                   </div>
                 ))}
+                <br />
                 <b style={{ textTransform: 'uppercase', lineHeight: '2' }}>Services</b>
                 {bizServiceArr.map(service => (
                   <div className='bus-details--service-name' style={{ textTransform: 'capitalize' }} key={service.id}>
@@ -141,58 +142,58 @@ const BusinessDetails = props => {
                   </div>
                 ))}
               </div>
-              <div className='card mx-auto'>
-                <div className='card-body '>
-                  <div className='products-list product-list-in-card '>
-                    <figure className='indie-card'>
-                      <div className='pic-star-container'>
-                        <img src='https://via.placeholder.com/100' alt='Placeholder Business Profile Image' className='image-fluid' />
-                        <p className='bus-details--rating'>
-                          <img src={star} alt='Star Icon' style={{ width: '10%' }} />
-                          <img src={star} alt='Star Icon' style={{ width: '10%' }} />
-                          <img src={star} alt='Star Icon' style={{ width: '10%' }} />
-                          <img src={star} alt='Star Icon' style={{ width: '10%' }} />
-                        </p>
-                        {props.token ? (
-                          <button className='btn btn-default' onClick={reviewRoute}>
-                            Review
-                          </button>
-                        ) : (
-                          ''
-                        )}
-                        <div className='map'>
-                          <MapThree />
-                        </div>
+              {/* <div className='card mx-auto'> */}
+              <div className='card-body '>
+                <div className='products-list product-list-in-card '>
+                  <figure className='indie-card'>
+                    <div className='pic-star-container'>
+                      <img src='https://via.placeholder.com/100' alt='Placeholder Business Profile Image' className='image-fluid' />
+                      <p className='bus-details--rating'>
+                        <img src={star} alt='Star Icon' style={{ width: '10%' }} />
+                        <img src={star} alt='Star Icon' style={{ width: '10%' }} />
+                        <img src={star} alt='Star Icon' style={{ width: '10%' }} />
+                        <img src={star} alt='Star Icon' style={{ width: '10%' }} />
+                      </p>
+                      {props.token ? (
+                        <button className='btn btn-default' onClick={reviewRoute}>
+                          Review
+                        </button>
+                      ) : (
+                        ''
+                      )}
+                      <div className='map'>
+                        <Map />
                       </div>
-                      <div className='product-container' style={{ width: '72%' }}>
-                        <h1 className='product title'>{business.businessName}</h1>
-                        <div className='product-description'>{business.description}</div>
+                    </div>
+                    <div className='product-container' style={{ width: '72%' }}>
+                      <h1 className='product title'>{business.businessName}</h1>
+                      <div className='product-description'>{business.description}</div>
+                      <br />
+                      <div className='bus-details--address small'>
+                        <b>Address:</b>
                         <br />
-                        <div className='bus-details--address small'>
-                          <b>Address:</b>
-                          <br />
-                          {business.address1} {business.city}, {business.state} {business.zipCode}
-                        </div>
-                        <div className='bus-details--email small'>
-                          <b>Email:</b>
-                          <br />
-                          {business.email}
-                        </div>
-                        <div className={phone ? 'visable-phone' : 'hidden-phone'}>phone: {business.phone}</div>
-                        {!hidden && (
-                          <button className='btn btn-default' onClick={handleClick} style={{ width: '100px' }}>
-                            {' '}
-                            Book Now
-                          </button>
-                        )}
+                        {business.address1} {business.city}, {business.state} {business.zipCode}
                       </div>
-                    </figure>
-                  </div>
+                      <div className='bus-details--email small'>
+                        <b>Email:</b>
+                        <br />
+                        {business.email}
+                      </div>
+                      <div className={phone ? 'visable-phone' : 'hidden-phone'}>phone: {business.phone}</div>
+                      {!hidden && (
+                        <button className='btn btn-default' onClick={handleClick} style={{ width: '100px' }}>
+                          {' '}
+                          Book Now
+                        </button>
+                      )}
+                    </div>
+                  </figure>
                 </div>
               </div>
+              {/* </div> */}
             </div>
             <div className='large-map' style={{ marginTop: '30px' }}>
-              <MapThree />
+              <Map />
             </div>
           </section>
         </>

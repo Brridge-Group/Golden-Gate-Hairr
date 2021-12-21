@@ -13,9 +13,11 @@
   background: snow;
   border-right: 10px solid #f4f6f9;
   padding: 10px;
+  box-shadow: 0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%);
 }
 .filtered-businesses {
   width: 75%;
+  /* box-shadow: 0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%); */
 }
 .card-body.filtered {
   padding: 0;
@@ -62,6 +64,7 @@ h5 {
   padding: 10px;
   text-align: center;
   background: white;
+  box-shadow: 0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%);
 }
 
 .hidden-phone {
@@ -81,9 +84,11 @@ h5 {
   height: 100px;
   margin-top: 20px;
 }
-.business-container.details.card.mx-auto {
-  margin-bottom: 0;
-}
+
 .large-map {
   margin-top: 30px;
+}
+.card-body {
+  background: white;
+  box-shadow: 0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%);
 }

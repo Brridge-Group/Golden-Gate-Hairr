@@ -7,7 +7,7 @@ import LoadSpinner from '../components/LoadSpinner'
 import '../stylesheets/Businesses.css'
 import star from '../images/star.svg'
 import { useLocation, useHistory } from 'react-router-dom'
-import MapThree from '../components/MapThree'
+import Map from '../components/Map'
 
 const BusinessDetails = props => {
   const history = useHistory()
@@ -211,7 +211,7 @@ const BusinessDetails = props => {
         isLoading && <LoadSpinner />
       )}
 
-      <MapThree />
+      <Map />
     </>
   )
 }
