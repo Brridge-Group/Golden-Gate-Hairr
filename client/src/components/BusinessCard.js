@@ -16,10 +16,7 @@ const BusinessCard = props => {
 
   const renderRedirect = () => {
     if (redirect) {
-      history.push(
-        `/${props.city.toLowerCase()}/${deleteNameSpace.toLowerCase()}`,
-        { business: business }
-      )
+      history.push(`/${props.city.toLowerCase()}/${deleteNameSpace.toLowerCase()}`, { business: business })
     }
   }
 
@@ -32,11 +29,7 @@ const BusinessCard = props => {
             <li className='item'>
               <figure className='indie-card'>
                 <div className='pic-star-container'>
-                  <img
-                    src='https://via.placeholder.com/100'
-                    alt='Placeholder Business Profile'
-                    className='image-fluid'
-                  />
+                  <img src='https://via.placeholder.com/100' alt='Placeholder Business Profile' className='image-fluid' />
                   <p className='bus-details--rating '>
                     <img src={star} alt='Star Icon' style={{ width: '10%' }} />
                     <img src={star} alt='Star Icon' style={{ width: '10%' }} />
@@ -49,9 +42,7 @@ const BusinessCard = props => {
                   <div>
                     {props.address} {props.city}, {props.state} {props.zipCode}
                   </div>
-                  <div className='product-description '>
-                    {props.description}
-                  </div>
+                  <div className='product-description '>{props.description}</div>
                 </div>
               </figure>
             </li>

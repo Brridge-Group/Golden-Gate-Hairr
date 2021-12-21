@@ -126,7 +126,6 @@ const BusinessDetails = props => {
                     </ul>
                   </div>
                 ))}
-
                 <b style={{ textTransform: 'uppercase', lineHeight: '2' }}>Services</b>
                 {bizServiceArr.map(service => (
                   <div className='bus-details--service-name' style={{ textTransform: 'capitalize' }} key={service.id}>
@@ -145,9 +144,8 @@ const BusinessDetails = props => {
               <div className='card mx-auto'>
                 <div className='card-body '>
                   <div className='products-list product-list-in-card '>
-                    {/* <div className='m-3'> */}
-                    <figure className='bus-details--image'>
-                      <div className='image--container'>
+                    <figure className='indie-card'>
+                      <div className='pic-star-container'>
                         <img src='https://via.placeholder.com/100' alt='Placeholder Business Profile Image' className='image-fluid' />
                         <p className='bus-details--rating'>
                           <img src={star} alt='Star Icon' style={{ width: '10%' }} />
@@ -163,66 +161,20 @@ const BusinessDetails = props => {
                           ''
                         )}
                       </div>
-                    </figure>
-                    {/* </div> */}
-                    <div className='bus-details d-flex flex-column'>
-                      <div className='d-flex justify-content-between'>
-                        <div className='bus-details--header'>
-                          <h1 className='card-header border-bottom-0'>{business.businessName}</h1>
-                          <div className='product-description'>{business.description}</div>
-
+                      <div className='product-container' style={{ width: '72%' }}>
+                        <h1 className='product title'>{business.businessName}</h1>
+                        <div className='product-description'>{business.description}</div>
+                        <br />
+                        <div className='bus-details--address small'>
+                          <b>Address:</b>
                           <br />
+                          {business.address1} {business.city}, {business.state} {business.zipCode}
                         </div>
-                        <div className='bus-details--info mt-3'>
-                          <div className='bus-details--address small'>
-                            <b>Address:</b>
-                            <br />
-                            {business.address1} {business.city}, {business.state} {business.zipCode}
-                          </div>
-                          <div className='bus-details--email small'>
-                            <b>Email:</b>
-                            <br />
-                            {business.email}
-                          </div>
+                        <div className='bus-details--email small'>
+                          <b>Email:</b>
+                          <br />
+                          {business.email}
                         </div>
-                      </div>
-                      <div className='d-flex justify-content-around'>
-                        {/* <div className='bus-details--features-list w-50'>
-                          <p className='card-header border-bottom-0'>
-                            <b>Features</b>
-                          </p>
-                          {bizFeatsArr.map(feat => (
-                            <div className='bus-details--features' style={{ textTransform: 'capitalize' }} key={feat.id}>
-                              <ul>
-                                <li>
-                                  <b>{feat.name}</b>
-                                  <br />
-                                  <span className='small'>{feat.description}</span>
-                                </li>
-                              </ul>
-                            </div>
-                          ))}
-                        </div> */}
-                        {/* <div className='bus-details--services-list w-50'>
-                          <p className='card-header border-bottom-0'>
-                            <b>Services</b>
-                          </p>
-                          {bizServiceArr.map(service => (
-                            <div className='bus-details--service-name' style={{ textTransform: 'capitalize' }} key={service.id}>
-                              <ul>
-                                <li>
-                                  <b>{service.name}</b>
-                                  <br />
-                                  <span className='small' style={{ textTransform: '' }}>
-                                    {service.description}
-                                  </span>
-                                </li>
-                              </ul>
-                            </div>
-                          ))}
-                        </div> */}
-                      </div>
-                      <div className='d-flex flex-column'>
                         <div className={phone ? 'visable-phone' : 'hidden-phone'}>phone: {business.phone}</div>
                         {!hidden && (
                           <button className='btn btn-default' onClick={handleClick}>
@@ -231,7 +183,7 @@ const BusinessDetails = props => {
                           </button>
                         )}
                       </div>
-                    </div>
+                    </figure>
                   </div>
                 </div>
               </div>
