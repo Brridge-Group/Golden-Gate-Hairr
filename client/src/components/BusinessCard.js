@@ -1,9 +1,11 @@
 import { useState } from 'react'
-import { Redirect } from 'react-router'
 import '../stylesheets/Businesses.css'
 import star from '../images/star.svg'
+import { useHistory } from 'react-router-dom'
 
 const BusinessCard = props => {
+  const history = useHistory()
+  const business = props.business
   const [redirect, setRedirect] = useState(false)
 
   const deleteNameSpace = props.name.replace(/\s+/g, '')
@@ -14,14 +16,7 @@ const BusinessCard = props => {
 
   const renderRedirect = () => {
     if (redirect) {
-      return (
-        <Redirect
-          to={{
-            pathname: `/${props.city.toLowerCase()}/${deleteNameSpace.toLowerCase()}`,
-            state: { business: props.business },
-          }}
-        />
-      )
+      history.push(`/${props.city.toLowerCase()}/${deleteNameSpace.toLowerCase()}`, { business: business })
     }
   }
 
@@ -34,11 +29,7 @@ const BusinessCard = props => {
             <li className='item'>
               <figure className='indie-card'>
                 <div className='pic-star-container'>
-                  <img
-                    src='https://via.placeholder.com/100'
-                    alt='Placeholder Business Profile'
-                    className='image-fluid'
-                  />
+                  <img src='https://via.placeholder.com/100' alt='Placeholder Business Profile' className='image-fluid' />
                   <p className='bus-details--rating '>
                     <img src={star} alt='Star Icon' style={{ width: '10%' }} />
                     <img src={star} alt='Star Icon' style={{ width: '10%' }} />
@@ -51,9 +42,7 @@ const BusinessCard = props => {
                   <div>
                     {props.address} {props.city}, {props.state} {props.zipCode}
                   </div>
-                  <div className='product-description '>
-                    {props.description}
-                  </div>
+                  <div className='product-description '>{props.description}</div>
                 </div>
               </figure>
             </li>

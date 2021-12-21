@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react'
 
 // Custom Imports
 import { withContext } from '../contexts/AppContext'
-import ContentHeader from '../components/ContentHeader'
 import LoadSpinner from '../components/LoadSpinner'
 import '../stylesheets/Businesses.css'
 import star from '../images/star.svg'
@@ -114,38 +113,20 @@ const BusinessDetails = props => {
                   <div className='m-3'>
                     <figure className='bus-details--image'>
                       <div className='image--container'>
-                        <img
-                          src='https://via.placeholder.com/100'
-                          alt='Placeholder Business Profile Image'
-                          className='image-fluid'
-                        />
+                        <img src='https://via.placeholder.com/100' alt='Placeholder Business Profile Image' className='image-fluid' />
                         <p className='bus-details--rating'>
-                          <img
-                            src={star}
-                            alt='Star Icon'
-                            style={{ width: '10%' }}
-                          />
-                          <img
-                            src={star}
-                            alt='Star Icon'
-                            style={{ width: '10%' }}
-                          />
-                          <img
-                            src={star}
-                            alt='Star Icon'
-                            style={{ width: '10%' }}
-                          />
-                          <img
-                            src={star}
-                            alt='Star Icon'
-                            style={{ width: '10%' }}
-                          />
+                          <img src={star} alt='Star Icon' style={{ width: '10%' }} />
+                          <img src={star} alt='Star Icon' style={{ width: '10%' }} />
+                          <img src={star} alt='Star Icon' style={{ width: '10%' }} />
+                          <img src={star} alt='Star Icon' style={{ width: '10%' }} />
                         </p>
                       </div>
                     </figure>
                     <div className='mx-auto d-flex flex-column'>
                       {props.token ? (
-                        <button className='btn btn-default'>Review</button>
+                        <button className='btn btn-default' onClick={reviewRoute}>
+                          Review
+                        </button>
                       ) : (
                         ''
                       )}
@@ -154,12 +135,8 @@ const BusinessDetails = props => {
                   <div className='bus-details d-flex flex-column'>
                     <div className='d-flex justify-content-between'>
                       <div className='bus-details--header'>
-                        <h1 className='card-header border-bottom-0'>
-                          {business.businessName}
-                        </h1>
-                        <div className='product-description'>
-                          {business.description}
-                        </div>
+                        <h1 className='card-header border-bottom-0'>{business.businessName}</h1>
+                        <div className='product-description'>{business.description}</div>
 
                         <br />
                       </div>
@@ -167,8 +144,7 @@ const BusinessDetails = props => {
                         <div className='bus-details--address small'>
                           <b>Address:</b>
                           <br />
-                          {business.address1} {business.city}, {business.state}{' '}
-                          {business.zipCode}
+                          {business.address1} {business.city}, {business.state} {business.zipCode}
                         </div>
                         <div className='bus-details--email small'>
                           <b>Email:</b>
@@ -183,18 +159,12 @@ const BusinessDetails = props => {
                           <b>Features</b>
                         </p>
                         {bizFeatsArr.map(feat => (
-                          <div
-                            className='bus-details--features'
-                            style={{ textTransform: 'capitalize' }}
-                            key={feat.id}
-                          >
+                          <div className='bus-details--features' style={{ textTransform: 'capitalize' }} key={feat.id}>
                             <ul>
                               <li>
                                 <b>{feat.name}</b>
                                 <br />
-                                <span className='small'>
-                                  {feat.description}
-                                </span>
+                                <span className='small'>{feat.description}</span>
                               </li>
                             </ul>
                           </div>
@@ -205,19 +175,12 @@ const BusinessDetails = props => {
                           <b>Services</b>
                         </p>
                         {bizServiceArr.map(service => (
-                          <div
-                            className='bus-details--service-name'
-                            style={{ textTransform: 'capitalize' }}
-                            key={service.id}
-                          >
+                          <div className='bus-details--service-name' style={{ textTransform: 'capitalize' }} key={service.id}>
                             <ul>
                               <li>
                                 <b>{service.name}</b>
                                 <br />
-                                <span
-                                  className='small'
-                                  style={{ textTransform: '' }}
-                                >
+                                <span className='small' style={{ textTransform: '' }}>
                                   {service.description}
                                 </span>
                               </li>
@@ -227,17 +190,15 @@ const BusinessDetails = props => {
                       </div>
                     </div>
                     <div className='d-flex flex-column'>
-                      <div className={phone ? 'visable-phone' : 'hidden-phone'}>
-                        phone: {business.phone}
-                      </div>
+                      <div className={phone ? 'visable-phone' : 'hidden-phone'}>phone: {business.phone}</div>
                       <button
                         onClick={handleClick}
                         className='btn btn-default'
-                        style={{
-                          width: '75%',
-                          marginTop: '10px',
-                          margin: 'auto',
-                        }}
+                        // style={{
+                        //   width: '75%',
+                        //   marginTop: '10px',
+                        //   margin: 'auto',
+                        // }}
                       >
                         Book Now
                       </button>
