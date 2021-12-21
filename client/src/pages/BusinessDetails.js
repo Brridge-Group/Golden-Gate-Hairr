@@ -15,7 +15,7 @@ const BusinessDetails = props => {
   //could also use const business = history.location.state.business
   const [phone, setPhone] = useState(false)
   const [hidden, setHidden] = useState(false)
-  console.log('props.history.location.business', props.history.location.business, 'state.business', state.business, 'props', props)
+  console.log('props.history.location.state.business', props.history.location.state.business, 'props', props)
 
   const deleteNameSpace = business.businessName.replace(/\s+/g, '')
 
@@ -37,17 +37,17 @@ const BusinessDetails = props => {
 
   const [isLoading, setIsLoading] = useState(true)
 
-  // useEffect(() => {
-  //   setIsLoading(true)
-  //   const fetchFeatsServices = async () => {
-  //     await props.fetchFeatures()
-  //     await props.fetchServices()
-  //   }
-  //   fetchFeatsServices()
-  //   return function clean() {
-  //     setIsLoading(false)
-  //   }
-  // }, [])
+  useEffect(() => {
+    setIsLoading(true)
+    const fetchFeatsServices = async () => {
+      await props.fetchFeatures()
+      await props.fetchServices()
+    }
+    fetchFeatsServices()
+    return function clean() {
+      setIsLoading(false)
+    }
+  }, [])
 
   // Initialize state for features and services  array from context
   const [bizFeatsArr, setBizFeatsArr] = useState([])
@@ -61,14 +61,14 @@ const BusinessDetails = props => {
       const dbServices = await props.services // Full services' data obj from context
 
       // let businessCopy = await state.business
-      let businessCopy = await props.history.location.business
+      let businessCopy = await props.history.location.state.business
 
       let tempBizFeatsArr = [] //rename ? temp?
       let tempBizServiceArr = [] //rename ? temp?
 
       // Map through the business' features array and compare the id string while mapping through the features whole data obj and using the find method to search for a matching id. If one is found push the containing object to an array and return that array.
       businessCopy?.features.map(bizFeat => {
-        // console.log('bizFeat', bizFeat)
+        console.log('bizFeat', bizFeat)
         dbFeats?.features.find(feat => {
           if (feat.id === bizFeat) {
             tempBizFeatsArr.push(feat)

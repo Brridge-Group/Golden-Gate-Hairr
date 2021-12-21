@@ -4,6 +4,7 @@ import star from '../images/star.svg'
 import { useHistory } from 'react-router-dom'
 
 const BusinessCard = props => {
+  console.log('in buscard, props', props)
   const history = useHistory()
   const business = props.business
   const [redirect, setRedirect] = useState(false)
@@ -14,30 +15,11 @@ const BusinessCard = props => {
     setRedirect(true)
   }
 
-  // const renderRedirect = () => {
-  //   if (redirect) {
-  //     history.push(`/${props.city.toLowerCase()}/${deleteNameSpace.toLowerCase()}`, { business: props.business })
-  //   }
-  // }
-
   const renderRedirect = () => {
     if (redirect) {
       history.push(`/${props.city.toLowerCase()}/${deleteNameSpace.toLowerCase()}`, { business: business })
     }
   }
-
-  // const renderRedirect = () => {
-  //   if (redirect) {
-  //     return (
-  //       <Redirect
-  //         to={{
-  //           pathname: `/${props.city.toLowerCase()}/${deleteNameSpace.toLowerCase()}`,
-  //           state: { business: props.business },
-  //         }}
-  //       />
-  //     )
-  //   }
-  // }
 
   return (
     <>
