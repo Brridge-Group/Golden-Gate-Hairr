@@ -8,6 +8,7 @@ import '../stylesheets/Businesses.css'
 import star from '../images/star.svg'
 import { useLocation, useHistory } from 'react-router-dom'
 import GoogleMapReact from 'google-map-react'
+import MapThree from '../components/MapThree'
 
 const BusinessDetails = props => {
   console.log('busdetails, props', props)
@@ -218,7 +219,7 @@ const BusinessDetails = props => {
       ) : (
         isLoading && <LoadSpinner />
       )}
-      <GoogleMapReact
+      {/* <GoogleMapReact
         bootstrapURLKeys={{
           key: process.env.API_KEY,
           language: 'en',
@@ -230,7 +231,8 @@ const BusinessDetails = props => {
         style={{ position: 'absolute', width: '75%', height: '300px', left: '0', right: '0', marginLeft: 'auto', marginRight: 'auto' }}
         // onChildMouseEnter={this.onChildMouseEnter}
         // onChildMouseLeave={this.onChildMouseLeave}
-      />
+      /> */}
+      <MapThree />
       {/* left: 0; right: 0; margin-left: auto; margin-right: auto; */}
     </>
   )

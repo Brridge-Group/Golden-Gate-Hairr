@@ -1,10 +1,5 @@
 import './App.css'
-import {
-  BrowserRouter as Router,
-  Route,
-  Redirect,
-  Switch,
-} from 'react-router-dom'
+import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import SideBar from './components/SideBar'
@@ -19,6 +14,7 @@ import Profile from './pages/Profile'
 import Review from './pages/Review'
 import Search from './pages/Search'
 import SearchResults from './pages/SearchResults'
+import MapThree from './components/MapThree'
 
 const App = () => {
   let routes
@@ -63,6 +59,7 @@ const App = () => {
       <Header />
       <SideBar />
       <div className='content-wrapper'>
+        {/* <MapThree /> */}
         <div className='content'>{routes}</div>
       </div>
       <Footer />
