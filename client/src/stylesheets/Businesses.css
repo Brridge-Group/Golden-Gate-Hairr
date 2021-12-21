@@ -12,6 +12,7 @@
   width: 25%;
   background: snow;
   border-right: 10px solid #f4f6f9;
+  padding: 10px;
 }
 .filtered-businesses {
   width: 75%;

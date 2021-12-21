@@ -63,7 +63,7 @@ const BusinessDetails = props => {
       const dbServices = await props.services // Full services' data obj from context
 
       let businessCopy = await business
-      // let businessCopy = await props.history.location.business
+      // let businessCopy = await props.history.location.state.business
 
       let tempBizFeatsArr = [] //rename ? temp?
       let tempBizServiceArr = [] //rename ? temp?
@@ -114,40 +114,33 @@ const BusinessDetails = props => {
           <section className='business-wrapper'>
             <div className='business-container'>
               <div className='business-features-placeholder'>
-                <div className='bus-details--features-list w-50'>
-                  <p className='card-header border-bottom-0'>
-                    <b>Features</b>
-                  </p>
-                  {bizFeatsArr.map(feat => (
-                    <div className='bus-details--features' style={{ textTransform: 'capitalize' }} key={feat.id}>
-                      <ul>
-                        <li>
-                          <b>{feat.name}</b>
-                          <br />
-                          <span className='small'>{feat.description}</span>
-                        </li>
-                      </ul>
-                    </div>
-                  ))}
-                </div>
-                <div className='bus-details--services-list w-50'>
-                  <p className='card-header border-bottom-0'>
-                    <b>Services</b>
-                  </p>
-                  {bizServiceArr.map(service => (
-                    <div className='bus-details--service-name' style={{ textTransform: 'capitalize' }} key={service.id}>
-                      <ul>
-                        <li>
-                          <b>{service.name}</b>
-                          <br />
-                          <span className='small' style={{ textTransform: '' }}>
-                            {service.description}
-                          </span>
-                        </li>
-                      </ul>
-                    </div>
-                  ))}
-                </div>
+                <b style={{ textTransform: 'uppercase', lineHeight: '2' }}>Features</b>
+                {bizFeatsArr.map(feat => (
+                  <div className='bus-details--features' style={{ textTransform: 'capitalize' }} key={feat.id}>
+                    <ul style={{ listStyleType: 'none', paddingLeft: '0' }}>
+                      <li style={{ lineHeight: '1.25' }}>
+                        <b>{feat.name}</b>
+                        <br />
+                        <span className='small'>{feat.description}</span>
+                      </li>
+                    </ul>
+                  </div>
+                ))}
+
+                <b style={{ textTransform: 'uppercase', lineHeight: '2' }}>Services</b>
+                {bizServiceArr.map(service => (
+                  <div className='bus-details--service-name' style={{ textTransform: 'capitalize' }} key={service.id}>
+                    <ul style={{ listStyleType: 'none', paddingLeft: '0' }}>
+                      <li style={{ lineHeight: '1.25' }}>
+                        <b>{service.name}</b>
+                        <br />
+                        <span className='small' style={{ textTransform: '', lineHeight: '.75' }}>
+                          {service.description}
+                        </span>
+                      </li>
+                    </ul>
+                  </div>
+                ))}
               </div>
               <div className='card mx-auto'>
                 <div className='card-body '>
