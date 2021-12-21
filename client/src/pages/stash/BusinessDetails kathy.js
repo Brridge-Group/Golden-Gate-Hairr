@@ -9,14 +9,9 @@ import star from '../images/star.svg'
 import { useLocation, useHistory } from 'react-router-dom'
 
 const BusinessDetails = props => {
-  console.log('busdetails, props', props)
   const history = useHistory()
-  //am using this to pull in content but
   const { state } = useLocation()
   const business = state.business
-  //could also use
-  // const business = history.location.state.business
-
   const [phone, setPhone] = useState(false)
   const [hidden, setHidden] = useState(false)
 
@@ -63,9 +58,7 @@ const BusinessDetails = props => {
       const dbFeats = await props.feats // Full features' data obj from context
       const dbServices = await props.services // Full services' data obj from context
 
-      let businessCopy = await business
-      // let businessCopy = await props.history.location.state.business
-
+      let businessCopy = await props.history.location.business
       let tempBizFeatsArr = [] //rename ? temp?
       let tempBizServiceArr = [] //rename ? temp?
 
@@ -112,6 +105,7 @@ const BusinessDetails = props => {
       {!props.loading ? (
         <>
           {/* (Backlog) TODO: [ ] - ? Remove all ContentHeaders or modify and utilize across app   */}
+
           <section>
             <div className='card mx-auto'>
               <div className='card-body'>
@@ -126,15 +120,17 @@ const BusinessDetails = props => {
                           <img src={star} alt='Star Icon' style={{ width: '10%' }} />
                           <img src={star} alt='Star Icon' style={{ width: '10%' }} />
                         </p>
-                        {props.token ? (
-                          <button className='btn btn-default' onClick={reviewRoute}>
-                            Review
-                          </button>
-                        ) : (
-                          ''
-                        )}
                       </div>
                     </figure>
+                    <div className='mx-auto d-flex flex-column'>
+                      {props.token ? (
+                        <button className='btn btn-default' onClick={reviewRoute}>
+                          Review
+                        </button>
+                      ) : (
+                        ''
+                      )}
+                    </div>
                   </div>
                   <div className='bus-details d-flex flex-column'>
                     <div className='d-flex justify-content-between'>
@@ -195,12 +191,17 @@ const BusinessDetails = props => {
                     </div>
                     <div className='d-flex flex-column'>
                       <div className={phone ? 'visable-phone' : 'hidden-phone'}>phone: {business.phone}</div>
-                      {!hidden && (
-                        <button className='btn btn-default' onClick={handleClick}>
-                          {' '}
-                          Book Now
-                        </button>
-                      )}
+                      <button
+                        onClick={handleClick}
+                        className='btn btn-default'
+                        // style={{
+                        //   width: '75%',
+                        //   marginTop: '10px',
+                        //   margin: 'auto',
+                        // }}
+                      >
+                        Book Now
+                      </button>
                     </div>
                   </div>
                 </div>
