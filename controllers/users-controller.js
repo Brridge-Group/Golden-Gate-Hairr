@@ -1,8 +1,9 @@
 const User = require('../models/user')
-
+const Review = require('../models/review')
 const { roles } = require('../roles')
 
-exports.grantAccess = function (action, resource) {
+//this function only for moderators, admin
+const grantAccess = (action, resource) => {
   return async (req, res, next) => {
     try {
       const permission = roles.can(req.user.role)[action](resource)
@@ -18,7 +19,7 @@ exports.grantAccess = function (action, resource) {
   }
 }
 
-exports.allowIfLoggedin = async (req, res, next) => {
+const allowIfLoggedin = async (req, res, next) => {
   try {
     const user = res.locals.loggedInUser
     if (!user)
@@ -47,8 +48,7 @@ const getUsers = async (req, res, next) => {
 
 const createUser = async (req, res, next) => {
   console.log(req.body)
-  const { firstName, lastName, email, password, password2, type, createdDate } =
-    req.body
+  const { firstName, lastName, email, password, password2, type, createdDate } = req.body
 
   const createdUser = new User({
     firstName,
@@ -134,26 +134,10 @@ const deleteUser = async (req, res, next) => {
   res.json({ message: 'Deleted successfully' })
 }
 
-const allAccess = (req, res) => {
-  res.status(200).send('Public Content.')
-}
-
-const userBoard = (req, res) => {
-  res.status(200).send('User Content.')
-}
-
-// const adminBoard = (req, res) => {
-//   res.status(200).send('Admin Content.')
-// }
-
-// const moderatorBoard = (req, res) => {
-//   res.status(200).send('Moderator Content.')
-// }
-
 exports.getUsers = getUsers
 exports.createUser = createUser
 exports.updateUser = updateUser
 exports.getUser = getUser
 exports.deleteUser = deleteUser
-exports.allAccess = allAccess
-exports.userBoard = userBoard
+exports.grantAccess = grantAccess
+exports.allowIfLoggedin = allowIfLoggedin
