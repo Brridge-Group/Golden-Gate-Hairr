@@ -77,11 +77,13 @@ h5 {
   margin-bottom: 8px;
 }
 
-/* google maps */
 .map {
   height: 100px;
   margin-top: 20px;
 }
-.details.card {
+.business-container.details.card.mx-auto {
   margin-bottom: 0;
+}
+.large-map {
+  margin-top: 30px;
 }

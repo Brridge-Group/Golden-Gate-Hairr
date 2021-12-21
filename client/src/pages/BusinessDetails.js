@@ -112,7 +112,7 @@ const BusinessDetails = props => {
         <>
           {/* (Backlog) TODO: [ ] - ? Remove all ContentHeaders or modify and utilize across app   */}
           <section className='business-wrapper'>
-            <div className='business-container'>
+            <div className='business-container details'>
               <div className='business-features-placeholder'>
                 <b style={{ textTransform: 'uppercase', lineHeight: '2' }}>Features</b>
                 {bizFeatsArr.map(feat => (
@@ -190,6 +190,9 @@ const BusinessDetails = props => {
                   </div>
                 </div>
               </div>
+            </div>
+            <div className='large-map' style={{ marginTop: '30px' }}>
+              <MapThree />
             </div>
           </section>
         </>
