@@ -78,6 +78,10 @@ h5 {
 }
 
 /* google maps */
-.google-map {
-  position: absolute;
+.map {
+  height: 100px;
+  margin-top: 20px;
+}
+.details.card {
+  margin-bottom: 0;
 }

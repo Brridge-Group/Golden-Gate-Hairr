@@ -160,6 +160,9 @@ const BusinessDetails = props => {
                         ) : (
                           ''
                         )}
+                        <div className='map'>
+                          <MapThree />
+                        </div>
                       </div>
                       <div className='product-container' style={{ width: '72%' }}>
                         <h1 className='product title'>{business.businessName}</h1>
@@ -177,7 +180,7 @@ const BusinessDetails = props => {
                         </div>
                         <div className={phone ? 'visable-phone' : 'hidden-phone'}>phone: {business.phone}</div>
                         {!hidden && (
-                          <button className='btn btn-default' onClick={handleClick}>
+                          <button className='btn btn-default' onClick={handleClick} style={{ width: '100px' }}>
                             {' '}
                             Book Now
                           </button>
@@ -193,8 +196,6 @@ const BusinessDetails = props => {
       ) : (
         isLoading && <LoadSpinner />
       )}
-
-      <MapThree />
     </>
   )
 }
