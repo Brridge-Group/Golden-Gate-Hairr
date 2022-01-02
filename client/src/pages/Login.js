@@ -13,13 +13,8 @@ const Login = props => {
   const [errorMessage, setErrorMessage] = useState('')
 
   const handleChange = e => {
-    setLoginUser({ ...loginUser, [e.target.name]: e.target.value })
-  }
-
-  const changeCase = e => {
-    console.log('changeCase, e.target.value', e.target)
-    e.preventDefault()
-    setLoginUser(e.target.value.toLowerCase())
+    const value = e.target.value.toLowerCase()
+    setLoginUser({ ...loginUser, [e.target.name]: value })
   }
 
   const routeChange = () => {
@@ -27,10 +22,8 @@ const Login = props => {
   }
   const handleSubmit = async e => {
     e.preventDefault()
-    console.log('handle', e.target.value)
-    // setLoginUser(e.target.value.toLowerCase())
-
-    console.log('in handle submit', loginUser)
+    // console.log('handle', e.target.value)
+    // console.log('in handle submit', loginUser)
     props
       .login(loginUser)
       .then(() => history.push('/'))
@@ -52,34 +45,14 @@ const Login = props => {
           <form className='form' onSubmit={handleSubmit}>
             <div className='form-group'>
               <label>Email</label>
-              <input
-                name='email'
-                type='email'
-                className='form-control'
-                placeholder='Email'
-                onChange={handleChange}
-                onMouseEnter={changeCase}
-                value={email}
-                autoComplete='off'
-              />
+              <input name='email' type='email' className='form-control' placeholder='Email' onChange={handleChange} value={email} autoComplete='off' />
             </div>
             <div className='form-group'>
               <label>Password</label>
-              <input
-                name='password'
-                type='password'
-                className='form-control'
-                placeholder='Password'
-                onChange={handleChange}
-                value={password}
-              />
+              <input name='password' type='password' className='form-control' placeholder='Password' onChange={handleChange} value={password} />
             </div>
             <div className='login-btns'>
-              <button
-                onChange={handleChange}
-                type='submit'
-                className='btn btn-primary'
-              >
+              <button onChange={handleChange} type='submit' className='btn btn-primary'>
                 Login
               </button>
               <button onClick={routeChange} className='btn btn-primary'>
@@ -87,9 +60,7 @@ const Login = props => {
               </button>
             </div>
           </form>
-          {errorMessage && (
-            <p style={{ color: 'grey', marginTop: '10px' }}>{errorMessage}</p>
-          )}
+          {errorMessage && <p style={{ color: 'grey', marginTop: '10px' }}>{errorMessage}</p>}
         </div>
       </div>
     </>

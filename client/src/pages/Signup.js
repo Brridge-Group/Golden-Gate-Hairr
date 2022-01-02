@@ -25,7 +25,6 @@ const Signup = props => {
 
   const onChange = e => {
     const value = e.target.value
-
     setUserForm({ ...userForm, [e.target.name]: value })
   }
 
@@ -38,11 +37,7 @@ const Signup = props => {
       console.log('handler userForm', userForm)
       props
         .signup(userForm)
-        .then(() =>
-          role === 'owner'
-            ? history.push('/business/profile')
-            : history.push('/')
-        )
+        .then(() => (role === 'owner' ? history.push('/business/profile') : history.push('/')))
         .catch(err => {
           if (err.response) {
             setErrorMessage(err.response.data)
@@ -74,90 +69,37 @@ const Signup = props => {
             </div>
             <div className='form-group'>
               <label htmlFor='last-name'>Last Name</label>
-              <input
-                name='lastName'
-                type='text'
-                className='form-control'
-                placeholder='Last Name'
-                onChange={onChange}
-                // onMouseEnter={changeCase}
-                value={lastName}
-                required
-              />
+              <input name='lastName' type='text' className='form-control' placeholder='Last Name' onChange={onChange} value={lastName} required />
             </div>
             <div className='form-group'>
               <label htmlFor='email'>Email</label>
-              <input
-                name='email'
-                type='email'
-                className='form-control'
-                placeholder='Email'
-                onChange={onChange}
-                // onMouseEnter={changeCase}
-                value={email}
-              />
+              <input name='email' type='email' className='form-control' placeholder='Email' onChange={onChange} value={email} />
             </div>
             <div className='form-group'>
               <label htmlFor='password'>Password</label>
-              <input
-                name='password'
-                type='password'
-                className='form-control'
-                placeholder='Password'
-                onChange={onChange}
-                minLength='6'
-                value={password}
-              />
+              <input name='password' type='password' className='form-control' placeholder='Password' onChange={onChange} minLength='6' value={password} />
             </div>
             <div className='form-group'>
               <label htmlFor='confirm-password'>Confirm Password</label>
-              <input
-                name='password2'
-                type='password'
-                className='form-control'
-                placeholder='Confirm Password'
-                onChange={onChange}
-                minLength='6'
-                value={password2}
-              />
+              <input name='password2' type='password' className='form-control' placeholder='Confirm Password' onChange={onChange} minLength='6' value={password2} />
             </div>
             <div className='form-group'>
               <div className='form-check'>
-                <input
-                  name='role'
-                  type='radio'
-                  className='form-check-input'
-                  onChange={onChange}
-                  checked={role === 'user'}
-                  value='user'
-                />
+                <input name='role' type='radio' className='form-check-input' onChange={onChange} checked={role === 'user'} value='user' />
                 <label className='form-check-label'>User</label>
               </div>
             </div>
             <div className='form-group'>
               <div className='form-check'>
-                <input
-                  name='role'
-                  type='radio'
-                  className='form-check-input'
-                  onChange={onChange}
-                  checked={role === 'owner'}
-                  value='owner'
-                />
+                <input name='role' type='radio' className='form-check-input' onChange={onChange} checked={role === 'owner'} value='owner' />
                 <label className='form-check-label'>Owner</label>
               </div>
             </div>
-            <button
-              onChange={onChange}
-              type='submit'
-              className='btn btn-primary'
-            >
+            <button onChange={onChange} type='submit' className='btn btn-primary'>
               Submit
             </button>
           </form>
-          {errorMessage && (
-            <p style={{ color: 'grey', marginTop: '10px' }}>{errorMessage}</p>
-          )}
+          {errorMessage && <p style={{ color: 'grey', marginTop: '10px' }}>{errorMessage}</p>}
         </div>
       </div>
     </>
