@@ -18,11 +18,6 @@ const Signup = props => {
 
   const { firstName, lastName, email, password, password2, role } = userForm
 
-  // const changeCase = e => {
-  //   e.preventDefault()
-  //   setUserForm(e.target.value.toLowerCase())
-  // }
-
   const onChange = e => {
     const value = e.target.value
     setUserForm({ ...userForm, [e.target.name]: value })
@@ -34,7 +29,6 @@ const Signup = props => {
     if (password !== password2) {
       alert('Passwords do not match')
     } else {
-      console.log('handler userForm', userForm)
       props
         .signup(userForm)
         .then(() => (role === 'owner' ? history.push('/business/profile') : history.push('/')))
@@ -56,16 +50,7 @@ const Signup = props => {
           <form className='form' onSubmit={registrationSubmitHandler}>
             <div className='form-group'>
               <label htmlFor='first-name'>First Name</label>
-              <input
-                name='firstName'
-                type='text'
-                className='form-control'
-                placeholder='First Name'
-                onChange={onChange}
-                // onMouseEnter={changeCase}
-                value={firstName}
-                required
-              />
+              <input name='firstName' type='text' className='form-control' placeholder='First Name' onChange={onChange} value={firstName} required />
             </div>
             <div className='form-group'>
               <label htmlFor='last-name'>Last Name</label>

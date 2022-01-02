@@ -22,8 +22,6 @@ const Login = props => {
   }
   const handleSubmit = async e => {
     e.preventDefault()
-    // console.log('handle', e.target.value)
-    // console.log('in handle submit', loginUser)
     props
       .login(loginUser)
       .then(() => history.push('/'))
