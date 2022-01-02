@@ -5,8 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js",
-    "dev": "nodemon server.js",
+    "start": "nodemon app.js",
     "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "engines": {
