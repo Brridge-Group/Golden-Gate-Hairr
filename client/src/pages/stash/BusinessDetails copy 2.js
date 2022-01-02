@@ -2,12 +2,14 @@
 import { useEffect, useState } from 'react'
 
 // Custom Imports
-import { withContext } from '../contexts/AppContext'
-import LoadSpinner from '../components/LoadSpinner'
+
+import MapThree from '../components/MapThree'
+import { withContext } from '../../contexts/AppContext'
+import LoadSpinner from '../../components/LoadSpinner'
 import '../stylesheets/Businesses.css'
 import star from '../images/star.svg'
 import { useLocation, useHistory } from 'react-router-dom'
-import MapThree from '../components/MapThree'
+import Map from '../components/Map'
 
 const BusinessDetails = props => {
   const history = useHistory()
@@ -249,7 +251,11 @@ const BusinessDetails = props => {
         isLoading && <LoadSpinner />
       )}
 
+<<<<<<< HEAD
       <MapThree />
+=======
+      <Map />
+>>>>>>> hair-49-google-map
     </>
   )
 }

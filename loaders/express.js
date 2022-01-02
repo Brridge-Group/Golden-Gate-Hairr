@@ -24,10 +24,7 @@ const loader = async app => {
   app.use('/api/features', featuresRoutes)
   app.use('/api/services', servicesRoutes)
   app.use('/api/authorize', authorizesRoutes)
-  app.use(
-    '/api',
-    expressJwt({ secret: process.env.TOKEN_KEY, algorithms: ['HS256'] })
-  )
+  app.use('/api', expressJwt({ secret: process.env.TOKEN_KEY, algorithms: ['HS256'] }))
   app.use(bodyParser.urlencoded({ extended: true }))
 
   // The "catchall" handler: for any request that doesn't
@@ -39,6 +36,21 @@ const loader = async app => {
 
   app.enable('trust proxy')
   app.use(cors())
+
+  // app.use(
+  //   cors({
+  //     allowedHeaders: ['Content-Type'], // headers that React is sending to the API
+  //     exposedHeaders: ['Content-Type'], // headers that you are sending back to React
+  //     origin: '*',
+  //     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  //     preflightContinue: false,
+  //   })
+  // )
+
+  // app.get('/cors', (req, res) => {
+  //   res.set('Access-Control-Allow-Origin', '*')
+  //   res.send({ msg: 'This has CORS enabled 🎈' })
+  // })
 
   // near the top with the other imports
   //following from bob zirolls tutorial https://coursework.vschool.io/token-auth-with-jwts-part-1/

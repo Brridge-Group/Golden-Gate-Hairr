@@ -63,7 +63,7 @@ const BusinessDetails = props => {
       const dbServices = await props.services // Full services' data obj from context
 
       let businessCopy = await business
-      // let businessCopy = await props.history.location.state.business
+      // let businessCopy = await props.history.location.business
 
       let tempBizFeatsArr = [] //rename ? temp?
       let tempBizServiceArr = [] //rename ? temp?
@@ -111,95 +111,107 @@ const BusinessDetails = props => {
       {!props.loading ? (
         <>
           {/* (Backlog) TODO: [ ] - ? Remove all ContentHeaders or modify and utilize across app   */}
-          <section className='business-wrapper'>
-            <div className='business-container details'>
-              <div className='business-features-placeholder'>
-                <b style={{ textTransform: 'uppercase', lineHeight: '2' }}>Features</b>
-                {bizFeatsArr.map(feat => (
-                  <div className='bus-details--features' style={{ textTransform: 'capitalize' }} key={feat.id}>
-                    <ul style={{ listStyleType: 'none', paddingLeft: '0' }}>
-                      <li style={{ lineHeight: '1.25' }}>
-                        <b>{feat.name}</b>
-                        <br />
-                        <span className='small'>{feat.description}</span>
-                      </li>
-                    </ul>
+          <section>
+            <div className='card mx-auto'>
+              <div className='card-body'>
+                <div className='products-list product-list-in-card d-flex justify-content-around align-content-center'>
+                  <div className='m-3'>
+                    <figure className='bus-details--image'>
+                      <div className='image--container'>
+                        <img src='https://via.placeholder.com/100' alt='Placeholder Business Profile Image' className='image-fluid' />
+                        <p className='bus-details--rating'>
+                          <img src={star} alt='Star Icon' style={{ width: '10%' }} />
+                          <img src={star} alt='Star Icon' style={{ width: '10%' }} />
+                          <img src={star} alt='Star Icon' style={{ width: '10%' }} />
+                          <img src={star} alt='Star Icon' style={{ width: '10%' }} />
+                        </p>
+                        {props.token ? (
+                          <button className='btn btn-default' onClick={reviewRoute}>
+                            Review
+                          </button>
+                        ) : (
+                          ''
+                        )}
+                      </div>
+                    </figure>
                   </div>
-                ))}
-                <br />
-                <b style={{ textTransform: 'uppercase', lineHeight: '2' }}>Services</b>
-                {bizServiceArr.map(service => (
-                  <div className='bus-details--service-name' style={{ textTransform: 'capitalize' }} key={service.id}>
-                    <ul style={{ listStyleType: 'none', paddingLeft: '0' }}>
-                      <li style={{ lineHeight: '1.25' }}>
-                        <b>{service.name}</b>
+                  <div className='bus-details d-flex flex-column'>
+                    <div className='d-flex justify-content-between'>
+                      <div className='bus-details--header'>
+                        <h1 className='card-header border-bottom-0'>{business.businessName}</h1>
+                        <div className='product-description'>{business.description}</div>
+
                         <br />
-                        <span className='small' style={{ textTransform: '', lineHeight: '.75' }}>
-                          {service.description}
-                        </span>
-                      </li>
-                    </ul>
-                  </div>
-                ))}
-              </div>
-              {/* <div className='card mx-auto'> */}
-              <div className='card-body '>
-                <div className='products-list product-list-in-card '>
-                  <figure className='indie-card'>
-                    <div className='pic-star-container'>
-                      <img src='https://via.placeholder.com/100' alt='Placeholder Business Profile Image' className='image-fluid' />
-                      <p className='bus-details--rating'>
-                        <img src={star} alt='Star Icon' style={{ width: '10%' }} />
-                        <img src={star} alt='Star Icon' style={{ width: '10%' }} />
-                        <img src={star} alt='Star Icon' style={{ width: '10%' }} />
-                        <img src={star} alt='Star Icon' style={{ width: '10%' }} />
-                      </p>
-                      {props.token ? (
-                        <button className='btn btn-default' onClick={reviewRoute}>
-                          Review
-                        </button>
-                      ) : (
-                        ''
-                      )}
-                      <div className='map'>
-                        <Map />
+                      </div>
+                      <div className='bus-details--info mt-3'>
+                        <div className='bus-details--address small'>
+                          <b>Address:</b>
+                          <br />
+                          {business.address1} {business.city}, {business.state} {business.zipCode}
+                        </div>
+                        <div className='bus-details--email small'>
+                          <b>Email:</b>
+                          <br />
+                          {business.email}
+                        </div>
                       </div>
                     </div>
-                    <div className='product-container' style={{ width: '72%' }}>
-                      <h1 className='product title'>{business.businessName}</h1>
-                      <div className='product-description'>{business.description}</div>
-                      <br />
-                      <div className='bus-details--address small'>
-                        <b>Address:</b>
-                        <br />
-                        {business.address1} {business.city}, {business.state} {business.zipCode}
+                    <div className='d-flex justify-content-around'>
+                      <div className='bus-details--features-list w-50'>
+                        <p className='card-header border-bottom-0'>
+                          <b>Features</b>
+                        </p>
+                        {bizFeatsArr.map(feat => (
+                          <div className='bus-details--features' style={{ textTransform: 'capitalize' }} key={feat.id}>
+                            <ul>
+                              <li>
+                                <b>{feat.name}</b>
+                                <br />
+                                <span className='small'>{feat.description}</span>
+                              </li>
+                            </ul>
+                          </div>
+                        ))}
                       </div>
-                      <div className='bus-details--email small'>
-                        <b>Email:</b>
-                        <br />
-                        {business.email}
+                      <div className='bus-details--services-list w-50'>
+                        <p className='card-header border-bottom-0'>
+                          <b>Services</b>
+                        </p>
+                        {bizServiceArr.map(service => (
+                          <div className='bus-details--service-name' style={{ textTransform: 'capitalize' }} key={service.id}>
+                            <ul>
+                              <li>
+                                <b>{service.name}</b>
+                                <br />
+                                <span className='small' style={{ textTransform: '' }}>
+                                  {service.description}
+                                </span>
+                              </li>
+                            </ul>
+                          </div>
+                        ))}
                       </div>
+                    </div>
+                    <div className='d-flex flex-column'>
                       <div className={phone ? 'visable-phone' : 'hidden-phone'}>phone: {business.phone}</div>
                       {!hidden && (
-                        <button className='btn btn-default' onClick={handleClick} style={{ width: '100px' }}>
+                        <button className='btn btn-default' onClick={handleClick}>
                           {' '}
                           Book Now
                         </button>
                       )}
                     </div>
-                  </figure>
+                  </div>
                 </div>
               </div>
-              {/* </div> */}
-            </div>
-            <div className='large-map' style={{ marginTop: '30px' }}>
-              <Map />
             </div>
           </section>
         </>
       ) : (
         isLoading && <LoadSpinner />
       )}
+
+      <Map />
     </>
   )
 }
