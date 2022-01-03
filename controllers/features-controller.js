@@ -1,5 +1,3 @@
-const mongoose = require('mongoose')
-
 const Feature = require('../models/feature')
 
 // Create Feature

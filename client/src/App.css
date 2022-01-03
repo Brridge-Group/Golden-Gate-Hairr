@@ -16,10 +16,10 @@ button.btn.btn-primary {
   background: #f4f6f9;
 }
 .content {
-  margin-top: 50px;
+  margin-top: 100px;
 }
 .star-rating {
-  margin-top: 1rem
+  margin-top: 1rem;
 }
 
 .btn-review {
@@ -45,6 +45,6 @@ button.btn.btn-primary {
 .card-body.review {
   text-align: center;
 }
-.form-control.text-area{
-  height: 200px
+.form-control.text-area {
+  height: 200px;
 }

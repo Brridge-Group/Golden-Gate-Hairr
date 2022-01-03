@@ -66,10 +66,7 @@ const BusinessProfile = props => {
   const [_error, set_Error] = useState(null)
 
   const onFormChange = event => {
-    const value =
-      event.target.type === 'checkbox'
-        ? event.target.checked
-        : event.target.value
+    const value = event.target.type === 'checkbox' ? event.target.checked : event.target.value
 
     setBusinessProfileForm({
       ...businessProfileForm,
@@ -210,15 +207,7 @@ const BusinessProfile = props => {
                     </div>
                     <div className='form-group'>
                       <label htmlFor='email'>Email</label>
-                      <input
-                        id='email'
-                        name='email'
-                        type='email'
-                        className='form-control'
-                        placeholder='Business@EmailAddress.com'
-                        value={businessProfileForm.email}
-                        onChange={onFormChange}
-                      />
+                      <input id='email' name='email' type='email' className='form-control' placeholder='Business@EmailAddress.com' value={businessProfileForm.email} onChange={onFormChange} />
                     </div>
                   </fieldset>
                   <fieldset>
@@ -249,21 +238,10 @@ const BusinessProfile = props => {
                     </div>
                     <div className='form-group'>
                       <label htmlFor='cityTown'>City / Town</label>
-                      <input
-                        id='cityTown'
-                        name='city'
-                        type='text'
-                        className='form-control'
-                        placeholder='City / Town'
-                        value={businessProfileForm.city}
-                        onChange={onFormChange}
-                        required
-                      />
+                      <input id='cityTown' name='city' type='text' className='form-control' placeholder='City / Town' value={businessProfileForm.city} onChange={onFormChange} required />
                     </div>
                     <div className='form-group'>
-                      <label htmlFor='stateProvinceRegion'>
-                        State / Province / Region
-                      </label>
+                      <label htmlFor='stateProvinceRegion'>State / Province / Region</label>
                       <input
                         id='stateProvinceRegion'
                         name='state'
@@ -306,23 +284,9 @@ const BusinessProfile = props => {
                     <label htmlFor='features'>Features</label>
 
                     {props.featuresArr?.map((feature, index) => (
-                      <div
-                        className='form-check'
-                        style={{ textTransform: 'capitalize' }}
-                        key={`${feature}_` + index}
-                      >
-                        <input
-                          className='form-check-input'
-                          type='checkbox'
-                          name={`feature-${feature[0]}`}
-                          id={feature[1]}
-                          defaultChecked={feature[2].isChecked}
-                          onChange={onFormChange}
-                        />
-                        <label
-                          className='form-check-label'
-                          htmlFor={feature[1]}
-                        >
+                      <div className='form-check' style={{ textTransform: 'capitalize' }} key={`${feature}_` + index}>
+                        <input className='form-check-input' type='checkbox' name={`feature-${feature[0]}`} id={feature[1]} defaultChecked={feature[2].isChecked} onChange={onFormChange} />
+                        <label className='form-check-label' htmlFor={feature[1]}>
                           {feature[0]}
                         </label>
                       </div>
@@ -331,23 +295,9 @@ const BusinessProfile = props => {
                   <div className='form-group'>
                     <label htmlFor='services'>Services</label>
                     {props.servicesArr?.map((service, index) => (
-                      <div
-                        className='form-check'
-                        style={{ textTransform: 'capitalize' }}
-                        key={`${service}_` + index}
-                      >
-                        <input
-                          className='form-check-input'
-                          type='checkbox'
-                          name={`service-${service[0]}`}
-                          id={service[1]}
-                          defaultChecked={service[2].isChecked}
-                          onChange={onFormChange}
-                        />
-                        <label
-                          className='form-check-label'
-                          htmlFor={service[1]}
-                        >
+                      <div className='form-check' style={{ textTransform: 'capitalize' }} key={`${service}_` + index}>
+                        <input className='form-check-input' type='checkbox' name={`service-${service[0]}`} id={service[1]} defaultChecked={service[2].isChecked} onChange={onFormChange} />
+                        <label className='form-check-label' htmlFor={service[1]}>
                           {service[0]}
                         </label>
                       </div>

@@ -1,9 +1,11 @@
 import { useState } from 'react'
-import { Redirect } from 'react-router'
 import '../stylesheets/Businesses.css'
 import star from '../images/star.svg'
+import { useHistory } from 'react-router-dom'
 
 const BusinessCard = props => {
+  const history = useHistory()
+  const business = props.business
   const [redirect, setRedirect] = useState(false)
 
   const deleteNameSpace = props.name.replace(/\s+/g, '')
@@ -14,13 +16,9 @@ const BusinessCard = props => {
 
   const renderRedirect = () => {
     if (redirect) {
-      return (
-        <Redirect
-          to={{
-            pathname: `/${props.city.toLowerCase()}/${deleteNameSpace.toLowerCase()}`,
-            state: { business: props.business },
-          }}
-        />
+      history.push(
+        `/${props.city.toLowerCase()}/${deleteNameSpace.toLowerCase()}`,
+        { business: business }
       )
     }
   }

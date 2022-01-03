@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import ContentHeader from '../components/ContentHeader'
 import { useHistory } from 'react-router-dom'
 
 const Search = () => {
@@ -20,7 +19,6 @@ const Search = () => {
 
   return (
     <>
-      <ContentHeader title='Search' />
       <div className='card w-50 mx-auto'>
         <div className='card-body' style={{ height: 200 }}>
           <div style={{ textAlign: 'center' }} className='search form-group'>

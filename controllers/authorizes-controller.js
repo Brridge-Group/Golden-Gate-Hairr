@@ -5,7 +5,7 @@ const User = require('../models/user')
 const signup = async (req, res) => {
   try {
     // Get user input
-    const { firstName, lastName, email, password, role, isOwner } = req.body
+    const { firstName, lastName, email, password, role } = req.body
 
     // Validate user input
     if (!(email && password && firstName && lastName)) {
@@ -23,12 +23,11 @@ const signup = async (req, res) => {
 
     // Create user in our database
     const user = await User.create({
-      firstName,
-      lastName,
-      email: email.toLowerCase(), // sanitize: convert email to lowercase
+      firstName: firstName.toLowerCase(),
+      lastName: lastName.toLowerCase(),
+      email: email.toLowerCase(), // sanitize: convert above to lowercase
       password: encryptedPassword,
       role,
-      // isOwner,
     })
     const token = jwt.sign(user.toObject(), process.env.TOKEN_KEY)
     return res.status(201).send({ success: true, user: user.toObject(), token })

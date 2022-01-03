@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { withContext } from '../contexts/AppContext'
-import ContentHeader from '../components/ContentHeader'
 
 const Signup = props => {
   // console.log('signup, props', props.user, props)
@@ -19,19 +18,10 @@ const Signup = props => {
 
   const { firstName, lastName, email, password, password2, role } = userForm
 
-  const changeCase = e => {
-    e.preventDefault()
-    setUserForm(e.target.value.toLowerCase())
-    // firstName =
-    //   e.target.value.charAt(0).toUpperCase() +
-    //   e.target.value.slice(1).toLowerCase()
-
-    // lastName =
-    //   e.target.value.charAt(0).toUpperCase() +
-    //   e.target.value.slice(1).toLowerCase()
-
-    // email(e.target.value.toLowerCase())
-  }
+  // const changeCase = e => {
+  //   e.preventDefault()
+  //   setUserForm(e.target.value.toLowerCase())
+  // }
 
   const onChange = e => {
     const value = e.target.value
@@ -63,7 +53,6 @@ const Signup = props => {
 
   return (
     <>
-      <ContentHeader title='Registration' />
       <div className='card w-50 mx-auto'>
         <div className='card-header'>
           <h5 className='m-0'>Registration</h5>
@@ -78,7 +67,7 @@ const Signup = props => {
                 className='form-control'
                 placeholder='First Name'
                 onChange={onChange}
-                onMouseEnter={changeCase}
+                // onMouseEnter={changeCase}
                 value={firstName}
                 required
               />
@@ -91,7 +80,7 @@ const Signup = props => {
                 className='form-control'
                 placeholder='Last Name'
                 onChange={onChange}
-                onMouseEnter={changeCase}
+                // onMouseEnter={changeCase}
                 value={lastName}
                 required
               />
@@ -104,7 +93,7 @@ const Signup = props => {
                 className='form-control'
                 placeholder='Email'
                 onChange={onChange}
-                onMouseEnter={changeCase}
+                // onMouseEnter={changeCase}
                 value={email}
               />
             </div>
