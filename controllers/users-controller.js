@@ -48,8 +48,7 @@ const getUsers = async (req, res, next) => {
 
 const createUser = async (req, res, next) => {
   console.log(req.body)
-  const { firstName, lastName, email, password, password2, type, createdDate } =
-    req.body
+  const { firstName, lastName, email, password, password2, type, createdDate } = req.body
 
   const createdUser = new User({
     firstName,
@@ -135,10 +134,28 @@ const deleteUser = async (req, res, next) => {
   res.json({ message: 'Deleted successfully' })
 }
 
+// user reviews queries
+
+const getUserReviews = async (req, res) => {
+  // let user
+  // const userId = req.params.id
+
+  let reviews
+  try {
+    reviews = await Review.find({ user: req.user.id }).lean()
+    res.render({ name: req.user.firstName, reviews })
+  } catch (error) {
+    return next(error)
+  }
+  // res.json({
+  //   users: users.map(user => user.toObject({ getters: true })),
+  // })
+}
 exports.getUsers = getUsers
 exports.createUser = createUser
 exports.updateUser = updateUser
 exports.getUser = getUser
 exports.deleteUser = deleteUser
+exports.getUserReviews = getUserReviews
 exports.grantAccess = grantAccess
 exports.allowIfLoggedin = allowIfLoggedin

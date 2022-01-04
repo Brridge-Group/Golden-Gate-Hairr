@@ -36,9 +36,9 @@ const Login = props => {
   return (
     <>
       <div className='card w-50 mx-auto'>
-        <div className='card-header'>
+        {/* <div className='card-header'>
           <h5 className='m-0'>Log In</h5>
-        </div>
+        </div> */}
         <div className='card-body'>
           <form className='form' onSubmit={handleSubmit}>
             <div className='form-group'>
