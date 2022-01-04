@@ -3,96 +3,34 @@ import { withContext } from '../contexts/AppContext'
 import axios from 'axios'
 
 const Profile = props => {
-  // const { currentUser } = props
-
   const [userReviews, setUserReviews] = useState([])
 
-  // const getUserReviews = () => {
-  //   props.user.reviews.map(review => console.log(review))
-  // }
+  const fetchUserReviews = async () => {
+    try {
+      const response = await fetch(`/api/reviews/`, { method: 'GET' })
+      const responseData = await response.json()
 
-  // const getReviews
-
-  // const getUserReviews = () => {
-  //   props.user.reviews.map(review => Reviews.find(_id: review))
-  // }
-
-  // const fetchUserReviews = async () => {
-  //   try {
-  //     const response = await fetch(`/api/reviews/${props.user.reviews}`, { method: 'GET' })
-  //     const responseData = await response.json()
-
-  //     if (!response.ok) {
-  //       throw new Error(responseData.message)
-  //     }
-
-  //     setUserReviews(responseData.items)
-  //     console.log('fetched reviews', userReviews)
-  //   } catch (err) {
-  //     console.log(err)
-  //   }
-  // }
-  // useEffect = () => {
-  //   fetchUserReviews()
-  // }
-  // const fetchUserReviews = () => {
-  //   axios
-  //     .get('api')
-  //     .then(response => {
-  //       const data = response.data
-  //       setUserReviews(data)
-  //       console.log('data has been received')
-  //     })
-  //     .catch(() => {
-  //       alert('error retrieving data')
-  //     })
-  // }
-
-  // useEffect(() => {
-  //   const fetchUserReviews = () => {
-  //     axios
-  //       .get('api/reviews')
-  //       .then(response => {
-  //         const data = response.data
-  //         setUserReviews(data)
-  //         console.log('data has been received')
-  //       })
-  //       .catch(() => {
-  //         alert('error retrieving data')
-  //       })
-  //   }
-
-  //   fetchUserReviews()
-  // }, [])
-  // }
-
-  //     fetchUserReviews()
-  //   }, [])
-  // }
-  // Contact.find({ _id: THE_CONTACT_ID })
-
-  // Reviews.find({_id:})
-  // const getUserReviews = () => {
-  // useEffect(() => {
-  //   const fetchUserReviews = async () => {
-  //     try {
-  //       const response = await fetch(`/api/users/${props.user.reviews}`, { method: 'GET' })
-  //       const responseData = await response.json()
-
-  //       if (!response.ok) {
-  //         throw new Error(responseData.message)
-  //       }
-
-  //       setUserReviews(responseData)
-  //       console.log('fetched reviews', userReviews)
-  //     } catch (err) {
-  //       console.log(err)
-  //     }
-  //   }
-
-  //   fetchUserReviews()
-  // }, [])
-  // }
+      if (!response.ok) {
+        throw new Error(responseData.message)
+      }
+      const userReviewArr = []
+      console.log('fetched responseData.reviews', responseData.reviews)
+      const reviews = responseData.reviews
+      reviews.map(review => {
+        props.user.reviews.find(userReview => {
+          if (userReview === review.id) {
+            userReviewArr.push(review)
+          }
+        })
+        console.log(userReviewArr)
+        return setUserReviews(userReviewArr)
+      })
+    } catch (err) {
+      console.log(err)
+    }
+    console.log(userReviews)
+  }
+  console.log(userReviews)
 
   return (
     <div className='card w-50 mx-auto'>
@@ -100,10 +38,21 @@ const Profile = props => {
         Hi {props.user.firstName.slice(0, 1).toUpperCase() + props.user.firstName.slice(1).toLowerCase()}!
         <br />
         Here are your reviews.
-        {props.user.reviews.map(review => {
-          return <h6>{review.comment}</h6>
+        {props.user.reviews}
+        {userReviews.map(review, index => {
+          return (
+            <ul>
+              <li key={index}>
+                {review.comment}
+                {review.rating}
+              </li>
+            </ul>
+          )
         })}
-        {/* <button onClick={fetchUserReviews} className='btn btn-default'></button> */}
+        {/* {props.user.reviews.map(review => {
+          return { review }
+        })} */}
+        <button onClick={fetchUserReviews} className='btn btn-default'></button>
       </div>
     </div>
   )

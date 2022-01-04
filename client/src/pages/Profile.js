@@ -39,10 +39,10 @@ const Profile = props => {
         <br />
         Here are your reviews.
         {props.user.reviews}
-        {userReviews.map(review => {
+        {userReviews.map(review, index => {
           return (
             <ul>
-              <li>
+              <li key={index}>
                 {review.comment}
                 {review.rating}
               </li>

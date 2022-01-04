@@ -38,6 +38,4 @@ router.delete('/:id', usersController.deleteUser)
 //   usersController.deleteUser
 // )
 
-//get User Reviews
-router.get('/:id', usersController.getUserReviews)
 module.exports = router

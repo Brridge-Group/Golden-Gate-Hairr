@@ -1,5 +1,4 @@
 const User = require('../models/user')
-const Review = require('../models/review')
 const { roles } = require('../roles')
 
 //this function only for moderators, admin
@@ -136,26 +135,10 @@ const deleteUser = async (req, res, next) => {
 
 // user reviews queries
 
-const getUserReviews = async (req, res) => {
-  // let user
-  // const userId = req.params.id
-
-  let reviews
-  try {
-    reviews = await Review.find({ user: req.user.id }).lean()
-    res.render({ name: req.user.firstName, reviews })
-  } catch (error) {
-    return next(error)
-  }
-  // res.json({
-  //   users: users.map(user => user.toObject({ getters: true })),
-  // })
-}
 exports.getUsers = getUsers
 exports.createUser = createUser
 exports.updateUser = updateUser
 exports.getUser = getUser
 exports.deleteUser = deleteUser
-exports.getUserReviews = getUserReviews
 exports.grantAccess = grantAccess
 exports.allowIfLoggedin = allowIfLoggedin
