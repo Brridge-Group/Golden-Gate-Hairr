@@ -28,7 +28,7 @@ const Profile = props => {
           props.user.reviews.find(userReview => {
             if (userReview === review.id) {
               userReviewArr.push(review)
-              // userReviewBusArr.push(review.business)
+              userReviewBusArr.push(review.business)
             }
           })
         })
@@ -36,13 +36,14 @@ const Profile = props => {
         console.log(error)
       }
       setUserReviews(userReviewArr)
-      // setBusinessReviews(userReviewBusArr)
+      setBusinessReviews(userReviewBusArr)
       console.log('userReviewBusArr, businessReviews, userReviews', userReviewBusArr, businessReviews, userReviews)
     }
 
     fetchUserReviews()
   }, [])
-  console.log('userReviewBusArr, businessReviews, userReviews', userReviewBusArr, businessReviews, userReviews)
+  console.log('businessReviews', businessReviews, 'userReviews', userReviews)
+
   const deleteUserReview = async id => {
     console.log('id', id)
     try {
@@ -68,6 +69,14 @@ const Profile = props => {
       <div className='card-body'>
         Hi {props.user.firstName.slice(0, 1).toUpperCase() + props.user.firstName.slice(1).toLowerCase()}!
         <br />
+        {console.log('userReviewBusArr, businessReviews, userReviews', userReviewBusArr, businessReviews, userReviews)}
+        {/* {!businessReviews.length ? [] : businessReviews.map(busR => {
+          userReviews.map(userR => {
+            if (busR === userR.business) {
+
+            }
+          })
+        })} */}
         Here are your reviews.
         <table className='table table-striped'>
           <thead>
@@ -80,11 +89,24 @@ const Profile = props => {
             </tr>
           </thead>
           <tbody>
+            {!businessReviews.length
+              ? []
+              : businessReviews.map(busR => {
+                  userReviews.map(userR => {
+                    console.log(busR, userR.business, busR.businessName, userR.business.businessName)
+                    if (busR === userR.business) {
+                      busArr.push(userR.businessName)
+                    }
+                    // {
+                    // }
+                    console.log('busArr', busArr)
+                  })
+                })}
             {userReviews.map(userRev => {
               // console.log('userRev', userRev)
               return (
                 <tr key={userRev.id}>
-                  <td>{userRev.businessName}</td>
+                  <td>{userRev.id}</td>
                   <td>{userRev.comment}</td>
                   <td>{userRev.rating}</td>
                   <td>

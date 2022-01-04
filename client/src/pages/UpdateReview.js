@@ -5,13 +5,14 @@ import { withContext } from '../contexts/AppContext'
 import { Link } from 'react-router-dom'
 
 const UpdateReview = props => {
-  console.log(props)
   const reviewId = useParams().id
   const history = useHistory()
   // const business = history.location.state.business
+  console.log('update review, props, history', props, history)
   const [rating, setRating] = useState(0)
   const [hover, setHover] = useState(0)
   const [comment, setComment] = useState('')
+  const [businessName, setBusinessName] = useState('')
 
   useEffect(() => {
     const fetchReview = async () => {
@@ -22,9 +23,10 @@ const UpdateReview = props => {
         if (!response.ok) {
           throw new Error(responseData.message)
         }
-
+        console.log('responseData', responseData)
         setComment(responseData.review.comment)
         setRating(responseData.review.rating)
+        setBusinessName(responseData.review.businessName)
       } catch (err) {
         console.log(err)
       }
@@ -63,7 +65,7 @@ const UpdateReview = props => {
     <>
       <div className='card w-50 mx-auto'>
         <div className='card-body review'>
-          {/* <h6 className='m-0'>Update your experience with {business.businessName} </h6> */}
+          <h6 className='m-0'>Update your experience with {businessName} </h6>
           <form className='form' onSubmit={updateReview}>
             <div className='form-group star-rating'>
               {[...Array(5)].map((star, index) => {

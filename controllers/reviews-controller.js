@@ -17,13 +17,14 @@ const getReviews = async (req, res, next) => {
 
 const createReview = async (req, res, next) => {
   console.log(req.body)
-  const { comment, rating, business, author } = req.body
+  const { comment, rating, business, author, businessName } = req.body
 
   const newReview = new Review({
     comment,
     rating,
     business,
     author,
+    businessName,
   })
 
   try {

@@ -15,6 +15,7 @@ const Review = props => {
   // TODO (Backlog): Error Handling UI
   const [_error, set_Error] = useState(null)
 
+  console.log('in review', business)
   const { comment } = reviewForm
 
   const handleChange = e => {
@@ -26,6 +27,7 @@ const Review = props => {
       author: props.user._id,
       business: business._id,
       rating: rating,
+      businessName: business.businessName,
     }
 
     const requestOptions = {
