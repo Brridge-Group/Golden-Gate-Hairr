@@ -48,3 +48,7 @@ button.btn.btn-primary {
 .form-control.text-area {
   height: 200px;
 }
+ul {
+  list-style-type: none;
+  padding: 0;
+}
