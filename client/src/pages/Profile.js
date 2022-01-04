@@ -3,6 +3,7 @@ import { withContext } from '../contexts/AppContext'
 import { Link } from 'react-router-dom'
 
 const Profile = props => {
+  console.log(props)
   const [userReviews, setUserReviews] = useState([])
   const [loadedReviews, setLoadedReviews] = useState([])
 
@@ -24,14 +25,17 @@ const Profile = props => {
             }
           })
         })
-      } catch (err) {
-        console.log(err)
+      } catch (error) {
+        console.log(error)
       }
       setUserReviews(userReviewArr)
     }
     fetchUserReviews()
   }, [])
+  // }, [props.user.reviews])
+
   const deleteUserReview = async id => {
+    console.log('id', id)
     try {
       const response = await fetch(`/api/reviews/${id}`, { method: 'DELETE' })
       const responseData = await response.json()
@@ -39,7 +43,7 @@ const Profile = props => {
       if (!response.ok) {
         throw new Error(responseData.message)
       }
-
+      console.log(responseData)
       setLoadedReviews(
         loadedReviews.filter(review => {
           return review.id !== id
@@ -77,7 +81,7 @@ const Profile = props => {
                     </Link>
                   </td>
                   <td>
-                    <button type='button' className='btn btn-danger' onClick={() => deleteUserReview(userRev.id)}>
+                    <button type='button' className='btn btn-default' onClick={() => deleteUserReview(userRev.id)}>
                       Delete
                     </button>
                   </td>
@@ -86,7 +90,6 @@ const Profile = props => {
             })}
           </tbody>
         </table>
-        {/* <button onClick={fetchUserReviews} className='btn btn-default'></button> */}
       </div>
     </div>
   )

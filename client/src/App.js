@@ -12,6 +12,7 @@ import BusinessDetails from './pages/BusinessDetails'
 import BusinessProfile from './pages/BusinessProfile'
 import Profile from './pages/Profile'
 import Review from './pages/Review'
+import UpdateReview from './pages/UpdateReview'
 import Search from './pages/Search'
 import SearchResults from './pages/SearchResults'
 import Map from './components/Map'
@@ -35,6 +36,9 @@ const App = () => {
       </Route>
       <Route exact path='/:name/review/'>
         <Review />
+      </Route>
+      <Route path='/reviews/:id' exact>
+        <UpdateReview />
       </Route>
       <Route exact path='/businesses'></Route>
       <Route exact path='/search/:city'>
