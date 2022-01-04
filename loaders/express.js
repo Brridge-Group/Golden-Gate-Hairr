@@ -3,6 +3,7 @@ const path = require('path')
 const cors = require('cors')
 const expressJwt = require('express-jwt')
 const bodyParser = require('body-parser')
+const itemsRoutes = require('../routes/items-route')
 
 const usersRoutes = require('../routes/users-route')
 const reviewsRoutes = require('../routes/reviews-route')
@@ -17,6 +18,7 @@ const loader = async app => {
 
   // Serve static files from the React app
   app.use(express.static(path.join(__dirname, '../client/build')))
+  app.use('/api/items', itemsRoutes)
 
   app.use('/api/users', usersRoutes)
   app.use('/api/reviews', reviewsRoutes)
