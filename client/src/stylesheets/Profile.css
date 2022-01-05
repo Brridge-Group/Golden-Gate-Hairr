@@ -1,0 +1,16 @@
+.profile-header {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-header h1 {
+  align-content: flex-end;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #000;
+  margin-bottom: 1rem;
+}
+
+/* .tab-content > .active {
+  display: block;
+} */
