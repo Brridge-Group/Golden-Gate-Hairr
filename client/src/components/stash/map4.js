@@ -21,15 +21,9 @@ class Map extends Component {
     },
   }
   getLatLng = () => {
-    Geocode.fromAddress('London Bridge').then(
+    Geocode.fromAddress(this.props.address).then(
       response => {
         const { lat, lng } = response.results[0].geometry.location
-        // this.setState({
-        //   details: { first_name: 'jack', last_name: 'high' }
-        // });
-        // this.setState({
-        //   center: { 'response.results[0].geometry.location'}
-        // })
         console.log(lat, lng, this.state.center, response.results[0].geometry.location)
       },
       error => {
@@ -39,21 +33,8 @@ class Map extends Component {
   }
 
   render() {
-    // Geocode.fromAddress('One World Trade Center').then(
-    //   response => {
-    //     const { lat, lng } = response.results[0].geometry.location
-    //     // this.setState({
-    //     //   details: { first_name: 'jack', last_name: 'high' }
-    //     // });
-    //     // this.setState({
-    //     //   center: { 'response.results[0].geometry.location'}
-    //     // })
-    //     console.log(lat, lng, this.state.center, response.results[0].geometry.location)
-    //   },
-    //   error => {
-    //     console.error(error)
-    //   }
-    // )
+    console.log('in map, this.props', this.props, this.props.address)
+
     return (
       // Important! Always set the container height explicitly
       <div style={{ height: '100vh', width: '100%' }}>
