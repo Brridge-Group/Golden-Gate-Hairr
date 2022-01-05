@@ -21,7 +21,7 @@ class Map extends Component {
     },
   }
   getLatLng = () => {
-    Geocode.fromAddress(this.props.address).then(
+    Geocode.fromAddress('London Bridge').then(
       response => {
         const { lat, lng } = response.results[0].geometry.location
         // this.setState({
@@ -39,8 +39,6 @@ class Map extends Component {
   }
 
   render() {
-    console.log('in map, this.props', this.props, this.props.address)
-
     // Geocode.fromAddress('One World Trade Center').then(
     //   response => {
     //     const { lat, lng } = response.results[0].geometry.location

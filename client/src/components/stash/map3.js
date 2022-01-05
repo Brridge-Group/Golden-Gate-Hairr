@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import GoogleMapReact from 'google-map-react'
+import axios from 'axios'
 import Geocode from 'react-geocode'
 
 require('dotenv').config()
@@ -21,7 +22,7 @@ class Map extends Component {
     },
   }
   getLatLng = () => {
-    Geocode.fromAddress(this.props.address).then(
+    Geocode.fromAddress('London Bridge').then(
       response => {
         const { lat, lng } = response.results[0].geometry.location
         // this.setState({
@@ -39,8 +40,6 @@ class Map extends Component {
   }
 
   render() {
-    console.log('in map, this.props', this.props, this.props.address)
-
     // Geocode.fromAddress('One World Trade Center').then(
     //   response => {
     //     const { lat, lng } = response.results[0].geometry.location
@@ -62,8 +61,8 @@ class Map extends Component {
         <GoogleMapReact
           bootstrapURLKeys={{ key: process.env.REACT_APP_API_KEY }}
           defaultCenter={this.props.center}
-          center={this.getLatLng()}
           defaultZoom={this.props.zoom}
+          center={this.getLatLng()}
           onChildMouseEnter={this.onChildMouseEnter}
           onChildMouseLeave={this.onChildMouseLeave}
           // onGoogleApiLoaded={this.initGeocoder}
