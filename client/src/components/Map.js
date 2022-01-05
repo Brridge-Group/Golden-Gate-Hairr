@@ -4,11 +4,15 @@ import Geocode from 'react-geocode'
 
 require('dotenv').config()
 
-// const AnyReactComponent = ({ text }) => <div>{text}</div>
+const Marker = () => (
+  <div>
+    <i className='fas fa-map-marker-alt fa-2x'></i>
+  </div>
+)
 class Map extends Component {
   static defaultProps = {
     center: { lat: 40.73, lng: -73.93 },
-    zoom: 11,
+    zoom: 10,
   }
   constructor(props) {
     super(props)
@@ -20,7 +24,7 @@ class Map extends Component {
 
   getLatLng = () => {
     // Geocode.fromAddress(this.props.address).then(
-    Geocode.fromAddress('Eiffel Tower').then(
+    Geocode.fromAddress('3601 concho, dallas, tx').then(
       response => {
         const resp = response.results[0].geometry.location
         // console.log(resp, response.results[0].geometry.location)
@@ -35,10 +39,13 @@ class Map extends Component {
   }
 
   render() {
+    // Object.values(example)[0]
     // console.log('in map, this.props', this.props, this.props.address)
 
     return (
-      <div style={{ height: '100vh', width: '100%' }}>
+      <div style={{ height: '100%', width: '100%' }}>
+        {/* <div style={{ height: '100vh', width: '100%' }}> */}
+
         <GoogleMapReact
           bootstrapURLKeys={{ key: process.env.REACT_APP_API_KEY }}
           defaultCenter={this.props.center}
@@ -49,7 +56,7 @@ class Map extends Component {
           // onGoogleApiLoaded={this.initGeocoder}
           // yesIWantToUseGoogleMapApiInternals
         >
-          {/* <AnyReactComponent lat={59.955413} lng={30.337844} text='My Marker' /> */}
+          <Marker lat={Object.values(this.state.coords)[0]} lng={Object.values(this.state.coords)[1]} />
         </GoogleMapReact>
         {this.getLatLng()}
         {/* {this.geocode()} */}

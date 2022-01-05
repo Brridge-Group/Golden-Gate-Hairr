@@ -5,13 +5,10 @@ import { Link } from 'react-router-dom'
 const Profile = props => {
   console.log('in profile, props', props)
   const [userReviews, setUserReviews] = useState([])
-  const [businessReviews, setBusinessReviews] = useState([])
   const [loadedReviews, setLoadedReviews] = useState([])
-  const [loadedBusReviews, setLoadedBusReviews] = useState([])
 
   const userReviewArr = []
   const userReviewBusArr = []
-  const busArr = []
 
   useEffect(() => {
     const fetchUserReviews = async () => {
@@ -28,7 +25,6 @@ const Profile = props => {
           props.user.reviews.find(userReview => {
             if (userReview === review.id) {
               userReviewArr.push(review)
-              // userReviewBusArr.push(review.business)
             }
           })
         })
@@ -36,13 +32,12 @@ const Profile = props => {
         console.log(error)
       }
       setUserReviews(userReviewArr)
-      // setBusinessReviews(userReviewBusArr)
-      console.log('userReviewBusArr, businessReviews, userReviews', userReviewBusArr, businessReviews, userReviews)
+      // console.log('userReviewBusArr,  userReviews', userReviewBusArr, userReviews)
     }
 
     fetchUserReviews()
   }, [])
-  console.log('userReviewBusArr, businessReviews, userReviews', userReviewBusArr, businessReviews, userReviews)
+  console.log('userReviewBusArr, userReviews', userReviewBusArr, userReviews)
   const deleteUserReview = async id => {
     console.log('id', id)
     try {

@@ -2,6 +2,8 @@ import React from 'react'
 import Geocode from 'react-geocode'
 import Map from './Map'
 
+;<i class='fas fa-map-marker-alt'></i>
+
 // Geocode.fromAddress('Eiffel Tower').then(
 //   response => {
 //     const { lat, lng } = response.results[0].geometry.location

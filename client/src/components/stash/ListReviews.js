@@ -58,6 +58,10 @@ const ListReviews = props => {
           return review.id !== id
         })
       )
+      const user = Object.assign({}, this.props.user)
+      user.push(loadedReviews)
+      setupdateUser(user)
+      console.log('updateUser', updateUser)
     } catch (err) {
       console.log(err)
     }

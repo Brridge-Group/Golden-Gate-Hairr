@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { withContext } from '../contexts/AppContext'
+import { withContext } from '../../contexts/AppContext'
 import { Link } from 'react-router-dom'
 
 const Profile = props => {
