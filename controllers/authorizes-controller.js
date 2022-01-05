@@ -28,6 +28,7 @@ const signup = async (req, res) => {
       email: email.toLowerCase(), // sanitize: convert above to lowercase
       password: encryptedPassword,
       role,
+      reviews,
     })
     const token = jwt.sign(user.toObject(), process.env.TOKEN_KEY)
     return res.status(201).send({ success: true, user: user.toObject(), token })
