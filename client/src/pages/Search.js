@@ -23,7 +23,7 @@ const Search = () => {
         <div className='card-body' style={{ height: 200 }}>
           <div style={{ textAlign: 'center' }} className='search form-group'>
             <label htmlFor='search'>
-              <h6 className='m-0'>I'm looking for a hair stylist in </h6>
+              <h6 className='m-0'>I'm looking for a hair stylist in</h6>
             </label>
             <input
               type='text'

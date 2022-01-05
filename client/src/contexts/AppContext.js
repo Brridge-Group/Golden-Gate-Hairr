@@ -5,9 +5,7 @@ export const AppContext = createContext()
 
 export const AppContextProvider = props => {
   console.log('in appcontext props', props)
-  const [user, setUser] = useState(
-    JSON.parse(localStorage.getItem('user')) || {}
-  )
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')) || {})
 
   const [token, setToken] = useState(localStorage.getItem('token') || '')
 
