@@ -40,7 +40,8 @@ const signup = async (req, res) => {
 const login = async (req, res) => {
   try {
     // Get user input
-    const { email, password } = req.body
+    let { email, password } = req.body
+    email = email.toLowerCase()
     // Validate user input
     if (!(email && password)) {
       res.status(400).send('All input is required')

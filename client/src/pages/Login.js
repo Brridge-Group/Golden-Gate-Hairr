@@ -13,7 +13,7 @@ const Login = props => {
   const [errorMessage, setErrorMessage] = useState('')
 
   const handleChange = e => {
-    const value = e.target.value.toLowerCase()
+    const value = e.target.value
     setLoginUser({ ...loginUser, [e.target.name]: value })
   }
 
@@ -36,9 +36,6 @@ const Login = props => {
   return (
     <>
       <div className='card w-50 mx-auto'>
-        {/* <div className='card-header'>
-          <h5 className='m-0'>Log In</h5>
-        </div> */}
         <div className='card-body'>
           <form className='form' onSubmit={handleSubmit}>
             <div className='form-group'>

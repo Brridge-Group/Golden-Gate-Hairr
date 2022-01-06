@@ -33,7 +33,7 @@ const Profile = props => {
     }
 
     fetchUserReviews()
-  }, [])
+  }, [props.user.reviews])
   const deleteUserReview = async id => {
     console.log('id', id)
     try {

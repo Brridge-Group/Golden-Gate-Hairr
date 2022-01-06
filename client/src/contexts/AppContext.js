@@ -22,7 +22,6 @@ export const AppContextProvider = props => {
   }
 
   const login = credentials => {
-    console.log('credentials', credentials)
     return axios.post('/api/authorize/login', credentials).then(response => {
       const { token, user } = response.data
       localStorage.setItem('token', token)
