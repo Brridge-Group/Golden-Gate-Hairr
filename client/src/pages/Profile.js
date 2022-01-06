@@ -3,15 +3,11 @@ import { withContext } from '../contexts/AppContext'
 import { Link } from 'react-router-dom'
 
 const Profile = props => {
-  console.log('in profile, props', props)
+  // console.log('in profile, props, props.user.reviews', props, props.user.reviews)
   const [userReviews, setUserReviews] = useState([])
-  const [businessReviews, setBusinessReviews] = useState([])
   const [loadedReviews, setLoadedReviews] = useState([])
-  const [loadedBusReviews, setLoadedBusReviews] = useState([])
 
   const userReviewArr = []
-  const userReviewBusArr = []
-  const busArr = []
 
   useEffect(() => {
     const fetchUserReviews = async () => {
@@ -24,11 +20,9 @@ const Profile = props => {
         }
         const reviews = responseData.reviews
         reviews.map(review => {
-          // console.log('in map, review', review, review.business)
           props.user.reviews.find(userReview => {
             if (userReview === review.id) {
               userReviewArr.push(review)
-              // userReviewBusArr.push(review.business)
             }
           })
         })
@@ -36,13 +30,10 @@ const Profile = props => {
         console.log(error)
       }
       setUserReviews(userReviewArr)
-      // setBusinessReviews(userReviewBusArr)
-      console.log('userReviewBusArr, businessReviews, userReviews', userReviewBusArr, businessReviews, userReviews)
     }
 
     fetchUserReviews()
   }, [])
-  console.log('userReviewBusArr, businessReviews, userReviews', userReviewBusArr, businessReviews, userReviews)
   const deleteUserReview = async id => {
     console.log('id', id)
     try {

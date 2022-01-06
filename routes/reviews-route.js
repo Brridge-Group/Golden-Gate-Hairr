@@ -20,6 +20,6 @@ reviewRouter.patch('/:id', reviewsController.updateReview)
 reviewRouter.delete('/:id', reviewsController.deleteReview)
 
 // Create Review
-reviewRouter.get('/userId', reviewsController.createReview)
+// reviewRouter.get('/userId', reviewsController.createReview)
 
 module.exports = reviewRouter

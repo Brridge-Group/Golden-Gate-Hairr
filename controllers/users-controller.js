@@ -133,8 +133,6 @@ const deleteUser = async (req, res, next) => {
   res.json({ message: 'Deleted successfully' })
 }
 
-// user reviews queries
-
 exports.getUsers = getUsers
 exports.createUser = createUser
 exports.updateUser = updateUser
