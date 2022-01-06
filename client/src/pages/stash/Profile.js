@@ -10,33 +10,33 @@ const Profile = props => {
   const userReviewArr = []
   const userReviewBusArr = []
 
-  // useEffect(() => {
-  //   const fetchUserReviews = async () => {
-  //     try {
-  //       const response = await fetch(`/api/reviews`)
-  //       const responseData = await response.json()
+  useEffect(() => {
+    const fetchUserReviews = async () => {
+      try {
+        const response = await fetch(`/api/reviews`)
+        const responseData = await response.json()
 
-  //       if (!response.ok) {
-  //         throw new Error(responseData.message)
-  //       }
-  //       const reviews = responseData.reviews
-  //       reviews.map(review => {
-  //         // console.log('in map, review', review, review.business)
-  //         props.user.reviews.find(userReview => {
-  //           if (userReview === review.id) {
-  //             userReviewArr.push(review)
-  //           }
-  //         })
-  //       })
-  //     } catch (error) {
-  //       console.log(error)
-  //     }
-  //     setUserReviews(userReviewArr)
-  //     // console.log('userReviewBusArr,  userReviews', userReviewBusArr, userReviews)
-  //   }
+        if (!response.ok) {
+          throw new Error(responseData.message)
+        }
+        const reviews = responseData.reviews
+        reviews.map(review => {
+          // console.log('in map, review', review, review.business)
+          props.user.reviews.find(userReview => {
+            if (userReview === review.id) {
+              userReviewArr.push(review)
+            }
+          })
+        })
+      } catch (error) {
+        console.log(error)
+      }
+      setUserReviews(userReviewArr)
+      // console.log('userReviewBusArr,  userReviews', userReviewBusArr, userReviews)
+    }
 
-  //   fetchUserReviews()
-  // }, [])
+    fetchUserReviews()
+  }, [])
   console.log('userReviewBusArr, userReviews', userReviewBusArr, userReviews)
   const deleteUserReview = async id => {
     console.log('id', id)
@@ -75,7 +75,7 @@ const Profile = props => {
             </tr>
           </thead>
           <tbody>
-            {props.user.reviews.map(userRev => {
+            {userReviews.map(userRev => {
               // console.log('userRev', userRev)
               return (
                 <tr key={userRev.id}>

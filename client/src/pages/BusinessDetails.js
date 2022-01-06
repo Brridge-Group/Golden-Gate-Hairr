@@ -193,7 +193,7 @@ const BusinessDetails = props => {
               {/* </div> */}
             </div>
             <div className='large-map' style={{ marginTop: '30px' }}>
-              <Map address={[business.address1, business.city, business.state, business.zipCode]} />
+              <Map address={[business.address1, business.city, business.state, business.zipCode].toString()} />
             </div>
           </section>
         </>

@@ -77,7 +77,7 @@ const ListReviews = props => {
       </thead>
       <tbody>
         {userReviews.map(userRev => {
-          // console.log('userRev', userRev)
+          console.log('userRev', userRev)
           return (
             <tr key={userRev.id}>
               <td>{userRev.businessName}</td>
