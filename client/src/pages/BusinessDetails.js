@@ -8,6 +8,11 @@ import '../stylesheets/Businesses.css'
 import star from '../images/star.svg'
 import { useLocation, useHistory } from 'react-router-dom'
 import Map from '../components/Map'
+import MapContainer from '../components/MapContainer'
+
+import LocationPin from '../components/LocationPin'
+
+import BusinessReviews from '../components/BusinessReviews'
 
 const BusinessDetails = props => {
   const history = useHistory()
@@ -161,9 +166,7 @@ const BusinessDetails = props => {
                       ) : (
                         ''
                       )}
-                      <div className='map'>
-                        <Map />
-                      </div>
+                      <div className='map'>{/* <Map /> */}</div>
                     </div>
                     <div className='product-container' style={{ width: '72%' }}>
                       <h1 className='product title'>{business.businessName}</h1>
@@ -187,13 +190,14 @@ const BusinessDetails = props => {
                         </button>
                       )}
                     </div>
+                    <BusinessReviews />
                   </figure>
                 </div>
               </div>
-              {/* </div> */}
             </div>
             <div className='large-map' style={{ marginTop: '30px' }}>
               <Map />
+              <LocationPin address={[business.address1, business.city, business.state, business.zipCode]} />
             </div>
           </section>
         </>

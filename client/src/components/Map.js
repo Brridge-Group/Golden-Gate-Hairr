@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import GoogleMapReact from 'google-map-react'
 import axios from 'axios'
-import Geocode from 'react-geocode'
 
 require('dotenv').config()
 
@@ -12,50 +11,9 @@ class Map extends Component {
     center: { lat: 40.73, lng: -73.93 },
     zoom: 11,
   }
-
-  // GET request using axios inside useEffect React hook
-  // geocode = () => {
-  //   const location = '22 west 25th street, new york, ny'
-  //   axios
-  //     .get('https://maps.googleapis.com/maps/api/geocode.json', {
-  //       params: {
-  //         address: location,
-  //         key: process.env.REACT_APP_GEO_KEY,
-  //       },
-  //       withCredentials: false,
-  //       headers: { 'Access-Control-Allow-Origin': true },
-  //     })
-  //     .then(function (resp) {
-  //       console.log(resp)
-  //     })
-  //     .catch(function (error) {
-  //       console.log(error)
-  //     })
+  // state = {
+  //   center: {},
   // }
-
-  // empty dependency array means this effect will only run once (like componentDidMount in classes)
-
-  // geocode = () => {
-  //   const location = '22 west 25th street, new york, ny'
-  //   axios
-  //     .get('https://maps.googleapis.com/maps/api/geocode.json', {
-  //       params: {
-  //         address: location,
-  //         key: process.env.REACT_APP_GEO_KEY,
-  //       },
-  //       headers: { 'Access-Control-Allow-Origin': '*' },
-  //     })
-  //     .then(function (resp) {
-  //       console.log(resp)
-  //     })
-  //     .catch(function (error) {
-  //       console.log(error)
-  //     })
-  // }
-  initGeocoder = ({ maps }) => {
-    const Geocoder = new maps.Geocoder()
-  }
-  // Geocode.setApiKey(REACT_APP_GEO_KEY );
 
   render() {
     return (
@@ -64,6 +22,7 @@ class Map extends Component {
         <GoogleMapReact
           bootstrapURLKeys={{ key: process.env.REACT_APP_API_KEY }}
           defaultCenter={this.props.center}
+          // center={this.state.center}
           defaultZoom={this.props.zoom}
           onChildMouseEnter={this.onChildMouseEnter}
           onChildMouseLeave={this.onChildMouseLeave}
