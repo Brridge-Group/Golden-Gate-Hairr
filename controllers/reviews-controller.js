@@ -2,6 +2,18 @@ const Review = require('../models/review')
 const Business = require('../models/business')
 const User = require('../models/user')
 
+// const getReviews = async (req, res, next) => {
+//   let reviews
+//   try {
+//     reviews = await Review.find({ user: req.user._id }, (err, reviews))
+//   } catch (error) {
+//     return next(error)
+//   }
+//   res.json({
+//     reviews: reviews.map(review => review.toObject({ getters: true })),
+//   })
+// }
+
 const getReviews = async (req, res, next) => {
   let reviews
   try {
@@ -17,15 +29,16 @@ const getReviews = async (req, res, next) => {
 
 const createReview = async (req, res, next) => {
   console.log(req.body)
-  const { comment, rating, business, author, businessName } = req.body
+  const { comment, rating, business, user, businessName } = req.body
 
   const newReview = new Review({
     comment,
     rating,
     business,
-    author,
+    user,
     businessName,
   })
+  // review.user = req.user._id
 
   try {
     await newReview.save()
@@ -37,7 +50,7 @@ const createReview = async (req, res, next) => {
   businessFind.reviews.push(newReview)
   await businessFind.save()
 
-  let authorFind = await User.findById(newReview.author)
+  let authorFind = await User.findById(newReview.user)
   console.log('authorFind', authorFind)
   authorFind.reviews.push(newReview)
   await authorFind.save()

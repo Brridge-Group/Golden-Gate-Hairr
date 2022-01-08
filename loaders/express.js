@@ -6,6 +6,9 @@ const bodyParser = require('body-parser')
 
 const usersRoutes = require('../routes/users-route')
 const reviewsRoutes = require('../routes/reviews-route')
+// const todosRoutes = require('../routes/todos-route')
+const todosRoutes = require('../routes/todos')
+
 // Require Routes
 const businessesRoutes = require('../routes/businesses-route')
 const featuresRoutes = require('../routes/features-route')
@@ -19,13 +22,18 @@ const loader = async app => {
   app.use(express.static(path.join(__dirname, '../client/build')))
 
   app.use('/api/users', usersRoutes)
-  app.use('/api/reviews', reviewsRoutes)
+
   app.use('/api/businesses', businessesRoutes)
   app.use('/api/features', featuresRoutes)
   app.use('/api/services', servicesRoutes)
   app.use('/api/authorize', authorizesRoutes)
+  app.use('/api/reviews', reviewsRoutes)
+  // app.use('/api/todos', todosRoutes)
+
   app.use('/api', expressJwt({ secret: process.env.TOKEN_KEY, algorithms: ['HS256'] }))
+
   app.use(bodyParser.urlencoded({ extended: true }))
+  app.use('/api/todos', todosRoutes)
 
   // The "catchall" handler: for any request that doesn't
   // match one above, send back React's index.html file.
@@ -37,22 +45,6 @@ const loader = async app => {
   app.enable('trust proxy')
   app.use(cors())
 
-  // app.use(
-  //   cors({
-  //     allowedHeaders: ['Content-Type'], // headers that React is sending to the API
-  //     exposedHeaders: ['Content-Type'], // headers that you are sending back to React
-  //     origin: '*',
-  //     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  //     preflightContinue: false,
-  //   })
-  // )
-
-  // app.get('/cors', (req, res) => {
-  //   res.set('Access-Control-Allow-Origin', '*')
-  //   res.send({ msg: 'This has CORS enabled 🎈' })
-  // })
-
-  // near the top with the other imports
   //following from bob zirolls tutorial https://coursework.vschool.io/token-auth-with-jwts-part-1/
 
   // Make the app use the express-jwt authentication middleware on anything starting with "/api"
@@ -62,7 +54,7 @@ const loader = async app => {
   // This way, it must go through the express-jwt middleware before
   // accessing any todos, making sure we can reference the "currently
   // logged-in user" in our todo routes.
-  // app.use("/api/todo", require("./routes/todo"));
+  // app.use("/api/todos", require("./routes/todo"));
 
   // ...More middlewares
 

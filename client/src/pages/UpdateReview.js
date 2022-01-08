@@ -39,7 +39,7 @@ const UpdateReview = props => {
     e.preventDefault()
     let updatedReview = {
       comment: comment,
-      author: props.user._id,
+      user: props.user._id,
       // business: business._id,
       rating: rating,
     }

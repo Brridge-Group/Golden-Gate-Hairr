@@ -1,5 +1,5 @@
 import React from 'react'
-import Geocode from 'react-geocode'
+// import Geocode from 'react-geocode'
 import Map from './Map'
 
 const LocationPin = props => {

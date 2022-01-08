@@ -1,67 +1,13 @@
-import { useState, createContext, useEffect } from 'react'
+import { useState, createContext } from 'react'
 import axios from 'axios'
-const todoAxios = axios.create()
-
-todoAxios.interceptors.request.use(config => {
-  const token = localStorage.getItem('token')
-  config.headers.Authorization = `Bearer ${token}`
-  return config
-})
 
 export const AppContext = createContext()
 
 export const AppContextProvider = props => {
   // console.log('in appcontext props', props)
-  const [todos, setTodos] = useState([])
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')) || {})
+
   const [token, setToken] = useState(localStorage.getItem('token') || '')
-
-  const useEffect = () => {
-    this.getTodos()
-  }
-  const addTodo = newTodo => {
-    console.log('in addTodo context, newTodo', newTodo)
-    return todoAxios.post('/api/todos/', newTodo).then(response => {
-      console.log('in add todo response', response)
-      const responseReceived = response.data
-      setTodos({ ...todos, responseReceived })
-      // setTodos(prevState => {
-      //   return { todos: [...prevState.todos, response.data] }
-      // })
-      // return response
-    })
-  }
-
-  const getTodos = () => {
-    return todoAxios.get('/api/todos').then(response => {
-      setTodos({ todos: response.data })
-      return response
-    })
-  }
-
-  const editTodo = (todoId, todo) => {
-    return todoAxios.put(`/api/todos/${todoId}`, todo).then(response => {
-      setTodos(prevState => {
-        const updatedTodos = prevState.todos.map(todo => {
-          return todo._id === response.data._id ? response.data : todo
-        })
-        return { todos: updatedTodos }
-      })
-      return response
-    })
-  }
-
-  const deleteTodo = todoId => {
-    return todoAxios.delete(`/api/todos/${todoId}`).then(response => {
-      setTodos(prevState => {
-        const updatedTodos = prevState.todos.filter(todo => {
-          return todo._id !== todoId
-        })
-        return { todos: updatedTodos }
-      })
-      return response
-    })
-  }
 
   const signup = userInfo => {
     return axios.post('/api/authorize/signup', userInfo).then(response => {
@@ -166,15 +112,9 @@ export const AppContextProvider = props => {
   return (
     <AppContext.Provider
       value={{
-        addTodo,
-        editTodo,
-        deleteTodo,
-        getTodos,
         signup,
         login,
         logout,
-        todos,
-        setTodos,
         user,
         setUser,
         token,
