@@ -4,7 +4,7 @@ class AddTodoForm extends Component {
   constructor() {
     super()
     this.state = {
-      title: '',
+      todo: '',
     }
   }
 
@@ -18,7 +18,7 @@ class AddTodoForm extends Component {
 
   clearInputs = () => {
     this.setState({
-      title: '',
+      todo: '',
     })
   }
 
@@ -36,7 +36,7 @@ class AddTodoForm extends Component {
         <form onSubmit={this.handleSubmit}>
           <h4>Add New Todo</h4>
 
-          <input name='title' value={this.state.title} onChange={this.handleChange} type='text' placeholder='Title' />
+          <input name='todo' value={this.state.todo} onChange={this.handleChange} type='text' placeholder='todo' />
 
           <button>+</button>
         </form>

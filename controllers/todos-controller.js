@@ -1,4 +1,4 @@
-const Todo = require('../models/todo')
+const Todo = require('../models/todo1')
 
 // const createTodo = (req, res, next) => {
 //   const todo = new Todo(req.body)

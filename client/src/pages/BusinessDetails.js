@@ -8,7 +8,6 @@ import '../stylesheets/Businesses.css'
 import star from '../images/star.svg'
 import { useLocation, useHistory } from 'react-router-dom'
 import Map from '../components/Map'
-import MapContainer from '../components/MapContainer'
 
 import LocationPin from '../components/LocationPin'
 

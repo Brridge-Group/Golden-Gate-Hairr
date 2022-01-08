@@ -3,18 +3,30 @@ import Todo from './Todo'
 import AddTodoForm from './AddTodoForm'
 import { withContext } from '../../contexts/AppContext'
 
-function TodoList(props) {
-  console.log('in todolist', props)
-  // const todos = props.todos.map(todo => {
-  //   return <Todo key={todo._id} todo={todo} editTodo={props.editTodo} deleteTodo={props.deleteTodo} />
-  // })
+class TodoList extends React.Component {
+  constructor(props) {
+    super(props)
+  }
+  // console.log('in todolist, props.todos', props.todos, props.todos.todos)
 
-  return (
-    <main>
-      <AddTodoForm addTodo={props.addTodo} />
-      {/* {todos} */}
-    </main>
-  )
+  // const todos =
+  //   // const todos = !props.todos.length
+  //   // ? null
+  //   // :
+  //   props.todos.todos.map(todo => {
+  //     return <Todo key={todo._id} todo={todo} editTodo={props.editTodo} deleteTodo={props.deleteTodo} />
+  //   })
+  render() {
+    // const todos =
+
+    console.log('todo list', this.props)
+    return (
+      <main>
+        {/* <AddTodoForm addTodo={props.addTodo} />
+        {todos} */}
+      </main>
+    )
+  }
 }
 
 export default withContext(TodoList)

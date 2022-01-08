@@ -16,26 +16,24 @@ export const AppContextProvider = props => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')) || {})
   const [token, setToken] = useState(localStorage.getItem('token') || '')
 
-  const useEffect = () => {
-    this.getTodos()
-  }
+  useEffect(() => {
+    getTodos()
+  }, [])
+
   const addTodo = newTodo => {
     console.log('in addTodo context, newTodo', newTodo)
     return todoAxios.post('/api/todos/', newTodo).then(response => {
-      console.log('in add todo response', response)
+      console.log('in addTodo response', response)
       const responseReceived = response.data
       setTodos({ ...todos, responseReceived })
-      // setTodos(prevState => {
-      //   return { todos: [...prevState.todos, response.data] }
-      // })
-      // return response
     })
   }
 
   const getTodos = () => {
     return todoAxios.get('/api/todos').then(response => {
+      console.log('getTodos, response.data', response.data)
       setTodos({ todos: response.data })
-      return response
+      // return response
     })
   }
 
@@ -62,6 +60,18 @@ export const AppContextProvider = props => {
       return response
     })
   }
+
+  // const deleteTodo = todoId => {
+  //   return todoAxios.delete(`/api/todos/${todoId}`).then(response => {
+  //     setTodos(prevState => {
+  //       const updatedTodos = prevState.todos.filter(todo => {
+  //         return todo._id !== todoId
+  //       })
+  //       return { todos: updatedTodos }
+  //     })
+  //     return response
+  //   })
+  // }
 
   const signup = userInfo => {
     return axios.post('/api/authorize/signup', userInfo).then(response => {
