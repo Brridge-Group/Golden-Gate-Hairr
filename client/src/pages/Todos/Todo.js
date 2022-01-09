@@ -1,7 +1,7 @@
 import React from 'react'
 
 function Todo(props) {
-  console.log('in todo, props.todo', props.todo, props.deleteTodo, props.todo._id)
+  // console.log('in todo, props.todo', props.todo, props.deleteTodo, props.todo._id)
   return (
     <>
       <div className='card w-50 mx-auto'>

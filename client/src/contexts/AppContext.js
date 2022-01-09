@@ -31,11 +31,18 @@ export const AppContextProvider = props => {
 
   const getTodos = () => {
     return todoAxios.get('/api/todos').then(response => {
-      console.log('getTodos, response.data', response.data)
+      console.log('getTodos, response.data', response.data, response)
       setTodos({ todos: response.data })
       // return response
     })
   }
+  // async function getTodos() {
+  //   let response = await todoAxios.get('/api/todos')
+  //   let todos = await response.data
+  //   // console.log('getTodos, response.data', response.data, response)
+  //   setTodos({ todos })
+  //   // return response
+  // }
 
   const editTodo = (todoId, todo) => {
     return todoAxios.put(`/api/todos/${todoId}`, todo).then(response => {
@@ -60,7 +67,6 @@ export const AppContextProvider = props => {
       return response
     })
   }
-
   // const deleteTodo = todoId => {
   //   return todoAxios.delete(`/api/todos/${todoId}`).then(response => {
   //     setTodos(prevState => {
@@ -92,6 +98,7 @@ export const AppContextProvider = props => {
       localStorage.setItem('user', JSON.stringify(user))
       setUser(user)
       setToken(token)
+      setTodos(todos)
       return response
     })
   }
@@ -101,6 +108,7 @@ export const AppContextProvider = props => {
     localStorage.removeItem('user')
     setToken('')
     setUser({})
+    setTodos([])
   }
 
   // Initialize  Services and Features to state
