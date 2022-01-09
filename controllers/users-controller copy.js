@@ -1,16 +1,6 @@
 const User = require('../models/user')
 const { roles } = require('../roles')
 
-User.find()
-  .then(p => console.log(p))
-  .catch(error => console.log(error))
-
-User.findOne({ email: 'nikki@pelo.com' })
-  .populate('reviews')
-  .exec((err, reviews) => {
-    console.log('Populated User ' + reviews)
-  })
-
 //this function only for moderators, admin
 const grantAccess = (action, resource) => {
   return async (req, res, next) => {
@@ -110,15 +100,34 @@ const updateUser = async (req, res, next) => {
 const getUser = async (req, res, next) => {
   let user
 
-  const userId = req.params.id
+  // const userId = req.params.id
 
   try {
-    user = await User.findOne(userId).populate('reviews')
+    user = await User.findOne({ _id: userId })
+      .populate('reviews') // key to populate
+      .then(user => {
+        res.json(user)
+      })
   } catch (err) {
     return next(err)
   }
-  res.json({ user })
+  console.log(user)
 }
+
+// User
+//    .findOne({_id: userId })
+//    .populate("blogs") // key to populate
+//    .then(user => {
+//       res.json(user);
+//    });
+
+// function getUser(email) {
+//   return User.findOne({ email: email })
+//     .populate('reviews')
+//     .exec((err, reviews) => {
+//       console.log('Populated User ' + reviews)
+//     })
+// }
 // const getUser = async (req, res, next) => {
 //   let user
 
@@ -131,22 +140,6 @@ const getUser = async (req, res, next) => {
 //   }
 
 //   res.json({ user })
-// }
-// const getUser = async (req, res, next) => {
-//   let user
-
-//   // const userId = req.params.id
-
-//   try {
-//     user = await User.findOne({ _id: userId })
-//       .populate('reviews') // key to populate
-//       .then(user => {
-//         res.json(user)
-//       })
-//   } catch (err) {
-//     return next(err)
-//   }
-//   console.log(user)
 // }
 
 const deleteUser = async (req, res, next) => {

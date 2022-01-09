@@ -59,15 +59,6 @@ const createReview = async (req, res, next) => {
   res.status(201).json({ review: newReview })
 }
 
-// newComment.save().then(result => {
-//   Comment.populate(newComment, { path: 'user' }).then(comment => {
-//     res.json({
-//       message: 'Comment added',
-//       comment,
-//     })
-//   })
-// })
-
 const updateReview = async (req, res, next) => {
   const reviewId = req.params.id
 

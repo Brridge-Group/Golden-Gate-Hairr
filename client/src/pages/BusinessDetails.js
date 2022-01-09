@@ -18,6 +18,7 @@ const BusinessDetails = props => {
   //am using this to pull in content but
   const { state } = useLocation()
   const business = state.business
+  console.log('business', business)
   //could also use const business = history.location.state.business
 
   const [phone, setPhone] = useState(false)

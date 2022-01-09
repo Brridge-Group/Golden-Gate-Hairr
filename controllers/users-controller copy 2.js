@@ -1,16 +1,6 @@
 const User = require('../models/user')
 const { roles } = require('../roles')
 
-User.find()
-  .then(p => console.log(p))
-  .catch(error => console.log(error))
-
-User.findOne({ email: 'nikki@pelo.com' })
-  .populate('reviews')
-  .exec((err, reviews) => {
-    console.log('Populated User ' + reviews)
-  })
-
 //this function only for moderators, admin
 const grantAccess = (action, resource) => {
   return async (req, res, next) => {
