@@ -6,8 +6,6 @@ const bodyParser = require('body-parser')
 
 const usersRoutes = require('../routes/users-route')
 const reviewsRoutes = require('../routes/reviews-route')
-// const todosRoutes = require('../routes/todos-route')
-const todosRoutes = require('../routes/todos')
 
 // Require Routes
 const businessesRoutes = require('../routes/businesses-route')
@@ -22,18 +20,15 @@ const loader = async app => {
   app.use(express.static(path.join(__dirname, '../client/build')))
 
   app.use('/api/users', usersRoutes)
-
   app.use('/api/businesses', businessesRoutes)
   app.use('/api/features', featuresRoutes)
   app.use('/api/services', servicesRoutes)
   app.use('/api/authorize', authorizesRoutes)
   app.use('/api/reviews', reviewsRoutes)
-  // app.use('/api/todos', todosRoutes)
 
   app.use('/api', expressJwt({ secret: process.env.TOKEN_KEY, algorithms: ['HS256'] }))
 
   app.use(bodyParser.urlencoded({ extended: true }))
-  app.use('/api/todos', todosRoutes)
 
   // The "catchall" handler: for any request that doesn't
   // match one above, send back React's index.html file.

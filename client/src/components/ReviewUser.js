@@ -3,7 +3,7 @@ import { withContext } from '../contexts/AppContext'
 import { Link } from 'react-router-dom'
 
 const ReviewUser = props => {
-  console.log('in reviewuser, props, props.user', props, props.user.reviews[0])
+  console.log('in reviewuser, props, props.user', props, props.user.reviews[1].comment)
   const [userReviews, setUserReviews] = useState([])
 
   const userReviewArr = []

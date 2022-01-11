@@ -16,10 +16,6 @@ import UpdateReview from './pages/UpdateReview'
 import Search from './pages/Search'
 import SearchResults from './pages/SearchResults'
 import Map from './components/Map'
-import Todo from './pages/Todos/Todo'
-import TodoList from './pages/Todos/TodoList'
-
-import ProtectedRoute from './auth/ProtectedRoute'
 
 const App = () => {
   let routes
@@ -38,7 +34,7 @@ const App = () => {
       <Route exact path='/profile/'>
         <Profile />
       </Route>
-      <ProtectedRoute path='/todos' component={TodoList} />
+
       <Route exact path='/:name/review/'>
         <Review />
       </Route>

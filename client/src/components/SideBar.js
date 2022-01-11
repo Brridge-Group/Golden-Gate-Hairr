@@ -55,12 +55,7 @@ const SideBar = props => {
                       <p>Profile</p>
                     </NavLink>
                   </li>
-                  <li className='nav-item'>
-                    <NavLink to='/todos' exact className='nav-link'>
-                      <i className='nav-icon fas fa-user-plus'></i>
-                      <p>Todos</p>
-                    </NavLink>
-                  </li>
+
                   <li className='nav-item'>
                     <NavLink to='/logout' exact className='nav-link' onClick={props.logout}>
                       <i className='nav-icon fas fa-sign-out-alt'></i>
