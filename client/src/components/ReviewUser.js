@@ -3,39 +3,11 @@ import { withContext } from '../contexts/AppContext'
 import { Link } from 'react-router-dom'
 
 const ReviewUser = props => {
-  console.log('in reviewuser, props, props.user', props, props.user.reviews[1].comment)
-  const [userReviews, setUserReviews] = useState([])
+  console.log('in reviewuser, props, props.user', props, props.user)
+  const [userReviews, setUserReviews] = useState(props.user.reviews)
 
   const userReviewArr = []
 
-  useEffect(() => {
-    const fetchUserReviews = async () => {
-      try {
-        const response = await fetch(`/api/reviews`)
-        const responseData = await response.json()
-
-        // Review.find({ _id: props.user.reviews })
-        console.log('in use effect', response)
-
-        if (!response.ok) {
-          throw new Error(responseData.message)
-        }
-        const reviews = responseData.reviews
-        reviews.map(review => {
-          props.user.reviews.find(userReview => {
-            if (userReview === review.id) {
-              userReviewArr.push(review)
-            }
-          })
-        })
-      } catch (error) {
-        console.log(error)
-      }
-      setUserReviews(userReviewArr)
-    }
-
-    fetchUserReviews()
-  }, [props.user.reviews])
   const deleteUserReview = async id => {
     console.log('id', id)
     try {
@@ -69,20 +41,20 @@ const ReviewUser = props => {
         </tr>
       </thead>
       <tbody>
-        {userReviews.map(userRev => {
-          // console.log('userRev', userRev)
+        {props.user.reviews.map(review => {
+          console.log('review.comment', review.comment)
           return (
-            <tr key={userRev.id}>
-              <td>{userRev.businessName}</td>
-              <td>{userRev.comment}</td>
-              <td>{userRev.rating}</td>
+            <tr key={review.id}>
+              <td>{review.businessName}</td>
+              <td>{review.comment}</td>
+              <td>{review.rating}</td>
               <td>
-                <Link to={'/reviews/' + userRev.id} className='btn btn-default'>
+                <Link to={'/reviews/' + review.id} className='btn btn-default'>
                   Edit
                 </Link>
               </td>
               <td>
-                <button type='button' className='btn btn-default' onClick={() => deleteUserReview(userRev.id)}>
+                <button type='button' className='btn btn-default' onClick={() => deleteUserReview(review.id)}>
                   Delete
                 </button>
               </td>

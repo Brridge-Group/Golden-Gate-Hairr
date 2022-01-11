@@ -8,6 +8,8 @@ const BusinessCard = props => {
   const business = props.business
   const [redirect, setRedirect] = useState(false)
 
+  console.log('in bus card, props.business', props.business)
+
   const deleteNameSpace = props.name.replace(/\s+/g, '')
 
   const doSetRedirect = () => {

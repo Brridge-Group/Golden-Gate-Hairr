@@ -56,6 +56,24 @@ const BusinessDetails = props => {
     }
   }, [])
 
+  // useEffect(() => {
+  //   const getBusiness = async () => {
+  //     const id = business._id
+  //     try {
+  //       const response = await fetch(`/api/businesses/${id}`)
+  //       console.log(response, 'response', response.data)
+  //       // if (!response.ok) {
+  //       //   throw new Error('New business profile not saved! Please resubmit.')
+  //       // }
+  //       const json = await response.json()
+  //       alert('Profile creation successful. Thank you!!')
+  //     } catch (error) {
+  //       console.log('error', error)
+  //     }
+  //   }
+  //   getBusiness()
+  // }, [])
+
   // Initialize state for features and services  array from context
   const [bizFeatsArr, setBizFeatsArr] = useState([])
   const [bizServiceArr, setBizServiceArr] = useState([])
