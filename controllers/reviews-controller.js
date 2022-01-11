@@ -87,11 +87,12 @@ const getReview = async (req, res, next) => {
   const reviewId = req.params.id
 
   try {
-    review = await Review.findById(reviewId).populate('user').exec()
+    review = await Review.findById(reviewId)
+    // .populate('user').exec()
   } catch (err) {
     return next(err)
   }
-  console.log('user, in get review', user)
+  // console.log('user, in get review', user)
   res.json({ review })
 }
 

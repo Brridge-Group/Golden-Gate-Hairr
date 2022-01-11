@@ -6,8 +6,6 @@ const ReviewUser = props => {
   console.log('in reviewuser, props, props.user', props, props.user)
   const [userReviews, setUserReviews] = useState(props.user.reviews)
 
-  const userReviewArr = []
-
   const deleteUserReview = async id => {
     console.log('id', id)
     try {
@@ -41,20 +39,20 @@ const ReviewUser = props => {
         </tr>
       </thead>
       <tbody>
-        {props.user.reviews.map(review => {
-          console.log('review.comment', review.comment)
+        {userReviews.map(review => {
+          console.log('review.comment, review, review._id', review.comment, review, review._id)
           return (
-            <tr key={review.id}>
+            <tr key={review._id}>
               <td>{review.businessName}</td>
               <td>{review.comment}</td>
               <td>{review.rating}</td>
               <td>
-                <Link to={'/reviews/' + review.id} className='btn btn-default'>
+                <Link to={'/reviews/' + review._id} className='btn btn-default'>
                   Edit
                 </Link>
               </td>
               <td>
-                <button type='button' className='btn btn-default' onClick={() => deleteUserReview(review.id)}>
+                <button type='button' className='btn btn-default' onClick={() => deleteUserReview(review._id)}>
                   Delete
                 </button>
               </td>
