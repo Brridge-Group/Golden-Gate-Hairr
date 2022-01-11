@@ -49,10 +49,14 @@ const Review = props => {
       console.error('Review not created.', error.message)
       set_Error(error.message)
     }
+    setReviewForm(prevReviewForm => [...prevReviewForm, newReview])
   }
 
   const submitReview = e => {
     e.preventDefault()
+    // setReviewForm(prevReviewForm => [...prevReviewForm, newReview])
+    // setItemList(prevItemList => [...prevItemList, docRef])
+
     saveNewReview().then(history.push('/'))
   }
 

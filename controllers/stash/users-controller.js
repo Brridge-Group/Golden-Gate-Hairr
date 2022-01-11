@@ -2,34 +2,11 @@ const User = require('../models/user')
 const { roles } = require('../roles')
 const Review = require('../models/review')
 
-// User.find()
-//   .then(p => console.log(p))
-//   .catch(error => console.log(error))
-
-// const getUser = async (req, res, next) => {
-// let user
-
-// User.findOne({ id: userId })
-//   .populate('reviews')
-//   .exec((err, reviews) => {
-//     console.log('Populated User ' + reviews)
-//   })
-// }
-
 // const user = User.findOne({ email: 'nikki@pelo.com' })
 //   .populate('reviews')
 //   .exec((err, reviews) => {
 //     console.log('Populated User ' + reviews)
 //     // console.log('Populated User ' + reviews)
-//     return user
-//   })
-
-// const user = User.findOne({ email: 'nikki@pelo.com' })
-//   .populate('reviews')
-//   .exec((err, reviews) => {
-//     console.log('Populated User ' + reviews)
-//     // console.log('Populated User ' + reviews)
-//     // res.json({ user })
 //     return user
 //   })
 

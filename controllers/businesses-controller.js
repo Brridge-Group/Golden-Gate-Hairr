@@ -38,7 +38,10 @@ const getBusiness = async (req, res, next) => {
   const businessId = req.params.id
 
   try {
-    business = await Business.findById(businessId).populate('reviews')
+    business = await Business.findById(businessId)
+
+    // business = await Business.find(businessId)
+    // business.populate('reviews').exec()
   } catch (error) {
     return next(error)
   }

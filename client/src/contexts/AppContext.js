@@ -36,13 +36,6 @@ export const AppContextProvider = props => {
       // return response
     })
   }
-  // async function getTodos() {
-  //   let response = await todoAxios.get('/api/todos')
-  //   let todos = await response.data
-  //   // console.log('getTodos, response.data', response.data, response)
-  //   setTodos({ todos })
-  //   // return response
-  // }
 
   const editTodo = (todoId, todo) => {
     return todoAxios.put(`/api/todos/${todoId}`, todo).then(response => {
@@ -67,17 +60,6 @@ export const AppContextProvider = props => {
       return response
     })
   }
-  // const deleteTodo = todoId => {
-  //   return todoAxios.delete(`/api/todos/${todoId}`).then(response => {
-  //     setTodos(prevState => {
-  //       const updatedTodos = prevState.todos.filter(todo => {
-  //         return todo._id !== todoId
-  //       })
-  //       return { todos: updatedTodos }
-  //     })
-  //     return response
-  //   })
-  // }
 
   const signup = userInfo => {
     return axios.post('/api/authorize/signup', userInfo).then(response => {
