@@ -8,7 +8,8 @@ const UpdateReview = props => {
   const reviewId = useParams().id
   const history = useHistory()
   // const business = history.location.state.business
-  console.log('update review, props, history', props, history)
+  console.log('update review, reviewId', reviewId, typeof reviewId)
+  // console.log('update review, props, history', props, history)
   const [rating, setRating] = useState(0)
   const [hover, setHover] = useState(0)
   const [comment, setComment] = useState('')
@@ -40,7 +41,6 @@ const UpdateReview = props => {
     let updatedReview = {
       comment: comment,
       user: props.user._id,
-      // business: business._id,
       rating: rating,
     }
 
@@ -54,7 +54,7 @@ const UpdateReview = props => {
       })
 
       if (!response.ok) {
-        throw new Error('Could not save new item')
+        throw new Error('Could not update review')
       }
 
       history.push('/profile')

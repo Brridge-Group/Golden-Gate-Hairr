@@ -1,12 +1,12 @@
 const User = require('../models/user')
 const { roles } = require('../roles')
 
-// const user = User.findOne({ email: 'nikki@pelo.com' })
-//   .populate('reviews')
-//   .exec((err, reviews) => {
-//     console.log('Populated User ' + reviews)
-//     // console.log('Populated User ' + reviews)
-//   })
+User.findOne({ email: 'c@cc.com' })
+  .populate('reviews')
+  .exec((err, reviews) => {
+    console.log('Populated User ' + reviews)
+    // console.log('Populated User ' + reviews)
+  })
 
 //this function only for moderators, admin
 const grantAccess = (action, resource) => {
@@ -78,7 +78,7 @@ const updateUser = async (req, res, next) => {
   const { firstName, lastName, email, password, password2 } = req.body
   let user
   try {
-    user = await user.findById(userId)
+    user = await user.findById(userId).populate('reviews').exec()
   } catch (err) {
     return next(err)
   }

@@ -11,6 +11,7 @@ const ReviewUser = props => {
   // }, [])
   // console.log('in reviewuser, props, props.user', props, props.user)
   const [userReviews, setUserReviews] = useState(props.user.reviews)
+  console.log('review user', userReviews)
 
   const deleteUserReview = async id => {
     console.log('id', id)
