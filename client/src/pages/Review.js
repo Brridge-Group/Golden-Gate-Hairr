@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { withContext } from '../contexts/AppContext'
 import { useHistory } from 'react-router-dom'
 
@@ -7,22 +7,22 @@ const Review = props => {
   const business = history.location.state.business
   const [rating, setRating] = useState(0)
   const [hover, setHover] = useState(0)
-  const [reviewForm, setReviewForm] = useState({
-    comment: '',
-  })
+  const [userReviews, setUserReviews] = useState(props.user.reviews)
+  const [comment, setComment] = useState('')
 
   // TODO (Backlog): Error Handling UI
   const [_error, set_Error] = useState(null)
 
-  console.log('in review', business)
-  const { comment } = reviewForm
+  console.log('in review props.user._id', props.user._id)
 
-  const handleChange = e => {
-    setReviewForm({ ...reviewForm, [e.target.name]: e.target.value })
-  }
+  // useEffect(() => {
+  //   const id = props.user._id
+  //   fetch(`api/users/${id}`)
+  // }, [userReviews])
+
   const saveNewReview = async () => {
     let newReview = {
-      ...reviewForm,
+      comment: comment,
       user: props.user._id,
       business: business._id,
       rating: rating,
@@ -38,7 +38,7 @@ const Review = props => {
     }
 
     try {
-      console.log('in try, new review', newReview)
+      // console.log('in try, new review, request options', newReview, requestOptions)
       const response = await fetch('/api/reviews', requestOptions)
       if (!response.ok) {
         throw new Error('New review not saved! Please resubmit.')
@@ -49,15 +49,18 @@ const Review = props => {
       console.error('Review not created.', error.message)
       set_Error(error.message)
     }
-    setReviewForm(prevReviewForm => [...prevReviewForm, newReview])
+    // setReviewForm(prevReviewForm => [...prevReviewForm, newReview])
   }
 
   const submitReview = e => {
     e.preventDefault()
-    // setReviewForm(prevReviewForm => [...prevReviewForm, newReview])
-    // setItemList(prevItemList => [...prevItemList, docRef])
+
+    // const itemToAdd = { name: item, date: Date.now() };
+    // const newReview = { comment: comment, user: props.user._id, business: business._id, rating: rating, businessName: business.businessName }
+    // console.log('in submit review, reviewForm', business.businessName, rating, comment)
 
     saveNewReview().then(history.push('/'))
+    // setUserReviews(prevUserReviews => [...prevUserReviews, newReview])
   }
 
   return (
@@ -85,7 +88,7 @@ const Review = props => {
             </div>
             <div className='form-group'>
               <label htmlFor='comment'></label>
-              <textarea name='comment' type='text' className='form-control text-area' onChange={handleChange} value={comment} />
+              <textarea name='comment' type='text' className='form-control text-area' onChange={e => setComment(e.target.value)} />
             </div>
             <button type='submit' className='btn btn-primary'>
               Submit

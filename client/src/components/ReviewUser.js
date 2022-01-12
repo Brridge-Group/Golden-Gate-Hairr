@@ -3,7 +3,13 @@ import { withContext } from '../contexts/AppContext'
 import { Link } from 'react-router-dom'
 
 const ReviewUser = props => {
-  console.log('in reviewuser, props, props.user', props, props.user)
+  // useEffect(() => {
+  //   console.log('in profile useeffect')
+  //   const id = props.user._id
+  //   fetch(`api/users/${id}`)
+  //   console.log('props.user', props.user)
+  // }, [])
+  // console.log('in reviewuser, props, props.user', props, props.user)
   const [userReviews, setUserReviews] = useState(props.user.reviews)
 
   const deleteUserReview = async id => {
@@ -40,7 +46,6 @@ const ReviewUser = props => {
       </thead>
       <tbody>
         {userReviews.map(review => {
-          console.log('review.comment, review, review._id', review.comment, review, review._id)
           return (
             <tr key={review._id}>
               <td>{review.businessName}</td>

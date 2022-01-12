@@ -1,36 +1,11 @@
 const User = require('../models/user')
 const { roles } = require('../roles')
-const Review = require('../models/review')
-
-// User.find()
-//   .then(p => console.log(p))
-//   .catch(error => console.log(error))
-
-// const getUser = async (req, res, next) => {
-// let user
-
-// User.findOne({ id: userId })
-//   .populate('reviews')
-//   .exec((err, reviews) => {
-//     console.log('Populated User ' + reviews)
-//   })
-// }
 
 // const user = User.findOne({ email: 'nikki@pelo.com' })
 //   .populate('reviews')
 //   .exec((err, reviews) => {
 //     console.log('Populated User ' + reviews)
 //     // console.log('Populated User ' + reviews)
-//     return user
-//   })
-
-// const user = User.findOne({ email: 'nikki@pelo.com' })
-//   .populate('reviews')
-//   .exec((err, reviews) => {
-//     console.log('Populated User ' + reviews)
-//     // console.log('Populated User ' + reviews)
-//     // res.json({ user })
-//     return user
 //   })
 
 //this function only for moderators, admin
@@ -71,7 +46,6 @@ const getUsers = async (req, res, next) => {
   } catch (error) {
     return next(error)
   }
-
   res.json({
     users: users.map(user => user.toObject({ getters: true })),
   })
@@ -80,7 +54,6 @@ const getUsers = async (req, res, next) => {
 const createUser = async (req, res, next) => {
   console.log(req.body)
   const { firstName, lastName, email, password, password2, type, createdDate } = req.body
-
   const createdUser = new User({
     firstName,
     lastName,
@@ -90,145 +63,57 @@ const createUser = async (req, res, next) => {
     type,
     createdDate,
   })
-
   try {
     await createdUser.save()
     console.log(createdUser._id)
   } catch (error) {
     return next(error)
   }
-
   res.status(201).json({ user: createdUser })
 }
 
 const updateUser = async (req, res, next) => {
   const userId = req.params.id
-
   console.log(req.body)
   const { firstName, lastName, email, password, password2 } = req.body
-
   let user
   try {
     user = await user.findById(userId)
   } catch (err) {
     return next(err)
   }
-
   user.firstName = firstName
   user.lastName = lastName
   user.email = email
   user.password = password
   user.password2 = password2
-
   try {
     const result = await user.save()
   } catch (err) {
     return next(err)
   }
-
   res.status(200).json({ user: user.toObject({ getters: true }) })
 }
 
-// const getUser = async (req, res, next) => {
-//   let user
-
-//   const userId = req.params.id
-
-//   try {
-//     user = await User.findOne(userId).populate('reviews')
-//   } catch (err) {
-//     return next(err)
-//   }
-//   res.json({ user })
-// }
-// const getUser = async (req, res, next) => {
-//   let user
-
-//   const userId = req.params.id
-
-//   try {
-//     user = await User.findOne({ id: userId })
-//       .populate('reviews')
-//       .exec((err, reviews) => {
-//         console.log('Populated User ' + reviews)
-//       })
-//     // user = await User.findById(userId)
-//   } catch (err) {
-//     return next(err)
-//   }
-
-//   res.json({ user })
-//   console.log(user)
-// }
-
-const getUser = async (req, res) => {
-  try {
-    const { userId } = req.params.id
-    dddd
-    if (!userId) return res.status(400).json({ message: 'ERROR ID!' })
-    const result = await User.findOne(userId).populate('review').exec()
-
-    console.log('Populated User in get user ' + review)
-
-    return res.status(200).json({ message: 'Success', result })
-  } catch (err) {
-    res.status(500).json({ message: 'INTERNAL ERROR SERVER!' })
-    console.log(err.message)
-  }
-}
-
-// const getUser = async (req, res) => {
-//   try {
-//     const { userId } = req.params
-//     debugger
-//     if (!userId) return res.status(400).json({ message: 'ERROR ID!' })
-//     const result = await User.findOne(userId).populate('review').exec()
-
-//     console.log('Populated User in get user ' + review)
-
-//     return res.status(200).json({ message: 'Success', result })
-//   } catch (err) {
-//     res.status(500).json({ message: 'INTERNAL ERROR SERVER!' })
-//     console.log(err.message)
-//   }
-// }
-
-// const user = User.findOne({ email: 'nikki@pelo.com' })
-//   .populate('reviews')
-//   .exec((err, reviews) => {
-//     console.log('Populated User ' + reviews)
-//     // console.log('Populated User ' + reviews)
-//     return user
-//   })
-
-// const getUser = async (req, res, next) => {
-//   let user
-
-//   // const userId = req.params.id
-
-//   try {
-//     user = await User.findOne({ _id: userId })
-//       .populate('reviews') // key to populate
-//       .then(user => {
-//         res.json(user)
-//       })
-//   } catch (err) {
-//     return next(err)
-//   }
-//   console.log(user)
-// }
-
-const deleteUser = async (req, res, next) => {
+const getUser = async (req, res, next) => {
   let user
-
   const userId = req.params.id
-
   try {
     user = await User.findById(userId)
   } catch (err) {
     return next(err)
   }
+  res.json({ user })
+}
 
+const deleteUser = async (req, res, next) => {
+  let user
+  const userId = req.params.id
+  try {
+    user = await User.findById(userId)
+  } catch (err) {
+    return next(err)
+  }
   try {
     if (user) {
       await user.remove()

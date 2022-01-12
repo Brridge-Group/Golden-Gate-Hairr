@@ -1,7 +1,10 @@
+import { useEffect } from 'react'
+
 import { withContext } from '../contexts/AppContext'
 import ReviewUser from '../components/ReviewUser'
 
 const Profile = props => {
+  console.log(props.user, 'in profile')
   return (
     <div className='card w-50 mx-auto'>
       <div className='card-body ' style={{ width: 'fit-content' }}>
