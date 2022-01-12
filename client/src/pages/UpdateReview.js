@@ -54,10 +54,10 @@ const UpdateReview = props => {
       })
 
       if (!response.ok) {
-        throw new Error('Could not save new item')
+        throw new Error('Could not update review')
       }
 
-      history.push('/items')
+      history.push('/reviews')
     } catch (err) {}
   }
 

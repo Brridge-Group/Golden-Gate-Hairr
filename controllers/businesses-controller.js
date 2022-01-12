@@ -84,7 +84,7 @@ const updateBusiness = async (req, res, next) => {
   business.email = email
   business.status = status
   business.phone = phone
-  business.features, features
+  business.features = features
   business.services = services
 
   try {

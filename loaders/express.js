@@ -24,6 +24,7 @@ const loader = async app => {
   app.use('/api/features', featuresRoutes)
   app.use('/api/services', servicesRoutes)
   app.use('/api/authorize', authorizesRoutes)
+  app.use('/api/reviews', reviewsRoutes)
   app.use('/api', expressJwt({ secret: process.env.TOKEN_KEY, algorithms: ['HS256'] }))
   app.use(bodyParser.urlencoded({ extended: true }))
 

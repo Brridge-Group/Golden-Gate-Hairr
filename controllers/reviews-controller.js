@@ -38,6 +38,7 @@ const createReview = async (req, res, next) => {
   await businessFind.save()
 
   let authorFind = await User.findById(newReview.author)
+  // let authorFind = await User.findById(newReview.user)
   console.log('authorFind', authorFind)
   authorFind.reviews.push(newReview)
   await authorFind.save()
@@ -49,21 +50,21 @@ const createReview = async (req, res, next) => {
 const updateReview = async (req, res, next) => {
   const reviewId = req.params.id
 
-  console.log(req.body)
+  console.log('req.body', req.body)
   const { comment, rating } = req.body
 
   let review
   try {
     review = await Review.findById(reviewId)
+    console.log('review', review)
   } catch (err) {
     return next(err)
   }
-
   review.comment = comment
   review.rating = rating
 
   try {
-    const result = await review.save()
+    await review.save()
   } catch (err) {
     return next(err)
   }
