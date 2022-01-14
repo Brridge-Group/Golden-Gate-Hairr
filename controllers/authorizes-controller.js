@@ -47,17 +47,19 @@ const login = async (req, res) => {
       res.status(400).send('All input is required')
     }
     // Validate if user exist in our database
-    const user = await User.findOne({ email }).populate('reviews').exec()
+    const user = await User.findOne({ email })
+    // .populate('reviews').exec()
     if (user && (await bcrypt.compare(password, user.password))) {
       console.log('in auth, user', user)
       const token = jwt.sign(user.toObject(), process.env.TOKEN_KEY)
+      console.log('in auth, token', user)
 
       // Send the token back to the client app.
       return res.send({ token: token, user: user.toObject(), success: true })
     }
     res.status(400).send('Invalid Credentials')
   } catch (err) {
-    console.log(err)
+    console.log('in invalid error auth', err)
   }
 }
 exports.signup = signup

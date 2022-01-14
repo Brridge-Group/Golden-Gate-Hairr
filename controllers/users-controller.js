@@ -74,11 +74,11 @@ const createUser = async (req, res, next) => {
 
 const updateUser = async (req, res, next) => {
   const userId = req.params.id
-  console.log(req.body)
+  console.log(req.body, 'in updateuser')
   const { firstName, lastName, email, password, password2 } = req.body
   let user
   try {
-    user = await user.findById(userId)
+    user = await User.findById(userId)
   } catch (err) {
     return next(err)
   }

@@ -13,7 +13,7 @@ const Review = props => {
   // TODO (Backlog): Error Handling UI
   const [_error, set_Error] = useState(null)
 
-  console.log('in review props.user._id', props.user._id)
+  // console.log('in review props.user._id', props.user._id)
 
   // useEffect(() => {
   //   const id = props.user._id

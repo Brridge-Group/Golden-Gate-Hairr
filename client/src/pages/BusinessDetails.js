@@ -18,7 +18,37 @@ const BusinessDetails = props => {
   //am using this to pull in content but
   const { state } = useLocation()
   const business = state.business
-  console.log('business', business)
+  console.log('business', business._id)
+  const [fetchBusiness, setFetchBusiness] = useState('')
+
+  useEffect(() => {
+    const getBusiness = async () => {
+      const id = business._id
+      try {
+        console.log('in try, get bus id', id)
+        const response = await fetch(`/api/businesses/${id}`, { method: 'GET' })
+        // if (!response.ok) {
+        //   throw new Error('New review not saved! Please resubmit.')
+        // }
+        const responseData = await response.json()
+        if (!response.ok) {
+          throw new Error(response.message)
+        }
+        setFetchBusiness(responseData)
+        console.log('response', fetchBusiness)
+        alert('bus deats useeffect successful.')
+      } catch (error) {
+        return error
+      }
+    }
+    getBusiness()
+  }, [])
+  // setReviewForm(prevReviewForm => [...prevReviewForm, newReview])
+
+  // return () => {
+  //   cleanup
+  // }
+
   //could also use const business = history.location.state.business
 
   const [phone, setPhone] = useState(false)

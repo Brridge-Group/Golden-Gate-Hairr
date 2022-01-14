@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-// const { ObjectId } = mongoose.Schema
+const { ObjectId } = mongoose.Schema
 const Schema = mongoose.Schema
 
 const reviewSchema = new mongoose.Schema({

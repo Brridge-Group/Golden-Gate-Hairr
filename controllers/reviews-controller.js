@@ -73,7 +73,7 @@ const updateReview = async (req, res, next) => {
   review.rating = rating
 
   try {
-    const result = await review.save()
+    await review.save()
   } catch (err) {
     return next(err)
   }
