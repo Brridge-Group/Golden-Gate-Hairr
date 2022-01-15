@@ -7,8 +7,8 @@ const reviewSchema = new mongoose.Schema({
   comment: { type: String },
   rating: { type: Number, required: true },
   createDate: { type: Date, default: Date.now },
-  user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
-  business: { type: Schema.Types.ObjectId, ref: 'Business', required: true },
+  user: { type: Schema.Types.ObjectId, ref: 'User' },
+  business: { type: Schema.Types.ObjectId, ref: 'Business' },
   businessName: { type: String },
 })
 

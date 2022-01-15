@@ -47,10 +47,8 @@ const login = async (req, res) => {
       res.status(400).send('All input is required')
     }
     // Validate if user exist in our database
-    const user = await User.findOne({ email })
-    // .populate('reviews').exec()
+    const user = await User.findOne({ email }).populate('reviews').exec()
     if (user && (await bcrypt.compare(password, user.password))) {
-      console.log('in auth, user', user)
       const token = jwt.sign(user.toObject(), process.env.TOKEN_KEY)
       console.log('in auth, token', user)
 

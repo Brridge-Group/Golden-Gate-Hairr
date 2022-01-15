@@ -1,5 +1,12 @@
 const Business = require('../models/business')
 
+Business.findOne({ email: 'nikki@pelo.com' })
+  .populate('reviews')
+  .exec((err, reviews) => {
+    console.log('Populated User ' + reviews)
+    // console.log('Populated User ' + reviews)
+  })
+
 // Create Business
 const createBusiness = async (req, res, next) => {
   const { businessName, description, createDate, address1, address2, zipCode, city, state, country, mainPicture, email, phone, status, userId, features, services } = req.body

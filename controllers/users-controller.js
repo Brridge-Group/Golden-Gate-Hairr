@@ -1,12 +1,12 @@
 const User = require('../models/user')
 const { roles } = require('../roles')
 
-// const user = User.findOne({ email: 'nikki@pelo.com' })
-//   .populate('reviews')
-//   .exec((err, reviews) => {
-//     console.log('Populated User ' + reviews)
-//     // console.log('Populated User ' + reviews)
-//   })
+const user = User.findOne({ email: 'nikki@pelo.com' })
+  .populate('reviews')
+  .exec((err, reviews) => {
+    console.log('Populated User ' + reviews)
+    // console.log('Populated User ' + reviews)
+  })
 
 //this function only for moderators, admin
 const grantAccess = (action, resource) => {
@@ -78,7 +78,7 @@ const updateUser = async (req, res, next) => {
   const { firstName, lastName, email, password, password2 } = req.body
   let user
   try {
-    user = await User.findById(userId)
+    user = await User.findById(userId).populate('reviews').exec()
   } catch (err) {
     return next(err)
   }
@@ -88,7 +88,7 @@ const updateUser = async (req, res, next) => {
   user.password = password
   user.password2 = password2
   try {
-    const result = await user.save()
+    const user = await user.save()
   } catch (err) {
     return next(err)
   }
@@ -96,10 +96,12 @@ const updateUser = async (req, res, next) => {
 }
 
 const getUser = async (req, res, next) => {
+  console.log('in users controller')
   let user
   const userId = req.params.id
   try {
-    user = await User.findById(userId)
+    user = await User.findById(userId).populate('reviews').exec()
+    console.log('get user, user', user)
   } catch (err) {
     return next(err)
   }

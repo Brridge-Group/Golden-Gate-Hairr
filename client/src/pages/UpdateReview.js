@@ -23,7 +23,7 @@ const UpdateReview = props => {
         if (!response.ok) {
           throw new Error(responseData.message)
         }
-        console.log('responseData', responseData)
+        console.log('in fetchreview use effect responseData', responseData)
         setComment(responseData.review.comment)
         setRating(responseData.review.rating)
         setBusinessName(responseData.review.businessName)

@@ -40,31 +40,6 @@ const createBusiness = async (req, res, next) => {
   res.status(201).json({ business: newBusiness })
 }
 
-// // Get Business
-// const getBusiness = async (req, res, next) => {
-//   let business
-//   const businessId = req.params.id
-
-//   try {
-//     business = await Business.findById(businessId)
-
-//     // business = await Business.find(businessId)
-//     // business.populate('reviews').exec()
-//   } catch (error) {
-//     return next(error)
-//   }
-//   res.json({ business })
-// }
-
-// exports.readUser = async function (req, res) {
-//   try {
-//     let result = await user.findById(req.params.userId).populate("building");
-//     res.json({ result });
-//   } catch (err) {
-//     res.send(err);
-//   }
-// };
-
 const getBusiness = async (req, res, next) => {
   const businessId = req.params.id
   try {
@@ -74,47 +49,8 @@ const getBusiness = async (req, res, next) => {
   } catch (err) {
     res.send(err)
   }
-  // Business.findOne({ id: businessId })
-  //   .populate('reviews')
-  //   .exec((err, reviews) => {
-  //     console.log('Populated Business ' + reviews)
-  //     // console.log('Populated User ' + reviews)
-  //     //   })
-  //     //   Business.findById(businessId)
-  //     //     .populate('reviews')
-  //     //     .exec()
-  //     //     .then(business => {
-  //     //       console.log(res.json(business))
-  //     //       res.json(business)
-  //   })
 }
 
-// Get Business
-// const getBusiness = async (req, res, next) => {
-//   const businessId = req.params.id
-//   let business
-
-//   try {
-//     await Business.findById(businessId)
-//       .populate('reviews')
-//       .exec()
-//       .then(business => {
-//         console.log('in get business', business)
-//         res.status(200).json({
-//           business: business,
-//           request: {
-//             type: 'GET',
-//             url: 'api/businesses',
-//           },
-//         })
-//       })
-//   } catch (error) {
-//     console.log('error', error)
-//     return next(error)
-//   }
-// }
-
-// Get All Businesses
 const getBusinesses = async (req, res, next) => {
   let businesses
 

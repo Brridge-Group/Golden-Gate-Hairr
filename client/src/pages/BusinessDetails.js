@@ -27,15 +27,12 @@ const BusinessDetails = props => {
       try {
         console.log('in try, get bus id', id)
         const response = await fetch(`/api/businesses/${id}`, { method: 'GET' })
-        // if (!response.ok) {
-        //   throw new Error('New review not saved! Please resubmit.')
-        // }
         const responseData = await response.json()
         if (!response.ok) {
           throw new Error(response.message)
         }
         setFetchBusiness(responseData)
-        console.log('response', fetchBusiness)
+        console.log('response', fetchBusiness, responseData)
         alert('bus deats useeffect successful.')
       } catch (error) {
         return error
@@ -43,11 +40,6 @@ const BusinessDetails = props => {
     }
     getBusiness()
   }, [])
-  // setReviewForm(prevReviewForm => [...prevReviewForm, newReview])
-
-  // return () => {
-  //   cleanup
-  // }
 
   //could also use const business = history.location.state.business
 
@@ -85,24 +77,6 @@ const BusinessDetails = props => {
       setIsLoading(false)
     }
   }, [])
-
-  // useEffect(() => {
-  //   const getBusiness = async () => {
-  //     const id = business._id
-  //     try {
-  //       const response = await fetch(`/api/businesses/${id}`)
-  //       console.log(response, 'response', response.data)
-  //       // if (!response.ok) {
-  //       //   throw new Error('New business profile not saved! Please resubmit.')
-  //       // }
-  //       const json = await response.json()
-  //       alert('Profile creation successful. Thank you!!')
-  //     } catch (error) {
-  //       console.log('error', error)
-  //     }
-  //   }
-  //   getBusiness()
-  // }, [])
 
   // Initialize state for features and services  array from context
   const [bizFeatsArr, setBizFeatsArr] = useState([])
@@ -238,7 +212,7 @@ const BusinessDetails = props => {
                         </button>
                       )}
                     </div>
-                    <BusinessReviews />
+                    <BusinessReviews business={business} />
                   </figure>
                 </div>
               </div>
