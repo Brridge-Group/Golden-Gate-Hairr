@@ -3,9 +3,9 @@ import React from 'react'
 import Map from './Map'
 
 const LocationPin = props => {
-  console.log('in location pin', props)
+  // console.log('in location pin', props)
   const address = props.address.toString()
-  console.log(address)
+  // console.log(address)
 
   // const getLatLng = () => {
   //   // Geocode.fromAddress(this.props.address).then(

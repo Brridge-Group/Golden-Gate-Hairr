@@ -2,12 +2,15 @@ import { useEffect } from 'react'
 
 import { withContext } from '../contexts/AppContext'
 import UserReviews from '../components/UserReviews'
+import { useHistory } from 'react-router-dom'
 
 const Profile = props => {
-  console.log(props.user, 'in profile')
+  const history = useHistory()
+
+  console.log('in profile', props.user, history)
   useEffect(() => {
     const getUser = () => {
-      console.log('in profile useeffect')
+      // console.log('in profile useeffect')
       const id = props.user._id
       fetch(`api/users/${id}`)
     }
@@ -20,7 +23,7 @@ const Profile = props => {
         Hi {props.user.firstName.slice(0, 1).toUpperCase() + props.user.firstName.slice(1).toLowerCase()}!
         <br />
         Here are your reviews.
-        <UserReviews />
+        <UserReviews user={props.user} />
       </div>
     </div>
   )

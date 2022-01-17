@@ -13,6 +13,7 @@ const UpdateReview = props => {
   const [hover, setHover] = useState(0)
   const [comment, setComment] = useState('')
   const [businessName, setBusinessName] = useState('')
+  const [updatedReview, setUpdatedReview] = useState([])
 
   useEffect(() => {
     const fetchReview = async () => {
@@ -33,7 +34,7 @@ const UpdateReview = props => {
     }
 
     fetchReview()
-  }, [reviewId])
+  }, [])
 
   const updateReview = async e => {
     e.preventDefault()
@@ -54,12 +55,31 @@ const UpdateReview = props => {
       })
 
       if (!response.ok) {
-        throw new Error('Could not save new item')
+        throw new Error('Could not update review')
       }
 
-      history.push('/items')
+      updateUser()
+      history.push('/profile')
     } catch (err) {}
   }
+
+  const updateUser = async () => {
+    const userId = props.user._id
+    try {
+      const response = await fetch(`/api/users/${userId}`, { method: 'GET' })
+      const responseData = await response.json()
+
+      console.log('in updateuser', responseData)
+      if (!response.ok) {
+        throw new Error(responseData.message)
+      }
+      setUpdatedReview(responseData)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  // console.log('update review, user', props.user, props.user._id)
 
   return (
     <>

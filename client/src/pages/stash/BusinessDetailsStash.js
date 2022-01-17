@@ -18,7 +18,33 @@ const BusinessDetails = props => {
   //am using this to pull in content but
   const { state } = useLocation()
   const business = state.business
-  // console.log('business', business._id)
+  // console.log('business in bus details', business)
+  const [fetchBusiness, setFetchBusiness] = useState([])
+  const [reviewLoading, setReviewLoading] = useState(false)
+
+  useEffect(() => {
+    const getBusiness = async () => {
+      setReviewLoading(true)
+      const id = business._id
+      try {
+        // console.log('in try, get bus id', id)
+        const response = await fetch(`/api/businesses/${id}`, { method: 'GET' })
+        const responseData = await response.json()
+        if (!response.ok) {
+          throw new Error(response.message)
+        }
+        setFetchBusiness(responseData)
+        return function clean() {
+          setReviewLoading(false)
+        }
+        alert('bus deats useeffect successful.')
+      } catch (error) {
+        return error
+      }
+    }
+    getBusiness()
+  }, [])
+  console.log('fetchBusiness', fetchBusiness, fetchBusiness.business)
 
   //could also use const business = history.location.state.business
 
@@ -114,7 +140,7 @@ const BusinessDetails = props => {
 
   return (
     <>
-      {!props.loading ? (
+      {!props.loading || !reviewLoading ? (
         <>
           {/* (Backlog) TODO: [ ] - ? Remove all ContentHeaders or modify and utilize across app   */}
           <section className='business-wrapper'>
@@ -190,10 +216,27 @@ const BusinessDetails = props => {
                           Book Now
                         </button>
                       )}
+                      <table className='table table-striped' style={{ marginTop: '20px' }}>
+                        <thead>
+                          <tr>
+                            <th>comment</th>
+                            <th>rating</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {fetchBusiness.business.reviews.map(review => {
+                            return (
+                              <tr key={review._id}>
+                                <td>{review.comment}</td>
+                                <td>{review.rating}</td>s
+                              </tr>
+                            )
+                          })}
+                        </tbody>
+                      </table>
                     </div>
                   </figure>
                 </div>
-                <BusinessReviews business={business} />
               </div>
             </div>
             <div className='large-map' style={{ marginTop: '30px' }}>

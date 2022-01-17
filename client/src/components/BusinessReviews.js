@@ -1,13 +1,28 @@
-import React from 'react'
+import { useEffect, useState } from 'react'
 
 const BusinessReviews = props => {
-  // useEffect(() => {
-  //   console.log('in review user useeffect, props.user._id', props.user._id)
-  //   const id = props.user._id
-  //   fetch(`api/users/${id}`)
-  //   console.log('props.user', props.user)
-  // }, [])
-  console.log('in bus reviews, props', props)
+  const [fetchReviews, setFetchReviews] = useState('')
+
+  useEffect(() => {
+    const getBusiness = async () => {
+      const id = props.business._id
+      try {
+        console.log('in try, get bus id', id)
+        const response = await fetch(`/api/businesses/${id}`, { method: 'GET' })
+        const responseData = await response.json()
+        if (!response.ok) {
+          throw new Error(response.message)
+        }
+        setFetchReviews(responseData)
+        console.log('response', fetchReviews, responseData)
+        alert('bus deats useeffect successful.')
+      } catch (error) {
+        return error
+      }
+    }
+    getBusiness()
+  }, [])
+  console.log('in bus reviews, fetchReviews', fetchReviews)
 
   return (
     <table className='table table-striped'>
@@ -18,22 +33,11 @@ const BusinessReviews = props => {
         </tr>
       </thead>
       <tbody>
-        {/* {userReviews.map(review => {
+        {/* {fetchReviews.business.reviews.map(review => {
           return (
             <tr key={review._id}>
-              <td>{review.businessName}</td>
               <td>{review.comment}</td>
               <td>{review.rating}</td>
-              <td>
-                <Link to={'/reviews/' + review._id} className='btn btn-default'>
-                  Edit
-                </Link>
-              </td>
-              <td>
-                <button type='button' className='btn btn-default' onClick={() => deleteUserReview(review._id)}>
-                  Delete
-                </button>
-              </td>
             </tr>
           )
         })} */}
