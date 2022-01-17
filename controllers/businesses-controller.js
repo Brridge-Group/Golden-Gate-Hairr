@@ -1,12 +1,12 @@
 const Business = require('../models/business')
 const mongoose = require('mongoose')
 
-// Business.findOne({ email: 'info@pelobrooklyn.com' })
-//   .populate('reviews')
-//   .exec((err, reviews) => {
-//     console.log('Populated Business ' + reviews)
-//     // console.log('Populated User ' + reviews)
-//   })
+Business.findOne({ email: 'info@pelobrooklyn.com' })
+  .populate('reviews')
+  .exec((err, reviews) => {
+    console.log('Populated Business ' + reviews)
+    // console.log('Populated User ' + reviews)
+  })
 
 // Create Business
 const createBusiness = async (req, res, next) => {

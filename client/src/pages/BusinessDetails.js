@@ -212,9 +212,9 @@ const BusinessDetails = props => {
                         </button>
                       )}
                     </div>
-                    <BusinessReviews business={business} />
                   </figure>
                 </div>
+                <BusinessReviews business={business} />
               </div>
             </div>
             <div className='large-map' style={{ marginTop: '30px' }}>
