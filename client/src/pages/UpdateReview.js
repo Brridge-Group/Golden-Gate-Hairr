@@ -8,12 +8,12 @@ const UpdateReview = props => {
   const reviewId = useParams().id
   const history = useHistory()
   // const business = history.location.state.business
-  console.log('update review, props, props.user', props, props.user)
+
   const [rating, setRating] = useState(0)
   const [hover, setHover] = useState(0)
   const [comment, setComment] = useState('')
   const [businessName, setBusinessName] = useState('')
-  const [updateUserReview, setUpdatUserReview] = useState([])
+  const [updateUserReview, setUpdateUserReview] = useState([])
   // const [updateUserReview, setUpdatUserReview] = useState(props.user)
 
   useEffect(() => {
@@ -37,6 +37,22 @@ const UpdateReview = props => {
     fetchReview()
   }, [])
 
+  const updateUser = async () => {
+    const userId = props.user._id
+    try {
+      const response = await fetch(`/api/users/${userId}`, { method: 'GET' })
+      const responseData = await response.json()
+      //get's changed review, but doesn't show update in ui
+      console.log('in update user, this changes review here', responseData)
+      if (!response.ok) {
+        throw new Error(responseData.message)
+      }
+      setUpdateUserReview(responseData)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   const updateReview = async e => {
     e.preventDefault()
     let updatedReview = {
@@ -58,29 +74,33 @@ const UpdateReview = props => {
       if (!response.ok) {
         throw new Error('Could not update review')
       }
-      updateUser()
 
       history.push('/profile')
     } catch (err) {}
+    updateUser()
   }
 
-  const updateUser = async () => {
-    const userId = props.user._id
-    try {
-      const response = await fetch(`/api/users/${userId}`, { method: 'GET' })
-      const responseData = await response.json()
+  //if don't use useEffect, memory leak. if use effect and don't updateuserreview doesn't work, so memory leak is in updateuerreview
+  // useEffect(() => {
+  //   const updateUser = async () => {
+  //     const userId = props.user._id
+  //     try {
+  //       const response = await fetch(`/api/users/${userId}`, { method: 'GET' })
+  //       const responseData = await response.json()
+  //       //get's changed review, but doesn't show update in ui
+  //       console.log('in update user, this changes review here', responseData)
+  //       if (!response.ok) {
+  //         throw new Error(responseData.message)
+  //       }
+  //       setUpdateUserReview(responseData)
+  //     } catch (err) {
+  //       console.log(err)
+  //     }
+  //   }
+  //   updateUser()
+  // }, [updateUserReview])
 
-      console.log('in updateuser', responseData)
-      if (!response.ok) {
-        throw new Error(responseData.message)
-      }
-      setUpdatUserReview(responseData)
-    } catch (err) {
-      console.log(err)
-    }
-  }
-
-  // console.log('updateUserReview', updateUserReview)
+  console.log('updateUserReview', updateUserReview)
 
   return (
     <>

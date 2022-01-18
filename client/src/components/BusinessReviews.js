@@ -13,16 +13,17 @@ const BusinessReviews = props => {
         if (!response.ok) {
           throw new Error(response.message)
         }
-        setFetchReviews(responseData)
-        console.log('response', fetchReviews, responseData)
+        // console.log('response', fetchReviews, responseData)
         alert('bus deats useeffect successful.')
+        setFetchReviews(responseData)
+        //gets rid of memory leak error
+        return function clean() {}
       } catch (error) {
         return error
       }
     }
     getBusiness()
   }, [])
-  console.log('in bus reviews, fetchReviews', fetchReviews)
 
   return (
     <table className='table table-striped'>
@@ -33,14 +34,15 @@ const BusinessReviews = props => {
         </tr>
       </thead>
       <tbody>
-        {/* {fetchReviews.business.reviews.map(review => {
-          return (
-            <tr key={review._id}>
-              <td>{review.comment}</td>
-              <td>{review.rating}</td>
-            </tr>
-          )
-        })} */}
+        {fetchReviews &&
+          fetchReviews.business.reviews.map(review => {
+            return (
+              <tr key={review._id}>
+                <td>{review.comment}</td>
+                <td>{review.rating}</td>
+              </tr>
+            )
+          })}
       </tbody>
     </table>
   )

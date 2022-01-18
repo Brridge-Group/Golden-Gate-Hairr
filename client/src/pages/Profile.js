@@ -7,7 +7,7 @@ import { useHistory } from 'react-router-dom'
 const Profile = props => {
   const history = useHistory()
 
-  console.log('in profile', props.user, history)
+  // console.log('in profile', props.user, history)
   useEffect(() => {
     const getUser = () => {
       // console.log('in profile useeffect')
