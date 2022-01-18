@@ -8,12 +8,13 @@ const UpdateReview = props => {
   const reviewId = useParams().id
   const history = useHistory()
   // const business = history.location.state.business
-  console.log('update review, props, history', props, history)
+  console.log('update review, props, props.user', props, props.user)
   const [rating, setRating] = useState(0)
   const [hover, setHover] = useState(0)
   const [comment, setComment] = useState('')
   const [businessName, setBusinessName] = useState('')
-  const [updatedReview, setUpdatedReview] = useState([])
+  const [updateUserReview, setUpdatUserReview] = useState([])
+  // const [updateUserReview, setUpdatUserReview] = useState(props.user)
 
   useEffect(() => {
     const fetchReview = async () => {
@@ -57,8 +58,8 @@ const UpdateReview = props => {
       if (!response.ok) {
         throw new Error('Could not update review')
       }
-
       updateUser()
+
       history.push('/profile')
     } catch (err) {}
   }
@@ -73,13 +74,13 @@ const UpdateReview = props => {
       if (!response.ok) {
         throw new Error(responseData.message)
       }
-      setUpdatedReview(responseData)
+      setUpdatUserReview(responseData)
     } catch (err) {
       console.log(err)
     }
   }
 
-  // console.log('update review, user', props.user, props.user._id)
+  // console.log('updateUserReview', updateUserReview)
 
   return (
     <>

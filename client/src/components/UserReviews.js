@@ -3,12 +3,12 @@ import { withContext } from '../contexts/AppContext'
 import { Link } from 'react-router-dom'
 
 const UserReviews = props => {
-  // useEffect(() => {
-  //   console.log('in review user useeffect, props.user._id', props.user._id)
-  //   const id = props.user._id
-  //   fetch(`api/users/${id}`)
-  //   console.log('props.user', props.user)
-  // }, [])
+  useEffect(() => {
+    console.log('in review user useeffect, props.user._id', props.user)
+    const id = props.user._id
+    fetch(`api/users/${id}`)
+    console.log('props.user', props.user)
+  }, [])
   console.log('in reviewuser, props, props.user', props, props.user)
 
   const userReviews = props.user.reviews
