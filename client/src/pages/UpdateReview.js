@@ -77,10 +77,11 @@ const UpdateReview = props => {
 
       history.push('/profile')
     } catch (err) {}
+    //updateuser works when called here but memory leak
     updateUser()
   }
 
-  //if don't use useEffect, memory leak. if use effect and don't updateuserreview doesn't work, so memory leak is in updateuerreview
+  //if don't use useEffect, memory leak. if use effect and don't updateuserreview doesn't work, so memory leak is in updateuserreview
   // useEffect(() => {
   //   const updateUser = async () => {
   //     const userId = props.user._id
@@ -100,7 +101,7 @@ const UpdateReview = props => {
   //   updateUser()
   // }, [updateUserReview])
 
-  console.log('updateUserReview', updateUserReview)
+  // console.log('updateUserReview', updateUserReview)
 
   return (
     <>
