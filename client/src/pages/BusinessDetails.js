@@ -72,7 +72,7 @@ const BusinessDetails = props => {
       // Map through the business' features array and compare the id string while mapping through the features whole data obj and using the find method to search for a matching id. If one is found push the containing object to an array and return that array.
       businessCopy?.features.map(bizFeat => {
         // console.log('bizFeat', bizFeat)
-        dbFeats?.features.find(feat => {
+        dbFeats?.features?.find(feat => {
           if (feat.id === bizFeat) {
             tempBizFeatsArr.push(feat)
           }
@@ -85,7 +85,7 @@ const BusinessDetails = props => {
       // Map through the business' services array and compare the id string while mapping through the services whole data obj and using the find method to search for a matching id. If a match is found push the containing object to an array and return that array.
       businessCopy?.services.map(bizService => {
         // console.log(bizService)
-        dbServices?.services.find(service => {
+        dbServices?.services?.find(service => {
           if (service.id === bizService) {
             tempBizServiceArr.push(service)
           }
@@ -127,7 +127,7 @@ const BusinessDetails = props => {
                           <img src={star} alt='Star Icon' style={{ width: '10%' }} />
                         </p>
                         {props.token ? (
-                          <button className='btn btn-default' onClick={reviewRoute}>
+                          <button className='btn btn-default' style={{ textTransform: 'var(--capitalize)' }} onClick={reviewRoute}>
                             Review
                           </button>
                         ) : (
@@ -139,18 +139,22 @@ const BusinessDetails = props => {
                   <div className='bus-details d-flex flex-column'>
                     <div className='d-flex justify-content-between'>
                       <div className='bus-details--header'>
-                        <h1 className='card-header border-bottom-0'>{business.businessName}</h1>
-                        <div className='product-description'>{business.description}</div>
+                        <h1 className='card-header border-bottom-0' style={{ textTransform: 'var(--capitalize)' }}>
+                          {business.businessName}
+                        </h1>
+                        <div className='product-description' style={{ textTransform: 'var(--capitalize)' }}>
+                          {business.description}.
+                        </div>
 
                         <br />
                       </div>
                       <div className='bus-details--info mt-3'>
-                        <div className='bus-details--address small'>
+                        <div className='bus-details--address small' style={{ textTransform: 'var(--capitalize)' }}>
                           <b>Address:</b>
                           <br />
                           {business.address1} {business.city}, {business.state} {business.zipCode}
                         </div>
-                        <div className='bus-details--email small'>
+                        <div className='bus-details--email small' style={{ textTransform: 'var(--capitalize)' }}>
                           <b>Email:</b>
                           <br />
                           {business.email}
@@ -159,7 +163,7 @@ const BusinessDetails = props => {
                     </div>
                     <div className='d-flex justify-content-around'>
                       <div className='bus-details--features-list w-50'>
-                        <p className='card-header border-bottom-0'>
+                        <p className='card-header border-bottom-0' style={{ textTransform: 'var(--capitalize)' }}>
                           <b>Features</b>
                         </p>
                         {bizFeatsArr.map(feat => (
@@ -194,9 +198,11 @@ const BusinessDetails = props => {
                       </div>
                     </div>
                     <div className='d-flex flex-column'>
-                      <div className={phone ? 'visable-phone' : 'hidden-phone'}>phone: {business.phone}</div>
+                      <div className={phone ? 'visable-phone' : 'hidden-phone'} style={{ textTransform: 'var(--capitalize)' }}>
+                        phone: {business.phone}
+                      </div>
                       {!hidden && (
-                        <button className='btn btn-default' onClick={handleClick}>
+                        <button className='btn btn-default' style={{ textTransform: 'var(--capitalize)' }} onClick={handleClick}>
                           {' '}
                           Book Now
                         </button>

@@ -106,7 +106,7 @@ const SearchResults = () => {
   return (
     <>
       <div className='business-wrapper'>
-        <h5>Business located in {cityCapitalize}</h5>
+        <h5 style={{ textTransform: 'var(--capitalize)' }}>{cityCapitalize} Businesses</h5>
         <div className='business-container'>
           <div className='business-features-placeholder'>
             <Filters filterResults={filterResults} onFeatChange={onFeatChange} onServiceChange={onServiceChange} handleFilterResults={handleFilterResults} handleResetFilter={handleResetFilter} />

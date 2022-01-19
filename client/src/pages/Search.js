@@ -29,7 +29,7 @@ const Search = () => {
               type='text'
               onChange={e => handleSearch(e)}
               placeholder='city'
-              style={{ marginLeft: 10, marginRight: 10 }}
+              style={{ marginLeft: 10, marginRight: 10,  textTransform: 'var(--capitalize)' }}
             />
 
             <button

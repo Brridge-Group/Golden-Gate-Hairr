@@ -164,7 +164,9 @@ const BusinessProfile = props => {
         <>
           <section className='content-wrapper bus-profile ml-0'>
             <div className='card card-primary w-75 mx-auto'>
-              <div className='card-header'>New Business Profile</div>
+              <div className='card-header' style={{ textTransform: 'var(--capitalize)' }}>
+                New Business Profile
+              </div>
               {/* <-- Form Start --> */}
               <form onSubmit={profileSubmitHandler}>
                 <span
@@ -181,7 +183,9 @@ const BusinessProfile = props => {
                 <div className='card-body'>
                   <fieldset>
                     <div className='form-group'>
-                      <label htmlFor='businessName'>Business Name</label>
+                      <label htmlFor='businessName' style={{ textTransform: 'var(--capitalize)' }}>
+                        Business Name
+                      </label>
                       <input
                         id='businessName'
                         name='businessName'
@@ -194,7 +198,9 @@ const BusinessProfile = props => {
                       />
                     </div>
                     <div className='form-group'>
-                      <label htmlFor='description'>Description</label>
+                      <label htmlFor='description' style={{ textTransform: 'var(--capitalize)' }}>
+                        Description
+                      </label>
                       <input
                         id='description'
                         name='description'
@@ -206,13 +212,17 @@ const BusinessProfile = props => {
                       />
                     </div>
                     <div className='form-group'>
-                      <label htmlFor='email'>Email</label>
+                      <label htmlFor='email' style={{ textTransform: 'var(--capitalize)' }}>
+                        Email
+                      </label>
                       <input id='email' name='email' type='email' className='form-control' placeholder='Business@EmailAddress.com' value={businessProfileForm.email} onChange={onFormChange} />
                     </div>
                   </fieldset>
                   <fieldset>
                     <div className='form-group'>
-                      <label htmlFor='address1'>Address Line 1</label>
+                      <label htmlFor='address1' style={{ textTransform: 'var(--capitalize)' }}>
+                        Address Line 1
+                      </label>
                       <input
                         id='address1'
                         name='address1'
@@ -225,23 +235,29 @@ const BusinessProfile = props => {
                       />
                     </div>
                     <div className='form-group'>
-                      <label htmlFor='address2'>Address Line 2</label>
+                      <label htmlFor='address2' style={{ textTransform: 'var(--capitalize)' }}>
+                        Address Line 2
+                      </label>
                       <input
                         id='address2'
                         name='address2'
                         type='text'
                         className='form-control'
-                        placeholder='Apt, Suite, Unit, Bld, Floor, Etc.'
+                        placeholder='Apt, Suite, Unit, Bldg, Floor, Etc.'
                         value={businessProfileForm.address2}
                         onChange={onFormChange}
                       />
                     </div>
                     <div className='form-group'>
-                      <label htmlFor='cityTown'>City / Town</label>
+                      <label htmlFor='cityTown' style={{ textTransform: 'var(--capitalize)' }}>
+                        City / Town
+                      </label>
                       <input id='cityTown' name='city' type='text' className='form-control' placeholder='City / Town' value={businessProfileForm.city} onChange={onFormChange} required />
                     </div>
                     <div className='form-group'>
-                      <label htmlFor='stateProvinceRegion'>State / Province / Region</label>
+                      <label htmlFor='stateProvinceRegion' style={{ textTransform: 'var(--capitalize)' }}>
+                        State / Province / Region
+                      </label>
                       <input
                         id='stateProvinceRegion'
                         name='state'
@@ -254,7 +270,9 @@ const BusinessProfile = props => {
                       />
                     </div>
                     <div className='form-group'>
-                      <label htmlFor='zipPostalCode'>Zip / Postal Code</label>
+                      <label htmlFor='zipPostalCode' style={{ textTransform: 'var(--capitalize)' }}>
+                        Zip / Postal Code
+                      </label>
                       <input
                         id='zipPostalCode'
                         name='zipCode'
@@ -267,7 +285,9 @@ const BusinessProfile = props => {
                       />
                     </div>
                     <div className='form-group'>
-                      <label htmlFor='phoneNumber'>Phone Number</label>
+                      <label htmlFor='phoneNumber' style={{ textTransform: 'var(--capitalize)' }}>
+                        Phone Number
+                      </label>
                       <PhoneInput
                         placeholder='Enter phone number'
                         className='form-control'
@@ -281,10 +301,12 @@ const BusinessProfile = props => {
                     </div>
                   </fieldset>
                   <div className='form-group'>
-                    <label htmlFor='features'>Features</label>
+                    <label htmlFor='features' style={{ textTransform: 'var(--capitalize)' }}>
+                      Features
+                    </label>
 
                     {props.featuresArr?.map((feature, index) => (
-                      <div className='form-check' style={{ textTransform: 'capitalize' }} key={`${feature}_` + index}>
+                      <div className='form-check' style={{ textTransform: 'var(--capitalize)' }} key={`${feature}_` + index}>
                         <input className='form-check-input' type='checkbox' name={`feature-${feature[0]}`} id={feature[1]} defaultChecked={feature[2].isChecked} onChange={onFormChange} />
                         <label className='form-check-label' htmlFor={feature[1]}>
                           {feature[0]}
@@ -293,9 +315,11 @@ const BusinessProfile = props => {
                     ))}
                   </div>
                   <div className='form-group'>
-                    <label htmlFor='services'>Services</label>
+                    <label htmlFor='services' style={{ textTransform: 'var(--capitalize)' }}>
+                      Services
+                    </label>
                     {props.servicesArr?.map((service, index) => (
-                      <div className='form-check' style={{ textTransform: 'capitalize' }} key={`${service}_` + index}>
+                      <div className='form-check' style={{ textTransform: 'var(--capitalize)' }} key={`${service}_` + index}>
                         <input className='form-check-input' type='checkbox' name={`service-${service[0]}`} id={service[1]} defaultChecked={service[2].isChecked} onChange={onFormChange} />
                         <label className='form-check-label' htmlFor={service[1]}>
                           {service[0]}
@@ -303,7 +327,7 @@ const BusinessProfile = props => {
                       </div>
                     ))}
                   </div>
-                  <button type='submit' className='btn btn-primary'>
+                  <button type='submit' className='btn btn-primary' style={{ textTransform: 'var(--capitalize)' }}>
                     Submit
                   </button>
                 </div>

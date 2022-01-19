@@ -55,7 +55,7 @@ const Filters = props => {
     if (props.onFeatChange) {
       //   props.onChange( filteredFeats)
       props.onFeatChange(filteredFeats)
-     // console.log(filteredFeats)
+      // console.log(filteredFeats)
     }
     if (props.onServiceChange) {
       props.onServiceChange(filteredServices)
@@ -69,10 +69,12 @@ const Filters = props => {
         <>
           <div className='filters' style={{ margin: '10px' }}>
             <div className='form-group'>
-              <label htmlFor='features'>Features</label>
+              <label htmlFor='features' style={{ textTransform: 'var(--capitalize)' }}>
+                Features
+              </label>
 
               {props.featuresArr?.map((feature, id, index) => (
-                <div className='form-check' style={{ textTransform: 'capitalize' }} key={`${feature}_` + index}>
+                <div className='form-check' style={{ textTransform: 'var(--capitalize)' }} key={`${feature}_` + index}>
                   <input className='form-check-input' type='checkbox' name={`feature-${feature[0]}`} id={feature[1]} defaultChecked={feature[2].isChecked} value={id} onChange={onFeatChange} />
                   <label className='form-check-label' htmlFor={feature[1]}>
                     {feature[0]}
@@ -81,9 +83,11 @@ const Filters = props => {
               ))}
             </div>
             <div className='form-group'>
-              <label htmlFor='services'>Services</label>
+              <label htmlFor='services' style={{ textTransform: 'var(--capitalize)' }}>
+                Services
+              </label>
               {props.servicesArr?.map((service, id, index) => (
-                <div className='form-check' style={{ textTransform: 'capitalize' }} key={`${service}_` + index}>
+                <div className='form-check' style={{ textTransform: 'var(--capitalize)' }} key={`${service}_` + index}>
                   <input className='form-check-input' type='checkbox' name={`service-${service[0]}`} id={service[1]} defaultChecked={service[2].isChecked} value={id} onChange={onServiceChange} />
                   <label className='form-check-label' htmlFor={service[1]}>
                     {service[0]}
@@ -91,8 +95,12 @@ const Filters = props => {
                 </div>
               ))}
             </div>
-            <button onClick={props.handleFilterResults}>Filter Results</button>
-            <button onClick={props.handleResetFilter}>Reset Filter</button>
+            <button onClick={props.handleFilterResults} style={{ textTransform: 'var(--capitalize)' }}>
+              Filter Results
+            </button>
+            <button onClick={props.handleResetFilter} style={{ textTransform: 'var(--capitalize)' }}>
+              Reset Filter
+            </button>
           </div>
         </>
       ) : (

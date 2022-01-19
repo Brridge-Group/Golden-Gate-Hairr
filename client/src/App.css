@@ -1,3 +1,7 @@
+:root {
+  --capitalize: capitalize;
+}
+
 .login-btns {
   display: flex;
   margin-right: 10px;
