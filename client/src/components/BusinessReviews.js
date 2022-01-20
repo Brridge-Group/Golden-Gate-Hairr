@@ -14,7 +14,8 @@ const BusinessReviews = props => {
           throw new Error(response.message)
         }
         // console.log('response', fetchReviews, responseData)
-        alert('bus deats useeffect successful.')
+        alert('bus deats useeffect successful')
+        console.log('responseData', responseData)
         setFetchReviews(responseData)
         //gets rid of memory leak error
         return function clean() {}

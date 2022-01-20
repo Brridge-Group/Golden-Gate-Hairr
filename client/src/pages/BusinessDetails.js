@@ -116,7 +116,6 @@ const BusinessDetails = props => {
     <>
       {!props.loading ? (
         <>
-          {/* (Backlog) TODO: [ ] - ? Remove all ContentHeaders or modify and utilize across app   */}
           <section className='business-wrapper'>
             <div className='business-container details'>
               <div className='business-features-placeholder'>
@@ -148,7 +147,6 @@ const BusinessDetails = props => {
                   </div>
                 ))}
               </div>
-              {/* <div className='card mx-auto'> */}
               <div className='card-body '>
                 <div className='products-list product-list-in-card '>
                   <figure className='indie-card'>

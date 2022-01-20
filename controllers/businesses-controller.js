@@ -63,6 +63,7 @@ const getBusinesses = async (req, res, next) => {
     businesses: businesses.map(business => business.toObject({ getter: true })),
   })
 }
+
 // Update Business
 const updateBusiness = async (req, res, next) => {
   const businessId = req.params.id
